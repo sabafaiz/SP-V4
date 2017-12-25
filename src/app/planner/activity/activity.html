@@ -1,0 +1,189 @@
+<div class="container-fluid">
+  <div class="text-center" style="color: red;">
+    <h1>Proposed Activity</h1>
+  </div>
+  <div class="panel">
+    <div class="panel-heading background-3">
+      <span data-toggle="collapse" href="#collapse1">Add Measure</span>
+      <span class="pull-right" style="cursor:pointer" data-toggle="tooltip" data-placement="auto" title="collapse">
+        <i class="glyphicon glyphicon-collapse-up" data-toggle="collapse" href="#collapse1"></i>
+      </span>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse">
+      <div class="panel-body">
+        <form [formGroup]="activityForm" (submit)="submitActivity()">
+          <div class="row">
+            <div class="col-lg-6 col-sm-12">
+              <div class="form-group">
+                <label for="year">Plan Year:</label>
+                <select id="year" name="year" class="form-control" formControlName="cycleId" (ngModelChange)="getObjective($event)">
+                  <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}] : {{c.description}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+              <div class="form-group">
+                <label for="sel1">Select Goal:</label>
+                <select class="form-control" id="sel1" formControlName="objectiveId" (ngModelChange)="getInitiative($event)">
+                  <option *ngFor="let objective of objectives;let i=index;" [value]="objective.goalId">{{i+1}}.{{objective.goal}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+              <div class="form-group">
+                <label for="sel1">Select Initiative:</label>
+                <select class="form-control" id="sel1" formControlName="initiativeId">
+                  <option *ngFor="let initiative of initiatives;let j=index;" [value]="initiative.initiativeId">{{j+1}}.{{initiative.initiative}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+              <div class="form-group">
+                <label>Activity</label>
+                <textarea class="form-control" rows="5" formControlName="activity"></textarea>
+              </div>
+            </div>
+            <div class="col-lg-12 col-sm-12">
+              <button type="submit" class="btn btn-success" [disabled]="activityForm.invalid">Submit</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="enableFields(); isUpdating = false">Clear</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="panel">
+    <div class="panel-heading background-4">Proposed Activities
+      <select id="year" name="year" class="form-control pull-right" [(ngModel)]="defaultCycle" (ngModelChange)="getActivities()"
+        style="width:auto;height: auto;padding: 0px;">
+        <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}]</option>
+      </select>
+    </div>
+    <div class="background-2" *ngIf="goals.length">
+      <div class="d-flex text-center margin flex-header border">
+        <div class="p-2 w-50">
+          <b>Goals</b>
+          <span class="search">
+            <input type="text" name="search" (keyup)="searchGoal($event)" placeholder="Search..">
+          </span>
+        </div>
+        <div class="p-2 w-50">
+          <b>Initiatives</b>
+          <span class="search">
+            <input type="text" name="search" (keyup)="searchInitiative($event)" placeholder="Search..">
+          </span>
+        </div>
+        <div class="p-2 w-75">
+          <b>Activities</b>
+          <span class="search">
+            <input type="text" name="search" (keyup)="searchActivity($event)" placeholder="Search..">
+          </span>
+        </div>
+      </div>
+      <div class="d-flex padding border" *ngFor="let goal of goals;let i = index;">
+        <div class="p-2 w-30">
+          {{ goal.goal }}
+        </div>
+        <div class="p-3">
+          <div *ngFor="let initiate of goal.initiatives;let j=index;">
+            <div class="d-flex innerFlex border">
+              <div class="p-2 w-50 border-right">
+                <span>{{initiate.initiative}}</span>
+              </div>
+              <div class="p-3 border-left">
+                <div class="initiative" *ngFor="let activit of initiate.activities;let k=index;">
+                  <div class="row">
+                    <div class="col-lg-10 col-sm-10">
+                      {{activit.activity}}
+                    </div>
+                    <div class="col-lg-1 col-xs-1">
+                      <span data-toggle="tooltip" data-placement="auto" title="Edit">
+                        <i class="glyphicon glyphicon-edit btn-edit" style="cursor:pointer;" (click)="updateActivity(goal,initiate,activit)"></i>
+                      </span>
+                    </div>
+                    <div class="col-lg-1 col-xs-1">
+                      <span data-toggle="tooltip" data-placement="auto" title="Delete">
+                        <i style="cursor:pointer;" class="glyphicon glyphicon-remove btn-del" (click)="deleteActivity(activit.activityId,initiate.activities,k)"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="text-center" *ngIf="!goals.length" style="padding-top: 5px;">No Activities Added Yet...</p>
+  </div> -->
+</div>
+
+<div class="container-fluid">
+<table class="table table-bordered">
+  <colgroup>
+    <col style="width:30%">
+    <col style="width:30%">
+    <col style="width:40%">
+  </colgroup>
+  <tr>
+    <th>Goal</th>
+    <th>Initiative</th>
+    <th>Activity</th>
+  </tr>
+  <tr *ngFor="let goal of goals;let i = index;">
+    <td>{{goal.goal}}</td>
+    <td colspan="2" style="padding:0px;border:none;">
+      <table class="table table-bordered">
+        <colgroup>
+          <col style="width:43%">
+          <col style="width:57%">
+        </colgroup>
+        <tr *ngFor="let initiate of goal.initiatives;let j=index;">
+          <td>{{initiate.initiative}}</td>
+          <td style="padding:0px;">
+            <table class="table">
+              <tr *ngFor="let activit of initiate.activities;let k=index;">
+                <td [style.border-top]="k?'1px solid #ddd':'none'">{{activit.activity}}</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--popup model-->
+<div class="modal fade" id="activityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!-- <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Confirm</h4>
+      </div> -->
+      <div class="modal-body">
+        <p>Saved successfully .,.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="collapse" href="#collapse1">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

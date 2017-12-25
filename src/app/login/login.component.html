@@ -1,0 +1,15 @@
+<div class="login-page">
+  <div class="title animate_fadein"> 
+    Strategic Planning
+  </div>
+  <div class="form">
+    <form [formGroup]="loginForm" (submit)="onSubmit()" class="login-form">
+      <input type="text" name='username' id='username' formControlName="username" placeholder="Username"/>
+      <input type='password' name='password' id='password' formControlName="password" placeholder="Password"/>
+      <button type="submit" value="Sign in" [disabled]="loginForm.invalid">login</button>
+      <div *ngIf="loginStart"></div>
+      <!-- <p class="message">Not registered? <a href="#">Create an account</a></p> -->
+      <p *ngIf="error" class="message">Invalid Username/Password</p>
+    </form>
+  </div>
+</div>

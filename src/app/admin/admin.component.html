@@ -1,0 +1,56 @@
+<nav class="navbar navbar-default navbar-fixed-top header">
+    <div class="">
+      <div class="navbar-header"> 
+        <a class="navbar-brand" id="menu-toggle" style="cursor: pointer;color:white"><i class="glyphicon glyphicon-menu-hamburger"></i></a>
+        <a class="navbar-brand" href="#" style="font-family: -webkit-pictograph;font-weight: bolder;background: white;color: red;    padding-left: 75px;
+        padding-right: 75px;">UAEU</a>           
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-top-links navbar-right">
+        </ul>
+      </div>
+    </div>
+  </nav>
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+        <li class="sidebar-header">
+          <a routerLink="/account">
+            <div class="profile-display">
+              <div class="accBgImage">
+                <div class="padding">
+                  <img class="profile-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZi7K0a65gxeWFOAgMJtvJ4aKXu9SCAyNgRW6OI3AjLMDzTav0gA">
+                </div>
+                <div class="profile-name">
+                  Pankaj Kharetwal
+                </div>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li routerLinkActive="active"><a [routerLink]="['./home']"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+        <!-- <li routerLinkActive="active"><a [routerLink]="['/admin/new-university']"><span class="glyphicon glyphicon-refresh" aria-hidden="true" ></span>Add University</a></li> -->
+        <li routerLinkActive="active"><a [routerLink]="['/admin/department']"><span class="glyphicon glyphicon-italic" aria-hidden="true"></span>Add Department</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/admin/new-employee']"><span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span>Add Employee</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/admin/existing-department']"><span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span>Existing Department</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/admin/add-role']"><span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span>Add Role</a></li>
+        <li class="sidebar-items" (click)="logout()">
+          <a href="" routerLinkActive="active">
+          <img class="sidebar-icon" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-9/256/Logout-icon.png">
+           Logout 
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+  
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <div style="display:none" GoogleChart></div>
+      <router-outlet></router-outlet>
+    </div>
+    <!-- /#page-content-wrapper -->
+  
+  </div>
+  

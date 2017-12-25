@@ -1,0 +1,55 @@
+<div class="container-fluid">
+  <div class="container text-center" style="    padding: 20px;">
+    <img src="assets/uaeu_signature.png" style="height: 100px;">
+  </div>
+  <form class="form-horizontal" [formGroup]="setupForm" (submit)="onSubmit()">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="mission">Mission:</label>
+      <div class="col-sm-8">
+        <textarea class="form-control" id="mission" formControlName="mission"></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="vision">Vision:</label>
+      <div class="col-sm-8">
+        <textarea class="form-control" id="vision" formControlName="vision"></textarea>
+      </div>
+    </div>
+    <div formArrayName="values">
+      <div class="form-group">
+        <label class="control-label col-sm-2">Values :</label>
+      <!-- </div> -->
+      <div class="col-sm-8">
+      <div class="col-sm-6" *ngFor="let stu of setupForm.controls.values.controls;let j=index;" [formGroupName]="j" style="padding: 0px;">
+        <div class="panel">
+          <div class="panel-heading">
+            <button type="button" class="close" (click)="removeValue(j)">&times;</button>
+          </div>
+          <div class="panel-body">
+            <div class="form-group">
+              <label class="control-label col-sm-3" for="title">Title:</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="title" formControlName="title" placeholder="Enter title">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3" for="desc">Description:</label>
+              <div class="col-sm-8">
+                <textarea class="form-control" id="desc" formControlName="description"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="button" class="btn btn-default" (click)="addValue()">Add Value</button>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>

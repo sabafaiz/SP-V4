@@ -1,0 +1,137 @@
+<div class="container-fluid">
+  <div class="panel">
+    <div class="panel-heading background-3">Edit Section</div>
+    <div class="panel-body">
+      <form [formGroup]="spiForm" (submit)="onSubmit()">
+        <div class="row">
+          <div class="col-lg-6 col-xs-12 col-sm-6">
+            <div class="form-group">
+              <label class="control-label" for="year">Strategic Plan:</label>
+              <select id="year" name="year" class="form-control" formControlName="cycleId" (ngModelChange)="getObjective($event)">
+                  <option *ngFor="let c of cycles;let y = index;" [value]="y">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}] : {{c.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-6 col-xs-12 col-sm-6">
+            <div class="form-group">
+              <label for="sel1">Select Goal:</label>
+              <select class="form-control" id="sel1" formControlName="goalId">
+              <option *ngFor="let objective of objectives;let i=index;" [value]="objective.goalId">{{i+1}}.{{objective.goal}}</option>
+            </select>
+            </div>
+          </div>
+          <div class="col-lg-6 col-xs-12 col-sm-6">
+            <div class="form-group">
+              <label>Enter Strategic Planning Indicator :</label>
+              <textarea class="form-control" rows="4" formControlName="spi"></textarea>
+            </div>
+          </div>
+          <div class="col-lg-6 col-xs-12 col-sm-6">
+            <div class="form-group">
+              <label>Measure Mode:</label>
+              <select class="form-control" formControlName="measureUnit">
+              <option value="" disabled selected>Choose Measurement Unit</option>
+              <option value="percentage">Percent</option>
+              <option value="number">Number</option>
+              <option value="rate">Rate</option>
+            </select>
+            </div>
+          </div>
+          <div class="col-lg-6 col-xs-12 col-sm-6">
+            <div class="form-group">
+              <label>Base Line</label>
+              <input type="number" min="0" step="1" class="form-control" formControlName="baseline">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="checkbox form-group">
+              <label>
+              <input type="checkbox" formControlName="direction"> Improvement direction (+ve)
+            </label>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="checkbox form-group">
+              <label>
+              <input type="checkbox" formControlName="approvalRequired"> Approval Required 
+            </label>
+            </div>
+          </div>
+          <div class="col-lg-6 col-xs-12 col-sm-6">
+            <div class="form-group">
+              <label>Remarks :</label>
+              <textarea class="form-control" rows="5" formControlName="remarks"></textarea>
+            </div>
+          </div>
+          <div class="col-lg-6 col-xs-12 col-sm-6">
+            <div class="form-group">
+              <label>Help Text :</label>
+              <textarea class="form-control" rows="5" formControlName="helpText"></textarea>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- <div class="panel panel-default" formArrayName="targetDigital">
+          <div class="panel-heading background-transparent background-5">
+            <b>Annual Target</b>
+          </div>
+          <div class="panel-body">
+            <div class="form-group row">
+              <div class="col-lg-3 col-sm-3 col-xs-12 col-md-3" *ngFor="let td of spiForm.controls.targetDigital.controls;let m = index;"
+                [formGroupName]="m">
+                <label for="example-text-input">{{td.value.year}}</label>
+                <input type="number" min="0" step="1" class="form-control" formControlName="expectedLevel">
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <button type="submit" class="btn btn-success" [disabled]="spiForm.invalid">Submit</button>
+        <button type="button" class="btn btn-default btn-danger" (click)="spiForm.reset()" data-dismiss="modal">Clear</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-heading background-4">Strategic Planning - Strategic Performance Indicators
+      <span class="pull-right" style="cursor:pointer">
+      <div class="ctooltip">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span class="ctooltiptext">Add Activity</span>
+    </div>
+    </span>
+  </div>
+  <table class="table table-bordered header-background" id="thable" *ngIf="spis.length">
+    <colgroup>
+      <col width="50%">
+      <col width="48%">
+      <col width="1%">
+      <col width="1%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Goal</th>
+        <th>Performance Indicator</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody class="body-background" *ngFor="let goal of spis;let i = index;">
+      <tr>
+        <td [attr.rowspan]="goal.spis.length+1" style="vertical-align: middle;">{{goal.goal}}</td>
+      </tr>
+      <ng-template let-spi ngFor [ngForOf]="goal.spis" let-j="index">
+        <tr>
+          <td style="vertical-align: middle;">
+            <div>{{spi.spi}}</div>
+          </td>
+          <td style="vertical-align: middle;"><i class="glyphicon glyphicon-edit" style="cursor:pointer;" (click)="updateSpi(goal.goalId,spi)"></i></td>
+          <td style="vertical-align: middle;"><i class="glyphicon glyphicon-remove" style="cursor:pointer;" (click)="deleteSpi(spi.spiId,goal.spis,j)"></i></td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </table>
+  <p class="text-center" *ngIf="!spis.length" style="padding-top: 5px;">No SPI Added Yet...</p>
+</div>
+
+</div>
