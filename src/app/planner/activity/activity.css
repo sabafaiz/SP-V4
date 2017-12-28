@@ -4,3 +4,56 @@
 .table .table {
  background-color: inherit;
 }
+
+.title{
+    text-align: center;
+    text-decoration: underline;
+
+}
+
+.add-goal .panel-heading{
+background: #cf3238;
+color:white;
+ border-bottom: 3px solid black;
+ cursor: pointer;
+}
+
+.add-goal .panel-footer{
+background-color: #f5f5f500;
+border-top: 1px solid #cf3238
+}
+
+.add-goal .btn-outline-danger{
+    background: white;
+    border: 1px solid #cf3238;
+    color:black;
+  }
+  
+.add-goal .btn-outline-danger:hover{
+    background: #cf3238;
+    color:white;
+ }
+
+
+.add-goal .btn-outline-success{
+    background: white;
+    border: 1px solid #4cae4c;
+    color:black;
+ }
+
+.add-goal .btn-outline-success:hover{
+    background: #4cae4c;
+    color:white;  
+ }
+
+.table{
+  background-color: white;
+} 
+
+.detail-plan{
+    color: white;
+    background-color: #293f53;
+    border-bottom: 3px solid #cf3238;
+    padding-bottom: 12px;
+    text-align: center;
+}

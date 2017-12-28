@@ -113,8 +113,7 @@ p-9{
 
 .flex-header {
   padding: 10px !important;
-  font-size: var (--large-font);
-  background: var(--color1);
+  background: aliceblue;
   font-weight:bold;
   text-align:center;
 }

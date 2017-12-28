@@ -1,8 +1,10 @@
 <div class="container-fluid">
   <!-- <div class="panel-group" id="accordion"> -->
-  <div class="text-center" style="color: red;"><h1>Proposed Initiative</h1></div>
-  <div class="panel">
-    <div class="panel-heading background-3">
+  <div class="title">
+    <h1>Proposed Initiative</h1>
+  </div>
+  <div class="panel add-goal">
+    <div class="panel-heading">
       <span style="cursor:pointer;" data-toggle="collapse" href="#collapse1">Add Initiative</span>
       <span class="pull-right" style="cursor:pointer" data-toggle="tooltip" data-placement="auto" title="collapse">
           <i class="glyphicon glyphicon-collapse-up" data-toggle="collapse" href="#collapse1"></i>
@@ -35,15 +37,17 @@
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-success" [disabled]="initiativeForm.invalid">Submit</button>
-          <button type="button" class="btn btn-default btn-danger" (click)="enableFields();isUpdating=false;">Clear</button>
         </form>
+      </div>
+      <div class="panel-footer">
+          <button type="submit" class="btn btn-success btn-outline-success" [disabled]="initiativeForm.invalid">Submit</button>
+          <button type="button" class="btn btn-danger btn-outline-danger" (click)="enableFields();isUpdating=false;">Clear</button>
       </div>
     </div>
   </div>
 
-  <div class="panel">
-    <div class="panel-heading background-4"><span style="cursor:pointer;" data-toggle="collapse"  href="#collapse2">Proposed Initiatives</span>
+  <div class="panel detail-plan">
+    <div class="panel-heading"><span style="cursor:pointer;" data-toggle="collapse"  href="#collapse2">Proposed Initiatives</span>
       <select id="year" name="year" class="form-control pull-right" [(ngModel)]="defaultCycle" (ngModelChange)="getInitiative()" style="width:auto;height: auto;padding: 0px;">
           <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}]</option>
       </select>

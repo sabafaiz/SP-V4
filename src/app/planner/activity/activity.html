@@ -1,9 +1,9 @@
 <div class="container-fluid">
-  <div class="text-center" style="color: red;">
+  <div class="title">
     <h1>Proposed Activity</h1>
   </div>
-  <div class="panel">
-    <div class="panel-heading background-3">
+  <div class="panel add-goal">
+    <div class="panel-heading">
       <span data-toggle="collapse" href="#collapse1">Add Measure</span>
       <span class="pull-right" style="cursor:pointer" data-toggle="tooltip" data-placement="auto" title="collapse">
         <i class="glyphicon glyphicon-collapse-up" data-toggle="collapse" href="#collapse1"></i>
@@ -43,12 +43,12 @@
                 <textarea class="form-control" rows="5" formControlName="activity"></textarea>
               </div>
             </div>
-            <div class="col-lg-12 col-sm-12">
-              <button type="submit" class="btn btn-success" [disabled]="activityForm.invalid">Submit</button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="enableFields(); isUpdating = false">Clear</button>
-            </div>
           </div>
         </form>
+      </div>
+      <div class="panel-footer">
+        <button type="submit" class="btn btn-success btn-outline-success" [disabled]="activityForm.invalid">Submit</button>
+        <button type="button" class="btn btn-danger btn-outline-danger" data-dismiss="modal" (click)="enableFields(); isUpdating = false">Clear</button>
       </div>
     </div>
   </div>
@@ -119,39 +119,39 @@
 </div>
 
 <div class="container-fluid">
-<table class="table table-bordered">
-  <colgroup>
-    <col style="width:30%">
-    <col style="width:30%">
-    <col style="width:40%">
-  </colgroup>
-  <tr>
-    <th>Goal</th>
-    <th>Initiative</th>
-    <th>Activity</th>
-  </tr>
-  <tr *ngFor="let goal of goals;let i = index;">
-    <td>{{goal.goal}}</td>
-    <td colspan="2" style="padding:0px;border:none;">
-      <table class="table table-bordered">
-        <colgroup>
-          <col style="width:43%">
-          <col style="width:57%">
-        </colgroup>
-        <tr *ngFor="let initiate of goal.initiatives;let j=index;">
-          <td>{{initiate.initiative}}</td>
-          <td style="padding:0px;">
-            <table class="table">
-              <tr *ngFor="let activit of initiate.activities;let k=index;">
-                <td [style.border-top]="k?'1px solid #ddd':'none'">{{activit.activity}}</td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
+  <table class="table table-bordered">
+    <colgroup>
+      <col style="width:30%">
+      <col style="width:30%">
+      <col style="width:40%">
+    </colgroup>
+    <tr>
+      <th class="detail-plan">Goal</th>
+      <th class="detail-plan">Initiative</th>
+      <th class="detail-plan">Activity</th>
+    </tr>
+    <tr *ngFor="let goal of goals;let i = index;">  
+      <td>{{goal.goal}}</td>
+      <td colspan="2" style="padding:0px;border:none;">
+        <table class="table table-bordered">
+          <colgroup>
+            <col style="width:43%">
+            <col style="width:57%">
+          </colgroup>
+          <tr *ngFor="let initiate of goal.initiatives;let j=index;">
+            <td>{{initiate.initiative}}</td>
+            <td>
+              <table class="table">
+                <tr *ngFor="let activit of initiate.activities;let k=index;">
+                  <td [style.border-top]="k?'1px solid #ddd':'none'">{{activit.activity}}</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
 </div>
 
 
