@@ -1,0 +1,28 @@
+.add-goal .panel-heading
+{
+background: #cf3238;
+color:white;
+border-bottom: 3px solid black;
+cursor: pointer;
+
+}
+
+.sub-panel .panel-heading{
+        color: white;
+        background-color: #293f53;
+        border-bottom: 3px solid #cf3238;
+}
+/* .panel-info{
+    border-color: #000000;
+} */
+
+
+
+.green-background{
+    margin-top: -8px;
+    background:  #293f53;
+}
+
+.btn:hover {
+    color: #cf3238;
+}

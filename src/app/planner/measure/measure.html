@@ -131,33 +131,33 @@
       </select>
     </div>
     <div id="collapse2" class="panel-collapse collapse in" *ngIf="goalsCopy.length">
-      <div class="d-flex border flex-header ">
-        <div class="p-2 border">
-          Goal
+      <div class="d-flex border top-header">
+        <div class="p-2" style="border-right:1px solid #d6c7e8;">
+          Goal<br>
           <span class="search">
             <input type="text" name="search" (keyup)="search($event)"  placeholder="Search..">
           </span>
         </div>
-        <div class="p-3 border">
+        <div class="p-3">
           <div class="d-flex">
-            <div class="p-2 border">
+            <div class="p-2" style="border-right:1px solid #d6c7e8;">
               Initiative
               <span class="search">
                 <input type="text" name="search" (keyup)="searchInitiative($event)"  placeholder="Search..">
               </span>
             </div>
-            <div class="p-3 border">
+            <div class="p-3">
               <div class="d-flex">
-                <div class="p-2 border">
+                <div class="p-2" style="border-right:1px solid #d6c7e8;">
                   Activities
                   <span class="search">
                     <input type="text" name="search" (keyup)="searchActivity($event)"  placeholder="Search..">
                   </span>
                 </div>
-                <div class="p-3 border">
+                <div class="p-3">
                   <div class="d-flex">
                     <div class="p-2" style="flex-basis:30%;">
-                      OPI
+                      OPI<br>
                       <span class="search">
                         <input type="text" name="search" (keyup)="searchOpi($event)"  placeholder="Search..">
                       </span>

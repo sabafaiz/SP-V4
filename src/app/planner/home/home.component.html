@@ -2,7 +2,7 @@
     <div class="container text-center" style="    padding: 20px;">
       <img src="assets/uaeu_signature.png" style="height: 100px;">
     </div>
-    <div class="panel panel-info panel-no-border">
+    <div class="panel panel-info panel-no-border add-goal">
       <!--<div class="panel-heading background-transparent text-center panel-no-border">-->
       <div class="panel-heading">
         <div class="dropdown pull-right">
@@ -17,7 +17,7 @@
         {{organizationInfo.mission}}
       </div>
     </div>
-    <div class="panel panel-info panel-no-border">
+    <div class="panel panel-info panel-no-border add-goal">
       <!--<div class="panel-heading background-transparent text-center panel-no-border">-->
       <div class="panel-heading">
         <div class="dropdown pull-right">
@@ -27,14 +27,14 @@
             <li><a data-toggle="modal" data-target="#missionVisionForm" >Edit</a></li>
           </ul>
         </div>
-        <b class="panel-title">Vision</b>
+        <b class="panel-tiatle">Vision</b>
       </div>
       <div class="panel-body panel-no-border">
         {{organizationInfo.vision}}
       </div>
     </div>
   
-    <div class="panel panel-info">
+    <div class="panel panel-info add-goal">
       <div class="panel-heading">
         <h3 class="panel-title">
           <b>Values</b>
@@ -48,7 +48,7 @@
       </div>
       <div class="panel-collapse collapse in">
         <div class="panel-body">
-          <div class="panel panel-info" *ngFor="let val of organizationInfo.values;let i = index;">
+          <div class="panel panel-info sub-panel" *ngFor="let val of organizationInfo.values;let i = index;">
             <div class="panel-heading"><b>{{i+1}}. {{val.title}}</b>
               <div class="dropdown pull-right">
                 <span class="glyphicon glyphicon-option-vertical dropdown-toggle" data-toggle="dropdown"></span>
