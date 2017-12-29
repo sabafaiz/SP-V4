@@ -106,7 +106,7 @@ export class InitiativeComponent extends Filters{
 
   initForm(){
     return this.formBuilder.group({
-      "cycleId":['',[Validators.required]],
+      "cycleId":[this.defaultCycle,[Validators.required]],
       "goalId":['',[Validators.required]],
       "initiative": ['', [Validators.required]],
       // "totalCost": ['', [Validators.required]],
@@ -225,6 +225,18 @@ export class InitiativeComponent extends Filters{
   enableFields(){
     this.initiativeForm.controls["cycleId"].enable();
     this.initiativeForm.controls["goalId"].enable();
-    this.initiativeForm.reset();
+    this.initiativeForm = this.initForm();
+  }
+
+  addNewInitiative(){
+    this.enableFields();
+    this.isUpdating=false;
+    $("#collapse1").collapse('show');
+    this.initiativeForm = this.initForm();
+
+  }
+
+  get(e){
+    $(e)["0"].height = $(e)["0"].clientHeight;
   }
 }

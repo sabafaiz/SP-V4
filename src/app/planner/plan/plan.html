@@ -1,76 +1,84 @@
 <div class="container-fluid">
-  <div class="panel panel-default">
-    <div class="panel-heading">Add Strategic Plan</div>
-
-    <form [formGroup]="cycleForm" (submit)="onSubmit()">
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="year">Plan Year:</label>
-              <select id="year" name="year" class="form-control" style="width:auto;" formControlName="planYear">
-                <option value="2017">2017</option>
-                <option value="2018">2018</option>
-                <option value="2019">2019</option>
-                <option value="2020">2020</option>
-                <option value="2021">2021</option>
-              </select>
+  <div class="text-center" style="color: red;">
+    <h1>Strategic Plan</h1>
+  </div>
+  <div class="panel">
+    <div class="panel-heading background-3">
+      <h4 class="panel-title">
+      <a data-toggle="collapse" href="#collapse1" class="accordion-toggle">Add Strategic Plan</a>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse">
+      <form [formGroup]="cycleForm" (submit)="onSubmit()">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="year">Plan Year:</label>
+                <select id="year" name="year" class="form-control" style="width:auto;" formControlName="planYear">
+                  <option value="2017">2017</option>
+                  <option value="2018">2018</option>
+                  <option value="2019">2019</option>
+                  <option value="2020">2020</option>
+                  <option value="2021">2021</option>
+                </select>
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="description">Description:</label>
-              <textarea class="form-control" id="description" name="description" formControlName="description"></textarea>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea class="form-control" id="description" name="description" formControlName="description"></textarea>
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="year">From Year:</label>
-              <select id="from-year" name="from-year" class="form-control" style="width:auto;" formControlName="startYear">
-                <option value="2017">2017</option>
-                <option value="2018">2018</option>
-                <option value="2019">2019</option>
-                <option value="2020">2020</option>
-                <option value="2021">2021</option>
-              </select>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="year">From Year:</label>
+                <select id="from-year" name="from-year" class="form-control" style="width:auto;" formControlName="startYear">
+                  <option value="2017">2017</option>
+                  <option value="2018">2018</option>
+                  <option value="2019">2019</option>
+                  <option value="2020">2020</option>
+                  <option value="2021">2021</option>
+                </select>
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="year">To Year:</label>
-              <select id="to-year" name="to-year" class="form-control" style="width:auto;" formControlName="endYear">
-                <option value="2017">2017</option>
-                <option value="2018">2018</option>
-                <option value="2019">2019</option>
-                <option value="2020">2020</option>
-                <option value="2021">2021</option>
-              </select>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="year">To Year:</label>
+                <select id="to-year" name="to-year" class="form-control" style="width:auto;" formControlName="endYear">
+                  <option value="2017">2017</option>
+                  <option value="2018">2018</option>
+                  <option value="2019">2019</option>
+                  <option value="2020">2020</option>
+                  <option value="2021">2021</option>
+                </select>
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="active">Active:</label>
-              <input type="checkbox" id="active" name="active" formControlName="active">
+            <div class="col-sm-6">
+              <label class="checkbox-inline">
+                <input type="checkbox" value="" formControlName="active"><b>Active</b>
+              </label>
             </div>
           </div>
         </div>
-      </div>
-      <div class="panel-footer">
-        <button type="submit" class="btn btn-default">Submit</button>
-      </div>
-    </form>
+        <div class="panel-footer">
+          <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+      </form>
+    </div>
   </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">Strategic Plans</div>
+  <div class="panel">
+    <div class="panel-heading background-4">Strategic Plans</div>
     <div class="panel-body">
       <table class="table table-bordered">
-        <thead>
+        <thead class="header-background">
           <tr>
             <th>Plan Year</th>
             <th>From Year</th>
             <th>End Year</th>
             <th>Description</th>
-            <th>isActive</th>
+            <th>Disabled</th>
+            <th></th>
             <th></th>
           </tr>
         </thead>
@@ -79,9 +87,20 @@
             <td>{{c.planYear}}</td>
             <td>{{c.startYear}}</td>
             <td>{{c.endYear}}</td>
-            <td>{{c.description}}</td>
-            <td><i class="glyphicon glyphicon-check"></i></td>
-            <td><i class="glyphicon glyphicon-remove" (click)="deleteCycle(c.cycleId)"></i></td>
+            <td>{{c.description}}
+              <span class="pull-right" style="color:green" *ngIf="c.defaultCycle">*default</span>
+            </td>
+            <td><input type="checkbox" [checked]="c.disable" (change)="changeStatus($event,c)"></td>
+            <td>
+              <a (click)="deleteCycle(c.cycleId)">
+                <i class="glyphicon glyphicon-remove" ></i>
+              </a>
+            </td>
+            <td>
+              <a (click)="editCycle(c)">
+                <i class="glyphicon glyphicon-edit" ></i>
+              </a>
+            </td>
           </tr>
         </tbody>
       </table>

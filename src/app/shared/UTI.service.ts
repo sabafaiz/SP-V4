@@ -43,6 +43,24 @@ export class UniversityService {
     .catch(this.handleError);
   }
 
+  public updateCycle(cycleId:any,data:any){
+    return this.http.put(this.baseUrl + "/cycle/"+cycleId,data)
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  public disableCycle(cycleId:any){
+    return this.http.put(this.baseUrl + "/cycle/"+cycleId+"/disable",{})
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  public enableCycle(cycleId:any){
+    return this.http.put(this.baseUrl + "/cycle/"+cycleId+"/enable",{})
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
   public addValue(val: any[]) {
     
     return this.http.post(this.baseUrl + "/values", val)

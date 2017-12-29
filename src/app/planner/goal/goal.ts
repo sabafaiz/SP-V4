@@ -1,45 +1,45 @@
-import {Component, AfterViewInit} from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { UniversityService } from "../../shared/UTI.service";
 import { FormBuilder, Validators, FormGroup, FormArray } from "@angular/forms";
 import { StorageService } from "../../shared/storage.service";
 import { Filters } from "../../shared/filters";
 
-declare let $:any;
+declare let $: any;
 
 @Component({
-  selector:'strategic-goal',
-  templateUrl:'./goal.html',
-  styleUrls:['./goal.css','./../planner.component.css']
+  selector: 'strategic-goal',
+  templateUrl: './goal.html',
+  styleUrls: ['./goal.css', './../planner.component.css']
 })
-export class GoalComponent extends Filters implements AfterViewInit{
+export class GoalComponent extends Filters implements AfterViewInit {
   public goalForm: FormGroup;
-  public isUpdating:boolean = false;
+  public isUpdating: boolean = false;
   // public goals:any[]=[];
   // public goalsCopy:any[]=[];
-  public cycles:any[]=[];
-  emptySearchResult:any;
-  check:any[]=[];
+  public cycles: any[] = [];
+  emptySearchResult: any;
+  check: any[] = [];
 
-  constructor(public orgService:UniversityService,
-              public formBuilder: FormBuilder,
-              public commonService:StorageService){
-                super();
-              this.getCycles();
-              this.initObjectiveForm();              
+  constructor(public orgService: UniversityService,
+    public formBuilder: FormBuilder,
+    public commonService: StorageService) {
+    super();
+    this.getCycles();
+    this.goalForm = this.initObjectiveForm();
   }
 
-  ngAfterViewInit(){
-    
+  ngAfterViewInit() {
+
   }
 
-  getCycles(){
-    this.orgService.getCycles().subscribe((response:any)=>{
-      if(response.status == 204){
+  getCycles() {
+    this.orgService.getCycles().subscribe((response: any) => {
+      if (response.status == 204) {
         this.cycles = [];
-      }else{
+      } else {
         this.cycles = response;
         this.cycles.forEach(element => {
-          if(element.defaultCycle)
+          if (element.defaultCycle)
             this.defaultCycle = element.cycleId;
         });
         this.getGoals();
@@ -47,22 +47,22 @@ export class GoalComponent extends Filters implements AfterViewInit{
     })
   }
 
-  defaultCycle:any;
-  getGoals(){
-    this.orgService.getObjectivesByCycleId(this.defaultCycle).subscribe((response:any)=>{
-      if(response.status == 204){
+  defaultCycle: any;
+  getGoals() {
+    this.orgService.getObjectivesByCycleId(this.defaultCycle).subscribe((response: any) => {
+      if (response.status == 204) {
         this.goals = [];
-        this.goalsCopy = [];  
-      }else{
-      this.goals = response;
-      this.goalsCopy = response;
-    }
+        this.goalsCopy = [];
+      } else {
+        this.goals = response;
+        this.goalsCopy = response;
+      }
     })
   }
-  
+
   initObjectiveForm() {
-    this.goalForm = this.formBuilder.group({
-      "cycleId":['',[Validators.required]],
+    return this.formBuilder.group({
+      "cycleId": [this.defaultCycle, [Validators.required]],
       "goal": ['', [Validators.required]],
       // "totalCost": ['', [Validators.required]],
       // "spis": this.formBuilder.array([this.inItSpi()]),
@@ -102,49 +102,53 @@ export class GoalComponent extends Filters implements AfterViewInit{
   //   control.removeAt(index);
   // }
 
-  disable(event:any,e2:any){
-
-  }
-
   onSubmit() {
     // this.goalForm.value["cycleId"] = this.commonService.getData('org_info').cycles[0].cycleId;/
     console.log(this.goalForm.value);
-    if(!this.isUpdating){
-      this.orgService.addObjective(this.goalForm.value).subscribe((response:any) => {
+    if (!this.isUpdating) {
+      this.orgService.addObjective(this.goalForm.value).subscribe((response: any) => {
         $('#objectModal').modal('show');
         // this.returnedObject = response;
         // this.goals.push(this.returnedObject);
         // this.initObjectiveForm();
         this.goalForm.controls["goal"].reset();
         this.getGoals();
-      }, (error:any) => {
+      }, (error: any) => {
         console.log(error);
       });
     }
-    
-    if(this.isUpdating){
-      if(confirm("Are you sure you want to Update this Goal?"))
-      this.orgService.updateObjective(this.selectedObjective.goalId,this.goalForm.value).subscribe((res:any)=>{
-        console.log(res);
-        $('#objectModal').modal('show');
-        this.goalForm.reset();
-        this.getGoals();
-        this.isUpdating=false;
-      })
+
+    if (this.isUpdating) {
+      if (confirm("Are you sure you want to Update this Goal?"))
+        this.orgService.updateObjective(this.selectedObjective.goalId, this.goalForm.value).subscribe((res: any) => {
+          console.log(res);
+          $('#objectModal').modal('show');
+          this.goalForm =  this.initObjectiveForm()
+          this.getGoals();
+          this.isUpdating = false;
+        })
     }
-    
+
   }
-  deleteGoal(goalId:any,goals:any[],index:any){
-    if(confirm("Are you sure you want to delete this Goal?"))
-    this.orgService.deleteObjective(goalId).subscribe((res:any)=>{
-      console.log(res);
-      goals.splice(index,1);
-    })
+  deleteGoal(goalId: any, goals: any[], index: any) {
+    if (confirm("Are you sure you want to delete this Goal?"))
+      this.orgService.deleteObjective(goalId).subscribe((res: any) => {
+        console.log(res);
+        goals.splice(index, 1);
+      })
   }
-  selectedObjective:any;
-  updateGoal(goal:any){
+  selectedObjective: any;
+  updateGoal(goal: any) {
     this.selectedObjective = goal;
-    this.isUpdating=true;
-    this.goalForm.patchValue({goal:goal.goal,cycleId:this.defaultCycle});  
+    this.isUpdating = true;
+    this.goalForm.patchValue({ goal: goal.goal, cycleId: this.defaultCycle });
+    $("#collapse1").collapse('show');
+  }
+
+  addNewGoal() {
+    this.isUpdating = false;
+    $("#collapse1").collapse('show');
+    this.goalForm =  this.initObjectiveForm()
+
   }
 }

@@ -21,16 +21,6 @@ nav a{
   text-decoration: none;
   background-color: #f5f5f5;
 }
-/* .rgHeader, .RadGrid_Web20 th.rgResizeCol {
-  border: 1px solid;
-  border-color: #fff #6e8ec2 #204582 #355a99;
-  border-top-width: 0;
-  background: 0 -2300px repeat-x #7fa5d7;
-}
-.rgCommandRow {
-  background: #3b548c;
-  color: #fff;
-} */
 .unexistance td{
   padding: 8px;
   border-top: 1px solid #ddd;
@@ -77,4 +67,16 @@ nav a{
 }
 .search form{
   display: inherit;
+}
+
+.panel-heading .accordion-toggle:after {
+  /* symbol for "opening" panels */
+  font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+  content: "\e114";    /* adjust as needed, taken from bootstrap.css */
+  float: right;        /* adjust as needed */
+  color: white;         /* adjust as needed */
+}
+.panel-heading .accordion-toggle.collapsed:after {
+  /* symbol for "collapsed" panels */
+  content: "\e080";    /* adjust as needed, taken from bootstrap.css */
 }

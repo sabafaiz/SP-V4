@@ -8,3 +8,10 @@
 .p-3o{
   flex:2;
 }
+
+.table{
+  margin-bottom: 0px;
+ }
+ .table .table {
+  background-color: inherit;
+ }

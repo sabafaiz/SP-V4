@@ -1,11 +1,10 @@
 <div class="container-fluid">
-  <!-- <div class="panel-group" id="accordion"> -->
   <div class="text-center" style="color: red;"><h1>Operational KPIs</h1></div>      
   <div class="panel">
-    <div class="panel-heading background-3"><span style="cursor:pointer;" data-toggle="collapse"  href="#collapse1">Add measures</span>
-      <span class="pull-right" style="cursor:pointer" data-toggle="tooltip" data-placement="auto" title="collapse">
-        <i class="glyphicon glyphicon-collapse-up" data-toggle="collapse"  href="#collapse1"></i>
-      </span>
+    <div class="panel-heading background-3">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapse1" class="accordion-toggle">Add measures</a>
+      </h4>
     </div>
     <div id="collapse1" class="panel-collapse collapse">
       <div class="panel-body">
@@ -14,7 +13,7 @@
             <div class="col-lg-6 col-xs-12 col-sm-6">
               <div class="form-group">
                 <label class="control-label" for="year">Plan Year:</label>
-                <select id="year" name="year" class="form-control" formControlName="cycleId" (ngModelChange)="getObjective($event)" >
+                <select id="year" name="year" class="form-control" formControlName="cycleId" [ngModel]="defaultCycle" (ngModelChange)="getObjective($event)" >
                     <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}] : {{c.description}}</option>
                 </select>
               </div>
@@ -70,12 +69,6 @@
               </select>
               </div>
             </div>
-            <!-- <div class="col-lg-6 col-xs-12 col-sm-12">
-              <div class="form-group">
-                <label>Base Line</label>
-                <input type="number" min="0" step="1" class="form-control" formControlName="baseline">
-              </div>
-            </div> -->
             <div class="col-lg-6 col-xs-12 col-sm-12">
               <div class="form-group">
                 <label>Frequency of Measurement</label>
@@ -114,178 +107,212 @@
             </div>
           </div>
           <button type="submit" class="btn btn-success" [disabled]="measureForm.invalid">Submit</button>
-          <button type="button" class="btn btn-danger" (click)="enableFields(); isUpdating = false" >Clear</button>
         </form>
       </div>
     </div>
   </div>
 
   <div class="panel">
-    <div class="panel-heading background-4"><span style="cursor:pointer;" data-toggle="collapse"  href="#collapse2">Proposed Operational Performance Indicators</span>
-      <select id="year" name="year" class="form-control pull-right" [(ngModel)]="defaultCycle" (ngModelChange)="getMeasure()" style="width:auto;height: auto;padding: 0px;">
-          <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}} : [{{c.startYear}} To {{c.endYear}}]</option>
-      </select>
+    <div class="panel-heading background-4">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapse2">Proposed Operational Performance Indicators</a>
+        <button type="button" class="btn-info pull-right" (click)="addNewMeasure()">
+          <span class="glyphicon glyphicon-plus"></span> Add
+        </button>
+      </h4>
     </div>
-    <div id="collapse2" class="panel-collapse collapse in" *ngIf="goalsCopy.length">
-      <div class="d-flex border flex-header ">
-        <div class="p-2 border">
-          Goal
-          <span class="search">
-            <input type="text" name="search" (keyup)="search($event)"  placeholder="Search..">
-          </span>
-        </div>
-        <div class="p-3 border">
-          <div class="d-flex">
-            <div class="p-2 border">
-              Initiative
-              <span class="search">
-                <input type="text" name="search" (keyup)="searchInitiative($event)"  placeholder="Search..">
-              </span>
+    <div id="collapse2" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <table class="table table-bordered">
+          <caption class="form-inline">
+            <div class="form-group pull-right">
+              <label class="control-label">Strategic Plan</label>
+              <select id="year" name="year" class="form-control" [ngModel]="defaultCycle" (ngModelChange)="getMeasure()"
+                style="width:auto;height: auto;padding: 0px;">
+                <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}} : [{{c.startYear}} To {{c.endYear}}]</option>
+              </select>
             </div>
-            <div class="p-3 border">
-              <div class="d-flex">
-                <div class="p-2 border">
-                  Activities
-                  <span class="search">
-                    <input type="text" name="search" (keyup)="searchActivity($event)"  placeholder="Search..">
-                  </span>
-                </div>
-                <div class="p-3 border">
-                  <div class="d-flex">
-                    <div class="p-2" style="flex-basis:30%;">
-                      OPI
-                      <span class="search">
-                        <input type="text" name="search" (keyup)="searchOpi($event)"  placeholder="Search..">
-                      </span>
-                    </div>
-                    <div class="p-2" style="flex-basis:25%;">
-                      Detail
-                    </div>
-                    <div class="p-2" style="flex-basis:15%;">
-                      Departments
-                    </div>
-                    <div class="p-2" style="flex-basis:5%;">
-                      Edit
-                    </div>
-                    <div class="p-2" style="flex-basis:5%;">
-                      Delete
-                    </div>
-                    <div class="p-2 text-center " style="flex-basis:10%;">
-                      Assign
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="d-flex margin-1 body-background" *ngFor="let goal of goals;let i = index;">
-        <div class="p-2 border">
-          {{ goal.goal }}
-        </div>
-        <div class="p-3 border">
-          <div class="d-flex" *ngFor="let initiate of goal.initiatives;let j=index">
-            <div class="p-2 border-bottom">
-              {{initiate.initiative}}
-            </div>
-            <div class="p-3 border no-bottom-border">
-              <div class="d-flex" *ngFor="let activit of initiate.activities;let k=index">
-                <div class="p-2 border-bottom">
-                  {{activit.activity}}
-                </div>
-                <div class="p-3">
-                  <div class="d-flex height-100" *ngFor="let msr of activit.opis;let l=index">
-                    <div class="p-2 border no-bottom-border" style="flex-basis:30%;">
-                      {{msr.opi}}
-                    </div>
-
-                    <div class="p-2 border no-bottom-border" style="flex-basis:25%;">
-                      <div class="d-flex" style="flex-direction: column;">                        
-                        <div class="p-2">
-                          <label>Frequency :</label>{{msr.frequency}}
-                        </div>
-                        <div class="p-2">
-                          <label>Cost :</label>10000
-                        </div>
-                        <div class="p-2">
-                          <label>MeasureUnit :</label>{{msr.measureUnit}}
-                        </div>
-                        <div class="p-2">
-                          <label>Direction :</label>{{direction[msr.direction]}}
-                        </div>
-                      </div>
-                    </div>
-                    <div class="p-2 border no-bottom-border" style="flex-basis:15%;">
-                      <ul style="list-style:none;padding:0px;">
-                        <li *ngFor="let dept of msr.assignedDepartments;let d = index">{{dept.department}}, </li>
-                      </ul>
-                      <span *ngIf="!msr.assignedDepartments.length">None</span>
-                    </div>
-
-                    <div class="p-2 border-bottom" style="flex-basis:5%;">
-                      <a (click)="updateMeasure(goal,initiate,activit,msr)" href="#collapse1" >
-                        <i class="glyphicon glyphicon-edit" style="cursor:pointer;" ></i>
-                      </a>
-                    </div>
-                    <div class="p-2 border-bottom" style="flex-basis:5%;">
-                      <i style="cursor:pointer;" class="glyphicon glyphicon-remove" (click)="deleteMeasure(msr.opiId,activit.opis,l)"></i>
-                    </div>
-                    <div class="p-2 border-bottom" style="flex-basis:10%;">
-                      <a data-toggle="modal" data-target="#myModal" (click)="selectedMeasure=msr;next=false;prev=true;checkAssignDept(msr.assignedDepartments);">Assign</a>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+          </caption>
+          <colgroup>
+            <col style="width:15%">
+            <col style="width:15%">
+            <col style="width:15%">
+            <col style="width:55%">
+          </colgroup>
+          <thead  class="header-background" *ngIf="goals.length">
+            <tr>
+              <th>Goal
+                <span class="search">
+                  <input type="text" name="search" (keyup)="searchGoal($event)" placeholder="Search..">
+                </span>
+              </th>
+              <th>Initiative
+                <span class="search">
+                  <input type="text" name="search" (keyup)="searchInitiative($event)" placeholder="Search..">
+                </span>
+              </th>
+              <th>Activity
+                <span class="search">
+                  <input type="text" name="search" (keyup)="searchActivity($event)" placeholder="Search..">
+                </span>
+              </th>
+              <th style="padding:0px;">
+                <table class="table table-bordered">
+                  <colgroup>
+                  <col style="width:37%">
+                  <col style="width:21%">
+                  <col style="width:21%">
+                  <col style="width:21%">
+                  </colgroup>
+                  <tr>
+                    <th colspan="6">
+                        KPI
+                        <span class="search">
+                          <input type="text" name="search" (keyup)="searchOpi($event)" placeholder="Search..">
+                        </span>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>OPI</th>
+                    <th>Detail</th>
+                    <th>Department</th>
+                    <th colspan="3"></th>
+                  </tr>
+                </table>              
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let goal of goals;let i = index;">
+              <td>{{goal.goal}}</td>
+              <td colspan="3" style="padding:0px;border:none;" #element [style.height]="get(element)">
+                <table class="table table-bordered" style="height: inherit;">
+                  <colgroup>
+                    <col style="width:17.60%">
+                    <col style="width:82.40%">
+                  </colgroup>
+                  <tr *ngFor="let initiate of goal.initiatives;let j=index;">
+                    <td>{{initiate.initiative}}</td>
+                    <td style="padding:0px;" #element1 [style.height]="get(element1)">
+                      <table class="table table-bordered" style="height: inherit;">
+                        <colgroup>
+                          <col style="width:21.40%">
+                          <col style="width:78.60%">
+                        </colgroup>
+                        <tr *ngFor="let activit of initiate.activities;let k=index;">
+                          <td [style.border-top]="k?'1px solid #ddd':'none'">{{activit.activity}}</td>
+                          <td style="padding:0px;" #element2 [style.height]="get(element2)">
+                            <table class="table table-bordered" style="height: inherit;">
+                              <colgroup>
+                                <col style="width:35%">
+                                <col style="width:20%">
+                                <col style="width:20%">
+                                <col style="width:5%">
+                                <col style="width:5%">
+                                <col style="width:10%">
+                              </colgroup>
+                              <tr *ngFor="let msr of activit.opis;let l=index">
+                                <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.opi}}</td>
+                                <td>
+                                  <label>Frequency :</label>{{msr.frequency}}<br>
+                                  <label>Cost :</label>10000<br>
+                                  <label>MeasureUnit :</label>{{msr.measureUnit}}<br>
+                                  <label>Direction :</label>{{direction[msr.direction]}}<br>
+                                </td>
+                                <td>
+                                  <ul style="list-style:none;padding:0px;">
+                                    <li *ngFor="let dept of msr.assignedDepartments;let d = index">{{dept.department}}, </li>
+                                  </ul>
+                                  <span *ngIf="!msr.assignedDepartments.length">None</span>
+                                </td>
+                                <td [style.border-top]="l?'1px solid #ddd':'none'">
+                                  <a (click)="updateMeasure(goal,initiate,activit,msr)" href="#collapse1">
+                                    <i class="glyphicon glyphicon-edit" style="cursor:pointer;"></i>
+                                  </a>
+                                </td>
+                                <td [style.border-top]="l?'1px solid #ddd':'none'">
+                                  <i style="cursor:pointer;" class="glyphicon glyphicon-remove" (click)="deleteMeasure(msr.opiId,activit.opis,l)"></i>
+                                </td>
+                                <td [style.border-top]="l?'1px solid #ddd':'none'">
+                                  <a data-toggle="modal" data-target="#myModal" (click)="selectedMeasure=msr;next=false;prev=true;checkAssignDept(msr.assignedDepartments);">Assign</a>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot *ngIf="!goals.length">
+            <tr><td colspan="4" class="text-center">No Data to Display .,.</td></tr>
+          </tfoot>
+        </table>
       </div>
     </div>
-    <p class="text-center" *ngIf="!goals.length" style="padding-top: 5px;">No OPI Added Yet...</p>
   </div>
-  <!-- </div> -->
+</div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Set targets</h4>
-        </div>
-        <div class="modal-body" *ngIf="selectedMeasure">
-          <div class="row" *ngIf="prev">
-            <div class="col-sm-6">
-              <div class="radio">
-                <label><input type="radio" name="optradio"> All(Institutional Units)</label>
-              </div>
-              <div class="radio">
-                <label><input type="radio" name="optradio">Select</label>
-              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Set targets</h4>
+      </div>
+      <div class="modal-body" *ngIf="selectedMeasure">
+        <div class="row" *ngIf="prev">
+          <div class="col-sm-6">
+            <div class="radio">
+              <label>
+                <input type="radio" name="optradio"> All(Institutional Units)</label>
             </div>
-            <div class="col-sm-6">
-              <div class="department-hierarchy">
-                <b>Organisation Unit</b>
-                <tree-view id="termSheetPopup" [treeData]="departments" [assignedDepartment]="selectedMeasure.assignedDepartments" (onSelected)="department($event)"></tree-view>
-              </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="optradio">Select</label>
             </div>
           </div>
-          <div class="row" *ngIf="next" style="margin: 15px 15px;">
-            <form [formGroup]="departmentForm">
-              <ul formArrayName="departmentsArray" style="list-style:none;padding-left: 0;">
-                <b>Selected Departments</b>
-                <li *ngIf="!selectedDepartments">None Selected</li>
-                <li *ngFor="let dept of departmentForm.controls.departmentsArray.controls;let arr=index;" [formGroupName]="arr">                    
-                  <table class="table">
-                    <caption style="text-align: left;">{{dept.value.departmentName}}
-                      <span class="input-group pull-right">
-                        <div class="input-group-addon">BaseLine</div>
-                        <input type="text" class="form-control" formControlName="baseline" style="width:25%" id="exampleInputAmount">
-                      </span>
-                    </caption>
-                    <ng-container formArrayName="opiAnnualTargets">
+          <div class="col-sm-6">
+            <div class="department-hierarchy">
+              <b>Organisation Unit</b>
+              <tree-view id="termSheetPopup" [treeData]="departments" [assignedDepartment]="selectedMeasure.assignedDepartments" (onSelected)="department($event)"></tree-view>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="next" style="margin: 15px 15px;">
+          <form [formGroup]="departmentForm">
+            <ul formArrayName="departmentsArray" style="list-style:none;padding-left: 0;">
+              <b>Selected Departments</b>
+              <li *ngIf="!selectedDepartments">None Selected</li>
+              <li *ngFor="let dept of departmentForm.controls.departmentsArray.controls;let arr=index;" [formGroupName]="arr">
+                <table class="table">
+                  <caption style="text-align: left;">{{dept.value.departmentName}}
+                    <span class="input-group pull-right">
+                      <div class="input-group-addon">BaseLine</div>
+                      <input type="text" class="form-control" formControlName="baseline" style="width:25%" id="exampleInputAmount">
+                    </span>
+                  </caption>
+                  <ng-container formArrayName="opiAnnualTargets">
                     <tr *ngFor="let array of dept.controls.opiAnnualTargets.controls;let op=index;" [formGroupName]="op">
                       <td>{{array.value.year}}</td>
                       <ng-container formArrayName="levels">
@@ -294,7 +321,7 @@
                             <div class="input-group-addon">Q{{level.value.quarterId}}</div>
                             <input type="text" class="form-control" id="exampleInputAmount" style="width: 50%;" formControlName="estimatedTargetLevel">
                           </div>
-                        </td>                        
+                        </td>
                       </ng-container>
                       <td>
                         <div class="input-group">
@@ -303,40 +330,38 @@
                         </div>
                       </td>
                     </tr>
-                    </ng-container>
-                  </table>
-                </li>
-              </ul>
-            </form>
-          </div>
+                  </ng-container>
+                </table>
+              </li>
+            </ul>
+          </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" *ngIf="next" (click)="prev = true;next = false;">Prev</button>
-          <button type="submit" class="btn btn-default" *ngIf="next" (click)="assign()">Save</button>
-          <button type="button" class="btn btn-default" *ngIf="prev" (click)="prev=false;next=true;assignDepartment()">Next</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" *ngIf="next" (click)="prev = true;next = false;">Prev</button>
+        <button type="submit" class="btn btn-default" *ngIf="next" (click)="assign()">Save</button>
+        <button type="button" class="btn btn-default" *ngIf="prev" (click)="prev=false;next=true;assignDepartment()">Next</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
+</div>
 
 
-  <!--popup model-->
-  <div class="modal fade" id="measureModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Confirm</h4>
-        </div>
-        <div class="modal-body">
-          <p>You have successfully added a new Measure.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="collapse" href="#collapse1">Close</button>
-        </div>
+<!--popup model-->
+<div class="modal fade" id="measureModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Confirm</h4>
+      </div>
+      <div class="modal-body">
+        <p>You have successfully added a new Measure.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="collapse" href="#collapse1">Close</button>
       </div>
     </div>
   </div>
-
 </div>
