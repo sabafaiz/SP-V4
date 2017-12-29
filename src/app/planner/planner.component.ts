@@ -18,7 +18,7 @@ export class PlannerComponent{
 	public fetchOrganizationInfo() {
     this.utiService.fetchOrganizationInfo().subscribe((res:any) => {
 			this.stogareService.storeData("org_info", res); 
-			this.router.navigateByUrl("/planner/home");			
+			// this.router.navigateByUrl("/planner/home");			
     }, (err:any) => {
 
     });

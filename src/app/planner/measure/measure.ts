@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, NgZone } from '@angular/core';
+import { Component, AfterViewInit} from '@angular/core';
 import { UniversityService } from "../../shared/UTI.service";
 import { FormBuilder, Validators, FormGroup, FormArray } from "@angular/forms";
 import { StorageService } from "../../shared/storage.service";
@@ -33,7 +33,6 @@ export class MeasureComponent implements AfterViewInit {
   next: boolean = false;
 
   public quarter: any[] = ["Q1", "Q2", "Q3", "Q4"];
-  public measureForm: FormGroup;
   public quarters: any[] = [
     {
       "id": 1,
@@ -60,9 +59,9 @@ export class MeasureComponent implements AfterViewInit {
       "quarter": "q4"
     }
   ];
+  public measureForm: FormGroup;
   selectedQuarter: any = 0;
   constructor(public orgService: UniversityService,
-    public zone: NgZone,
     public formBuilder: FormBuilder, public commonService: StorageService) {
     this.measureForm = this.setMeasure();
 
@@ -392,11 +391,11 @@ export class MeasureComponent implements AfterViewInit {
 
   setMeasure() {
     return this.formBuilder.group({
-      "cycleId": [{ value: '', disabled: false }, [Validators.required]],
+      "cycleId": [{ value: this.defaultCycle, disabled: false }, [Validators.required]],
       "objectiveId": [{ value: '', disabled: false }, [Validators.required]],
       "initiativeId": [{ value: '', disabled: false }, [Validators.required]],
       "activityId": [{ value: '', disabled: false }, [Validators.required]],
-      "opi": [{ value: '' }, [Validators.required]],
+      "opi": ['', [Validators.required]],
       "frequencyId": [1, [Validators.required]],
       "measureUnit": ['', [Validators.required]],
       "evidanceFormId": ['', []],
@@ -434,7 +433,7 @@ export class MeasureComponent implements AfterViewInit {
       if (confirm("Are you sure you want to update this OPI as " + msg)) {
         delete this.measureForm.value["activityId"];
         this.orgService.updateMeasure(this.selectedMeasure.opiId, formChanges).subscribe((response: any) => {
-          this.measureForm.reset();
+          this.measureForm = this.setMeasure();
           this.getMeasure();
         });
       }
@@ -474,7 +473,7 @@ export class MeasureComponent implements AfterViewInit {
     this.measureForm.controls["objectiveId"].enable();
     this.measureForm.controls["initiativeId"].enable();
     this.measureForm.controls["activityId"].enable();
-    this.measureForm.reset();
+    this.measureForm = this.setMeasure();
   }
 
   nextForm() {
@@ -517,5 +516,16 @@ export class MeasureComponent implements AfterViewInit {
     this.orgService.getEvidenceForms().subscribe((response: any) => {
       this.evidenceForms = response;
     })
+  }
+
+  addNewMeasure(){
+    this.enableFields(); 
+    this.isUpdating = false;
+    $("#collapse1").collapse('show');
+    this.measureForm = this.setMeasure();
+  }
+
+  get(e){
+    $(e)["0"].height = $(e)["0"].clientHeight;
   }
 }

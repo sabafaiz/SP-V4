@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PlannerComponent } from './planner.component';
 import { RouterModule } from '@angular/router';
-import { PlannerService } from "./planner.service";
 import { UniversityService } from "../shared/UTI.service";
 import { StorageService } from "../shared/storage.service";
 import { CustomHttpService } from "../shared/default.header.service";
@@ -13,7 +12,7 @@ import { SharedModule } from "../shared/shared.module";
 			component: PlannerComponent,
 			children: [
 				{
-					path: 'home',
+					path: '',
 					loadChildren: 'app/planner/home/home.module#HomeModule'
 				},
 				{ path: 'strategic-plan', loadChildren: 'app/planner/plan/plan.module#PlanModule'},
@@ -26,7 +25,7 @@ import { SharedModule } from "../shared/shared.module";
 		},
 
 	])],
-	providers: [PlannerService, UniversityService, StorageService, CustomHttpService],
+	providers: [UniversityService, StorageService, CustomHttpService],
 	declarations: [PlannerComponent],
 	// exports: [RouterModule]
 })

@@ -9,7 +9,7 @@ import { AuthGuard } from "./shared/auth.gaurd";
 export const routes: Routes = [
 	{
 		path: '',
-		redirectTo: 'login',
+		redirectTo: "/" + JSON.parse(localStorage.getItem('role')),
 		pathMatch: 'full'
 	},
 	{
@@ -31,6 +31,7 @@ export const routes: Routes = [
 		loadChildren: 'app/admin/admin.module#AdminModule',
 		canActivate: [AuthGuard]
 	}
+		
 ];
 @NgModule({
 	imports: [BrowserModule, RouterModule.forRoot(routes, { useHash: true,})],

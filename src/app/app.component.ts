@@ -31,6 +31,8 @@ export class AppComponent {
     router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event)
     })
+    if(!localStorage.getItem('access_token'))
+      this.router.navigateByUrl('/login');
   }
 
   // Shows and hides the loading spinner during RouterEvent changes
