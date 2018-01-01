@@ -1,22 +1,12 @@
 <div class="container-fluid">
-<<<<<<< HEAD
-  <!-- <div class="panel-group" id="accordion"> -->
   <div class="title">
     <h1>Operational KPIs</h1>
-  </div>
-  <div class="panel add-goal">
-    <div class="panel-heading"><span style="cursor:pointer;" data-toggle="collapse" href="#collapse1">Add measures</span>
-      <span class="pull-right" style="cursor:pointer" data-toggle="tooltip" data-placement="auto" title="collapse">
-        <i class="glyphicon glyphicon-collapse-up" data-toggle="collapse"  href="#collapse1"></i>
-      </span>
-=======
-  <div class="text-center" style="color: red;"><h1>Operational KPIs</h1></div>      
-  <div class="panel">
-    <div class="panel-heading background-3">
+  </div>      
+  <div class="panel add-plan">
+    <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" href="#collapse1" class="accordion-toggle">Add measures</a>
       </h4>
->>>>>>> 0254b7c6b4146e2ceb7b36ab02c8b5ba1b973782
     </div>
     <div id="collapse1" class="panel-collapse collapse">
       <div class="panel-body">
@@ -25,11 +15,7 @@
             <div class="col-lg-6 col-xs-12 col-sm-6">
               <div class="form-group">
                 <label class="control-label" for="year">Plan Year:</label>
-<<<<<<< HEAD
-                <select id="year" name="year" class="form-control" formControlName="cycleId" (ngModelChange)="getObjective($event)">
-=======
                 <select id="year" name="year" class="form-control" formControlName="cycleId" [ngModel]="defaultCycle" (ngModelChange)="getObjective($event)" >
->>>>>>> 0254b7c6b4146e2ceb7b36ab02c8b5ba1b973782
                     <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}] : {{c.description}}</option>
                 </select>
               </div>
@@ -122,12 +108,12 @@
               </label>
             </div>
           </div>
-          <button type="submit" class="btn btn-success" [disabled]="measureForm.invalid">Submit</button>
+          <button type="submit" class="btn btn-success btn-green" [disabled]="measureForm.invalid">Submit</button>
         </form>
       </div>
       <div class="panel-footer">
-        <button type="submit" class="btn btn-success btn-outline-success" [disabled]="measureForm.invalid">Submit</button>
-        <button type="button" class="btn btn-danger btn-outine-danger" (click)="enableFields(); isUpdating = false">Clear</button>
+        <button type="submit" class="btn btn-success btn-outline-success btn-green" [disabled]="measureForm.invalid">Submit</button>
+        <button type="button" class="btn btn-danger btn-outine-danger btn-empty" (click)="enableFields(); isUpdating = false">Clear</button>
       </div>
     </div>
   </div>
@@ -318,33 +304,6 @@
               <tree-view id="termSheetPopup" [treeData]="departments" [assignedDepartment]="selectedMeasure.assignedDepartments" (onSelected)="department($event)"></tree-view>
             </div>
           </div>
-<<<<<<< HEAD
-          <div class="row" *ngIf="next" style="margin: 15px 15px;">
-            <form [formGroup]="departmentForm">
-              <ul formArrayName="departmentsArray" style="list-style:none;padding-left: 0;">
-                <b>Selected Departments</b>
-                <li *ngIf="!selectedDepartments">None Selected</li>
-                <li *ngFor="let dept of departmentForm.controls.departmentsArray.controls;let arr=index;" [formGroupName]="arr">
-                  <table class="table">
-                    <caption style="text-align: left;">{{dept.value.departmentName}}
-                      <span class="input-group pull-right">
-                        <div class="input-group-addon">BaseLine</div>
-                        <input type="text" class="form-control" formControlName="baseline" style="width:25%" id="exampleInputAmount">
-                      </span>
-                    </caption>
-                    <ng-container formArrayName="opiAnnualTargets">
-                      <tr *ngFor="let array of dept.controls.opiAnnualTargets.controls;let op=index;" [formGroupName]="op">
-                        <td>{{array.value.year}}</td>
-                        <ng-container formArrayName="levels">
-                          <td *ngFor="let level of array.controls.levels.controls;let l = index;" [formGroupName]="l">
-                            <div class="input-group">
-                              <div class="input-group-addon">Q{{level.value.quarterId}}</div>
-                              <input type="text" class="form-control" id="exampleInputAmount" style="width: 50%;" formControlName="estimatedTargetLevel">
-                            </div>
-                          </td>
-                        </ng-container>
-                        <td>
-=======
         </div>
         <div class="row" *ngIf="next" style="margin: 15px 15px;">
           <form [formGroup]="departmentForm">
@@ -364,27 +323,11 @@
                       <td>{{array.value.year}}</td>
                       <ng-container formArrayName="levels">
                         <td *ngFor="let level of array.controls.levels.controls;let l = index;" [formGroupName]="l">
->>>>>>> 0254b7c6b4146e2ceb7b36ab02c8b5ba1b973782
                           <div class="input-group">
                             <div class="input-group-addon">Estimated Cost</div>
                             <input type="text" class="form-control" formControlName="estimatedCost" style="width:50%" id="exampleInputAmount">
                           </div>
                         </td>
-<<<<<<< HEAD
-                      </tr>
-                    </ng-container>
-                  </table>
-                </li>
-              </ul>
-            </form>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" *ngIf="next" (click)="prev = true;next = false;">Prev</button>
-          <button type="submit" class="btn btn-default" *ngIf="next" (click)="assign()">Save</button>
-          <button type="button" class="btn btn-default" *ngIf="prev" (click)="prev=false;next=true;assignDepartment()">Next</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-=======
                       </ng-container>
                       <td>
                         <div class="input-group">
@@ -398,7 +341,6 @@
               </li>
             </ul>
           </form>
->>>>>>> 0254b7c6b4146e2ceb7b36ab02c8b5ba1b973782
         </div>
       </div>
       <div class="modal-footer">

@@ -537,11 +537,7 @@ opacity: 0;
 }
 
 /* panel-css */
-.title{
-  text-align: center;
-  text-decoration: underline;
-  margin-bottom: 20px;
-}
+
 
 .add-plan .panel-heading{
   color: white;
@@ -553,7 +549,7 @@ opacity: 0;
 
 .add-plan .panel-footer{
   background-color: #f5f5f500;
-  border-top: 1px solid #cf3238
+  border-top: 1px solid  #c125bd;
 }
 
 .detail-plan .panel-heading{
