@@ -30,6 +30,11 @@ export const routes: Routes = [
 		path: 'admin',
 		loadChildren: 'app/admin/admin.module#AdminModule',
 		canActivate: [AuthGuard]
+	},
+	{
+		path: 'hod',
+		loadChildren: 'app/hod/hod.module#HodModule',
+		canActivate: [AuthGuard]
 	}
 		
 ];

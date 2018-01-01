@@ -383,15 +383,16 @@
   <!--opi List-->
   <div class="panel">
     <div class="panel-heading background-4">
-      <span style="cursor:pointer;" data-toggle="collapse" href="#collapse2">
-        Proposed Operational Performance Indicators</span>
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapse2">Proposed Operational Performance Indicators</a>
+      </h4>
     </div>
-    <div id="collapse2" class="panel-collapse collapse in" *ngIf="goalsCopy.length">
+    <!-- <div id="collapse2" class="panel-collapse collapse in" *ngIf="goalsCopy.length">
       <div class="d-flex border flex-header ">
         <div class="p-2 border">
           Goal
           <span class="search">
-            <input type="text" name="search" (keyup)="searchGoal($event)"  placeholder="Search..">
+            <input type="text" name="search" (keyup)="searchGoal($event)" placeholder="Search..">
           </span>
         </div>
         <div class="p-3 border">
@@ -399,7 +400,7 @@
             <div class="p-2 border">
               Initiative
               <span class="search">
-                <input type="text" name="search" (keyup)="searchInitiative($event)"  placeholder="Search..">
+                <input type="text" name="search" (keyup)="searchInitiative($event)" placeholder="Search..">
               </span>
             </div>
             <div class="p-3 border">
@@ -407,7 +408,7 @@
                 <div class="p-2 border">
                   Activities
                   <span class="search">
-                    <input type="text" name="search" (keyup)="searchActivity($event)"  placeholder="Search..">
+                    <input type="text" name="search" (keyup)="searchActivity($event)" placeholder="Search..">
                   </span>
                 </div>
                 <div class="p-3 border">
@@ -415,14 +416,14 @@
                     <div class="p-2">
                       OPI
                       <span class="search">
-                        <input type="text" name="search" (keyup)="searchOpi($event)"  placeholder="Search..">
+                        <input type="text" name="search" (keyup)="searchOpi($event)" placeholder="Search..">
                       </span>
                     </div>
                     <div class="p-2">
                       Frequency
                     </div>
                     <div class="p-2">
-
+  
                     </div>
                   </div>
                 </div>
@@ -463,8 +464,91 @@
           </div>
         </div>
       </div>
+    </div> -->
+    <div class="panel-body">
+      <table class="table table-bordered">
+        <colgroup>
+          <col style="width:20%">
+          <col style="width:20%">
+          <col style="width:20%">
+          <col style="width:20%">
+          <col style="width:10%">
+          <col style="width:10%">
+        </colgroup>
+        <thead  class="header-background" *ngIf="goalsCopy.length">
+          <tr>
+            <th>Goal
+              <span class="search">
+                <input type="text" name="search" (keyup)="searchGoal($event)" placeholder="Search..">
+              </span>
+            </th>
+            <th>Initiative
+              <span class="search">
+                <input type="text" name="search" (keyup)="searchInitiative($event)" placeholder="Search..">
+              </span>
+            </th>
+            <th>Activity
+              <span class="search">
+                <input type="text" name="search" (keyup)="searchActivity($event)" placeholder="Search..">
+              </span>
+            </th>
+            <th>KPI
+              <span class="search">
+                <input type="text" name="search" (keyup)="searchOpi($event)" placeholder="Search..">
+              </span>                      
+            </th>
+            <th>Frequency</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let goal of goals;let i = index;">
+            <td>{{goal.goal}}</td>
+            <td colspan="5" style="padding:0px;border:none;" #element [style.height]="get(element)">
+              <table class="table table-bordered" style="height: inherit;">
+                <colgroup>
+                  <col style="width:25%">
+                  <col style="width:75%">
+                </colgroup>
+                <tr *ngFor="let initiate of goal.initiatives;let j=index;">
+                  <td>{{initiate.initiative}}</td>
+                  <td colspan="4" style="padding:0px;" #element1 [style.height]="get(element1)">
+                    <table class="table table-bordered" style="height: inherit;">
+                      <colgroup>
+                        <col style="width:33.33%">
+                        <col style="width:66.67">
+                      </colgroup>
+                      <tr *ngFor="let activit of initiate.activities;let k=index;">
+                        <td [style.border-top]="k?'1px solid #ddd':'none'">{{activit.activity}}</td>
+                        <td colspan="3" style="padding:0px;" #element2 [style.height]="get(element2)">
+                          <table class="table table-bordered" style="height: inherit;">
+                            <colgroup>
+                              <col style="width:50%">
+                              <col style="width:25%">
+                              <col style="width:25%">
+                            </colgroup>
+                            <tr *ngFor="let msr of activit.opis;let l=index">
+                              <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.opi}}</td>
+                              <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.frequency}}</td>
+                              <td [style.border-top]="l?'1px solid #ddd':'none'">
+                                <a data-target="#edit-section" (click)="selectedOpi=goal;selectedInitiative=initiate;selectedActivity=activit;selectedMeasure=msr;showOpi(goal,msr)">Fill</a>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot *ngIf="!goals.length">
+          <tr><td colspan="4" class="text-center">No Data to Display .,.</td></tr>
+        </tfoot>
+      </table>
     </div>
-    <p class="text-center" *ngIf="!goals.length" style="padding-top: 5px;">No OPI Added Yet...</p>
   </div>
 
   <!--Evidence Form-->

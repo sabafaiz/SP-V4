@@ -237,6 +237,7 @@ export class InitiativeComponent extends Filters{
   }
 
   get(e){
-    $(e)["0"].height = $(e)["0"].clientHeight;
+    var promise = new Promise((resolve:any,reject:any)=>{     $(e)["0"].height = $(e)["0"].clientHeight;     resolve();    });    
+    return promise;
   }
 }

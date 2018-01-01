@@ -1,7 +1,8 @@
 nav{
-  background: #03001e;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #fdeff9, #ec38bc, #7303c0, #03001e);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #fdeff9, #ec38bc, #7303c0, #03001e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #00d2ff;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
   
   /* box-shadow: 0px 1px 15px 1px rgb(94, 97, 138); */
 }
@@ -87,14 +88,21 @@ nav a{
 /*panel-css */
 .add-plan .panel-heading{
   color: white;
-  background-color: #c125bd;
-  border-color: #7f08bf;
-  border-bottom: 3px solid #880cbf;
+  background: #00d2ff;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border-color:#de32bd;
+  border-bottom: 3px solid #de32bd;
 
 }
 .detail-plan .panel-heading{
   color: white;
-  background-color: #490283;
+  background: #16BFFD;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #CB3066, #16BFFD);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #CB3066, #16BFFD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+  
+  
   border-bottom: 3px solid #de32bd;
 }
 
@@ -102,9 +110,13 @@ nav a{
 .title{
   text-align: center;
   margin-bottom: 20px;
-  background: #03001e;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #fdeff9, #ec38bc, #7303c0, #03001e);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #fdeff9, #ec38bc, #7303c0, #03001e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #00d2ff;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #00d2ff;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
  height:100px;  
  margin-top: -24px;
  margin-bottom: 100px;
@@ -116,6 +128,7 @@ nav a{
 }
 .container-fluid{
 padding-right: 0px!important;
+padding-left: 0px!important;
 }
 
 
@@ -141,3 +154,4 @@ padding-right: 0px!important;
   -webkit-transform-origin: 100%;
           transform-origin: 100%;
 }
+

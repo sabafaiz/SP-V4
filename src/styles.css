@@ -50,7 +50,8 @@ body{
   color: var(--color5Text) !important;
 }
 .header-background{
-  background: var(--color1);
+  background: cyan;
+  color: brown;
 }
 .body-background{
   background: var(--color2);
@@ -537,6 +538,10 @@ opacity: 0;
 }
 
 /* panel-css */
+.panel{
+  margin-right: 20px!important;
+  margin-left: 20px!important;
+}
 
 
 .add-plan .panel-heading{
@@ -544,7 +549,6 @@ opacity: 0;
   background-color: #cf3238;
   border-color: #cf3238;
   border-bottom: 3px solid black;
-
 }
 
 .add-plan .panel-footer{
@@ -557,17 +561,36 @@ opacity: 0;
   background-color: #293f53;
   border-bottom: 3px solid #cf3238;
 }
-
+.btn-default:focus {
+  color: white;
+  background-color: #259be5;
+  border-color: #259be5;
+}
 .btn-empty{
-  color: #293f53;
-  background-color: #fff;
-  border-color: #cf3238;
+    border-radius: 50%;
+    width: 62px;
+    height: 62px;
+    color: #ffffff;
+    background-color: #259be5;
+    border-color: #1ea5e9;
+  box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.2), 0 13px 24px -11px rgba(233, 30, 99, 0.6)
 }
 
 .btn-empty:hover{
   color:white;
   background-color: #cf3238;
 }
+
+.btn:active:focus, .btn:focus {
+  outline: 0px auto -webkit-focus-ring-color;
+  outline-offset: 0px;
+}
+
+.btn:focus{
+outline: 0px auto -webkit-focus-ring-color;
+outline-offset: 0px;
+}
+
 
 .btn-green{
   color: #293f53;
@@ -595,6 +618,7 @@ opacity: 0;
   border-color: #293f53;
   box-shadow: 0 0 0 3px rgba(121,82,179,.25);
 }
+
 
 
 

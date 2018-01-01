@@ -178,4 +178,9 @@ export class HomeComponent extends Filters implements AfterViewInit{
     })
   }
 
+  get(e){
+    var promise = new Promise((resolve:any,reject:any)=>{     $(e)["0"].height = $(e)["0"].clientHeight;     resolve();    });    
+    return promise;
+  }
+
 }

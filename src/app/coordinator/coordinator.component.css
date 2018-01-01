@@ -2,3 +2,10 @@
   border: 1px solid #6788be;
   background-color: #93b4df;
 }
+
+.table{
+  margin-bottom: 0px;
+ }
+ .table .table {
+  background-color: inherit;
+ }
