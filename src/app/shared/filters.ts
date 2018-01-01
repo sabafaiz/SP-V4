@@ -11,7 +11,7 @@ export class Filters{
   }
 
   public initFilters(goalsCopy:any[]){
-    // this.filteredGoals = this.filteredActivities = this.filteredInitiatives = this.filteredOpis = goalsCopy;
+    this.filteredGoals = this.filteredActivities = this.filteredInitiatives = this.filteredOpis = goalsCopy;
   }
 
   public searchGoal(key: any) {
@@ -24,31 +24,6 @@ export class Filters{
       this.filteredGoals = this.goals;
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   public searchInitiative(key: any) {
     this.goals = JSON.parse(JSON.stringify(this.filteredGoals));
     let val = key.target.value;

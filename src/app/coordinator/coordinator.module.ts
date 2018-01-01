@@ -18,7 +18,7 @@ import { SharedModule } from "../shared/shared.module";
 			component: CoordinatorComponent,
 			children: [
 				{
-					path: 'home',
+					path: '',
 					loadChildren: 'app/coordinator/home/home.module#HomeModule'
 				}
 			]

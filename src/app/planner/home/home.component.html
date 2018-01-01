@@ -3,7 +3,6 @@
       <img src="assets/uaeu_signature.png" style="height: 100px;">
     </div>
     <div class="panel panel-info panel-no-border">
-      <!--<div class="panel-heading background-transparent text-center panel-no-border">-->
       <div class="panel-heading">
         <div class="dropdown pull-right">
           <span class="glyphicon glyphicon-option-vertical dropdown-toggle" data-toggle="dropdown" (click)="editMisionVision('mission', organizationInfo.mission);"></span>
@@ -18,7 +17,6 @@
       </div>
     </div>
     <div class="panel panel-info panel-no-border">
-      <!--<div class="panel-heading background-transparent text-center panel-no-border">-->
       <div class="panel-heading">
         <div class="dropdown pull-right">
           <span class="glyphicon glyphicon-option-vertical dropdown-toggle" data-toggle="dropdown" 
@@ -47,7 +45,7 @@
         </h3>            
       </div>
       <div class="panel-collapse collapse in">
-        <div class="panel-body">
+        <div class="panel-body" *ngIf="organizationInfo.values">
           <div class="panel panel-info" *ngFor="let val of organizationInfo.values;let i = index;">
             <div class="panel-heading"><b>{{i+1}}. {{val.title}}</b>
               <div class="dropdown pull-right">

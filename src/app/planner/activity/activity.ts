@@ -240,7 +240,8 @@ export class ActivityComponent extends Filters implements OnInit, AfterViewInit 
   }
 
   get(e){
-    $(e)["0"].height = $(e)["0"].clientHeight;
+    var promise = new Promise((resolve:any,reject:any)=>{     $(e)["0"].height = $(e)["0"].clientHeight;     resolve();    }) ;   
+    return promise;
   }
 
 }

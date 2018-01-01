@@ -139,7 +139,7 @@
             <col style="width:15%">
             <col style="width:55%">
           </colgroup>
-          <thead  class="header-background" *ngIf="goals.length">
+          <thead  class="header-background" *ngIf="goalsCopy.length">
             <tr>
               <th>Goal
                 <span class="search">
@@ -156,36 +156,18 @@
                   <input type="text" name="search" (keyup)="searchActivity($event)" placeholder="Search..">
                 </span>
               </th>
-              <th style="padding:0px;">
-                <table class="table table-bordered">
-                  <colgroup>
-                  <col style="width:37%">
-                  <col style="width:21%">
-                  <col style="width:21%">
-                  <col style="width:21%">
-                  </colgroup>
-                  <tr>
-                    <th colspan="6">
-                        KPI
-                        <span class="search">
-                          <input type="text" name="search" (keyup)="searchOpi($event)" placeholder="Search..">
-                        </span>
-                    </th>
-                  </tr>
-                  <tr>
-                    <th>OPI</th>
-                    <th>Detail</th>
-                    <th>Department</th>
-                    <th colspan="3"></th>
-                  </tr>
-                </table>              
+              <th>
+                  KPI
+                  <span class="search">
+                    <input type="text" name="search" (keyup)="searchOpi($event)" placeholder="Search..">
+                  </span>
               </th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let goal of goals;let i = index;">
               <td>{{goal.goal}}</td>
-              <td colspan="3" style="padding:0px;border:none;" #element [style.height]="get(element)">
+              <td colspan="8" style="padding:0px;border:none;" #element [style.height]="get(element)">
                 <table class="table table-bordered" style="height: inherit;">
                   <colgroup>
                     <col style="width:17.60%">
@@ -193,7 +175,7 @@
                   </colgroup>
                   <tr *ngFor="let initiate of goal.initiatives;let j=index;">
                     <td>{{initiate.initiative}}</td>
-                    <td style="padding:0px;" #element1 [style.height]="get(element1)">
+                    <td colspan="7" style="padding:0px;" #element1 [style.height]="get(element1)">
                       <table class="table table-bordered" style="height: inherit;">
                         <colgroup>
                           <col style="width:21.40%">
@@ -220,7 +202,7 @@
                                   <label>Direction :</label>{{direction[msr.direction]}}<br>
                                 </td>
                                 <td>
-                                  <ul style="list-style:none;padding:0px;">
+                                  <ul style="list-style:none;padding:0px;"><b>Assigned Departments</b>
                                     <li *ngFor="let dept of msr.assignedDepartments;let d = index">{{dept.department}}, </li>
                                   </ul>
                                   <span *ngIf="!msr.assignedDepartments.length">None</span>

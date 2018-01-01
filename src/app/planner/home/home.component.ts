@@ -28,8 +28,18 @@ export class HomeComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.organizationInfo = this.commonService.getData('org_info');    
+    // this.organizationInfo = this.commonService.getData('org_info');  
+    this.fetchOrganizationInfo();  
   }
+
+  public fetchOrganizationInfo() {
+		this.orgSer.fetchOrganizationInfo().subscribe((res: any) => {
+      this.commonService.storeData("org_info", res);
+      this.organizationInfo = res;
+		}, (err: any) => {
+
+		});
+	}
 
   onValueSubmit(){
     if(this.selectedValue){

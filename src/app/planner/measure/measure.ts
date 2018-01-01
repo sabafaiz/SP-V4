@@ -1,8 +1,9 @@
-import { Component, AfterViewInit} from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { UniversityService } from "../../shared/UTI.service";
 import { FormBuilder, Validators, FormGroup, FormArray } from "@angular/forms";
 import { StorageService } from "../../shared/storage.service";
 import { TreeView } from "./tree-view";
+import { Filters } from '../../shared/filters';
 
 declare let $: any;
 
@@ -11,7 +12,7 @@ declare let $: any;
   templateUrl: './measure.html',
   styleUrls: ['./measure.css', './../planner.component.css']
 })
-export class MeasureComponent implements AfterViewInit {
+export class MeasureComponent extends Filters implements AfterViewInit {
   defaultCycle: any;
   objectives: any[] = [];
   initiatives: any[] = [];
@@ -21,8 +22,6 @@ export class MeasureComponent implements AfterViewInit {
   evidenceForms: any[] = [];
   public isUpdating: boolean = false;
   public cycles: any[] = [];
-  public goals: any[] = [];
-  public goalsCopy: any[] = [];
 
   public direction: any = {
     true: 'Upward',
@@ -63,6 +62,7 @@ export class MeasureComponent implements AfterViewInit {
   selectedQuarter: any = 0;
   constructor(public orgService: UniversityService,
     public formBuilder: FormBuilder, public commonService: StorageService) {
+    super();
     this.measureForm = this.setMeasure();
 
     this.orgService.getCycleWithChildren().subscribe((response: any) => {
@@ -104,71 +104,6 @@ export class MeasureComponent implements AfterViewInit {
   }
 
   emptySearchResult: any;
-  private filteredGoals: any[];
-  private filteredInitiatives: any[];
-  private filteredActivities: any[];
-  private filteredOpis: any[];
-
-  search(key: any) {
-    this.goals = JSON.parse(JSON.stringify(this.goalsCopy));
-    let val = key.target.value;
-    if (val && val.trim() != '') {
-      this.goals = this.goalsCopy.filter((item: any) => {
-        return (item.goal.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      });
-      this.filteredGoals = this.goals;
-    }
-  }
-
-  searchInitiative(key: any) {
-    this.goals = JSON.parse(JSON.stringify(this.filteredGoals));
-    let val = key.target.value;
-    if (val && val.trim() != '') {
-      this.goals = this.goals.filter((outerItem: any) => {
-        outerItem.initiatives = outerItem.initiatives.filter((item: any) => {
-          return (item.initiative.toLowerCase().indexOf(val.toLowerCase()) > -1);
-        });
-        this.filteredInitiatives = this.goals;
-        return outerItem.initiatives.length;
-      });
-    }
-  }
-
-  searchActivity(key: any) {
-    this.goals = JSON.parse(JSON.stringify(this.filteredInitiatives));
-    let val = key.target.value;
-    if (val && val.trim() != '') {
-      this.goals = this.goals.filter((outerItem: any) => {
-        outerItem.initiatives = outerItem.initiatives.filter((innerItem: any) => {
-          innerItem.activities = innerItem.activities.filter((item: any) => {
-            return (item.activity.toLowerCase().indexOf(val.toLowerCase()) > -1);
-          });
-          return innerItem.activities.length;
-        });
-        this.filteredActivities = this.goals;
-        return outerItem.initiatives.length;
-      });
-    }
-  }
-
-  searchOpi(key: any) {
-    this.goals = JSON.parse(JSON.stringify(this.filteredActivities));
-    let val = key.target.value;
-    if (val && val.trim() != '') {
-      this.goals = this.goals.filter((outerItem: any) => {
-        outerItem.initiatives = outerItem.initiatives.filter((innerItem: any) => {
-          innerItem.activities = innerItem.activities.filter((item: any) => {
-            item.opis = item.opis.filter((inItem: any) => {
-              return (inItem.opi.toLowerCase().indexOf(val.toLowerCase()) > -1);
-            })
-            return item.opis.length;
-          });
-          return innerItem.activities.length;
-        });
-        return outerItem.initiatives.length;
-      });
-    }
-  }
 
   getInitiative(objId: any) {
     if (objId) {
@@ -239,31 +174,31 @@ export class MeasureComponent implements AfterViewInit {
     this.travers(event, event.my);
   }
 
-  checkAssignDept(assignedDepartments:any[]){
+  checkAssignDept(assignedDepartments: any[]) {
     this.selectedDepartments = [];
     this.departments = JSON.parse(JSON.stringify(this.departmentsCopy));
     assignedDepartments.forEach(outerElement => {
       this.departments.forEach(innerElement => {
-        this.searchDepartment(innerElement,outerElement);
-      });      
+        this.searchDepartment(innerElement, outerElement);
+      });
     });
   }
 
-  searchDepartment(department:any,assigneddepartment:any){
+  searchDepartment(department: any, assigneddepartment: any) {
     if (!department) {
       return;
     } else {
-      if(department.departmentId == assigneddepartment.departmentId){ 
-        department.baseline = assigneddepartment.baseline;        
+      if (department.departmentId == assigneddepartment.departmentId) {
+        department.baseline = assigneddepartment.baseline;
         department.opiAnnualTargets = assigneddepartment.opiAnnualTargets;
         department.my = true;
         department.isUpdating = true;
         console.log(department);
         this.selectedDepartments.push(department);
-      }else{
+      } else {
         if (department.reporteeDepartments)
           department.reporteeDepartments.forEach((element: any) => {
-            this.searchDepartment(element,assigneddepartment);
+            this.searchDepartment(element, assigneddepartment);
           });
       }
     }
@@ -327,10 +262,10 @@ export class MeasureComponent implements AfterViewInit {
     });
     return departmentsFormArray;
   }
-  setAnnualTarget(opiAnnualTargets:any) {
+  setAnnualTarget(opiAnnualTargets: any) {
     const annualTarget: any[] = [];
-    if(opiAnnualTargets)
-      opiAnnualTargets.forEach((element:any) => {
+    if (opiAnnualTargets)
+      opiAnnualTargets.forEach((element: any) => {
         annualTarget.push(this.inItTargetWithLevels(element))
       });
     else
@@ -356,8 +291,8 @@ export class MeasureComponent implements AfterViewInit {
     });
   }
 
-  setLevelsWithValue(levels:any[]){
-    const quarterLevel:any[] = [];
+  setLevelsWithValue(levels: any[]) {
+    const quarterLevel: any[] = [];
     levels.forEach(element => {
       quarterLevel.push(this.formBuilder.group({
         quarterId: element.quarterId,
@@ -489,43 +424,21 @@ export class MeasureComponent implements AfterViewInit {
       })
   }
 
-  getRowSpan(array: any[]) {
-    var rowSpan = 1;
-    rowSpan += array.length;
-    array.forEach((element) => {
-      rowSpan += element.activities.length;
-      element.activities.forEach((innerElement: any) => {
-        rowSpan += innerElement.measures.length;
-      });
-    });
-    if (rowSpan == 1)
-      return rowSpan + 1;
-    return rowSpan;
-  }
-
-  getRowSpanOfIni(array: any[]) {
-    var rowSpan = 1;
-    rowSpan += array.length * 2;
-    array.forEach((innerElement: any) => {
-      rowSpan += innerElement.measures.length;
-    });
-    return rowSpan;
-  }
-
   getEvidenceForms() {
     this.orgService.getEvidenceForms().subscribe((response: any) => {
       this.evidenceForms = response;
     })
   }
 
-  addNewMeasure(){
-    this.enableFields(); 
+  addNewMeasure() {
+    this.enableFields();
     this.isUpdating = false;
     $("#collapse1").collapse('show');
     this.measureForm = this.setMeasure();
   }
 
-  get(e){
-    $(e)["0"].height = $(e)["0"].clientHeight;
+  get(e) {
+    var promise = new Promise((resolve: any, reject: any) => { $(e)["0"].height = $(e)["0"].clientHeight; resolve(); });
+    return promise;
   }
 }
