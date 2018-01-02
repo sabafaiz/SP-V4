@@ -1,4 +1,4 @@
-<div class="container-fluid">     
+<div class="container-fluid">
   <div class="panel add-plan">
     <div class="panel-heading">
       <h4 class="panel-title">
@@ -6,111 +6,111 @@
       </h4>
     </div>
     <div id="collapse1" class="panel-collapse collapse">
-      <form [formGroup]="measureForm" (submit)="submitMeasure()">      
+      <form [formGroup]="measureForm" (submit)="submitMeasure()">
         <div class="panel-body">
-            <div class="row">
-              <div class="col-lg-6 col-xs-12 col-sm-6">
-                <div class="form-group">
-                  <label class="control-label" for="year">Plan Year:</label>
-                  <select id="year" name="year" class="form-control" formControlName="cycleId" [ngModel]="defaultCycle" (ngModelChange)="getObjective($event)" >
+          <div class="row">
+            <div class="col-lg-6 col-xs-12 col-sm-6">
+              <div class="form-group">
+                <label class="control-label" for="year">Plan Year:</label>
+                <select id="year" name="year" class="form-control" formControlName="cycleId" [ngModel]="defaultCycle" (ngModelChange)="getObjective($event)">
                       <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}] : {{c.description}}</option>
                   </select>
-                </div>
               </div>
-              <div class="col-lg-6 col-xs-12 col-sm-12">
-                <div class="form-group">
-                  <label>Select Goal:</label>
-                  <select class="form-control" id="sel1" formControlName="objectiveId" (ngModelChange)="getInitiative($event)">
+            </div>
+            <div class="col-lg-6 col-xs-12 col-sm-12">
+              <div class="form-group">
+                <label>Select Goal:</label>
+                <select class="form-control" id="sel1" formControlName="objectiveId" (ngModelChange)="getInitiative($event)">
                   <option *ngFor="let objective of objectives;let i=index;" [value]="objective.goalId">{{i+1}}.{{objective.goal}}</option>
                 </select>
-                </div>
               </div>
-              <div class="col-lg-6 col-xs-12 col-sm-12">
-                <div class="form-group">
-                  <label>Select Initiative:</label>
-                  <select class="form-control" id="sel1" formControlName="initiativeId" (ngModelChange)="getActivities($event)">
+            </div>
+            <div class="col-lg-6 col-xs-12 col-sm-12">
+              <div class="form-group">
+                <label>Select Initiative:</label>
+                <select class="form-control" id="sel1" formControlName="initiativeId" (ngModelChange)="getActivities($event)">
                   <option *ngFor="let initiative of initiatives;let j=index;" [value]="initiative.initiativeId">{{j+1}}.{{initiative.initiative}}</option>
                 </select>
-                </div>
               </div>
-              <div class="col-lg-6 col-xs-12 col-sm-12">
-                <div class="form-group">
-                  <label>Select Activity:</label>
-                  <select class="form-control" id="sel1" formControlName="activityId">
+            </div>
+            <div class="col-lg-6 col-xs-12 col-sm-12">
+              <div class="form-group">
+                <label>Select Activity:</label>
+                <select class="form-control" id="sel1" formControlName="activityId">
                   <option *ngFor="let activity of activities;let k=index;" [value]="activity.activityId">{{k+1}}.{{activity.activity}}</option>
                 </select>
-                </div>
               </div>
-              <div class="col-lg-6 col-xs-12 col-sm-12">
-                <div class="form-group">
-                  <label>Operational KPI</label>
-                  <textarea class="form-control" rows="3" formControlName="opi"></textarea>
-                </div>
+            </div>
+            <div class="col-lg-6 col-xs-12 col-sm-12">
+              <div class="form-group">
+                <label>Operational KPI</label>
+                <textarea class="form-control" rows="3" formControlName="opi"></textarea>
               </div>
-              <div class="col-lg-6 col-xs-12 col-sm-12">
-                <div class="form-group">
-                  <label>Select MeasureUnit</label>
-                  <select class="form-control" formControlName="measureUnit">
+            </div>
+            <div class="col-lg-6 col-xs-12 col-sm-12">
+              <div class="form-group">
+                <label>Select MeasureUnit</label>
+                <select class="form-control" formControlName="measureUnit">
                   <option value="" disabled selected>Choose Measurement Unit</option>
                   <option value="percentage">Percent</option>
                   <option value="number">Decimal</option>
                   <option value="rate">Rate</option>
                 </select>
-                </div>
               </div>
-              <div class="col-lg-6 col-xs-12 col-sm-12">
-                <div class="form-group">
-                  <label>Select Direction</label>
-                  <select class="form-control" formControlName="direction">
+            </div>
+            <div class="col-lg-6 col-xs-12 col-sm-12">
+              <div class="form-group">
+                <label>Select Direction</label>
+                <select class="form-control" formControlName="direction">
                   <option value="" disabled selected>Choose Direction of measureUnit</option>
                   <option value="true">Positive</option>
                   <option value="false">Negative</option>
                 </select>
-                </div>
               </div>
-              <div class="col-lg-6 col-xs-12 col-sm-12">
-                <div class="form-group">
-                  <label>Frequency of Measurement</label>
-                  <select class="form-control" formControlName="frequencyId">
+            </div>
+            <div class="col-lg-6 col-xs-12 col-sm-12">
+              <div class="form-group">
+                <label>Frequency of Measurement</label>
+                <select class="form-control" formControlName="frequencyId">
                     <option value="1">Annually</option>
                     <option value="2">Semi-Annual</option>      
                     <option value="3">Quarterly</option> 
                   </select>
-                </div>
               </div>
-              <div class="col-lg-6 col-xs-12 col-sm-12">
-                <div class="form-group">
-                  <label>Evidence Forms</label>
-                  <select class="form-control" formControlName="evidanceFormId">
+            </div>
+            <div class="col-lg-6 col-xs-12 col-sm-12">
+              <div class="form-group">
+                <label>Evidence Forms</label>
+                <select class="form-control" formControlName="evidanceFormId">
                   <option value="1" *ngFor="let form of evidenceForms;let f = index;" [value]="form.formId">{{form.form}}</option>
                 </select>
-                </div>
               </div>
-              <div class="col-lg-6 col-xs-12 col-sm-12">
-                <div class="form-group">
-                  <label>Remarks</label>
-                  <textarea class="form-control" rows="3" formControlName="remarks"></textarea>
-                </div>
+            </div>
+            <div class="col-lg-6 col-xs-12 col-sm-12">
+              <div class="form-group">
+                <label>Remarks</label>
+                <textarea class="form-control" rows="3" formControlName="remarks"></textarea>
               </div>
-              <div class="col-lg-6 col-xs-12 col-sm-12">
-                <div class="form-group">
-                  <label>Help Text</label>
-                  <textarea class="form-control" rows="3" formControlName="helpText"></textarea>
-                </div>
+            </div>
+            <div class="col-lg-6 col-xs-12 col-sm-12">
+              <div class="form-group">
+                <label>Help Text</label>
+                <textarea class="form-control" rows="3" formControlName="helpText"></textarea>
               </div>
-              <div class="col-lg-6 col-xs-12 col-sm-12 form-check">
-                <label class="form-check-label">
+            </div>
+            <div class="col-lg-6 col-xs-12 col-sm-12 form-check">
+              <label class="form-check-label">
                   <input type="checkbox" class="form-check-input" formControlName="approvalRequired" ><span style="color:red;">*</span>
                   Approval Required
                 </label>
-              </div>
-            </div>          
+            </div>
+          </div>
         </div>
         <div class="panel-footer">
           <button type="submit" class="btn btn-success btn-outline-success btn-empty" [disabled]="measureForm.invalid"><i class="glyphicon glyphicon-ok"></i></button>
           <button type="button" class="btn btn-danger btn-outine-danger btn-close" (click)="enableFields(); isUpdating = false"><i class="glyphicon glyphicon-trash"></i></button>
         </div>
-      </form>      
+      </form>
     </div>
   </div>
 
@@ -118,12 +118,11 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" href="#collapse2">Proposed KPIs</a>
-        
+
         <div class="form-inline pull-right" style="margin-bottom:unset;">
           <div class="form-group">
             <label class="control-label">Strategic Plan</label>
-            <select id="year" name="year" class="form-control" [ngModel]="defaultCycle" (ngModelChange)="getMeasure()"
-              style="width:auto;height: auto;padding: 0px;">
+            <select id="year" name="year" class="form-control" [ngModel]="defaultCycle" (ngModelChange)="getMeasure()" style="width:auto;height: auto;padding: 0px;">
               <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}} : [{{c.startYear}} To {{c.endYear}}]</option>
             </select>
           </div>
@@ -132,7 +131,7 @@
             <span class="glyphicon glyphicon-plus"></span> Add
           </button>
         </div>
-        
+
       </h4>
     </div>
     <div id="collapse2" class="panel-collapse collapse in">
@@ -144,27 +143,26 @@
             <col style="width:15%">
             <col style="width:55%">
           </colgroup>
-          <thead  class="header-background" *ngIf="goalsCopy.length">
+          <thead class="header-background" *ngIf="goalsCopy.length">
             <tr>
-              <th>Goal
+              <th>
                 <span class="search">
-                  <input type="text" name="search" (keyup)="searchGoal($event)" placeholder="Search..">
-                </span>
-              </th>
-              <th>Initiative
-                <span class="search">
-                  <input type="text" name="search" (keyup)="searchInitiative($event)" placeholder="Search..">
-                </span>
-              </th>
-              <th>Activity
-                <span class="search">
-                  <input type="text" name="search" (keyup)="searchActivity($event)" placeholder="Search..">
+                  <input type="text" name="search" (keyup)="searchGoal($event)" placeholder="Goal">
                 </span>
               </th>
               <th>
-                  KPI
-                  <span class="search">
-                    <input type="text" name="search" (keyup)="searchOpi($event)" placeholder="Search..">
+                <span class="search">
+                  <input type="text" name="search" (keyup)="searchInitiative($event)" placeholder="Initiative">
+                </span>
+              </th>
+              <th>
+                <span class="search">
+                  <input type="text" name="search" (keyup)="searchActivity($event)" placeholder="Activity">
+                </span>
+              </th>
+              <th>
+                <span class="search">
+                    <input type="text" name="search" (keyup)="searchOpi($event)" placeholder="KPI">
                   </span>
               </th>
             </tr>
@@ -235,7 +233,9 @@
             </tr>
           </tbody>
           <tfoot *ngIf="!goals.length">
-            <tr><td colspan="4" class="text-center">No Data to Display .,.</td></tr>
+            <tr>
+              <td colspan="4" class="text-center">No Data to Display .,.</td>
+            </tr>
           </tfoot>
         </table>
       </div>
@@ -254,16 +254,19 @@
       </div>
       <div class="modal-body" *ngIf="selectedMeasure">
         <div class="row" *ngIf="prev">
-          <div class="col-sm-6">
-            <div class="radio">
-              <label>
-                <input type="radio" name="optradio"> All(Institutional Units)</label>
-            </div>
-            <div class="radio">
+          <div class="col-sm-12">
+            <div class="pull-right">
+              <button type="button" class="btn btn-warning"><label>
+                  <input type="radio" name="optradio"> All(Institutional Units)</label>
+                </button>
+                <button type="button" class="btn btn-warning">
               <label>
                 <input type="radio" name="optradio">Select</label>
+              </button>
             </div>
           </div>
+        </div>
+        <div class="row" *ngIf="prev">
           <div class="col-sm-6">
             <div class="department-hierarchy">
               <b>Organisation Unit</b>
@@ -274,14 +277,14 @@
         <div class="row" *ngIf="next" style="margin: 15px 15px;">
           <form [formGroup]="departmentForm">
             <ul formArrayName="departmentsArray" style="list-style:none;padding-left: 0;">
-              <b>Selected Departments</b>
+              <div class="sub-title">Selected Departments</div>
               <li *ngIf="!selectedDepartments">None Selected</li>
               <li *ngFor="let dept of departmentForm.controls.departmentsArray.controls;let arr=index;" [formGroupName]="arr">
-                <table class="table">
-                  <caption style="text-align: left;">{{dept.value.departmentName}}
+                <table class="table border-color">
+                  <caption style="text-align: left;color: #b10909;">{{dept.value.departmentName}}
                     <span class="input-group pull-right">
-                      <div class="input-group-addon">BaseLine</div>
-                      <input type="text" class="form-control" formControlName="baseline" style="width:25%" id="exampleInputAmount">
+                      <div class="input-group-addon base-color">BaseLine</div>
+                      <input type="text" class="form-control form-border" formControlName="baseline" style="width:25%" id="exampleInputAmount">
                     </span>
                   </caption>
                   <ng-container formArrayName="opiAnnualTargets">
@@ -290,14 +293,14 @@
                       <ng-container formArrayName="levels">
                         <td *ngFor="let level of array.controls.levels.controls;let l = index;" [formGroupName]="l">
                           <div class="input-group">
-                            <div class="input-group-addon">Q{{level.value.quarterId}}</div>
+                            <div class="input-group-addon base-color2">Q{{level.value.quarterId}}</div>
                             <input type="text" class="form-control" id="exampleInputAmount" style="width: 50%;" formControlName="estimatedTargetLevel">
                           </div>
                         </td>
                       </ng-container>
                       <td>
                         <div class="input-group">
-                          <div class="input-group-addon">Estimated Cost</div>
+                          <div class="input-group-addon base-color3">Estimated Cost</div>
                           <input type="text" class="form-control" formControlName="estimatedCost" style="width:50%" id="exampleInputAmount">
                         </div>
                       </td>
@@ -310,10 +313,10 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" *ngIf="next" (click)="prev = true;next = false;">Prev</button>
-        <button type="submit" class="btn btn-default" *ngIf="next" (click)="assign()">Save</button>
-        <button type="button" class="btn btn-default" *ngIf="prev" (click)="prev=false;next=true;assignDepartment()">Next</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default btn-empty" *ngIf="next" (click)="prev = true;next = false;"><i class="glyphicon glyphicon-arrow-left"></i></button>
+        <button type="submit" class="btn btn-default btn-empty" *ngIf="next" (click)="assign()"><i class="glyphicon glyphicon-floppy-saved"></i></button>
+        <button type="button" class="btn btn-default btn-empty" *ngIf="prev" (click)="prev=false;next=true;assignDepartment()"><i class="glyphicon glyphicon-arrow-right"></i></button>
+        <button type="button" class="btn btn-default btn-close" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>
       </div>
     </div>
   </div>
