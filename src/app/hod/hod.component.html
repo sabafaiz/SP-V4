@@ -1,8 +1,121 @@
-<div class="container-fluid">'
+<div class="container-fluid">
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li routerLinkActive="active"><a routerLink="/">Home</a></li>
+        <li><a routerLink="/login" (click)="logout()">Logout</a></li>      
+      </ul>
+    </div>
+  </nav>
+
   <div class="text-center" style="color: red;">
     <h1>
       <b>Assigned Operational Performance Indicators</b>
     </h1>
+  </div>
+  <!--edit section-->
+  <div class="panel" *ngIf="selectedOpi">
+    <div class="panel-heading background-4">
+      <h4 class="panel-title ">
+        <a data-toggle="collapse" href="#edit-section">Edit Section</a>
+      </h4>
+    </div>
+    <div id="edit-section" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-6">
+            <label>Strategic Goal :</label>
+            {{selectedOpi.goal}}
+          </div>
+          <div class="col-lg-6">
+            <label>Initiative :</label>
+            {{selectedInitiative.initiative}}
+          </div>
+          <div class="col-lg-6">
+            <label>Activity :</label>
+            {{selectedActivity.activity}}
+          </div>
+          <div class="col-lg-6">
+            <label>OPI :</label>
+            {{selectedMeasure.opi}}
+          </div>
+          <div class="col-lg-6">
+            <label>Frequency :</label>
+            {{selectedMeasure.frequency}}
+          </div>
+          <div class="col-lg-6">
+            <label>Measure Unit :</label>
+            {{selectedMeasure.measureUnit}}
+          </div>
+          <div class="col-lg-6">
+            <label>Base Line :</label>
+            {{selectedMeasure.departmentInfo[0].baseline}}
+          </div>
+          <div class="col-lg-6">
+            <label>Evidence Form Type :</label>
+            {{selectedMeasure.evidanceForm}}
+            <p *ngIf="!selectedMeasure.evidanceForm">None</p>
+          </div>
+        </div>
+
+        <table id="accordion" class="table table-hover">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Estimated Cost</th>
+                <th>Quarter</th>
+                <th>Current Cost</th>
+                <th>Current Level</th>
+                <th>End Date</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let tdl of selectedMeasure.departmentInfo[0].opiAnnualTargets;let at=index;">
+              <tr>
+                <td [attr.rowspan]="tdl.levels.length + 2" style="vertical-align: middle;">{{tdl.year}}</td>
+                <td [attr.rowspan]="tdl.levels.length + 2" style="vertical-align: middle;">{{tdl.estimatedCost}}</td>
+              </tr>
+              <ng-template let-lev ngFor [ngForOf]="tdl.levels" let-in="index">
+                <tr [style.background]="lev.disabled?'lightgray':null">
+                  <td>{{lev.quarter}}</td>
+                  <td><input type="number" [(ngModel)]="lev.currentCost" *ngIf="lev.status=='unsubmitted'" [disabled]="lev.disabled"> <span *ngIf="lev.status!='unsubmitted'">{{lev.currentCost}}</span></td>
+                  <td><input type="number" [(ngModel)]="lev.currentTargetLevel" *ngIf="lev.status=='unsubmitted'" [disabled]="lev.disabled"> <span *ngIf="lev.status!='unsubmitted'">{{lev.currentTargetLevel}}</span></td>
+                  <td>{{lev.endDate + tdl.year}}</td>
+                  <td>
+                    <div *ngIf="!lev.disabled">
+                    <button  *ngIf="lev.status=='unsubmitted'" [disabled]="!(lev.currentTargetLevel&&lev.currentCost)" (click)="lev.isUpdating=false;saveQuarterResult(lev)" [disabled]="lev.disabled"> Save</button>
+                    <button  *ngIf="lev.status=='inprogress'" data-toggle="modal" data-target="#evidenceForm" (click)="selectedQuarter=lev;evForm=0" [disabled]="lev.disabled">Upload Evidence</button>
+                    <button  *ngIf="lev.status=='inprogress'" (click)="lev.status='unsubmitted';lev.isUpdating=true;" [disabled]="lev.disabled">Edit</button>
+                    <button  *ngIf="lev.isUpdating" (click)="lev.status='inprogress';lev.isUpdating=false;"> Cancel</button>
+                    <button  *ngIf="lev.evidance&&!isUpdating" (click)="lockQuarterResult(lev)" [disabled]="lev.disabled">Lock</button>
+                    <button type="button" class="close" data-toggle="collapse"  [attr.href]="'#row-collapse'+at" (click)="evidences=lev.evidance;">
+                      <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                      <span class="sr-only">Close</span>
+                    </button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-container *ngIf="evidences">
+                <tr [attr.id]="'row-collapse'+at" class="collapse">
+                  <td colspan="5">
+                    <b>Evidences</b><br>
+                    <div class="row" *ngFor="let ev of evidences;let e = index;">
+                      <div class="col-lg-6">
+                        <a [attr.href]="ev.url">{{e+1}}) evidance {{e+1}}</a>
+                        <button type="button" class="close" (click)="deleteEvidence(evidences,ev,e)">
+                          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+      </div>
+    </div>
   </div>
   <div class="panel">
     <div class="panel-heading  background-4">

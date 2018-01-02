@@ -5,140 +5,142 @@
   <div class="panel add-plan">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" href="#collapse1" class="accordion-toggle">Add measures</a>
+        <a data-toggle="collapse" href="#collapse1" class="accordion-toggle">Add KPI</a>
       </h4>
     </div>
     <div id="collapse1" class="panel-collapse collapse">
-      <div class="panel-body">
-        <form [formGroup]="measureForm" (submit)="submitMeasure()">
-          <div class="row">
-            <div class="col-lg-6 col-xs-12 col-sm-6">
-              <div class="form-group">
-                <label class="control-label" for="year">Plan Year:</label>
-                <select id="year" name="year" class="form-control" formControlName="cycleId" [ngModel]="defaultCycle" (ngModelChange)="getObjective($event)" >
-                    <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}] : {{c.description}}</option>
+      <form [formGroup]="measureForm" (submit)="submitMeasure()">      
+        <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-6 col-xs-12 col-sm-6">
+                <div class="form-group">
+                  <label class="control-label" for="year">Plan Year:</label>
+                  <select id="year" name="year" class="form-control" formControlName="cycleId" [ngModel]="defaultCycle" (ngModelChange)="getObjective($event)" >
+                      <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}] : {{c.description}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-6 col-xs-12 col-sm-12">
+                <div class="form-group">
+                  <label>Select Goal:</label>
+                  <select class="form-control" id="sel1" formControlName="objectiveId" (ngModelChange)="getInitiative($event)">
+                  <option *ngFor="let objective of objectives;let i=index;" [value]="objective.goalId">{{i+1}}.{{objective.goal}}</option>
                 </select>
+                </div>
               </div>
-            </div>
-            <div class="col-lg-6 col-xs-12 col-sm-12">
-              <div class="form-group">
-                <label>Select Goal:</label>
-                <select class="form-control" id="sel1" formControlName="objectiveId" (ngModelChange)="getInitiative($event)">
-                <option *ngFor="let objective of objectives;let i=index;" [value]="objective.goalId">{{i+1}}.{{objective.goal}}</option>
-              </select>
-              </div>
-            </div>
-            <div class="col-lg-6 col-xs-12 col-sm-12">
-              <div class="form-group">
-                <label>Select Initiative:</label>
-                <select class="form-control" id="sel1" formControlName="initiativeId" (ngModelChange)="getActivities($event)">
-                <option *ngFor="let initiative of initiatives;let j=index;" [value]="initiative.initiativeId">{{j+1}}.{{initiative.initiative}}</option>
-              </select>
-              </div>
-            </div>
-            <div class="col-lg-6 col-xs-12 col-sm-12">
-              <div class="form-group">
-                <label>Select Activity:</label>
-                <select class="form-control" id="sel1" formControlName="activityId">
-                <option *ngFor="let activity of activities;let k=index;" [value]="activity.activityId">{{k+1}}.{{activity.activity}}</option>
-              </select>
-              </div>
-            </div>
-            <div class="col-lg-6 col-xs-12 col-sm-12">
-              <div class="form-group">
-                <label>Operational KPI</label>
-                <textarea class="form-control" rows="3" formControlName="opi"></textarea>
-              </div>
-            </div>
-            <div class="col-lg-6 col-xs-12 col-sm-12">
-              <div class="form-group">
-                <label>Select MeasureUnit</label>
-                <select class="form-control" formControlName="measureUnit">
-                <option value="" disabled selected>Choose Measurement Unit</option>
-                <option value="percentage">Percent</option>
-                <option value="number">Decimal</option>
-                <option value="rate">Rate</option>
-              </select>
-              </div>
-            </div>
-            <div class="col-lg-6 col-xs-12 col-sm-12">
-              <div class="form-group">
-                <label>Select Direction</label>
-                <select class="form-control" formControlName="direction">
-                <option value="" disabled selected>Choose Direction of measureUnit</option>
-                <option value="true">Positive</option>
-                <option value="false">Negative</option>
-              </select>
-              </div>
-            </div>
-            <div class="col-lg-6 col-xs-12 col-sm-12">
-              <div class="form-group">
-                <label>Frequency of Measurement</label>
-                <select class="form-control" formControlName="frequencyId">
-                  <option value="1">Annually</option>
-                  <option value="2">Semi-Annual</option>      
-                  <option value="3">Quarterly</option> 
+              <div class="col-lg-6 col-xs-12 col-sm-12">
+                <div class="form-group">
+                  <label>Select Initiative:</label>
+                  <select class="form-control" id="sel1" formControlName="initiativeId" (ngModelChange)="getActivities($event)">
+                  <option *ngFor="let initiative of initiatives;let j=index;" [value]="initiative.initiativeId">{{j+1}}.{{initiative.initiative}}</option>
                 </select>
+                </div>
               </div>
-            </div>
-            <div class="col-lg-6 col-xs-12 col-sm-12">
-              <div class="form-group">
-                <label>Evidence Forms</label>
-                <select class="form-control" formControlName="evidanceFormId">
-                <option value="1" *ngFor="let form of evidenceForms;let f = index;" [value]="form.formId">{{form.form}}</option>
-              </select>
+              <div class="col-lg-6 col-xs-12 col-sm-12">
+                <div class="form-group">
+                  <label>Select Activity:</label>
+                  <select class="form-control" id="sel1" formControlName="activityId">
+                  <option *ngFor="let activity of activities;let k=index;" [value]="activity.activityId">{{k+1}}.{{activity.activity}}</option>
+                </select>
+                </div>
               </div>
-            </div>
-            <div class="col-lg-6 col-xs-12 col-sm-12">
-              <div class="form-group">
-                <label>Remarks</label>
-                <textarea class="form-control" rows="3" formControlName="remarks"></textarea>
+              <div class="col-lg-6 col-xs-12 col-sm-12">
+                <div class="form-group">
+                  <label>Operational KPI</label>
+                  <textarea class="form-control" rows="3" formControlName="opi"></textarea>
+                </div>
               </div>
-            </div>
-            <div class="col-lg-6 col-xs-12 col-sm-12">
-              <div class="form-group">
-                <label>Help Text</label>
-                <textarea class="form-control" rows="3" formControlName="helpText"></textarea>
+              <div class="col-lg-6 col-xs-12 col-sm-12">
+                <div class="form-group">
+                  <label>Select MeasureUnit</label>
+                  <select class="form-control" formControlName="measureUnit">
+                  <option value="" disabled selected>Choose Measurement Unit</option>
+                  <option value="percentage">Percent</option>
+                  <option value="number">Decimal</option>
+                  <option value="rate">Rate</option>
+                </select>
+                </div>
               </div>
-            </div>
-            <div class="col-lg-6 col-xs-12 col-sm-12 form-check">
-              <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" formControlName="approvalRequired" ><span style="color:red;">*</span>
-                Approval Required
-              </label>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-success btn-green" [disabled]="measureForm.invalid">Submit</button>
-        </form>
-      </div>
-      <div class="panel-footer">
-        <button type="submit" class="btn btn-success btn-outline-success btn-green" [disabled]="measureForm.invalid">Submit</button>
-        <button type="button" class="btn btn-danger btn-outine-danger btn-empty" (click)="enableFields(); isUpdating = false">Clear</button>
-      </div>
+              <div class="col-lg-6 col-xs-12 col-sm-12">
+                <div class="form-group">
+                  <label>Select Direction</label>
+                  <select class="form-control" formControlName="direction">
+                  <option value="" disabled selected>Choose Direction of measureUnit</option>
+                  <option value="true">Positive</option>
+                  <option value="false">Negative</option>
+                </select>
+                </div>
+              </div>
+              <div class="col-lg-6 col-xs-12 col-sm-12">
+                <div class="form-group">
+                  <label>Frequency of Measurement</label>
+                  <select class="form-control" formControlName="frequencyId">
+                    <option value="1">Annually</option>
+                    <option value="2">Semi-Annual</option>      
+                    <option value="3">Quarterly</option> 
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-6 col-xs-12 col-sm-12">
+                <div class="form-group">
+                  <label>Evidence Forms</label>
+                  <select class="form-control" formControlName="evidanceFormId">
+                  <option value="1" *ngFor="let form of evidenceForms;let f = index;" [value]="form.formId">{{form.form}}</option>
+                </select>
+                </div>
+              </div>
+              <div class="col-lg-6 col-xs-12 col-sm-12">
+                <div class="form-group">
+                  <label>Remarks</label>
+                  <textarea class="form-control" rows="3" formControlName="remarks"></textarea>
+                </div>
+              </div>
+              <div class="col-lg-6 col-xs-12 col-sm-12">
+                <div class="form-group">
+                  <label>Help Text</label>
+                  <textarea class="form-control" rows="3" formControlName="helpText"></textarea>
+                </div>
+              </div>
+              <div class="col-lg-6 col-xs-12 col-sm-12 form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" formControlName="approvalRequired" ><span style="color:red;">*</span>
+                  Approval Required
+                </label>
+              </div>
+            </div>          
+        </div>
+        <div class="panel-footer">
+          <button type="submit" class="btn btn-success btn-outline-success btn-green" [disabled]="measureForm.invalid">Submit</button>
+          <button type="button" class="btn btn-danger btn-outine-danger btn-empty" (click)="enableFields(); isUpdating = false">Clear</button>
+        </div>
+      </form>      
     </div>
   </div>
 
   <div class="panel">
     <div class="panel-heading background-4">
       <h4 class="panel-title">
-        <a data-toggle="collapse" href="#collapse2">Proposed Operational Performance Indicators</a>
-        <button type="button" class="btn-info pull-right" (click)="addNewMeasure()">
-          <span class="glyphicon glyphicon-plus"></span> Add
-        </button>
+        <a data-toggle="collapse" href="#collapse2">Proposed KPIs</a>
+        
+        <div class="form-inline pull-right" style="margin-bottom:unset;">
+          <div class="form-group">
+            <label class="control-label">Strategic Plan</label>
+            <select id="year" name="year" class="form-control" [ngModel]="defaultCycle" (ngModelChange)="getMeasure()"
+              style="width:auto;height: auto;padding: 0px;">
+              <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}} : [{{c.startYear}} To {{c.endYear}}]</option>
+            </select>
+          </div>
+          <button type="button" class="btn-info" style="display: inline-block;
+          vertical-align: top;" (click)="addNewMeasure()">
+            <span class="glyphicon glyphicon-plus"></span> Add
+          </button>
+        </div>
+        
       </h4>
     </div>
     <div id="collapse2" class="panel-collapse collapse in">
       <div class="panel-body">
         <table class="table table-bordered">
-          <caption class="form-inline">
-            <div class="form-group pull-right">
-              <label class="control-label">Strategic Plan</label>
-              <select id="year" name="year" class="form-control" [ngModel]="defaultCycle" (ngModelChange)="getMeasure()"
-                style="width:auto;height: auto;padding: 0px;">
-                <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}} : [{{c.startYear}} To {{c.endYear}}]</option>
-              </select>
-            </div>
-          </caption>
           <colgroup>
             <col style="width:15%">
             <col style="width:15%">
@@ -245,24 +247,9 @@
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -306,8 +293,8 @@
                       <ng-container formArrayName="levels">
                         <td *ngFor="let level of array.controls.levels.controls;let l = index;" [formGroupName]="l">
                           <div class="input-group">
-                            <div class="input-group-addon">Estimated Cost</div>
-                            <input type="text" class="form-control" formControlName="estimatedCost" style="width:50%" id="exampleInputAmount">
+                            <div class="input-group-addon">Q{{level.value.quarterId}}</div>
+                            <input type="text" class="form-control" id="exampleInputAmount" style="width: 50%;" formControlName="estimatedTargetLevel">
                           </div>
                         </td>
                       </ng-container>

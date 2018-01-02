@@ -1,6 +1,8 @@
 .department-hierarchy{
   overflow: scroll;
-  height: 300px;
+}
+.modal-xl{
+  width: 80%;
 }
 .p-3 {
   flex: 6 !important;

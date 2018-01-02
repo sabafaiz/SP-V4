@@ -1,5 +1,5 @@
-  <div class="container-fluid">
-    <div class="container text-center" style="    padding: 20px;">
+  <div class="container-fluid" *ngIf="organizationInfo">
+    <div class="container text-center" style="padding: 20px;">
       <img src="assets/uaeu_signature.png" style="height: 100px;">
     </div>
     <div class="panel panel-info panel-no-border">
@@ -45,7 +45,7 @@
         </h3>            
       </div>
       <div class="panel-collapse collapse in">
-        <div class="panel-body" *ngIf="organizationInfo.values">
+        <div class="panel-body">
           <div class="panel panel-info" *ngFor="let val of organizationInfo.values;let i = index;">
             <div class="panel-heading"><b>{{i+1}}. {{val.title}}</b>
               <div class="dropdown pull-right">

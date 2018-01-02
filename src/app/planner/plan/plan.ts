@@ -24,7 +24,7 @@ export class PlanComponent{
       "planYear":new FormControl('',[Validators.required]),
       "startYear":new FormControl('',[Validators.required]),
       "endYear":new FormControl('',[Validators.required]),
-      "active":new FormControl('',[Validators.required])
+      "active":new FormControl(false,[Validators.required])
     });  
     this.getCycles();
   }

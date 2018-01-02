@@ -54,73 +54,6 @@
       </div>
     </div>
   </div>
-  <!-- <div class="panel">
-    <div class="panel-heading background-4">Proposed Activities
-        <button type="button" class="btn btn-info" (click)="addNewActivity()">
-          <span class="glyphicon glyphicon-plus"></span> Add
-        </button>
-      <select id="year" name="year" class="form-control pull-right" [(ngModel)]="defaultCycle" (ngModelChange)="getActivities()"
-        style="width:auto;height: auto;padding: 0px;">
-        <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}]</option>
-      </select>
-    </div>
-    <div class="background-2" *ngIf="goals.length">
-      <div class="d-flex text-center margin flex-header border">
-        <div class="p-2 w-50">
-          <b>Goals</b>
-          <span class="search">
-            <input type="text" name="search" (keyup)="searchGoal($event)" placeholder="Search..">
-          </span>
-        </div>
-        <div class="p-2 w-50">
-          <b>Initiatives</b>
-          <span class="search">
-            <input type="text" name="search" (keyup)="searchInitiative($event)" placeholder="Search..">
-          </span>
-        </div>
-        <div class="p-2 w-75">
-          <b>Activities</b>
-          <span class="search">
-            <input type="text" name="search" (keyup)="searchActivity($event)" placeholder="Search..">
-          </span>
-        </div>
-      </div>
-      <div class="d-flex padding border" *ngFor="let goal of goals;let i = index;">
-        <div class="p-2 w-30">
-          {{ goal.goal }}
-        </div>
-        <div class="p-3">
-          <div *ngFor="let initiate of goal.initiatives;let j=index;">
-            <div class="d-flex innerFlex border">
-              <div class="p-2 w-50 border-right">
-                <span>{{initiate.initiative}}</span>
-              </div>
-              <div class="p-3 border-left">
-                <div class="initiative" *ngFor="let activit of initiate.activities;let k=index;">
-                  <div class="row">
-                    <div class="col-lg-10 col-sm-10">
-                      {{activit.activity}}
-                    </div>
-                    <div class="col-lg-1 col-xs-1">
-                      <span data-toggle="tooltip" data-placement="auto" title="Edit">
-                        <i class="glyphicon glyphicon-edit btn-edit" style="cursor:pointer;" (click)="updateActivity(goal,initiate,activit)"></i>
-                      </span>
-                    </div>
-                    <div class="col-lg-1 col-xs-1">
-                      <span data-toggle="tooltip" data-placement="auto" title="Delete">
-                        <i style="cursor:pointer;" class="glyphicon glyphicon-remove btn-del" (click)="deleteActivity(activit.activityId,initiate.activities,k)"></i>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <p class="text-center" *ngIf="!goals.length" style="padding-top: 5px;">No Activities Added Yet...</p>
-  </div> -->
 </div>
 
 <div class="container-fluid">
@@ -128,23 +61,24 @@
     <div class="panel-heading">
       <h4 class="panel-title">
       <a data-toggle="collapse"  href="#collapse2">Proposed Activities</a>
-      <button type="button" class="btn-info pull-right btn-add" (click)="addNewActivity()">
-        <span class="glyphicon glyphicon-plus"></span> Add
-      </button>
+        <div class="form-inline pull-right" style="margin-bottom:unset;">
+          <div class="form-group">
+            <label class="control-label">Strategic Plan</label>
+            <select id="year" name="year" class="form-control" [(ngModel)]="defaultCycle" (ngModelChange)="getActivities()"
+              style="width:auto;height: auto;padding: 0px;">
+              <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}]</option>
+            </select>
+          </div>
+          <button type="button" class="btn-info btn-add" style="display: inline-block;
+          vertical-align: top;" (click)="addNewActivity()">
+            <span class="glyphicon glyphicon-plus"></span> Add
+          </button>
+        </div>
       </h4>
     </div>
     <div id="collapse2" class="panel-collapse collapse in">
       <div class="panel-body">
         <table class="table table-bordered">
-          <caption class="form-inline">
-            <div class="form-group pull-right">
-              <label class="control-label">Strategic Plan</label>
-              <select id="year" name="year" class="form-control" [(ngModel)]="defaultCycle" (ngModelChange)="getActivities()"
-                style="width:auto;height: auto;padding: 0px;">
-                <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}]</option>
-              </select>
-            </div>
-          </caption>
           <colgroup>
             <col style="width:30%">
             <col style="width:30%">

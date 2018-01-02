@@ -72,6 +72,7 @@
                   <td><input type="number" [(ngModel)]="lev.currentTargetLevel" *ngIf="lev.status=='unsubmitted'" [disabled]="lev.disabled"> <span *ngIf="lev.status!='unsubmitted'">{{lev.currentTargetLevel}}</span></td>
                   <td>{{lev.endDate + tdl.year}}</td>
                   <td>
+                    <div *ngIf="!lev.disabled">
                     <button  *ngIf="lev.status=='unsubmitted'" [disabled]="!(lev.currentTargetLevel&&lev.currentCost)" (click)="lev.isUpdating=false;saveQuarterResult(lev)" [disabled]="lev.disabled"> Save</button>
                     <button  *ngIf="lev.status=='inprogress'" data-toggle="modal" data-target="#evidenceForm" (click)="selectedQuarter=lev;evForm=0" [disabled]="lev.disabled">Upload Evidence</button>
                     <button  *ngIf="lev.status=='inprogress'" (click)="lev.status='unsubmitted';lev.isUpdating=true;" [disabled]="lev.disabled">Edit</button>
@@ -81,6 +82,7 @@
                       <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
                       <span class="sr-only">Close</span>
                     </button>
+                    </div>
                   </td>
                 </tr>
               </ng-template>

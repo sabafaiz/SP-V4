@@ -47,67 +47,23 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse"  href="#collapse2">Proposed Initiatives</a>
-        <button type="button" class="btn-info  pull-right btn-add" (click)="addNewInitiative()">
-          <span class="glyphicon glyphicon-plus"></span> Add
-        </button>
+        <div class="form-inline pull-right" style="margin-bottom: unset">
+          <div class="form-group">
+            <label class="control-label">Strategic Plan</label>
+            <select id="year" name="year" class="form-control" [(ngModel)]="defaultCycle" (ngModelChange)="getInitiative()" style="width:auto;height: auto;padding: 0px;">
+                <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}]</option>
+            </select>
+          </div>
+          <button type="button" class="btn-info btn-add" style="display: inline-block;
+          vertical-align: top;" (click)="addNewInitiative()">
+            <span class="glyphicon glyphicon-plus"></span> Add
+          </button>
+        </div>
       </h4>      
     </div>
-    <!-- <div id="collapse2" class="panel-collapse collapse in">
-      <div class="jumbotron nopadding border" >
-        <div class="flex-header border">
-          <div class="row">
-            <div class="text-center  col-lg-4 col-xs-4">
-              <b>Goals</b>
-              <span class="search">
-                <input type="text" name="search" (keyup)="searchGoal($event)"  placeholder="Search..">
-              </span>
-            </div>
-            <div class="text-center  col-lg-7 col-xs-7">
-              <b>Initiatives</b>
-              <span class="search">
-                <input type="text" name="search" (keyup)="searchInitiative($event)"  placeholder="Search..">
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex padding border" *ngFor="let goal of goals;let i = index;">
-          <div class="p-2">
-            {{goal.goal}}
-          </div>
-          <div class="p-3 margin-1">
-            <div *ngFor="let initiate of goal.initiatives; let j=index" class="border padding10">
-              <div class="row">
-                <div class="col-lg-10 col-sm-10">
-                  {{initiate.initiative}}
-                </div>
-                <div class="col-lg-1 col-xs-1">
-                  <span data-toggle="tooltip" data-placement="auto" title="Edit">
-                    <i class="glyphicon glyphicon-edit btn-edit" style="cursor:pointer;" (click)="updateInitiative(goal.goalId,initiate)"  data-toggle="collapse" href="#collapse1"></i>
-                  </span>
-                </div>
-                <div class="col-lg-1 col-xs-1">
-                  <span data-toggle="tooltip" data-placement="auto" title="Delete">
-                    <i style="cursor:pointer;" class="glyphicon glyphicon-remove btn-del" (click)="deleteInitiative(initiate.initiativeId,goal.initiatives,j)"></i>    
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <p class="text-center" *ngIf="!goals.length" style="padding-top: 5px;">No Initiative Added Yet...</p>
-    </div> -->
     <div id="collapse2" class="panel-collapse collapse in">
       <div class="panel-body">
         <table class="table table-bordered">
-          <caption class="form-inline">
-            <div class="form-group pull-right">
-              <label class="control-label">Strategic Plan</label>
-              <select id="year" name="year" class="form-control" [(ngModel)]="defaultCycle" (ngModelChange)="getInitiative()" style="width:auto;height: auto;padding: 0px;">
-                  <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}]</option>
-              </select>
-            </div>
-          </caption>
           <colgroup>
             <col style="width:30%">
             <col style="width:70%">
