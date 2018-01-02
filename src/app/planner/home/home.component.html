@@ -2,7 +2,7 @@
     <div class="container text-center" style="padding: 20px;">
       <img src="assets/uaeu_signature.png" style="height: 100px;">
     </div>
-    <div class="panel panel-info panel-no-border">
+    <div class="panel panel-info panel-color">
       <div class="panel-heading">
         <div class="dropdown pull-right">
           <span class="glyphicon glyphicon-option-vertical dropdown-toggle" data-toggle="dropdown" (click)="editMisionVision('mission', organizationInfo.mission);"></span>
@@ -16,7 +16,7 @@
         {{organizationInfo.mission}}
       </div>
     </div>
-    <div class="panel panel-info panel-no-border">
+    <div class="panel panel-info panel-color2">
       <div class="panel-heading">
         <div class="dropdown pull-right">
           <span class="glyphicon glyphicon-option-vertical dropdown-toggle" data-toggle="dropdown" 
@@ -47,7 +47,7 @@
       <div class="panel-collapse collapse in">
         <div class="panel-body">
           <div class="panel panel-info" *ngFor="let val of organizationInfo.values;let i = index;">
-            <div class="panel-heading"><b>{{i+1}}. {{val.title}}</b>
+            <div class="panel-heading color3"><b>{{i+1}}. {{val.title}}</b>
               <div class="dropdown pull-right">
                 <span class="glyphicon glyphicon-option-vertical dropdown-toggle" data-toggle="dropdown"></span>
                 <ul class="dropdown-menu">
@@ -68,7 +68,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <!-- Modal Header -->
-        <div class="modal-header">
+        <div class="modal-header color4">
           <button type="button" class="close" data-dismiss="modal">
               <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
           </button>
@@ -90,8 +90,8 @@
           </div>
           <!-- Modal Footer -->
           <div class="modal-footer">
-            <button type="submit" class="btn btn-default">Submit</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-default btn-submit"><i class="glyphicon glyphicon-ok"></i></button>
+            <button type="button" class="btn btn-default btn-close" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>
           </div>
         </form>
       </div>
@@ -103,7 +103,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <!-- Modal Header -->
-        <div class="modal-header">
+        <div class="modal-header color4">
           <button type="button" class="close" data-dismiss="modal">
             <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
           </button>
@@ -121,8 +121,8 @@
           </div>
           <!-- Modal Footer -->
           <div class="modal-footer">
-            <button type="submit" class="btn btn-default">Submit</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-default btn-submit"><i class="glyphicon glyphicon-ok"></i></button>
+            <button type="button" class="btn btn-default btn-close" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>
           </div>
         </form>
       </div>

@@ -89,8 +89,8 @@
       </form>
     </div>
     <div class="panel-footer">
-        <button type="submit" class="btn btn-success btn-green" [disabled]="spiForm.invalid">Submit</button>
-        <button type="button" class="btn btn-default btn-empty" (click)="spiForm.reset()" data-dismiss="modal">Clear</button>
+        <button type="submit" class="btn btn-success btn-empty" [disabled]="spiForm.invalid"><i class="glyphicon glyphicon-ok"></i></button>
+        <button type="button" class="btn btn-default btn-close" (click)="spiForm.reset()" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>
     </div>
   </div>
 

@@ -541,6 +541,7 @@ opacity: 0;
 .panel{
   margin-right: 20px!important;
   margin-left: 20px!important;
+  margin-top:45px;
 }
 
 
@@ -575,10 +576,16 @@ opacity: 0;
     border-color: #1ea5e9;
   box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.2), 0 13px 24px -11px rgba(233, 30, 99, 0.6)
 }
+.btn-empty[disabled]:hover{
+  border-color: #ffffff;
+  color: white;
+  background: forestgreen;
+}
 
 .btn-empty:hover{
-  color:white;
-  background-color: #cf3238;
+  border-color: #ffffff;
+  color: white;
+  background: forestgreen;
 }
 
 .btn:active:focus, .btn:focus {
@@ -608,6 +615,7 @@ outline-offset: 0px;
 .btn-add{
   background-color: #cf3238;
   border-color: #cf3238;
+  border-radius: 15%;
 }
 
 .search input[type=text]{
@@ -620,6 +628,27 @@ outline-offset: 0px;
 }
 
 
+.btn-close{
+  border-radius: 50%;
+  width: 62px;
+  height: 62px;
+  color: #ffffff;
+  background-color: #cf3238;
+  border-color: #cf3238;
+  box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.2), 0 13px 24px -11px rgba(233, 30, 99, 0.6)
+}
+
+.btn-close:hover{
+color:white;
+background-color: #00C9FF;
+}
+
+.color4{
+  background: #00C9FF;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #92FE9D, #00C9FF);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #92FE9D, #00C9FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color:white;
+}
 
 
 /* panel-css */

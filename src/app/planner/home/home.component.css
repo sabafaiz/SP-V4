@@ -1,28 +1,100 @@
 .add-goal .panel-heading
 {
-background: #cf3238;
-color:white;
-border-bottom: 3px solid black;
-cursor: pointer;
+    background: #283c86;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #45a247, #283c86);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #45a247, #283c86); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color:white;
+    border-bottom: 2px solid #0dbef5;
+    cursor: pointer;
 
 }
-
-.sub-panel .panel-heading{
-        color: white;
-        background-color: #293f53;
-        border-bottom: 3px solid #cf3238;
-}
-/* .panel-info{
-    border-color: #000000;
-} */
-
-
 
 .green-background{
     margin-top: -8px;
-    background:  #293f53;
+    background:   #20a3e8;
 }
 
 .btn:hover {
     color: #cf3238;
+}
+
+.panel-color .panel-heading{
+    color: white;
+    background: #23074d;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #cc5333, #23074d);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #cc5333, #23074d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-bottom: 2px solid #0dbef5;
+}
+
+
+
+
+.panel-color2 .panel-heading{
+    color:white;
+    background: #7b4397;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #dc2430, #7b4397);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #dc2430, #7b4397); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-bottom: 2px solid #0dbef5;
+}
+
+.color3{
+    background: #614385;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #516395, #614385);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #516395, #614385); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color:white;    
+}
+
+.dropdown-menu>li>a:hover {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #bc4c36;
+}
+
+.color4{
+    background: #00C9FF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #92FE9D, #00C9FF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #92FE9D, #00C9FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color:white;
+}
+
+.btn-submit{
+    border-radius: 50%;
+    width: 62px;
+    height: 62px;
+    color: #ffffff;
+    background-color: #259be5;
+    border-color: #1ea5e9;
+  box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.2), 0 13px 24px -11px rgba(233, 30, 99, 0.6)
+}
+
+.btn-submit:hover{
+  color:white;
+  background-color: #92FE9D;
+}
+
+.btn:active:focus, .btn:focus {
+  outline: 0px auto -webkit-focus-ring-color;
+  outline-offset: 0px;
+}
+
+.btn:focus{
+outline: 0px auto -webkit-focus-ring-color;
+outline-offset: 0px;
+}
+
+
+
+.btn-close{
+    border-radius: 50%;
+    width: 62px;
+    height: 62px;
+    color: #ffffff;
+    background-color: #cf3238;
+    border-color: #cf3238;
+    box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.2), 0 13px 24px -11px rgba(233, 30, 99, 0.6)
+}
+
+.btn-close:hover{
+  color:white;
+  background-color: #00C9FF;
 }

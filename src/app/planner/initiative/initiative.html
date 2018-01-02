@@ -1,6 +1,5 @@
 <div class="container-fluid">
-  <div class="title"><h1>Proposed Initiative</h1></div>
-  <div class="panel add-plan">
+   <div class="panel add-plan">
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" href="#collapse1" class="accordion-toggle">Add Initiative</a>
@@ -33,12 +32,12 @@
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-success btn-green" [disabled]="initiativeForm.invalid">Submit</button>
+          <button type="submit" class="btn btn-success btn-empty" [disabled]="initiativeForm.invalid"><i class="glyphicon glyphicon-ok"></i></button>
         </form>
       </div>
       <div class="panel-footer">
-          <button type="submit" class="btn btn-success btn-outline-success btn-green" [disabled]="initiativeForm.invalid">Submit</button>
-          <button type="button" class="btn btn-danger btn-empty " (click)="enableFields();isUpdating=false;">Clear</button>
+          <button type="submit" class="btn btn-success btn-outline-success btn-empty" [disabled]="initiativeForm.invalid"><i class="glyphicon glyphicon-ok"></i></button>
+          <button type="button" class="btn btn-danger btn-close" (click)="enableFields();isUpdating=false;"><i class="glyphicon glyphicon-trash"></i></button>
       </div>
     </div>
   </div>
@@ -137,7 +136,7 @@
 <div class="modal fade" id="initiativeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header color4">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Confirm</h4>
       </div>
@@ -145,7 +144,7 @@
         <p>You have successfully added a new Initiative.</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default btn-empty" data-dismiss="modal" data-toggle="collapse" href="#collapse2">Close</button>
+        <button type="button" class="btn btn-default btn-close" data-dismiss="modal" data-toggle="collapse" href="#collapse2"><i class="glyphicon glyphicon-remove"></i></button>
       </div>
     </div>
   </div>
