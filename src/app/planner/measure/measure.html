@@ -281,7 +281,7 @@
               <li *ngIf="!selectedDepartments">None Selected</li>
               <li *ngFor="let dept of departmentForm.controls.departmentsArray.controls;let arr=index;" [formGroupName]="arr">
                 <table class="table border-color">
-                  <caption style="text-align: left;color: #b10909;">{{dept.value.departmentName}}
+                  <caption style="text-align: left;">{{dept.value.departmentName}}
                     <span class="input-group pull-right">
                       <div class="input-group-addon base-color">BaseLine</div>
                       <input type="text" class="form-control form-border" formControlName="baseline" style="width:25%" id="exampleInputAmount">
@@ -314,7 +314,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default btn-empty" *ngIf="next" (click)="prev = true;next = false;"><i class="glyphicon glyphicon-arrow-left"></i></button>
-        <button type="submit" class="btn btn-default btn-empty" *ngIf="next" (click)="assign()"><i class="glyphicon glyphicon-floppy-saved"></i></button>
+        <button type="submit" class="btn btn-default btn-green" *ngIf="next" (click)="assign()"><i class="glyphicon glyphicon-floppy-saved"></i></button>
         <button type="button" class="btn btn-default btn-empty" *ngIf="prev" (click)="prev=false;next=true;assignDepartment()"><i class="glyphicon glyphicon-arrow-right"></i></button>
         <button type="button" class="btn btn-default btn-close" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>
       </div>
