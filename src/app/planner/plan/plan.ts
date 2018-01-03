@@ -50,6 +50,7 @@ export class PlanComponent{
   onSubmit(){
     if(!this.isUpdating)
       this.orgService.saveCycle(this.cycleForm.value).subscribe((response:any)=>{
+        this.isUpdating = false;        
         this.getCycles();
         this.cycleForm.reset();
       });
@@ -58,6 +59,7 @@ export class PlanComponent{
       data['description'] = this.cycleForm.value["description"];
       data['endYear'] = this.cycleForm.value["endYear"];
       this.orgService.updateCycle(this.selectedCycle.cycleId,data).subscribe((response:any)=>{
+        this.isUpdating = false;
         this.getCycles();
         this.cycleForm.reset();
       })
@@ -91,6 +93,13 @@ export class PlanComponent{
     if(confirm("Do you Really want to Delete this Cycle??"))
     this.orgService.deleteCycle(cycleId).subscribe((response:any)=>{
       this.getCycles();
+    },(error:any)=>{
+      confirm("You Can not Delete this Cycle??")
     })
+  }
+
+  reset(){
+    this.isUpdating = false;
+    this.cycleForm.reset();
   }
 }

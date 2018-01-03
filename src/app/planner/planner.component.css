@@ -20,15 +20,35 @@ nav a{
     background-color: #b93f75;
     color: #ffffff;
 }
+
+.navbar-login{
+  width: 305px;
+  padding: 10px;
+  padding-bottom: 0px;
+}
+
+.navbar-login-session{
+  padding: 10px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+
+.icon-size{
+  font-size: 87px;
+}
+
 .dropdown-menu{
-  top: 125%;
+  /* top: 125%; */
   border: none;
-  box-shadow: 0 6px 12px rgba(38, 39, 52, 0.52);
-  background-color: rgba(38, 39, 52, 0.78);
+  box-shadow: 0 6px 12px #26273485;
+  /* background-color: rgba(38, 39, 52, 0.78); */
+}
+.dropdown-menu>li>a{
+  color: black;
 }
 .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
   background-color: #b93f75;
-  color: #ffffff;
+  color: white;
   text-decoration: none;
 }
 .unexistance td{

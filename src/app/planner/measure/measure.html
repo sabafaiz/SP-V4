@@ -20,7 +20,7 @@
             <div class="col-lg-6 col-xs-12 col-sm-12">
               <div class="form-group">
                 <label>Select Goal:</label>
-                <select class="form-control" id="sel1" formControlName="objectiveId" (ngModelChange)="getInitiative($event)">
+                <select class="form-control" id="sel1" formControlName="objectiveId" [ngModel]="defaultCycle"(ngModelChange)="getInitiative($event)">
                   <option *ngFor="let objective of objectives;let i=index;" [value]="objective.goalId">{{i+1}}.{{objective.goal}}</option>
                 </select>
               </div>
@@ -108,7 +108,7 @@
         </div>
         <div class="panel-footer">
           <button type="submit" class="btn btn-success btn-outline-success btn-empty" [disabled]="measureForm.invalid"><i class="glyphicon glyphicon-ok"></i></button>
-          <button type="button" class="btn btn-danger btn-outine-danger btn-close" (click)="enableFields(); isUpdating = false"><i class="glyphicon glyphicon-trash"></i></button>
+          <button type="button" class="btn btn-danger btn-outine-danger btn-close" (click)="enableFields(); isUpdating = false;" ><i class="glyphicon glyphicon-remove"></i></button>
         </div>
       </form>
     </div>
@@ -122,7 +122,7 @@
         <div class="form-inline pull-right" style="margin-bottom:unset;">
           <div class="form-group">
             <label class="control-label">Strategic Plan</label>
-            <select id="year" name="year" class="form-control" [ngModel]="defaultCycle" (ngModelChange)="getMeasure()" style="width:auto;height: auto;padding: 0px;">
+            <select id="year" name="year" class="form-control" [(ngModel)]="defaultCycle" (ngModelChange)="getMeasure()" style="width:auto;height: auto;padding: 0px;">
               <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}} : [{{c.startYear}} To {{c.endYear}}]</option>
             </select>
           </div>
@@ -171,7 +171,7 @@
             <tr *ngFor="let goal of goals;let i = index;">
               <td>{{goal.goal}}</td>
               <td colspan="8" style="padding:0px;border:none;" #element [style.height]="get(element)">
-                <table class="table table-bordered" style="height: inherit;">
+                <table class="table table-bordered" style="height: inherit;border:none;">
                   <colgroup>
                     <col style="width:17.60%">
                     <col style="width:82.40%">
@@ -179,7 +179,7 @@
                   <tr *ngFor="let initiate of goal.initiatives;let j=index;">
                     <td>{{initiate.initiative}}</td>
                     <td colspan="7" style="padding:0px;" #element1 [style.height]="get(element1)">
-                      <table class="table table-bordered" style="height: inherit;">
+                      <table class="table table-bordered" style="height: inherit;border:none;">
                         <colgroup>
                           <col style="width:21.40%">
                           <col style="width:78.60%">
@@ -187,7 +187,7 @@
                         <tr *ngFor="let activit of initiate.activities;let k=index;">
                           <td [style.border-top]="k?'1px solid #ddd':'none'">{{activit.activity}}</td>
                           <td style="padding:0px;" #element2 [style.height]="get(element2)">
-                            <table class="table table-bordered" style="height: inherit;">
+                            <table class="table table-bordered" style="height: inherit;border:none;">
                               <colgroup>
                                 <col style="width:35%">
                                 <col style="width:20%">
@@ -253,7 +253,7 @@
         <h4 class="modal-title">Set targets</h4>
       </div>
       <div class="modal-body" *ngIf="selectedMeasure">
-        <div class="row" *ngIf="prev">
+        <!-- <div class="row" *ngIf="prev">
           <div class="col-sm-12">
             <div class="pull-right">
               <button type="button" class="btn btn-warning"><label>
@@ -265,9 +265,9 @@
               </button>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="row" *ngIf="prev">
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <div class="department-hierarchy">
               <b>Organisation Unit</b>
               <tree-view id="termSheetPopup" [treeData]="departments" [assignedDepartment]="selectedMeasure.assignedDepartments" (onSelected)="department($event)"></tree-view>
@@ -276,7 +276,7 @@
         </div>
         <div class="row" *ngIf="next" style="margin: 15px 15px;">
           <form [formGroup]="departmentForm">
-            <ul formArrayName="departmentsArray" style="list-style:none;padding-left: 0;">
+            <ul formArrayName="departmentsArray" style="list-style:none;padding-left:0;">
               <div class="sub-title">Selected Departments</div>
               <li *ngIf="!selectedDepartments">None Selected</li>
               <li *ngFor="let dept of departmentForm.controls.departmentsArray.controls;let arr=index;" [formGroupName]="arr">

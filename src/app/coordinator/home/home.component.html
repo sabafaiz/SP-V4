@@ -135,9 +135,10 @@
                   <td style="text-align:center;">View/Fill Quarter</td>
                 </tr>
                 <ng-container>
-                  <tr [attr.id]="'row-collapse'+at+'q'+in" class="collapse">
+                  <tr [attr.id]="'row-collapse'+at+'q'+in" class="collapse" *ngIf="!lev.disabled">
                     <td colspan="5">
                       <b><u>Internship Details </u>:</b>
+                      <button  class="pull-right" (click)="lockQuarterResult(lev)" *ngIf="lev.internshipDetails.length" [disabled]="lev.status=='locked'">Lock</button>
                       <div class="row">
                         <div class="col-sm-12">
                           <div class="form-group">
@@ -158,7 +159,7 @@
                           <div class="col-sm-6">
                             <div class="form-group">
                               <label>Evidences :</label>
-                              <button class="pull-right" data-toggle="modal" data-target="#evidenceForm" (click)="selectedInternshipFile = file;">Add</button>
+                              <button class="pull-right" data-toggle="modal" data-target="#evidenceForm" (click)="selectedInternshipFile = file;" *ngIf="lev.status!='locked'">Add</button>
                               <ul style="list-style:none;padding-left:0px;">
                                 <li *ngFor="let ev of file.evidance;let e=index;">
                                   <a [attr.href]="ev.url">evidence {{e+1}}</a>
@@ -166,14 +167,11 @@
                                     <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                                   </button>
                                 </li>
-                                <li *ngIf="!file.evidance" style="color:red">No evidence added yet.</li>
+                                <li *ngIf="!file['evidance'].length" style="color:red">No evidence added yet.</li>
                               </ul>
                             </div>
                           </div>
                         </div>
-                        <!-- <div class="col-sm-12">
-                          <button >Add More</button>
-                        </div> -->
                         <div *ngIf="!lev.internshipDetails.length">
                           <div class="col-sm-6">
                             <div class="form-group">
@@ -182,12 +180,6 @@
                               <small id="fileHelp" class="form-text text-muted">Accept only .xls, .csv or excel sheets</small>
                             </div>
                           </div>
-                          <!-- <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="exampleInputFile">Evidence</label><br>
-                              <button type="button" data-toggle="modal" data-target="#evidenceForm" (click)="evForm=3;">Choose File</button> No file chosn
-                            </div>
-                          </div> -->
                           <div class="col-sm-12">
                             <div class="form-group">
                               <button type="button"  (click)="saveInternshipForm(lev)">Save</button>
@@ -237,7 +229,7 @@
                   <tr [attr.id]="'row-collapse'+at+'lev'+in" class="collapse">
                     <td colspan="5">
                       <b><u>Mou Details </u>:</b>
-                      <button  class="pull-right" (click)="lockQuarterResult(lev)" *ngIf="lev.disabled&&lev.mouDetails.length">Lock</button>
+                      <button  class="pull-right" (click)="lockQuarterResult(lev)" *ngIf="lev.mouDetails.length" [disabled]="lev.disabled">Lock</button>
                       <div class="row">
                         <div class="col-sm-12">
                           <div class="form-group">
@@ -316,59 +308,6 @@
                           <button type="button"  *ngIf="lev.addMore" (click)="lev.addMore=false;">Cancel</button>
                         </div>
                       </div>
-                      <!-- <table class="table table-hover" *ngIf="lev.mouDetails.length">
-                        <caption>
-                          <label>Current Cost</label>
-                          <input type="number" [(ngModel)]="lev.currentCost" *ngIf="lev.status=='unsubmitted'"> <span *ngIf="lev.status!='unsubmitted'">{{lev.currentCost}}</span>
-                        </caption>
-                        <thead>
-                          <th>Mou Type</th>
-                          <th>Organization</th>
-                          <th></th>
-                        </thead>
-                        <tbody *ngFor="let detail of lev.mouDetails;let d = index;" >
-                          <tr data-toggle="collapse" [attr.href]="'#mou-evidence'+at+'lev'+in+'detail'+d">
-                            <td>
-                              <input type="text" [(ngModel)]="detail.mouType" *ngIf="detail.edit">
-                              <span *ngIf="!detail.edit&&detail.mouType">{{detail.mouType}}</span>
-                            </td>
-                            <td>
-                              <input type="text" [(ngModel)]="detail.organization" *ngIf="detail.edit">
-                              <span *ngIf="!detail.edit&&detail.organization">{{detail.organization}}</span>
-                            </td>
-                            <td>
-                              <button type="button"  (click)="detail.edit=true;detail.mouTypeCopy=detail.mouType;detail.organizationCopy=detail.organization;" *ngIf="!detail.edit" [hidden]="lev.disabled"> Edit</button>
-                              <button type="button"  (click)="detail.edit=true;updateMou(detail);" *ngIf="detail.edit" [hidden]="lev.disabled">save</button>
-                              <button type="button"  (click)="detail.edit=false;detail.mouType=detail.mouTypeCopy;detail.organization=detail.organizationCopy;"
-                                *ngIf="detail.edit" [hidden]="lev.disabled"> Cancel</button>
-                              <button  (click)="evForm=2;selectedMou=detail;" data-toggle="modal" data-target="#evidenceForm" [hidden]="lev.disabled">Upload Evidence</button>
-                              <button (click)="deleteMou(lev.mouDetails,detail,d)" [hidden]="lev.disabled">Delete</button>
-                            </td>
-                          </tr>
-                          <tr [attr.id]="'mou-evidence'+at+'lev'+in+'detail'+d" class="collapse" *ngIf="detail.evidance.length;">
-                            <td colspan="3">
-                              <b>Evidences</b><br>
-                              <div class="row" *ngFor="let ev of detail.evidance;let e = index;">
-                                <div class="col-lg-6">
-                                  <a [attr.href]="ev.url">{{e+1}}) evidance {{e+1}}</a>
-                                  <button type="button" class="close" (click)="deleteEvidence(evidences,ev,e)">
-                                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-                                  </button>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                        <tbody *ngIf="lev.addMore">
-                          <tr>
-                            <td><input type="text" [(ngModel)]="lev.mouType"></td>
-                            <td><input type="text" [(ngModel)]="lev.organization"></td>
-                            <td>
-                              <button type="button"  (click)="saveQuarterResultWithMou(lev)">save</button>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table> -->
                       <button type="button"  *ngIf="lev.mouDetails.length" (click)="lev.addMore=true;" [hidden]="lev.disabled">Add More</button>
                       <button type="button"  *ngIf="lev.addMore" (click)="lev.addMore=false;" [hidden]="lev.disabled">Cancel</button>
                     </td>
@@ -389,84 +328,6 @@
         <a data-toggle="collapse" href="#collapse2">Proposed Operational Performance Indicators</a>
       </h4>
     </div>
-    <!-- <div id="collapse2" class="panel-collapse collapse in" *ngIf="goalsCopy.length">
-      <div class="d-flex border flex-header ">
-        <div class="p-2 border">
-          Goal
-          <span class="search">
-            <input type="text" name="search" (keyup)="searchGoal($event)" placeholder="Search..">
-          </span>
-        </div>
-        <div class="p-3 border">
-          <div class="d-flex">
-            <div class="p-2 border">
-              Initiative
-              <span class="search">
-                <input type="text" name="search" (keyup)="searchInitiative($event)" placeholder="Search..">
-              </span>
-            </div>
-            <div class="p-3 border">
-              <div class="d-flex">
-                <div class="p-2 border">
-                  Activities
-                  <span class="search">
-                    <input type="text" name="search" (keyup)="searchActivity($event)" placeholder="Search..">
-                  </span>
-                </div>
-                <div class="p-3 border">
-                  <div class="d-flex">
-                    <div class="p-2">
-                      OPI
-                      <span class="search">
-                        <input type="text" name="search" (keyup)="searchOpi($event)" placeholder="Search..">
-                      </span>
-                    </div>
-                    <div class="p-2">
-                      Frequency
-                    </div>
-                    <div class="p-2">
-  
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="d-flex margin-1 body-background" *ngFor="let goal of goals;let i = index;">
-        <div class="p-2 border">
-          {{ goal.goal }}
-        </div>
-        <div class="p-3 border">
-          <div class="d-flex" *ngFor="let initiate of goal.initiatives;let j=index">
-            <div class="p-2 border-bottom">
-              {{initiate.initiative}}
-            </div>
-            <div class="p-3 border no-bottom-border">
-              <div class="d-flex" *ngFor="let activit of initiate.activities;let k=index">
-                <div class="p-2 border-bottom">
-                  {{activit.activity}}
-                </div>
-                <div class="p-3">
-                  <div class="d-flex height-100" *ngFor="let msr of activit.opis;let l=index">
-                    <div class="p-2 border no-bottom-border">
-                      {{msr.opi}}
-                    </div>
-                    <div class="p-2 border no-bottom-border">
-                      {{msr.frequency}}
-                    </div>
-                    <div class="p-2 border no-bottom-border">
-                      <a data-target="#edit-section" (click)="selectedOpi=goal;selectedInitiative=initiate;selectedActivity=activit;selectedMeasure=msr;showOpi(goal,msr)">Fill</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
     <div class="panel-body">
       <table class="table table-bordered">
         <colgroup>
@@ -507,7 +368,7 @@
           <tr *ngFor="let goal of goals;let i = index;">
             <td>{{goal.goal}}</td>
             <td colspan="5" style="padding:0px;border:none;" #element [style.height]="get(element)">
-              <table class="table table-bordered" style="height: inherit;">
+              <table class="table table-bordered" style="height: inherit;border:none;">
                 <colgroup>
                   <col style="width:25%">
                   <col style="width:75%">
@@ -515,7 +376,7 @@
                 <tr *ngFor="let initiate of goal.initiatives;let j=index;">
                   <td>{{initiate.initiative}}</td>
                   <td colspan="4" style="padding:0px;" #element1 [style.height]="get(element1)">
-                    <table class="table table-bordered" style="height: inherit;">
+                    <table class="table table-bordered" style="height: inherit;border:none;">
                       <colgroup>
                         <col style="width:33.33%">
                         <col style="width:66.67">
@@ -523,7 +384,7 @@
                       <tr *ngFor="let activit of initiate.activities;let k=index;">
                         <td [style.border-top]="k?'1px solid #ddd':'none'">{{activit.activity}}</td>
                         <td colspan="3" style="padding:0px;" #element2 [style.height]="get(element2)">
-                          <table class="table table-bordered" style="height: inherit;">
+                          <table class="table table-bordered" style="height: inherit;border:none;">
                             <colgroup>
                               <col style="width:50%">
                               <col style="width:25%">

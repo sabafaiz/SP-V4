@@ -26,8 +26,7 @@ export class InitiativeComponent extends Filters{
               // this.orgService.getObjectives().subscribe((response:any)=>{
               //   this.objectives = response;
               // });
-              this.getCycleWithChildren();
-              
+              this.getCycleWithChildren();              
               this.initiativeForm = this.initForm();
   }
 

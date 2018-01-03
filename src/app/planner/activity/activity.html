@@ -6,8 +6,9 @@
       </h4>
     </div>
     <div id="collapse1" class="panel-collapse collapse">
-      <div class="panel-body">
-        <form [formGroup]="activityForm" (submit)="submitActivity()">
+      <form [formGroup]="activityForm" (submit)="submitActivity()">
+
+        <div class="panel-body">
           <div class="row">
             <div class="col-lg-6 col-sm-12">
               <div class="form-group">
@@ -36,19 +37,21 @@
             <div class="col-lg-6 col-sm-12">
               <div class="form-group">
                 <label>Activity</label>
-                <textarea class="form-control" rows="5" formControlName="activity"></textarea>
+                <textarea class="form-control" rows="3" formControlName="activity"></textarea>
               </div>
             </div>
-            <div class="col-lg-12 col-sm-12">
-              <button type="submit" class="btn btn-success btn-empty" [disabled]="activityForm.invalid"><i class="glyphicon glyphicon-ok"></i></button>
-            </div>
           </div>
-        </form>
-      </div>
-      <div class="panel-footer">
-        <button type="submit" class="btn btn-success btn-outline-success btn-empty" [disabled]="activityForm.invalid"><i class="glyphicon glyphicon-ok"></i></button>
-        <button type="button" class="btn btn-danger btn-outline-danger btn-close" data-dismiss="modal" (click)="enableFields(); isUpdating = false"><i class="glyphicon glyphicon-trash"></i></button>
-      </div>
+
+        </div>
+        <div class="panel-footer">
+          <button type="submit" class="btn btn-success btn-outline-success btn-empty" [disabled]="activityForm.invalid" data-toggle="tooltip" data-placement="auto" title="Submit Form">
+            <i class="glyphicon glyphicon-ok"></i>
+          </button>
+          <button type="button" class="btn btn-danger btn-outline-danger btn-close" data-dismiss="modal" (click)="enableFields(); isUpdating = false" data-toggle="tooltip" data-placement="auto" title="Reset Form">
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -57,12 +60,11 @@
   <div class="panel detail-plan">
     <div class="panel-heading">
       <h4 class="panel-title">
-      <a data-toggle="collapse"  href="#collapse2">Proposed Activities</a>
+        <a data-toggle="collapse" href="#collapse2">Proposed Activities</a>
         <div class="form-inline pull-right" style="margin-bottom:unset;">
           <div class="form-group">
             <label class="control-label">Strategic Plan</label>
-            <select id="year" name="year" class="form-control" [(ngModel)]="defaultCycle" (ngModelChange)="getActivities()"
-              style="width:auto;height: auto;padding: 0px;">
+            <select id="year" name="year" class="form-control" [(ngModel)]="defaultCycle" (ngModelChange)="getActivities()" style="width:auto;height: auto;padding: 0px;">
               <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}]</option>
             </select>
           </div>
@@ -139,29 +141,15 @@
             </tr>
           </tbody>
           <tfoot *ngIf="!goals.length">
-            <tr><td colspan="4" class="text-center">No Data to Display .,.</td></tr>
+            <tr>
+              <td colspan="4" class="text-center">No Data to Display .,.</td>
+            </tr>
           </tfoot>
         </table>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!--popup model-->
 <div class="modal fade" id="activityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

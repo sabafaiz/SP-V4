@@ -6,8 +6,8 @@
       </h4>
     </div>
     <div id="collapse1" class="panel-collapse collapse">
+      <form [formGroup]="goalForm" (submit)="onSubmit()">      
       <div class="panel-body">
-        <form [formGroup]="goalForm" (submit)="onSubmit()">
           <div class="row">
             <div class="col-lg-6 col-xs-12 col-sm-6">
               <div class="form-group">
@@ -24,11 +24,11 @@
               </div>
             </div>
           </div>
-        </form>
       </div>
       <div class="panel-footer">
         <button type="submit" class="btn btn-success btn-empty" [disabled]="goalForm.invalid"><i class="glyphicon glyphicon-ok"></i></button>
       </div>
+    </form>      
     </div>
   </div>
   <div class="panel detail-plan">
