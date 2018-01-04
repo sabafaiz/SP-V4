@@ -210,7 +210,8 @@ export class MeasureComponent extends Filters implements AfterViewInit {
     } else {
       if (checked) {
         department.my = true;
-        this.selectedDepartments.push(department);
+        if(this.selectedDepartments.indexOf(department)===-1)
+          this.selectedDepartments.push(department);
       } else {
         department.my = false;
         this.selectedDepartments.splice(this.selectedDepartments.indexOf(department), 1);
@@ -252,7 +253,9 @@ export class MeasureComponent extends Filters implements AfterViewInit {
 
   getDepartmentFormArray() {
     const departmentsFormArray: any[] = [];
+    const departmentsArrayForEdit: any[] = [];
     this.selectedDepartments.forEach(element => {
+      // if(element.isUpdating)
       departmentsFormArray.push(this.formBuilder.group({
         baseline: [element.baseline],
         departmentId: [element.departmentId],

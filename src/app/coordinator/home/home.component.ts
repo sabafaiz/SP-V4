@@ -104,6 +104,7 @@ export class HomeComponent extends Filters implements AfterViewInit{
   lockQuarterResult(quarter:any){
     this.utServ.updateQuarterResult(quarter.id,{'status':'locked'}).subscribe((response:any)=>{
       console.log(response);
+      quarter.disabled = true;
     });
   }
 
@@ -115,8 +116,9 @@ export class HomeComponent extends Filters implements AfterViewInit{
   }
 
   deleteInternshipEvidence(evidences:any[],evidence:any,index:any){
+    if(confirm("Are you sure you want to delete this evidence"))
     this.utServ.deleteInternshipEvidence(evidence.id).subscribe((response:any)=>{
-      console.log("success");
+      evidences.splice(index,1);
     })
   }
 
@@ -128,8 +130,6 @@ export class HomeComponent extends Filters implements AfterViewInit{
   selectedInternshipFile:any;
   selectedMou:any;
   onEvidenceSubmit(evForm:any){
-    console.log(evForm);
-
     let formData = new FormData();
     formData.append('title',this.evidencForm.value['title']);
     formData.append('description',this.evidencForm.value['description']);
@@ -146,7 +146,7 @@ export class HomeComponent extends Filters implements AfterViewInit{
       break;
       case 1:
         this.utServ.saveEvidenceForInternshipFile(formData,this.selectedInternshipFile.id).subscribe((response:any)=>{
-          this.selectedInternshipFile.evidance.push(response);
+          this.selectedInternshipFile['evidance'].push(response);
           $('#evidenceForm').modal('hide');
         })
       break;

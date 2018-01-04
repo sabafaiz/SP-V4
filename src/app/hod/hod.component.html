@@ -77,24 +77,12 @@
                 <td [attr.rowspan]="tdl.levels.length + 2" style="vertical-align: middle;">{{tdl.estimatedCost}}</td>
               </tr>
               <ng-template let-lev ngFor [ngForOf]="tdl.levels" let-in="index">
-                <tr [style.background]="lev.disabled?'lightgray':null">
+                <tr>
                   <td>{{lev.quarter}}</td>
-                  <td><input type="number" [(ngModel)]="lev.currentCost" *ngIf="lev.status=='unsubmitted'" [disabled]="lev.disabled"> <span *ngIf="lev.status!='unsubmitted'">{{lev.currentCost}}</span></td>
-                  <td><input type="number" [(ngModel)]="lev.currentTargetLevel" *ngIf="lev.status=='unsubmitted'" [disabled]="lev.disabled"> <span *ngIf="lev.status!='unsubmitted'">{{lev.currentTargetLevel}}</span></td>
+                  <td>{{lev.currentCost}}</td>
+                  <td>{{lev.currentTargetLevel}}</td>
                   <td>{{lev.endDate + tdl.year}}</td>
-                  <td>
-                    <div *ngIf="!lev.disabled">
-                    <button  *ngIf="lev.status=='unsubmitted'" [disabled]="!(lev.currentTargetLevel&&lev.currentCost)" (click)="lev.isUpdating=false;saveQuarterResult(lev)" [disabled]="lev.disabled"> Save</button>
-                    <button  *ngIf="lev.status=='inprogress'" data-toggle="modal" data-target="#evidenceForm" (click)="selectedQuarter=lev;evForm=0" [disabled]="lev.disabled">Upload Evidence</button>
-                    <button  *ngIf="lev.status=='inprogress'" (click)="lev.status='unsubmitted';lev.isUpdating=true;" [disabled]="lev.disabled">Edit</button>
-                    <button  *ngIf="lev.isUpdating" (click)="lev.status='inprogress';lev.isUpdating=false;"> Cancel</button>
-                    <button  *ngIf="lev.evidance&&!isUpdating" (click)="lockQuarterResult(lev)" [disabled]="lev.disabled">Lock</button>
-                    <button type="button" class="close" data-toggle="collapse"  [attr.href]="'#row-collapse'+at" (click)="evidences=lev.evidance;">
-                      <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-                      <span class="sr-only">Close</span>
-                    </button>
-                    </div>
-                  </td>
+                  <td><a href="#">Approve/Reject</a></td>
                 </tr>
               </ng-template>
               <ng-container *ngIf="evidences">

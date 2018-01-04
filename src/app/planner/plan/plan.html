@@ -63,6 +63,14 @@
           <button type="submit" class="btn btn-default btn-empty" [disabled]="cycleForm.invalid">
             <i class="glyphicon glyphicon-ok"></i>
           </button>
+          <button type="button" class="btn btn-danger btn-close" data-toggle="tooltip" data-placement="auto" title="Reset Form" (click)="reset()">
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
+          <div class="pull-right" *ngIf="isUpdating">
+          <button type="button" class="btn btn-default">Make it Default</button>
+          <button type="button" class="btn btn-default">Make it Disable</button>
+          <button type="button" class="btn btn-default" (click)="deleteCycle(selectedCycle.cycleId)">Delete</button>   
+          </div>
         </div>
       </form>
     </div>

@@ -1,19 +1,19 @@
 <div class="container-fluid">
-   <div class="panel add-plan">
+  <div class="panel add-plan">
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" href="#collapse1" class="accordion-toggle">Add Initiative</a>
       </h4>
     </div>
     <div id="collapse1" class="panel-collapse collapse">
-      <div class="panel-body">
-        <form [formGroup]="initiativeForm" (submit)="submitInitiative()">
+      <form [formGroup]="initiativeForm" (submit)="submitInitiative()">
+        <div class="panel-body">
           <div class="row">
             <div class="col-lg-6 col-xs-12 col-sm-6">
               <div class="form-group">
                 <label class="control-label" for="year">Strategic Plan :</label>
                 <select id="year" name="year" class="form-control" formControlName="cycleId" [ngModel]="defaultCycle" (ngModelChange)="getObjective($event)">
-                    <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}] : {{c.description}}</option>
+                  <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}] : {{c.description}}</option>
                 </select>
               </div>
             </div>
@@ -32,25 +32,28 @@
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-success btn-empty" [disabled]="initiativeForm.invalid"><i class="glyphicon glyphicon-ok"></i></button>
-        </form>
-      </div>
-      <div class="panel-footer">
-          <button type="submit" class="btn btn-success btn-outline-success btn-empty" [disabled]="initiativeForm.invalid"><i class="glyphicon glyphicon-ok"></i></button>
-          <button type="button" class="btn btn-danger btn-close" (click)="enableFields();isUpdating=false;"><i class="glyphicon glyphicon-trash"></i></button>
-      </div>
+        </div>
+        <div class="panel-footer">
+          <button type="submit" class="btn btn-success btn-outline-success btn-empty" [disabled]="initiativeForm.invalid" data-toggle="tooltip" data-placement="auto" title="Submit Form">
+            <i class="glyphicon glyphicon-ok"></i>
+          </button>
+          <button type="button" class="btn btn-danger btn-close" (click)="enableFields();isUpdating=false;" data-toggle="tooltip" data-placement="auto" title="Reset Form">
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 
   <div class="panel detail-plan">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse"  href="#collapse2">Proposed Initiatives</a>
+        <a data-toggle="collapse" href="#collapse2">Proposed Initiatives</a>
         <div class="form-inline pull-right" style="margin-bottom: unset">
           <div class="form-group">
             <label class="control-label">Strategic Plan</label>
             <select id="year" name="year" class="form-control" [(ngModel)]="defaultCycle" (ngModelChange)="getInitiative()" style="width:auto;height: auto;padding: 0px;">
-                <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}]</option>
+              <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}]</option>
             </select>
           </div>
           <button type="button" class="btn-info btn-add" style="display: inline-block;
@@ -58,7 +61,7 @@
             <span class="glyphicon glyphicon-plus"></span> Add
           </button>
         </div>
-      </h4>      
+      </h4>
     </div>
     <div id="collapse2" class="panel-collapse collapse in">
       <div class="panel-body">
@@ -86,21 +89,22 @@
               <td>{{goal.goal}}</td>
               <td style="padding:0px;border:none;" #element [style.height]="get(element)">
                 <table class="table table-bordered" style="height: inherit;">
-                    <colgroup>
-                      <col style="width:80%">
-                      <col style="width:10%">
-                      <col style="width:10%">
-                    </colgroup>
+                  <colgroup>
+                    <col style="width:80%">
+                    <col style="width:10%">
+                    <col style="width:10%">
+                  </colgroup>
                   <tr *ngFor="let initiate of goal.initiatives;let j=index;">
                     <td>{{initiate.initiative}}</td>
                     <td>
                       <span data-toggle="tooltip" data-placement="auto" title="Edit">
-                        <i class="glyphicon glyphicon-edit btn-edit" style="cursor:pointer;" (click)="updateInitiative(goal.goalId,initiate)"  data-toggle="collapse" href="#collapse1"></i>
+                        <i class="glyphicon glyphicon-edit btn-edit" style="cursor:pointer;" (click)="updateInitiative(goal.goalId,initiate)" data-toggle="collapse"
+                          href="#collapse1"></i>
                       </span>
                     </td>
                     <td>
                       <span data-toggle="tooltip" data-placement="auto" title="Delete">
-                        <i style="cursor:pointer;" class="glyphicon glyphicon-trash btn-del" (click)="deleteInitiative(initiate.initiativeId,goal.initiatives,j)"></i>    
+                        <i style="cursor:pointer;" class="glyphicon glyphicon-trash btn-del" (click)="deleteInitiative(initiate.initiativeId,goal.initiatives,j)"></i>
                       </span>
                     </td>
                   </tr>
@@ -109,28 +113,15 @@
             </tr>
           </tbody>
           <tfoot *ngIf="!goals.length">
-            <tr><td colspan="4" class="text-center">No Data to Display .,.</td></tr>
+            <tr>
+              <td colspan="4" class="text-center">No Data to Display .,.</td>
+            </tr>
           </tfoot>
         </table>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!--popup model-->
 <div class="modal fade" id="initiativeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -144,7 +135,9 @@
         <p>You have successfully added a new Initiative.</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default btn-close" data-dismiss="modal" data-toggle="collapse" href="#collapse2"><i class="glyphicon glyphicon-remove"></i></button>
+        <button type="button" class="btn btn-default btn-close" data-dismiss="modal" data-toggle="collapse" href="#collapse2">
+          <i class="glyphicon glyphicon-remove"></i>
+        </button>
       </div>
     </div>
   </div>
