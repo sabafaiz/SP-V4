@@ -679,7 +679,35 @@ color: brown;
   border-top: 1px solid #ddd;
 }
 
+.btn-ghost{
+  border-color: #3387db;
+}
 
+.btn-ghost:hover,.btn-ghost:active,.btn-ghost:focus,.btn-ghost:visited{
+  color: white;
+  background-color: #3387db;
+  border-color: #3387db;
+}
+
+.btn-del{
+  border-color:#cf3238;
+}
+
+.btn-del:hover,.btn-del:active,.btn-del:focus,.btn-del:visited{
+  color: white;
+  background-color: #cf3238;
+  border-color: #cf3238;
+}
+
+.btn-fault{
+  border-color: #cccccc;
+}
+
+.btn-fault:hover,.btn-fault:active,.btn-fault:focus,.btn-fault:visited{
+  color: black;
+  background-color:#3387db;
+  border-color: #3387db; 
+}
 /* panel-css */
 
 

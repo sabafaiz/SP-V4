@@ -67,9 +67,9 @@
             <i class="glyphicon glyphicon-remove"></i>
           </button>
           <div class="pull-right" *ngIf="isUpdating">
-          <button type="button" class="btn btn-default">Make it Default</button>
-          <button type="button" class="btn btn-default">Make it Disable</button>
-          <button type="button" class="btn btn-default" (click)="deleteCycle(selectedCycle.cycleId)">Delete</button>   
+          <button type="button" class="btn btn-default btn-ghost">Make it Default</button>
+          <button type="button" class="btn btn-default btn-fault">Make it Disable</button>
+          <button type="button" class="btn btn-default btn-del" (click)="deleteCycle(selectedCycle.cycleId)">Delete</button>   
           </div>
         </div>
       </form>
