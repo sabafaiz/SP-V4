@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as alertify from 'alertifyjs';
 import {
   Router,
   // import as RouterEvent to avoid confusion with the DOM Event
@@ -33,6 +34,7 @@ export class AppComponent {
     })
     if(!localStorage.getItem('access_token'))
       this.router.navigateByUrl('/login');
+      alertify.set('notifier','position', 'bottom-right');
   }
 
   // Shows and hides the loading spinner during RouterEvent changes
@@ -52,4 +54,6 @@ export class AppComponent {
       this.loading = false
     }
   }
+
+  
 }

@@ -4,6 +4,7 @@
     "name": "sp-project"
   },
   "apps": [
+
     {
       "root": "src",
       "outDir": "dist",
@@ -19,7 +20,9 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../node_modules/alertifyjs/build/css/alertify.min.css",
+        "../node_modules/alertifyjs/build/css/themes/default.min.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

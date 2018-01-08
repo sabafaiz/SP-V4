@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="panel add-plan">
+  <div class="panel add-plan" id="add-plan" style="display:none;">
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" href="#collapse1" class="accordion-toggle">Add Strategic Plan</a>
@@ -76,7 +76,14 @@
     </div>
   </div>
   <div class="panel detail-plan">
-    <div class="panel-heading">Strategic Plans</div>
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a>Strategic Plans</a>
+        <button type="button" class="btn-info btn-add pull-right" (click)="addNewPlan()">
+          <span class="glyphicon glyphicon-plus"></span> Add
+        </button>
+      </h4>
+    </div>
     <div class="panel-body">
       <table class="table table-bordered table-striped">
         <thead class="header-background">

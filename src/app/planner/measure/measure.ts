@@ -161,14 +161,56 @@ export class MeasureComponent extends Filters implements AfterViewInit {
     })
   }
   public selectedMeasureId: any;
-  // assignDepartment() {
-  //   this.orgService.assignMeasure(this.selectedMeasureId, this.departmentIds).subscribe((res: any) => {
-  //     this.getMeasure();
-  //     $('#myModal').modal('hide');
-  //   })
-  // }
 
-  // public departmentIds: any[] = [];
+  /**for editing opi target levels */
+  editDepartmentForm:FormGroup;
+  viewDepartment(dept:any){
+    dept.edit = true;
+    this.editDepartmentForm = this.formBuilder.group({
+      "id":[dept.id],
+      "baseline":[dept.baseline],
+      "opiAnnualTargets":this.formBuilder.array(this.getOpiAnnualTargets(dept.opiAnnualTargets))
+    });
+  }
+
+  getOpiAnnualTargets(opiAnnualTargets:any[]){
+    const annualTargets:any[] = [];
+    opiAnnualTargets.forEach(element => {
+      annualTargets.push(this.formBuilder.group({
+        "id":[element.id],
+        "estimatedCost":[element.estimatedCost],
+        "levels":this.formBuilder.array(this.getLevels(element.levels))
+      }))
+    });
+    return annualTargets;
+  }
+
+  getLevels(levelsArray){
+    const levels:any[]=[];
+    levelsArray.forEach(element => {
+      levels.push(this.formBuilder.group({
+        "id":element.id,
+        "estimatedTargetLevel":element.estimatedTargetLevel
+      }))
+    });
+    return levels;
+  }
+
+  removeAssignedDept(selectedMeasure:any,index:any){
+    const assignedDepartments:any[] = selectedMeasure.assignedDepartments;
+    if(confirm("Do you realy want to unassign department??"))
+    this.orgService.deleteAssignedDepartment(selectedMeasure.assignedDepartments[index].id).subscribe((response:any)=>{
+      assignedDepartments.splice(index,1);
+    })    
+  }
+
+  updateOpiTarget(selectedMeasure:any,index:any){
+    if(confirm("Do you realy want to update targets??"))
+    this.orgService.updateTarget(selectedMeasure.opiId,[this.editDepartmentForm.value]).subscribe((response:any)=>{
+      selectedMeasure.assignedDepartments[index] = response[0];
+    });
+  }  
+
   public selectedDepartments: any[] = [];
   public department(event: any) {
     this.travers(event, event.my);
@@ -192,9 +234,9 @@ export class MeasureComponent extends Filters implements AfterViewInit {
         department.baseline = assigneddepartment.baseline;
         department.opiAnnualTargets = assigneddepartment.opiAnnualTargets;
         department.my = true;
+        department.disabled = true;
         department.isUpdating = true;
-        console.log(department);
-        this.selectedDepartments.push(department);
+        // this.selectedDepartments.push(department);
       } else {
         if (department.reporteeDepartments)
           department.reporteeDepartments.forEach((element: any) => {
@@ -209,12 +251,16 @@ export class MeasureComponent extends Filters implements AfterViewInit {
       return;
     } else {
       if (checked) {
-        department.my = true;
-        if(this.selectedDepartments.indexOf(department)===-1)
+        if(!department.disabled){
+          department.my = true;
+          if(this.selectedDepartments.indexOf(department)===-1)
           this.selectedDepartments.push(department);
+        }
       } else {
-        department.my = false;
-        this.selectedDepartments.splice(this.selectedDepartments.indexOf(department), 1);
+        if(!department.disabled){
+          department.my = false;
+          this.selectedDepartments.splice(this.selectedDepartments.indexOf(department), 1);
+        }
       }
       if (department.reporteeDepartments)
         department.reporteeDepartments.forEach((element: any) => {
@@ -246,10 +292,11 @@ export class MeasureComponent extends Filters implements AfterViewInit {
         departmentsArray.forEach(element => {
           this.selectedMeasure.assignedDepartments.push(departmentsArray);
         });
+        $('#detailModal').modal('show');
         $('#myModal').modal('hide');
+        
       })
   }
-
 
   getDepartmentFormArray() {
     const departmentsFormArray: any[] = [];
@@ -326,7 +373,6 @@ export class MeasureComponent extends Filters implements AfterViewInit {
     });
   }
 
-
   setMeasure() {
     return this.formBuilder.group({
       "cycleId": [{ value: this.defaultCycle, disabled: false }, [Validators.required]],
@@ -358,6 +404,7 @@ export class MeasureComponent extends Filters implements AfterViewInit {
           opi: '',
           measureUnit: '', frequencyId: 1, baseline: '', direction: '', remarks: '', helpText: '', approvalRequired: ''
         });
+        $('#add-opi').hide();
       }, error => {
         console.log(error);
       });
@@ -375,6 +422,7 @@ export class MeasureComponent extends Filters implements AfterViewInit {
           this.getMeasure();
         });
       }
+      $('#add-opi').hide();      
     }
   }
 
@@ -402,20 +450,18 @@ export class MeasureComponent extends Filters implements AfterViewInit {
       helpText: measure.helpText,
       approvalRequired: measure.approvalRequired
     });
+    $('#add-opi').show();    
     $('#collapse1').collapse('show');
     // this.measureForm.controls["annualTarget"].patchValue(measure.annualTarget);
   }
 
   enableFields() {
+    $('#add-opi').hide();        
     this.measureForm.controls["cycleId"].enable();
     this.measureForm.controls["objectiveId"].enable();
     this.measureForm.controls["initiativeId"].enable();
     this.measureForm.controls["activityId"].enable();
     this.measureForm = this.setMeasure();
-  }
-
-  nextForm() {
-
   }
 
   deleteMeasure(measureId: any, measures: any[], index: any) {
@@ -436,6 +482,7 @@ export class MeasureComponent extends Filters implements AfterViewInit {
   addNewMeasure() {
     this.enableFields();
     this.isUpdating = false;
+    $('#add-opi').show();        
     $("#collapse1").collapse('show');
     this.measureForm = this.setMeasure();
   }

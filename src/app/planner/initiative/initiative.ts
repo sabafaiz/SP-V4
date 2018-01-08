@@ -23,49 +23,14 @@ export class InitiativeComponent extends Filters{
               public formBuilder: FormBuilder,
               public commonService:StorageService){
                 super();
-              // this.orgService.getObjectives().subscribe((response:any)=>{
-              //   this.objectives = response;
-              // });
               this.getCycleWithChildren();              
               this.initiativeForm = this.initForm();
   }
-
-  // emptySearchResult:any;
-  // copyOfGoals:any[];
-  // search(key:any){
-  //   this.goals = this.goalsCopy;
-  //   this.copyOfGoals = this.goals;
-  //   let val = key.target.value;
-  //   if (val && val.trim() != '') {
-  //     this.emptySearchResult = false;
-  //     this.goals = this.goalsCopy.filter((item: any) => {
-  //       return (item.goal.toLowerCase().indexOf(val.toLowerCase()) > -1);
-  //     })
-  //     if (this.goals.length === 0)
-  //       this.emptySearchResult = true;
-  //     else
-  //       this.emptySearchResult = false;
-  //   }
-  // }
-  // searchInitiative(key:any,searchFrom:any[]){
-  //   this.goals = this.copyOfGoals;
-  //   let val = key.target.value;
-  //   if (val && val.trim() != '') {
-  //     this.goals = this.copyOfGoals.filter((item: any) => {
-  //       var exist:boolean = false;
-  //       item.initiatives = item.initiatives.filter((innerItem:any)=>{
-  //         exist = (innerItem.initiative.toLowerCase().indexOf(val.toLowerCase())>-1);
-  //       });
-  //       return exist;
-  //     })
-  //   }
-  // }
 
   getCycleWithChildren(){
     this.orgService.getCycleWithChildren().subscribe((response:any)=>{
       if(response.status == 204){
         this.cycles = [];
-        // this.objectives = [];
       }else{
         this.cycles = response;
         this.cycles.forEach(element => {
@@ -73,8 +38,6 @@ export class InitiativeComponent extends Filters{
             this.defaultCycle = element.cycleId;
         });
         this.getInitiative();
-        // this.objectives = response[0].goals;
-        // console.log(this.objectives);
       }
     })
   }
@@ -93,11 +56,9 @@ export class InitiativeComponent extends Filters{
       if(response.status == 204){
         this.goals = [];
         this.goalsCopy = [];  
-        // this.copyOfGoals = [];
       }else{
         this.goals = response;
         this.goalsCopy = response;
-        // this.copyOfGoals = response;
         this.initFilters(response);
       }      
     });
@@ -182,23 +143,22 @@ export class InitiativeComponent extends Filters{
   submitInitiative() {
     delete this.initiativeForm.value["cycleId"];
     if(!this.isUpdating)
-    this.orgService.addInitiative(this.initiativeForm.value).subscribe((res:any) => {
-      this.getInitiative();
-      $('#initiativeModal').modal('show');
-      // this.initForm();
-      
-      this.initiativeForm.controls["initiative"].reset();
-    }, err => {
-      console.log(err);
-    });
-    if(this.isUpdating)
-    if(confirm("Are you sure you want to update this Initiative?"))
-    this.orgService.updateInitiative(this.selectedInitiative.initiativeId,this.initiativeForm.value).subscribe((res:any)=>{
-      console.log(res);
-      this.getInitiative();
-      $('#initiativeModal').modal('show');
-      this.isUpdating=false;
-    })
+      this.orgService.addInitiative(this.initiativeForm.value).subscribe((res:any) => {
+        this.getInitiative();
+        $("#add-initiative").hide();
+        $('#initiativeModal').modal('show');      
+        this.initiativeForm.controls["initiative"].reset();
+      }, err => {
+        console.log(err);
+      });
+    else
+      if(confirm("Are you sure you want to update this Initiative?"))
+      this.orgService.updateInitiative(this.selectedInitiative.initiativeId,this.initiativeForm.value).subscribe((res:any)=>{
+        $("#add-initiative").hide();        
+        this.getInitiative();
+        $('#initiativeModal').modal('show');
+        this.isUpdating=false;
+      })
   }
 
   deleteInitiative(initiativeId:any,initiatives:any[],index:any){
@@ -219,16 +179,18 @@ export class InitiativeComponent extends Filters{
     this.initiativeForm.patchValue({cycleId:this.defaultCycle, 
                                     goalId:goalId, 
                                     initiative:initiative.initiative});
+    $("#add-initiative").show();                                       
   }
 
   enableFields(){
+    $("#add-initiative").hide();                                        
     this.initiativeForm.controls["cycleId"].enable();
     this.initiativeForm.controls["goalId"].enable();
     this.initiativeForm = this.initForm();
   }
 
   addNewInitiative(){
-    this.enableFields();
+    $("#add-initiative").show();                                            
     this.isUpdating=false;
     $("#collapse1").collapse('show');
     this.initiativeForm = this.initForm();

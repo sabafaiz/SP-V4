@@ -367,6 +367,18 @@ export class UniversityService {
     .catch(this.handleError);
   }
 
+  public deleteAssignedDepartment(assignedId:any){
+    return this.http.delete(this.baseUrl + "/assign/opiDepartment/"+assignedId)
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  public updateTarget(opiId:any,department:any){
+    return this.http.put(this.baseUrl + "/assign/opi/"+opiId+"/departments", department)
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
   private extractData(res: Response) {
     if (res.status === 204) { return res; }
     let body = res.json();

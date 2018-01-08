@@ -103,14 +103,10 @@ export class GoalComponent extends Filters implements AfterViewInit {
   // }
 
   onSubmit() {
-    // this.goalForm.value["cycleId"] = this.commonService.getData('org_info').cycles[0].cycleId;/
-    console.log(this.goalForm.value);
     if (!this.isUpdating) {
       this.orgService.addObjective(this.goalForm.value).subscribe((response: any) => {
         $('#objectModal').modal('show');
-        // this.returnedObject = response;
-        // this.goals.push(this.returnedObject);
-        // this.initObjectiveForm();
+        $("#add-plan").hide();
         this.goalForm.controls["goal"].reset();
         this.getGoals();
       }, (error: any) => {
@@ -142,13 +138,19 @@ export class GoalComponent extends Filters implements AfterViewInit {
     this.selectedObjective = goal;
     this.isUpdating = true;
     this.goalForm.patchValue({ goal: goal.goal, cycleId: this.defaultCycle });
+    $("#add-plan").show();
     $("#collapse1").collapse('show');
   }
 
   addNewGoal() {
+    $("#add-plan").show();    
     this.isUpdating = false;
     $("#collapse1").collapse('show');
     this.goalForm =  this.initObjectiveForm()
 
+  }
+
+  closeForm(){
+    $("#add-plan").hide();
   }
 }
