@@ -1,24 +1,44 @@
 nav{
-  background: #00d2ff;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
-  
+  background: #1a75d2;  /* fallback for old browsers */ 
   /* box-shadow: 0px 1px 15px 1px rgb(94, 97, 138); */
 }
+
+.navbar-brand{
+font-family: -webkit-pictograph;
+font-weight: bolder;
+background:#1a75d2;
+color: white;
+transition: 0.6s;
+text-decoration: none;
+border-right: 2px dotted transparent;
+/* padding: 30px 8px 0 10px; */
+margin: 0 10px;
+}
+
+.navbar-brand:hover,.navbar-brand:focus,.navbar-brand:active{
+  color:#d54e21;
+  border-right: 2px dotted #ffffff;
+  padding-bottom: 24px;
+}
+
 nav a{
-  color:white;
+  color: white;
+  transition: 0.6s;
+  text-decoration: none;
+  border-right: 2px dotted transparent;
+  /* padding: 30px 8px 0 10px; */
+  margin: 0 10px;
 }
 
 .nav .open>a{
-  background-color: #b93f75;
-  border-color: #b93f75;
+  background-color: #de3572;
+  border-color: white;
 }
 
 .nav>li>a:focus, .nav>li>a:hover , .nav>li:active>a{
-  text-decoration: none;
-    background-color: #b93f75;
-    color: #ffffff;
+  border-right: 2px dotted #ffffff;
+  padding-bottom: 15px;
+  background: transparent;
 }
 
 .navbar-login{
@@ -47,8 +67,8 @@ nav a{
   color: black;
 }
 .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
-  background-color: #b93f75;
-  color: white;
+  background-color: #1a75d2;
+  color: #DB4513;
   text-decoration: none;
 }
 .unexistance td{
@@ -114,22 +134,16 @@ nav a{
 /*panel-css */
 .add-plan .panel-heading{
   color: white;
-  background: #00d2ff;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  border-color:#de32bd;
-  border-bottom: 3px solid #de32bd;
+  background: #1a75d2;
+  /* border-color:#de32bd;
+  border-bottom: 3px solid #de32bd; */
 
 }
 .detail-plan .panel-heading{
   color: white;
   background: #16BFFD;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #CB3066, #16BFFD);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #CB3066, #16BFFD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
-  
-  
-  border-bottom: 3px solid #de32bd;
+  background: #1a75d2;
+  /* border-bottom: 3px solid #de32bd; */
 }
 
 /* panel-css */

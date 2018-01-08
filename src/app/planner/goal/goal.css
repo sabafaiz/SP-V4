@@ -35,15 +35,7 @@ border-top: 1px solid #cf3238
     color:white;  
  }
 
- .detail-plan .panel-heading{
-    color: white;
-    background-color: #293f53;
-    border-bottom: 3px solid #cf3238;
- }
 
-.table-bordered thead{
-    background: aliceblue;
-}
 
 .table-bordered .glyphicon-edit{
     color:red;

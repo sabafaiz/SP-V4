@@ -1,10 +1,7 @@
 .add-goal .panel-heading
 {
-    background: #283c86;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #45a247, #283c86);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #45a247, #283c86); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    color:white;
-    border-bottom: 2px solid #0dbef5;
+    background: #1a4292;  /* fallback for old browsers */
+    color: white;
     cursor: pointer;
 
 }
@@ -20,10 +17,7 @@
 
 .panel-color .panel-heading{
     color: white;
-    background: #23074d;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #cc5333, #23074d);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #cc5333, #23074d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    border-bottom: 2px solid #0dbef5;
+    background: #1a4292;
 }
 
 
@@ -31,10 +25,7 @@
 
 .panel-color2 .panel-heading{
     color:white;
-    background: #7b4397;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #dc2430, #7b4397);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #dc2430, #7b4397); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    border-bottom: 2px solid #0dbef5;
+    background: #1a4292;
 }
 
 .color3{
