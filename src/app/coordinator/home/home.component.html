@@ -167,7 +167,7 @@
                                     <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                                   </button>
                                 </li>
-                                <li *ngIf="!file['evidance'].length" style="color:red">No evidence added yet.</li>
+                                <li *ngIf="!file.evidance.length" style="color:red">No evidence added yet.</li>
                               </ul>
                             </div>
                           </div>
@@ -216,105 +216,108 @@
             </thead>
             <tbody *ngFor="let tdl of selectedMeasure.departmentInfo[0].opiAnnualTargets;let at=index;">
               <tr>
-                <td [attr.rowspan]="tdl.levels.length + 4" style="vertical-align: middle;">{{tdl.year}}</td>
-                <td [attr.rowspan]="tdl.levels.length + 4" style="vertical-align: middle;">{{tdl.estimatedCost}}</td>
+                <td [attr.rowspan]="tdl.levels.length+4" style="vertical-align: middle;">{{tdl.year}}</td>
+                <td [attr.rowspan]="tdl.levels.length+4" style="vertical-align: middle;">{{tdl.estimatedCost}}</td>
               </tr>
               <ng-template let-lev ngFor [ngForOf]="tdl.levels" let-in="index">
-                <tr [style.background]="lev.disabled?'lightgray':null" data-toggle="collapse" [attr.href]="'#row-collapse'+at+'lev'+in" (click)="selectedQuarter=lev;">
+                <!-- <tr [style.background]="lev.disabled?'lightgray':null"> -->
+                <tr data-toggle="collapse" [attr.href]="'#row-collapse'+at+'lev'+in" (click)="selectedQuarter=lev;">
                   <td>{{lev.quarter}}</td>
                   <td>{{lev.endDate + tdl.year}}</td>
-                  <td style="text-align:center;">View/Fill Quarter</td>
+                  <td style="text-align:center;">View/Fill</td>
                 </tr>
                 <ng-container>
                   <tr [attr.id]="'row-collapse'+at+'lev'+in" class="collapse">
                     <td colspan="5">
-                      <b><u>Mou Details </u>:</b>
-                      <button  class="pull-right" (click)="lockQuarterResult(lev)" *ngIf="lev.mouDetails.length" [disabled]="lev.disabled">Lock</button>
-                      <div class="row">
-                        <div class="col-sm-12">
+                      <table class="table table-bordered" *ngIf="lev.mouDetails.length">
+                        <caption align="top">
+                          <div class="input-group">
+                            <div class="input-group-addon">Current Cost</div>
+                            <div class="form-control" style="width:25%">{{lev.currentCost}}</div>
+                            <button type="button" class="btn btn-link">
+                              <i class="glyphicon glyphicon-pencil"></i>
+                            </button>
+                            <button class="btn pull-right" (click)="lockQuarterResult(lev)" *ngIf="lev.mouDetails.length" [disabled]="lev.disabled">Lock </button>
+                            <button class="btn pull-right" type="button" *ngIf="lev.mouDetails.length" (click)="lev.addMore=true;" [hidden]="lev.disabled">Add More</button>
+                          </div>                          
+                        </caption>
+                        <colgroup>
+                          <col style="width:10%">
+                          <col style="width:30%">
+                          <col style="width:30%">
+                          <col style="width:30%">
+                        </colgroup>
+                        <thead>
+                          <tr>
+                            <th>*</th>
+                            <th>Mou Type</th>
+                            <th>Organisation</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody *ngFor="let detail of lev.mouDetails;let d = index;">
+                          <tr *ngIf="!detail.edit">
+                            <td>{{d+1}}</td>
+                            <td><div class="form-control">{{detail.mouType}}</div></td>
+                            <td><div class="form-control">{{detail.organization}}</div> </td>
+                            <td>
+                              <button type="button" (click)="detail.edit=true;detail.mouTypeCopy=detail.mouType;detail.organizationCopy=detail.organization;"
+                              > Edit</button>
+                              <button (click)="evForm=2;selectedMou=detail;" data-toggle="modal" data-target="#evidenceForm">Upload Evidence</button>
+                            </td>
+                          </tr>
+                          <tr *ngIf="detail.edit">
+                            <td>{{d+1}}</td>
+                            <td><input class="form-control" [(ngModel)]="detail.mouType"></td>
+                            <td><input class="form-control" [(ngModel)]="detail.organization"></td>
+                            <td>
+                              <button type="button" (click)="detail.edit=true" >save </button>
+                              <button type="button" (click)="detail.edit=false;detail.mouType=detail.mouTypeCopy;detail.organization=detail.organizationCopy;">Cancel </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tfoot *ngIf="lev.addMore">
+                          <tr>
+                              <td></td>
+                              <td><input class="form-control" [(ngModel)]="lev.mouType"></td>
+                              <td><input class="form-control" [(ngModel)]="lev.organization"></td>
+                              <td>
+                                <button type="button" (click)="saveQuarterResultWithMou(lev)" >save </button>
+                                <button type="button" *ngIf="lev.addMore" (click)="lev.addMore=false;">Cancel </button>
+                              </td>
+                            </tr>
+                        </tfoot>
+                      </table>
+                      <div class="row" *ngIf="lev.mouDetails.length">
+                        <div class="col-sm-3">
+                          <div class="input-group">
+                            <div class="input-group-addon">Current Cost</div>
+                            <input type="text" class="form-control" [(ngModel)]="lev.currentCost">
+                          </div>
+                        </div>
+                        <div class="col-sm-3">
+                          <div class="input-group">
+                            <div class="input-group-addon">Mou type</div>
+                            <input type="text" class="form-control" [(ngModel)]="lev.mouType">
+                          </div>
+                        </div>
+                        <div class="col-sm-3">
+                          <div class="input-group">
+                            <div class="input-group-addon">Organization</div>
+                            <input type="text" class="form-control" [(ngModel)]="lev.organization">
+                          </div>
+                        </div>
+                        <div class="col-sm-3">
                           <div class="form-group">
-                            <label>Current Cost</label>
-                            <input type="number" [(ngModel)]="lev.currentCost" *ngIf="lev.status=='unsubmitted'"> <span *ngIf="lev.status!='unsubmitted'">{{lev.currentCost}}</span>
+                            <button class="btn" type="button" (click)="saveQuarterResultWithMou(lev)"> Save</button>
                           </div>
-                        </div>
-                        <div *ngIf="!lev.mouDetails.length">
-                          <div class="col-sm-4">
-                            <div class="form-group">
-                              <label>Mou type</label>
-                              <input type="text" [(ngModel)]="lev.mouType">
-                            </div>
-                          </div>
-                          <div class="col-sm-4">
-                            <div class="form-group">
-                              <label>Organization</label>
-                              <input type="text" [(ngModel)]="lev.organization">
-                            </div>
-                          </div>
-                          <div class="col-sm-4">
-                            <div class="form-group">
-                              <button type="button"  (click)="saveQuarterResultWithMou(lev)"> Save</button>
-                            </div>
-                          </div>
-                        </div>
-                        <div *ngIf="lev.mouDetails.length" style="list-style:none;">
-                          <div *ngFor="let detail of lev.mouDetails;let d = index;">
-                            <div class="col-sm-4">
-                              <div class="form-group">
-                                <label>Mou type : </label>
-                                <input type="text" [(ngModel)]="detail.mouType" *ngIf="detail.edit">
-                                <span *ngIf="!detail.edit&&detail.mouType">{{detail.mouType}}</span>
-                              </div>
-                            </div>
-                            <div class="col-sm-4">
-                              <div class="form-group">
-                                <label>Organization : </label>
-                                <input type="text" [(ngModel)]="detail.organization" *ngIf="detail.edit">
-                                <span *ngIf="!detail.edit&&detail.organization">{{detail.organization}}</span>
-                              </div>
-                            </div>
-                            <div class="col-sm-4">
-                              <div class="form-group">
-                                <button type="button"  (click)="detail.edit=true;detail.mouTypeCopy=detail.mouType;detail.organizationCopy=detail.organization;"
-                                  *ngIf="!detail.edit"> Edit</button>
-                                <button type="button"  (click)="detail.edit=true" *ngIf="detail.edit">save</button>
-                                <button type="button"  (click)="detail.edit=false;detail.mouType=detail.mouTypeCopy;detail.organization=detail.organizationCopy;"
-                                  *ngIf="detail.edit"> Cancel</button>
-                                <button  (click)="evForm=2;selectedMou=detail;" data-toggle="modal" data-target="#evidenceForm">Upload Evidence</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div *ngIf="lev.addMore">
-                          <div class="col-sm-4">
-                            <div class="form-group">
-                              <label>Mou type : </label>
-                              <input type="text" [(ngModel)]="lev.mouType">
-                            </div>
-                          </div>
-                          <div class="col-sm-4">
-                            <div class="form-group">
-                              <label>Organization : </label>
-                              <input type="text" [(ngModel)]="lev.organization">
-                            </div>
-                          </div>
-                          <div class="col-sm-4">
-                            <div class="form-group">
-                              <button type="button"  (click)="saveQuarterResultWithMou(lev)">save</button>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-12">
-                          <button type="button"  *ngIf="lev.mouDetails.length" (click)="lev.addMore=true;">Add More</button>
-                          <button type="button"  *ngIf="lev.addMore" (click)="lev.addMore=false;">Cancel</button>
                         </div>
                       </div>
-                      <button type="button"  *ngIf="lev.mouDetails.length" (click)="lev.addMore=true;" [hidden]="lev.disabled">Add More</button>
-                      <button type="button"  *ngIf="lev.addMore" (click)="lev.addMore=false;" [hidden]="lev.disabled">Cancel</button>
                     </td>
                   </tr>
                 </ng-container>
               </ng-template>
-            </tbody>            
+            </tbody>
           </table>
         </div>
       </div>

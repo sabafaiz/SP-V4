@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { StorageService } from "../../shared/storage.service";
 import { UniversityService } from "../../shared/UTI.service";
+import * as alertify from 'alertifyjs';
 
 declare let $:any;
 
@@ -29,6 +30,10 @@ export class PlanComponent{
     this.getCycles();
   }
 
+  addNewPlan(){
+    $("#add-plan").show();
+    $("#collapse1").collapse('show');    
+  }
   getCycles(){
     this.orgService.getCycles().subscribe((response:any)=>{
       if(response.status == 204){
@@ -41,15 +46,17 @@ export class PlanComponent{
   }
 
   editCycle(c:any){
+    $("#add-plan").show();
+    $("#collapse1").collapse('show');
     this.isUpdating = true;
     this.selectedCycle = c;
     this.cycleForm.patchValue(c);
-    $("#collapse1").collapse('show');
   }
 
   onSubmit(){
     if(!this.isUpdating)
       this.orgService.saveCycle(this.cycleForm.value).subscribe((response:any)=>{
+        alertify.success('You added New Strategic plan.');
         this.isUpdating = false;        
         this.getCycles();
         this.cycleForm.reset();
@@ -59,6 +66,7 @@ export class PlanComponent{
       data['description'] = this.cycleForm.value["description"];
       data['endYear'] = this.cycleForm.value["endYear"];
       this.orgService.updateCycle(this.selectedCycle.cycleId,data).subscribe((response:any)=>{
+        alertify.success('You updated Strategic plan.');        
         this.isUpdating = false;
         this.getCycles();
         this.cycleForm.reset();
@@ -71,7 +79,7 @@ export class PlanComponent{
       const forDiabled =  confirm("Are you sure you want to disable it");
       if(forDiabled){
         this.orgService.disableCycle(c.cycleId).subscribe((response:any)=>{
-          console.log(response);
+          alertify.success('You disabled the plan.');
         });
       } else { 
         event.srcElement.checked = !event.srcElement.checked;
@@ -81,7 +89,7 @@ export class PlanComponent{
       const forEnabled = confirm("Are you sure you want to enable it");
       if(forEnabled){
         this.orgService.enableCycle(c.cycleId).subscribe((response:any)=>{
-          console.log(response);
+          alertify.success('You enabled the plan.');
         })
       } else {
         event.srcElement.checked = !event.srcElement.checked;
@@ -90,15 +98,18 @@ export class PlanComponent{
   }
 
   deleteCycle(cycleId:any){
-    if(confirm("Do you Really want to Delete this Cycle??"))
-    this.orgService.deleteCycle(cycleId).subscribe((response:any)=>{
-      this.getCycles();
-    },(error:any)=>{
-      confirm("You Can not Delete this Cycle??")
+    alertify.confirm("Do you Really want to Delete this Cycle??",()=>{
+      this.orgService.deleteCycle(cycleId).subscribe((response:any)=>{
+        this.getCycles();
+      },(error:any)=>{      
+        alertify.alert("You Can not Delete this Cycle??");
+      })
     })
+    
   }
 
   reset(){
+    $("#add-plan").hide();
     this.isUpdating = false;
     this.cycleForm.reset();
   }

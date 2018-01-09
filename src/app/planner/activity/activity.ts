@@ -14,8 +14,8 @@ declare let $: any;
 export class ActivityComponent extends Filters implements OnInit, AfterViewInit {
   // [x: string]: any;
   public cycles: any[] = [];
-  public goals: any[] = [];
-  public goalsCopy: any[] = [];
+  // public goals: any[] = [];
+  // public goalsCopy: any[] = [];
 
   public activityForm: FormGroup;
   public quarter: any[] = ["Q1", "Q2", "Q3", "Q4"];
@@ -105,14 +105,6 @@ export class ActivityComponent extends Filters implements OnInit, AfterViewInit 
       this.initiatives = [];
     }
   }
-  // this.orgService.fetchInitiative(objId).subscribe((res:any)=>{
-  //   if(res.status === 204){
-  //     this.initiatives = [];
-  //     alert("There is no initiatives of corresponding Goal");
-  //   }else{
-  //     this.initiatives = res;        
-  //   }
-  // });
 
   setActivity() {
     return this.formBuilder.group({
@@ -163,6 +155,7 @@ export class ActivityComponent extends Filters implements OnInit, AfterViewInit 
     if (!this.isUpdating) {
       this.orgService.saveActivity(this.activityForm.value)
         .subscribe(response => {
+          $("#add-activity").hide();
           $('#activityModal').modal('show');
           this.getActivities();
           this.activityForm.controls["activity"].reset();
@@ -199,6 +192,7 @@ export class ActivityComponent extends Filters implements OnInit, AfterViewInit 
       initiativeId: initiative.initiativeId,
       activity: activity.activity
     });
+    $("#add-activity").show();    
   }
 
   enableFields() {
@@ -206,6 +200,7 @@ export class ActivityComponent extends Filters implements OnInit, AfterViewInit 
     this.activityForm.controls["objectiveId"].enable();
     this.activityForm.controls["initiativeId"].enable();
     this.activityForm = this.setActivity();
+    $("#add-activity").hide();    
   }
 
   getRowSpan(array: any[]) {
@@ -234,6 +229,7 @@ export class ActivityComponent extends Filters implements OnInit, AfterViewInit 
   addNewActivity(){
     this.enableFields(); 
     this.isUpdating = false;
+    $("#add-activity").show();
     $("#collapse1").collapse('show');
     this.activityForm = this.setActivity();
 

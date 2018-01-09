@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="panel add-plan">
+  <div class="panel add-plan" id="add-plan" style="display:none">
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" href="#collapse1" class="accordion-toggle">Add Goal</a>
@@ -27,6 +27,9 @@
       </div>
       <div class="panel-footer">
         <button type="submit" class="btn btn-success btn-empty" [disabled]="goalForm.invalid"><i class="glyphicon glyphicon-ok"></i></button>
+        <button type="button" class="btn btn-danger btn-close" (click)="closeForm();isUpdating=false;" data-toggle="tooltip" data-placement="auto" title="Close">
+          <i class="glyphicon glyphicon-remove"></i>
+        </button>
       </div>
     </form>      
     </div>

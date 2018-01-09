@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="panel add-plan">
+  <div class="panel add-plan" id="add-opi" style="display:none;">
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" href="#collapse1" class="accordion-toggle">Add KPI</a>
@@ -13,14 +13,14 @@
               <div class="form-group">
                 <label class="control-label" for="year">Plan Year:</label>
                 <select id="year" name="year" class="form-control" formControlName="cycleId" [ngModel]="defaultCycle" (ngModelChange)="getObjective($event)">
-                      <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}] : {{c.description}}</option>
-                  </select>
+                  <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}] : {{c.description}}</option>
+                </select>
               </div>
             </div>
             <div class="col-lg-6 col-xs-12 col-sm-12">
               <div class="form-group">
                 <label>Select Goal:</label>
-                <select class="form-control" id="sel1" formControlName="objectiveId" [ngModel]="defaultCycle"(ngModelChange)="getInitiative($event)">
+                <select class="form-control" id="sel1" formControlName="objectiveId" [ngModel]="defaultCycle" (ngModelChange)="getInitiative($event)">
                   <option *ngFor="let objective of objectives;let i=index;" [value]="objective.goalId">{{i+1}}.{{objective.goal}}</option>
                 </select>
               </div>
@@ -72,10 +72,10 @@
               <div class="form-group">
                 <label>Frequency of Measurement</label>
                 <select class="form-control" formControlName="frequencyId">
-                    <option value="1">Annually</option>
-                    <option value="2">Semi-Annual</option>      
-                    <option value="3">Quarterly</option> 
-                  </select>
+                  <option value="1">Annually</option>
+                  <option value="2">Semi-Annual</option>
+                  <option value="3">Quarterly</option>
+                </select>
               </div>
             </div>
             <div class="col-lg-6 col-xs-12 col-sm-12">
@@ -100,15 +100,20 @@
             </div>
             <div class="col-lg-6 col-xs-12 col-sm-12 form-check">
               <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" formControlName="approvalRequired" ><span style="color:red;">*</span>
-                  Approval Required
-                </label>
+                <input type="checkbox" class="form-check-input" formControlName="approvalRequired">
+                <span style="color:red;">*</span>
+                Approval Required
+              </label>
             </div>
           </div>
         </div>
         <div class="panel-footer">
-          <button type="submit" class="btn btn-success btn-outline-success btn-empty" [disabled]="measureForm.invalid"><i class="glyphicon glyphicon-ok"></i></button>
-          <button type="button" class="btn btn-danger btn-outine-danger btn-close" (click)="enableFields(); isUpdating = false;" ><i class="glyphicon glyphicon-remove"></i></button>
+          <button type="submit" class="btn btn-success btn-outline-success btn-empty" [disabled]="measureForm.invalid">
+            <i class="glyphicon glyphicon-ok"></i>
+          </button>
+          <button type="button" class="btn btn-danger btn-outine-danger btn-close" (click)="enableFields(); isUpdating = false;">
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
         </div>
       </form>
     </div>
@@ -118,7 +123,6 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" href="#collapse2">Proposed KPIs</a>
-
         <div class="form-inline pull-right" style="margin-bottom:unset;">
           <div class="form-group">
             <label class="control-label">Strategic Plan</label>
@@ -138,10 +142,14 @@
       <div class="panel-body">
         <table class="table table-bordered">
           <colgroup>
-            <col style="width:15%">
-            <col style="width:15%">
-            <col style="width:15%">
-            <col style="width:55%">
+            <col style="width:16%">
+            <col style="width:16%">
+            <col style="width:16%">
+            <col style="width:16%">
+            <col style="width:16%">
+            <col style="width:16%">
+            <col style="width:2%">
+            <col >
           </colgroup>
           <thead class="header-background" *ngIf="goalsCopy.length">
             <tr>
@@ -162,53 +170,65 @@
               </th>
               <th>
                 <span class="search">
-                    <input type="text" name="search" (keyup)="searchOpi($event)" placeholder="KPI">
-                  </span>
+                  <input type="text" name="search" (keyup)="searchOpi($event)" placeholder="KPI">
+                </span>
               </th>
+              <th style="vertical-align:middle">KPI Detail</th>
+              <th style="vertical-align:middle">Assigned Departments</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let goal of goals;let i = index;">
               <td>{{goal.goal}}</td>
-              <td colspan="8" style="padding:0px;border:none;" #element [style.height]="get(element)">
-                <table class="table table-bordered" style="height: inherit;border:none;">
+              <td colspan="8" style="padding:0px;" #element [style.height]="get(element)">
+                <table class="table table-bordered" style="height: inherit;">
                   <colgroup>
-                    <col style="width:17.60%">
-                    <col style="width:82.40%">
+                    <col style="width:19%">
+                    <col style="width:81%">
                   </colgroup>
                   <tr *ngFor="let initiate of goal.initiatives;let j=index;">
                     <td>{{initiate.initiative}}</td>
                     <td colspan="7" style="padding:0px;" #element1 [style.height]="get(element1)">
-                      <table class="table table-bordered" style="height: inherit;border:none;">
+                      <table class="table table-bordered" style="height: inherit;">
                         <colgroup>
-                          <col style="width:21.40%">
-                          <col style="width:78.60%">
+                          <col style="width:23.5%">
+                          <col style="width:76.5%">
                         </colgroup>
                         <tr *ngFor="let activit of initiate.activities;let k=index;">
                           <td [style.border-top]="k?'1px solid #ddd':'none'">{{activit.activity}}</td>
-                          <td style="padding:0px;" #element2 [style.height]="get(element2)">
-                            <table class="table table-bordered" style="height: inherit;border:none;">
+                          <td colspan="5" style="padding:0px;" #element2 [style.height]="get(element2)">
+                            <table class="table table-bordered" style="height: inherit;">
                               <colgroup>
-                                <col style="width:35%">
-                                <col style="width:20%">
-                                <col style="width:20%">
-                                <col style="width:5%">
-                                <col style="width:5%">
-                                <col style="width:10%">
+                                <col style="width: 30.9%;">
+                                <col style="width: 30.9%;">
+                                <col style="width: 30.9%;">
+                                <col >
+                                <col >
                               </colgroup>
                               <tr *ngFor="let msr of activit.opis;let l=index">
                                 <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.opi}}</td>
-                                <td>
-                                  <label>Frequency :</label>{{msr.frequency}}<br>
-                                  <label>Cost :</label>10000<br>
-                                  <label>MeasureUnit :</label>{{msr.measureUnit}}<br>
-                                  <label>Direction :</label>{{direction[msr.direction]}}<br>
+                                <td [style.border-top]="l?'1px solid #ddd':'none'">
+                                  <label>Frequency :</label>{{msr.frequency}}
+                                  <br>
+                                  <label>Cost :</label>10000
+                                  <br>
+                                  <label>MeasureUnit :</label>{{msr.measureUnit}}
+                                  <br>
+                                  <label>Direction :</label>{{direction[msr.direction]}}
+                                  <br>
                                 </td>
-                                <td>
-                                  <ul style="list-style:none;padding:0px;"><b>Assigned Departments</b>
+                                <td [style.border-top]="l?'1px solid #ddd':'none'">
+                                  <ul style="list-style:none;padding:0px;">
+                                    <li *ngIf="!msr.assignedDepartments.length">None
+                                      <a class="pull-right" data-toggle="modal" data-target="#myModal" (click)="selectedMeasure=msr;next=false;prev=true;checkAssignDept(msr.assignedDepartments);">Add</a>
+                                    </li>
                                     <li *ngFor="let dept of msr.assignedDepartments;let d = index">{{dept.department}}, </li>
-                                  </ul>
-                                  <span *ngIf="!msr.assignedDepartments.length">None</span>
+                                    <li *ngIf="msr.assignedDepartments.length">
+                                      <a data-toggle="modal" data-target="#detailModal" (click)="selectedMeasure=msr;"> Detail</a>
+                                    </li>
+                                  </ul>                                  
                                 </td>
                                 <td [style.border-top]="l?'1px solid #ddd':'none'">
                                   <a (click)="updateMeasure(goal,initiate,activit,msr)" href="#collapse1">
@@ -217,9 +237,6 @@
                                 </td>
                                 <td [style.border-top]="l?'1px solid #ddd':'none'">
                                   <i style="cursor:pointer;" class="glyphicon glyphicon-remove" (click)="deleteMeasure(msr.opiId,activit.opis,l)"></i>
-                                </td>
-                                <td [style.border-top]="l?'1px solid #ddd':'none'">
-                                  <a data-toggle="modal" data-target="#myModal" (click)="selectedMeasure=msr;next=false;prev=true;checkAssignDept(msr.assignedDepartments);">Assign</a>
                                 </td>
                               </tr>
                             </table>
@@ -234,7 +251,7 @@
           </tbody>
           <tfoot *ngIf="!goals.length">
             <tr>
-              <td colspan="4" class="text-center">No Data to Display .,.</td>
+              <td colspan="8" class="text-center">No Data to Display .,.</td>
             </tr>
           </tfoot>
         </table>
@@ -247,25 +264,12 @@
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
   <div class="modal-dialog modal-xl">
-    <div class="modal-content">
+    <div class="modal-content" *ngIf="selectedMeasure">
       <div class="modal-header color4">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Set targets</h4>
+        <h4 class="modal-title"><b>KPI </b>: {{selectedMeasure.opi}}</h4>
       </div>
-      <div class="modal-body" *ngIf="selectedMeasure">
-        <!-- <div class="row" *ngIf="prev">
-          <div class="col-sm-12">
-            <div class="pull-right">
-              <button type="button" class="btn btn-warning"><label>
-                  <input type="radio" name="optradio"> All(Institutional Units)</label>
-                </button>
-                <button type="button" class="btn btn-warning">
-              <label>
-                <input type="radio" name="optradio">Select</label>
-              </button>
-            </div>
-          </div>
-        </div> -->
+      <div class="modal-body">
         <div class="row" *ngIf="prev">
           <div class="col-sm-12">
             <div class="department-hierarchy">
@@ -313,10 +317,116 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default btn-empty" *ngIf="next" (click)="prev = true;next = false;"><i class="glyphicon glyphicon-arrow-left"></i></button>
-        <button type="submit" class="btn btn-default btn-green" *ngIf="next" (click)="assign()"><i class="glyphicon glyphicon-floppy-saved"></i></button>
-        <button type="button" class="btn btn-default btn-empty" *ngIf="prev" (click)="prev=false;next=true;assignDepartment()"><i class="glyphicon glyphicon-arrow-right"></i></button>
-        <button type="button" class="btn btn-default btn-close" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>
+        <button type="button" class="btn btn-default btn-empty" *ngIf="next" (click)="prev = true;next = false;">
+          <i class="glyphicon glyphicon-arrow-left"></i>
+        </button>
+        <button type="submit" class="btn btn-default btn-empty" *ngIf="next" (click)="assign()">
+          <i class="glyphicon glyphicon-floppy-saved"></i>
+        </button>
+        <button type="button" class="btn btn-default btn-empty" *ngIf="prev" (click)="prev=false;next=true;assignDepartment()">
+          <i class="glyphicon glyphicon-arrow-right"></i>
+        </button>
+        <button type="button" class="btn btn-default btn-close" data-dismiss="modal">
+          <i class="glyphicon glyphicon-remove"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content" *ngIf="selectedMeasure">
+      <div class="modal-header color4">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">
+        <b>KPI </b>: {{selectedMeasure.opi}}</h4>
+      </div>
+      <div class="modal-body">
+        <h3>Assigned Departments
+          <button class="btn btn-primary pull-right" data-toggle="modal" data-dismiss="modal" data-target="#myModal" (click)="next=false;prev=true;checkAssignDept(selectedMeasure.assignedDepartments);">Add
+            <span class="glyphicon glyphicon-plus"></span>
+          </button>
+        </h3>
+        <hr>
+        <ul style="list-style:none;padding-left:0;height: 55vh;overflow-y: auto;">
+          <li class="sibling-list-element" *ngIf="!selectedDepartments">None Selected</li>
+          <li class="sibling-list-element" *ngFor="let dept of selectedMeasure.assignedDepartments;let arr=index;">
+            <div class="edit-btn">
+              <button type="button" class="btn btn-link" (click)="viewDepartment(dept)" *ngIf="!dept.edit">
+                <i class="glyphicon glyphicon-pencil"></i>
+              </button>
+              <button type="button" class="btn btn-link" (click)="updateOpiTarget(selectedMeasure,arr);dept.edit = false;" *ngIf="dept.edit">
+                <i class="glyphicon glyphicon-floppy-saved"></i>
+              </button>
+              <button type="button" class="btn btn-link" (click)="removeAssignedDept(selectedMeasure,arr)" *ngIf="dept.edit">
+                <i class="glyphicon glyphicon-trash"></i>
+              </button>
+              <button type="button" class="btn btn-link" (click)="dept.edit = false;" *ngIf="dept.edit">
+                <i class="glyphicon glyphicon-remove"></i>
+              </button>
+            </div>
+            <table class="table border-color" *ngIf="!dept.edit">
+              <caption style="text-align: left;color: #b10909;">{{dept.department}}
+                <span class="input-group pull-right">
+                  <div class="input-group-addon base-color">BaseLine</div>
+                  <div class="form-control form-border" style="width:25%">{{dept.baseline}}</div>
+                </span>
+              </caption>
+              <ng-container>
+                <tr *ngFor="let array of dept.opiAnnualTargets;let op=index;">
+                  <td>{{array.year}}</td>
+                  <ng-container>
+                    <td *ngFor="let level of array.levels;let l = index;">
+                      <div class="input-group">
+                        <div class="input-group-addon base-color2">Q{{level.quarterId}}</div>
+                        <div class="form-control" style="width: 50%;">{{level.estimatedTargetLevel}}</div>
+                      </div>
+                    </td>
+                  </ng-container>
+                  <td>
+                    <div class="input-group">
+                      <div class="input-group-addon base-color3">Estimated Cost</div>
+                      <div class="form-control" style="width:50%">{{array.estimatedCost}}</div>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </table>
+            <table class="table border-color" [formGroup]="editDepartmentForm" *ngIf="dept.edit">
+              <caption style="text-align: left;color: #b10909;">{{dept.department}}
+                <span class="input-group pull-right">
+                  <div class="input-group-addon base-color">BaseLine</div>
+                  <input type="text" class="form-control form-border" autofocus formControlName="baseline" style="width:25%" id="exampleInputAmount">
+                </span>
+              </caption>
+              <ng-container formArrayName="opiAnnualTargets">
+                <tr *ngFor="let array of editDepartmentForm.controls.opiAnnualTargets.controls;let op=index;" [formGroupName]="op">
+                  <td>{{dept.opiAnnualTargets[op].year}}</td>
+                  <ng-container formArrayName="levels">
+                    <td *ngFor="let level of array.controls.levels.controls;let l = index;" [formGroupName]="l">
+                      <div class="input-group">
+                        <div class="input-group-addon base-color2">Q{{dept.opiAnnualTargets[op].levels[l].quarterId}}</div>
+                        <input type="text" class="form-control" id="exampleInputAmount" style="width: 50%;" formControlName="estimatedTargetLevel">
+                      </div>
+                    </td>
+                  </ng-container>
+                  <td>
+                    <div class="input-group">
+                      <div class="input-group-addon base-color3">Estimated Cost</div>
+                      <input type="text" class="form-control" formControlName="estimatedCost" style="width:50%" id="exampleInputAmount">
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </table>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-close" data-dismiss="modal">
+          <i class="glyphicon glyphicon-remove"></i>
+        </button>
       </div>
     </div>
   </div>
@@ -335,7 +445,9 @@
         <p>You have successfully added a new Measure.</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default btn-close" data-dismiss="modal" data-toggle="collapse" href="#collapse1"><i class="glyphicon glyphicon-remove"></i></button>
+        <button type="button" class="btn btn-default btn-close" data-dismiss="modal" data-toggle="collapse" href="#collapse1">
+          <i class="glyphicon glyphicon-remove"></i>
+        </button>
       </div>
     </div>
   </div>

@@ -17,3 +17,22 @@
  .table .table {
   background-color: inherit;
  }
+
+ .sibling-list-element{
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,.14);
+  border-radius:6px;
+  padding:15px;
+  position:relative;
+  margin-bottom: 5px;
+}
+
+.sibling-list-element .edit-btn{
+  position: absolute;
+  right: 0;
+  z-index: 1;
+}
+
+.table>.table,.table>.table>.table{
+  border-spacing: 0;
+    border-collapse: collapse;
+}
