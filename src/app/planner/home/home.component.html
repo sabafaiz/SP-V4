@@ -1,8 +1,8 @@
-  <div class="container-fluid" *ngIf="organizationInfo">
-    <div class="container text-center" style="padding: 20px;">
-      <img src="assets/uaeu_signature.png" style="height: 100px;">
-    </div>
-    <div class="panel panel-info panel-color">
+<div class="container-fluid" *ngIf="organizationInfo">
+  <div class="container text-center" style="padding: 20px;">
+    <img src="assets/uaeu_signature.png" style="height: 100px;">
+  </div>
+  <!-- <div class="panel panel-info panel-color">
       <div class="panel-heading">
         <div class="dropdown pull-right">
           <span class="glyphicon glyphicon-option-vertical dropdown-toggle" data-toggle="dropdown" (click)="editMisionVision('mission', organizationInfo.mission);"></span>
@@ -61,9 +61,11 @@
         </div>
       </div>
     </div>
-  </div>
-  
-  
+  </div> -->
+
+  <!-- end -->
+
+
   <div class="modal fade" id="valueForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -97,8 +99,8 @@
       </div>
     </div>
   </div>
-  
-  
+
+
   <div class="modal fade" id="missionVisionForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -128,7 +130,47 @@
       </div>
     </div>
   </div>
-      <!-- ===============================================================================
+  <!-- ===============================================================================
   ======================== /End of Initial setup Interface ==============================================
   ===================================================================================== -->
-  
+  <div class="card nav-card">
+    <div id='cssmenu'>
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#mission">Mission</a></li>
+        <li><a data-toggle="tab" href="#vision">Vision</a></li>
+        <li><a data-toggle="tab" href="#values">Values</a></li>
+      </ul>
+    </div>
+    <div class="tab-content" style="margin-top:15px;" *ngIf="organizationInfo">
+      <div id="mission" class="tab-pane fade in active">
+        <span class="pull-right edit-icon" (click)="editMisionVision('mission', organizationInfo.mission);"><i class="glyphicon glyphicon-edit" data-toggle="modal" data-target="#missionVisionForm"></i></span>
+        <p>{{organizationInfo.mission}}</p>
+      </div>
+      <div id="vision" class="tab-pane fade">
+        <span class="pull-right edit-icon" (click)="editMisionVision('vision', organizationInfo.vision);"><i class="glyphicon glyphicon-edit" data-toggle="modal" data-target="#missionVisionForm"></i></span>
+        <p>{{organizationInfo.vision}}</p>
+      </div>
+      <div id="values" class="tab-pane fade">
+        <div class="row">
+          <button type="button" class="btn btn-default pull-right margin" (click)="onValueSelected('',null)" data-toggle="modal" data-target="#valueForm"><i class="glyphicon glyphicon-plus"></i></button>
+          <button type="button" class="btn btn-default pull-right margin" data-toggle="modal" data-target="#valueForm" (click)="onValueSelected(val,i)"><i class="glyphicon glyphicon-edit"></i></button>
+          <button type="button" class="btn btn-default pull-right margin" (click)="deleteValue(val,i)"><i class="glyphicon glyphicon-trash"></i></button>
+          <div class="col-sm-2">
+            <ul class="nav nav-values">
+              <li [ngClass]="{'active': !i}" *ngFor="let val of organizationInfo.values;let i = index;">
+                <a data-toggle="tab" [attr.href]="'#val'+i">Value {{i+1}}</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm-10">
+            <div class="tab-content margin-top">
+              <div [attr.id]="'val'+j" class="tab-pane fade" [ngClass]="{'in active': !j}" *ngFor="let val of organizationInfo.values;let j = index;">
+                <h3>{{val.title}}</h3>
+                <p>{{val.description}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

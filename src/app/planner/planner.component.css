@@ -1,12 +1,12 @@
 nav{
-  background: #1a75d2;  /* fallback for old browsers */ 
-  /* box-shadow: 0px 1px 15px 1px rgb(94, 97, 138); */
+  background: #563d7c; /* fallback for old browsers */ 
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,.05), inset 0 -1px 0 rgba(0,0,0,.1)
 }
 
 .navbar-brand{
 font-family: -webkit-pictograph;
 font-weight: bolder;
-background:#1a75d2;
+background:#563d7c; 
 color: white;
 transition: 0.6s;
 text-decoration: none;
@@ -133,17 +133,85 @@ nav a{
 
 /*panel-css */
 .add-plan .panel-heading{
-  color: white;
-  background: #1a75d2;
+  color: #563d7c;
+  background: #cbbde2
   /* border-color:#de32bd;
   border-bottom: 3px solid #de32bd; */
 
 }
 .detail-plan .panel-heading{
-  color: white;
-  background: #16BFFD;  /* fallback for old browsers */
-  background: #1a75d2;
+  color: #563d7c;
+  background: transparent;
+  margin-top: 50px;
   /* border-bottom: 3px solid #de32bd; */
 }
 
+
+/* .table-data{
+  background: #cbbde2;
+} */
 /* panel-css */
+
+
+/* serach css */
+
+.search-form .form-group {
+  float: right !important;
+  transition: all 0.35s, border-radius 0s;
+  width: 32px;
+  height: 32px;
+  background-color: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+}
+.search-form .form-group input.form-control {
+  padding-right: 20px;
+  border: 0 none;
+  background: transparent;
+  box-shadow: none;
+  display:block;
+}
+.search-form .form-group input.form-control::-webkit-input-placeholder {
+  display: none;
+}
+.search-form .form-group input.form-control:-moz-placeholder {
+  /* Firefox 18- */
+  display: none;
+}
+.search-form .form-group input.form-control::-moz-placeholder {
+  /* Firefox 19+ */
+  display: none;
+}
+.search-form .form-group input.form-control:-ms-input-placeholder {
+  display: none;
+}
+.search-form .form-group:hover,
+.search-form .form-group.hover {
+  width: 100%;
+  border-radius: 4px 25px 25px 4px;
+}
+.search-form .form-group span.form-control-feedback {
+  position: absolute;
+  top: -1px;
+  right: -2px;
+  z-index: 2;
+  display: block;
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  color: #563d7c;
+  left: initial;
+  font-size: 14px;
+}
+
+
+/* serach css */
+
+.dropdown-st{
+  background: #563d7c;
+  padding: 10px;
+  color: white;
+  border-radius: 4px;
+}

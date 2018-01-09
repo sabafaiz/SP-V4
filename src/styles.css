@@ -2,7 +2,7 @@
 
 /* Variables */
 :root{
-  --color0        : #f2f3f8;
+  --color0        : white;
   --color1        : #d6c7e8;
   --color2        : rgb(248, 242, 255);
   --color3        : #36a3f7;
@@ -50,11 +50,11 @@ body{
   color: var(--color5Text) !important;
 }
 .header-background{
-  background: #1a75d287;
-  color: #312929;
+  color: #563d7c;
+  background: #cbbde2;
 }
 .body-background{
-  background: var(--color2);
+  background: var(--color0);
 }
 /* FLexbox */
 .nopadding {
@@ -604,9 +604,10 @@ outline-offset: 0px;
 
 
 .btn-add{
-  background-color: #cf3238;
-  border-color: #cf3238;
-  border-radius: 15%;
+  background-color: #563d7c;
+  border-color: #563d7c;
+  margin-top: -8px;
+  color: white;
 }
 
 .search input[type=text]{
@@ -712,4 +713,7 @@ color: brown;
 /* panel-css */
 
 
+.header-background>tr>th{
+  padding:3px;
+}
 

@@ -37,17 +37,17 @@
   <div class="panel detail-plan">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" href="#collapse2">Strategic Goals</a>  
-        <div class="form-inline pull-right" style="margin-bottom: unset">
-          <div class="form-group">
+        <a data-toggle="collapse" href="#collapse2"></a>  
+        <div class="form-inline" style="margin-bottom: unset">
+          <div class="form-group dropdown-st">
             <label class="control-label">Strategic Plan</label>
             <select id="year" name="year" class="form-control" [(ngModel)]="defaultCycle" (ngModelChange)="getGoals()" style="width:auto;height: auto;padding: 0px;">
               <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}]</option>
             </select>
           </div>
-          <button type="button" class="btn-info btn-add" style="display: inline-block;
+          <button type="button" class=" btn btn-default btn-add pull-right" style="display: inline-block;
           vertical-align: top;" (click)="addNewGoal()">
-            <span class="glyphicon glyphicon-plus"></span> Add
+            <span class="glyphicon glyphicon-plus"></span>
           </button>
         </div>      
       </h4>
@@ -56,10 +56,18 @@
       <table class="table table-hover table-bordered" >        
         <thead class="header-background" *ngIf="goals.length">
           <tr>
-            <th>Goal
-              <span class="search">
+            <th>
+                <form action="" class="search-form">
+                    <div class="form-group has-feedback" style="margin-bottom: 10px;">
+                    <label for="search" class="sr-only">Search</label>
+                    <input type="text" class="form-control" name="search" id="search"  (keyup)="searchGoal($event,goals)" placeholder="Goal">
+                      <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                  </div>
+                </form>
+
+              <!-- <span class="search">
                 <input type="text" name="search" (keyup)="searchGoal($event,goals)" placeholder="Search..">
-              </span>
+              </span> -->
             </th>
             <th></th>
             <th></th>
