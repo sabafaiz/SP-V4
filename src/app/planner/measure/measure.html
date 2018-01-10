@@ -124,16 +124,21 @@
       <h4 class="panel-title">
         <a data-toggle="collapse" href="#collapse2"></a>
         <div class="form-inline" style="margin-bottom:unset;">
-          <div class="form-group dropdown-st">
+          <!-- new code -->
+          <div class="button__holder">
+              <button class="plus"  (click)="addNewMeasure()"></button>
+          </div>
+          <!-- end -->
+          <div class="form-group dropdown-st swing">
             <label class="control-label">Strategic Plan</label>
             <select id="year" name="year" class="form-control" [(ngModel)]="defaultCycle" (ngModelChange)="getMeasure()" style="width:auto;height: auto;padding: 0px;">
               <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}} : [{{c.startYear}} To {{c.endYear}}]</option>
             </select>
           </div>
-          <button type="button" class=" btn btn-default btn-add pull-right" style="display: inline-block;
+          <!-- <button type="button" class=" btn btn-default btn-add pull-right" style="display: inline-block;
           vertical-align: top;" (click)="addNewMeasure()">
             <span class="glyphicon glyphicon-plus"></span>
-          </button>
+          </button> -->
         </div>
 
       </h4>
@@ -289,7 +294,6 @@
     </div>
   </div>
 </div>
-
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">

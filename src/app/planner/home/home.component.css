@@ -255,3 +255,49 @@ outline-offset: 0px;
 
 
 /* cssmenu end */
+
+.value-card{
+    /* background: #cbbde2; */
+    border-radius: 6px;
+    position: relative;
+    z-index: 1;
+    border: 1px solid #563d7c;
+    margin-bottom:30px;
+    cursor: pointer;
+
+}
+
+
+.value-card .card-header{
+    background: #cbbde2;
+    width:auto;
+    border-radius: 4px;
+    position: absolute;
+    z-index: 2;
+    margin-top: -13px;
+    font-size: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    color:#563d7c;
+    
+}
+
+.value-card .card-header:hover{
+    background:#563d7c;
+    color: #cbbde2;
+}
+
+.value-card .card-body{
+    padding-top: 30px;
+    padding-left: 15px;
+}
+
+.value-card h5{
+    font-weight: 700;
+}
+
+
+
+/* icon */

@@ -151,7 +151,7 @@
         <p>{{organizationInfo.vision}}</p>
       </div>
       <div id="values" class="tab-pane fade">
-        <div class="row">
+        <!-- <div class="row">
           <button type="button" class="btn btn-default pull-right margin" (click)="onValueSelected('',null)" data-toggle="modal" data-target="#valueForm"><i class="glyphicon glyphicon-plus"></i></button>
           <button type="button" class="btn btn-default pull-right margin" data-toggle="modal" data-target="#valueForm" (click)="onValueSelected(val,i)"><i class="glyphicon glyphicon-edit"></i></button>
           <button type="button" class="btn btn-default pull-right margin" (click)="deleteValue(val,i)"><i class="glyphicon glyphicon-trash"></i></button>
@@ -170,7 +170,23 @@
               </div>
             </div>
           </div>
+        </div> -->
+        <!-- new design code for values -->
+        <button type="button" class="btn btn-default pull-right margin" (click)="onValueSelected('',null)" data-toggle="modal" data-target="#valueForm"><i class="glyphicon glyphicon-plus"></i></button>
+        <button type="button" class="btn btn-default pull-right margin" data-toggle="modal" data-target="#valueForm" (click)="onValueSelected(val,i)"><i class="glyphicon glyphicon-edit"></i></button>
+        <button type="button" class="btn btn-default pull-right margin" (click)="deleteValue(val,i)"><i class="glyphicon glyphicon-trash"></i></button>
+        <div class="col-sm-12" style="margin-top: 15px;">
+          <div class="card value-card" *ngFor="let val of organizationInfo.values;let i = index;">
+            <div class="card-header">
+                <h5>{{i+1}}.{{val.title}}</h5>
+             </div>
+            <div class="card-body">
+               <!-- <h3>{{val.title}}</h3> -->
+              <p>{{val.description}}</p>
+            </div> 
+          </div>
         </div>
+        <!-- end -->
       </div>
     </div>
   </div>
