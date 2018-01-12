@@ -67,9 +67,9 @@
             <i class="glyphicon glyphicon-remove"></i>
           </button>
           <div class="pull-right" *ngIf="isUpdating">
-          <button type="button" class="btn btn-default">Make it Default</button>
-          <button type="button" class="btn btn-default">Make it Disable</button>
-          <button type="button" class="btn btn-default" (click)="deleteCycle(selectedCycle.cycleId)">Delete</button>   
+          <button type="button" class="btn btn-default btn-ghost">Make it Default</button>
+          <button type="button" class="btn btn-default btn-fault">Make it Disable</button>
+          <button type="button" class="btn btn-default btn-del" (click)="deleteCycle(selectedCycle.cycleId)">Delete</button>   
           </div>
         </div>
       </form>
@@ -78,14 +78,19 @@
   <div class="panel detail-plan">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a>Strategic Plans</a>
-        <button type="button" class="btn-info btn-add pull-right" (click)="addNewPlan()">
-          <span class="glyphicon glyphicon-plus"></span> Add
-        </button>
+        <!-- new code -->
+        <div class="button__holder">
+            <button class="plus"  (click)="addNewPlan()"></button>
+        </div>
+
+        <!-- end -->
+        <!-- <button type="button" class=" btn btn-default btn-add pull-right" (click)="addNewPlan()">
+          <span class="glyphicon glyphicon-plus"></span>
+        </button> -->
       </h4>
     </div>
     <div class="panel-body">
-      <table class="table table-bordered table-striped">
+      <table class="table table-bordered  table-data">
         <thead class="header-background">
           <tr>
             <th>Plan Year</th>
