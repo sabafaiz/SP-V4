@@ -159,7 +159,8 @@
       <div id="cssmenu" style="margin-top:40px;">
         <ul class="nav nav-tabs">
           <li class="active"><a data-toggle="tab" href="#values">VALUES</a></li>
-          <button type="button" class="btn btn-default pull-right margin" data-toggle="modal" data-target="#valueForm" (click)="onValueSelected(val,i)"><i class="glyphicon glyphicon-edit"></i></button>
+          <button type="button" class="btn btn-default pull-right margin" (click)="onValueSelected('',null)" data-toggle="modal" data-target="#valueForm"><i class="glyphicon glyphicon-plus"></i></button>
+         
         
         </ul>
       </div>
@@ -171,7 +172,7 @@
             </div>
             <div class="card-body">
               <p>{{val.description}} </p><br>
-                <button type="button" class="btn btn-default pull-right icon-add" (click)="onValueSelected('',null)" data-toggle="modal" data-target="#valueForm"><i class="glyphicon glyphicon-plus"></i></button>
+              <button type="button" class="btn btn-default pull-right icon-add" data-toggle="modal" data-target="#valueForm" (click)="onValueSelected(val,i)"><i class="glyphicon glyphicon-edit"></i></button>
                 <button type="button" class="btn btn-default pull-right icon-btn " (click)="deleteValue(val,i)"><i class="glyphicon glyphicon-trash"></i></button>
               </div>
           </div>
