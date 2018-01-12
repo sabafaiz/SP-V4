@@ -145,7 +145,7 @@
     </div>
     <div id="collapse2" class="panel-collapse collapse in">
       <div class="panel-body">
-        <table class="table table-bordered">
+        <table class="table table-bordered table-data">
           <colgroup>
             <col style="width:16%">
             <col style="width:16%">
@@ -267,11 +267,11 @@
                                 </td>
                                 <td [style.border-top]="l?'1px solid #ddd':'none'">
                                   <a (click)="updateMeasure(goal,initiate,activit,msr)" href="#collapse1">
-                                    <i class="glyphicon glyphicon-edit" style="cursor:pointer;"></i>
+                                    <i class="glyphicon glyphicon-edit"></i>
                                   </a>
                                 </td>
-                                <td [style.border-top]="l?'1px solid #ddd':'none'">
-                                  <i style="cursor:pointer;" class="glyphicon glyphicon-remove" (click)="deleteMeasure(msr.opiId,activit.opis,l)"></i>
+                                <td [style.border-top]="l?'1px solid #ddd':'none'" class="icon">
+                                  <i class="glyphicon glyphicon-trash" (click)="deleteMeasure(msr.opiId,activit.opis,l)"></i>
                                 </td>
                               </tr>
                             </table>

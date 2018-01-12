@@ -130,19 +130,6 @@ ul {
   padding: 15px;
 }
 
-.btn-del,
-.btn-edit {
-  color: var(--button-color1);
-}
-
-.btn-del:hover {
-  color: var(--button-color2);
-}
-
-.btn-edit:hover {
-  color: var(--button-color3);
-}
-
 .border-left {
   border-left: 1px solid var(--color1);
   margin-left: -1px;
@@ -692,16 +679,6 @@ color: brown;
   border-color: #3387db;
 }
 
-.btn-del{
-  border-color:#cf3238;
-}
-
-.btn-del:hover,.btn-del:active,.btn-del:focus,.btn-del:visited{
-  color: white;
-  background-color: #cf3238;
-  border-color: #cf3238;
-}
-
 .btn-fault{
   border-color: #cccccc;
 }
@@ -718,3 +695,12 @@ color: brown;
   padding:3px;
 }
 
+.table-data a{
+  color: #563d7c;
+  cursor: pointer;
+}
+
+.table-data .icon{
+  color: #563d7c;
+  cursor: pointer;
+}

@@ -8,7 +8,7 @@ nav{
 font-family: -webkit-pictograph;
 font-weight: bolder;
 background:#563d7c; 
-color: white;
+color: #cbbde2;
 transition: 0.6s;
 text-decoration: none;
 border-right: 2px dotted transparent;
@@ -17,9 +17,8 @@ margin: 0 10px;
 }
 
 .navbar-brand:hover,.navbar-brand:focus,.navbar-brand:active{
-  color:#d54e21;
-  border-right: 2px dotted #ffffff;
-  padding-bottom: 24px;
+  color: #fff;
+  background: transparent;
 }
 
 nav a{

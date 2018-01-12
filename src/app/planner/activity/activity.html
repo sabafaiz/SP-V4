@@ -82,7 +82,7 @@
     </div>
     <div id="collapse2" class="panel-collapse collapse in">
       <div class="panel-body">
-        <table class="table table-bordered">
+        <table class="table table-bordered table-data">
           <colgroup>
             <col style="width:30%">
             <col style="width:30%">
@@ -152,13 +152,13 @@
                         <tr *ngFor="let activit of initiate.activities;let k=index;">
                           <td [style.border-top]="k?'1px solid #ddd':'none'">{{activit.activity}}</td>
                           <td [style.border-top]="k?'1px solid #ddd':'none'">
-                            <span data-toggle="tooltip" data-placement="auto" title="Edit">
-                              <i class="glyphicon glyphicon-edit btn-edit" style="cursor:pointer;" (click)="updateActivity(goal,initiate,activit)"></i>
+                            <span data-toggle="tooltip" data-placement="auto" title="Edit" class="icon">
+                              <i class="glyphicon glyphicon-edit btn-edit"  (click)="updateActivity(goal,initiate,activit)"></i>
                             </span>
                           </td>
                           <td [style.border-top]="k?'1px solid #ddd':'none'">
-                            <span data-toggle="tooltip" data-placement="auto" title="Delete">
-                              <i style="cursor:pointer;" class="glyphicon glyphicon-trash btn-del" (click)="deleteActivity(activit.activityId,initiate.activities,k)"></i>
+                            <span data-toggle="tooltip" data-placement="auto" title="Delete" class="icon">
+                              <i class="glyphicon glyphicon-trash btn-del" (click)="deleteActivity(activit.activityId,initiate.activities,k)"></i>
                             </span>
                           </td>
                         </tr>
