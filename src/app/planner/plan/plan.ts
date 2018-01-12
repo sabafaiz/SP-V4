@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { StorageService } from "../../shared/storage.service";
 import { UniversityService } from "../../shared/UTI.service";
 import * as alertify from 'alertifyjs';
+import { LoaderService } from '../../shared/loader.service';
 
 declare let $:any;
 
@@ -18,7 +19,8 @@ export class PlanComponent{
   cycleForm:FormGroup;
   cycles:any[]=[];
   status:any[]=[];
-  constructor(public ss:StorageService,public orgService:UniversityService){
+  constructor(public ss:StorageService,public orgService:UniversityService, private loaderService:LoaderService){
+    this.loaderService.display(true);    
     this.cycleForm = new FormGroup({
       "universityId":new FormControl(this.ss.getData('org_info').universityId),
       "description":new FormControl('',[Validators.required]),
@@ -40,9 +42,10 @@ export class PlanComponent{
         this.cycles = [];
       }else{
         this.cycles = response;
-        console.log(this.cycles);
       }
-    }) 
+    },(error:any)=>{
+      this.loaderService.display(false);
+    });
   }
 
   editCycle(c:any){

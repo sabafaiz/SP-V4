@@ -4,6 +4,8 @@ import { FormBuilder, Validators, FormGroup, FormArray } from "@angular/forms";
 import { StorageService } from "../../shared/storage.service";
 import { TreeView } from "./tree-view";
 import { Filters } from '../../shared/filters';
+import * as alertify from 'alertifyjs';
+import { LoaderService } from '../../shared/loader.service';
 
 declare let $: any;
 
@@ -32,39 +34,14 @@ export class MeasureComponent extends Filters implements AfterViewInit {
   next: boolean = false;
 
   public quarter: any[] = ["Q1", "Q2", "Q3", "Q4"];
-  public quarters: any[] = [
-    {
-      "id": 1,
-      "endDate": "31/03/",
-      "startDate": "01/01/",
-      "quarter": "q1"
-    },
-    {
-      "id": 2,
-      "endDate": "31/06/",
-      "startDate": "01/04/",
-      "quarter": "q2"
-    },
-    {
-      "id": 3,
-      "endDate": "31/09/",
-      "startDate": "01/07/",
-      "quarter": "q3"
-    },
-    {
-      "id": 4,
-      "endDate": "31/12/",
-      "startDate": "01/10/",
-      "quarter": "q4"
-    }
-  ];
+  public quarters: any[];
   public measureForm: FormGroup;
   selectedQuarter: any = 0;
   constructor(public orgService: UniversityService,
-    public formBuilder: FormBuilder, public commonService: StorageService) {
+    public formBuilder: FormBuilder, public commonService: StorageService, private loaderService:LoaderService) {
     super();
     this.measureForm = this.setMeasure();
-
+    this.loaderService.display(true);
     this.orgService.getCycleWithChildren().subscribe((response: any) => {
       this.cycles = response;
       this.cycles.forEach(element => {
@@ -144,7 +121,10 @@ export class MeasureComponent extends Filters implements AfterViewInit {
         this.filteredInitiatives = response;
         this.filteredOpis = response;
       }
-    })
+      this.loaderService.display(false);      
+    },(error:any)=>{
+      this.loaderService.display(false);
+    });
   }
 
   getQuarter() {
@@ -283,26 +263,26 @@ export class MeasureComponent extends Filters implements AfterViewInit {
   }
 
   assign() {
-    var departmentsArray: any[] = this.departmentForm.controls["departmentsArray"].value;
+    const departmentsArray: any[] = this.departmentForm.controls["departmentsArray"].value;
     departmentsArray.forEach(element => {
       delete element["departmentName"];
     });
-    if (confirm("Do you really want to assign this OPI"))
+    alertify.confirm("Do you really want to assign this OPI",()=>{
       this.orgService.assignOpi(this.selectedMeasure.opiId, departmentsArray).subscribe((response: any) => {
-        departmentsArray.forEach(element => {
-          this.selectedMeasure.assignedDepartments.push(departmentsArray);
-        });
-        $('#detailModal').modal('show');
-        $('#myModal').modal('hide');
-        
+        this.selectedMeasure.assignedDepartments = this.selectedMeasure.assignedDepartments.concat(response);
+        alertify.notify("Successfully assigned");
+        $('#detailModal').modal('show');        
+        $('#myModal').modal('hide');        
+      },(error:any)=>{
+        alertify.error("Something went wrong");
       })
+    })
   }
 
   getDepartmentFormArray() {
     const departmentsFormArray: any[] = [];
     const departmentsArrayForEdit: any[] = [];
     this.selectedDepartments.forEach(element => {
-      // if(element.isUpdating)
       departmentsFormArray.push(this.formBuilder.group({
         baseline: [element.baseline],
         departmentId: [element.departmentId],
@@ -399,7 +379,8 @@ export class MeasureComponent extends Filters implements AfterViewInit {
     if (!this.isUpdating) {
       this.orgService.saveMeasure(this.measureForm.value).subscribe((response: any) => {
         this.getMeasure();
-        $('#measureModal').modal('show');
+        // $('#measureModal').modal('show');
+        alertify.notify("You have successfully added a new OPI.");
         this.measureForm.reset({
           opi: '',
           measureUnit: '', frequencyId: 1, baseline: '', direction: '', remarks: '', helpText: '', approvalRequired: ''
@@ -415,14 +396,14 @@ export class MeasureComponent extends Filters implements AfterViewInit {
           msg += "\n" + key + " = " + formChanges[key] + ",";
         }
       });
-      if (confirm("Are you sure you want to update this OPI as " + msg)) {
+      alertify.confirm("Are you sure you want to update this OPI as " + msg, ()=> {
         delete this.measureForm.value["activityId"];
         this.orgService.updateMeasure(this.selectedMeasure.opiId, formChanges).subscribe((response: any) => {
           this.measureForm = this.setMeasure();
           this.getMeasure();
         });
-      }
-      $('#add-opi').hide();      
+      })
+      $('#add-opi').hide();            
     }
   }
 

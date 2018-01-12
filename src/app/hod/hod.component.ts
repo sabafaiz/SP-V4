@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Filters } from '../shared/filters';
 import { StorageService } from '../shared/storage.service';
 import { HodService } from './hod.service';
+import * as alertify from 'alertifyjs';
 
 declare let $: any;
 
@@ -31,6 +32,29 @@ export class HodComponent extends Filters {
       }
     })
   }
+
+  setQuarterFeedback(data:any){
+    console.log(data.feedback);
+    if(data.feedback == 'true')
+      alertify.confirm("Do you realy want to Approve this??",()=>{
+        this.utServ.approve(data.quarterId,{comment:data.comment}).subscribe((reponse)=>{
+          console.log(reponse);
+        },(error:any)=>{
+          console.log(error);        
+        });
+      });
+    else
+      alertify.confirm("Do you realy want to Reject this??", ()=>{
+        this.utServ.reject(data.quarterId,{comment:data.comment}).subscribe((reponse)=>{
+          console.log(reponse);
+        },(error:any)=>{
+          console.log(error);        
+        });
+      })
+      
+  }
+
+
 
   public showOpi(goal: any, measure: any) {
     $('#edit-section').collapse('show');

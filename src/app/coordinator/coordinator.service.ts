@@ -115,6 +115,12 @@ export class CoordinatorService{
     .catch(this.handleError);
   }
 
+  updateQuarterResultCurrentCost(quarterId:any,data:any){
+    return this.http.put(this.baseUrl + "/quarter/"+quarterId+"/result",data)
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
   updateMou(mouId:any,mou:any){
     return this.http.put(this.baseUrl + "/mous/"+ mouId,mou)
     .map(this.extractData)

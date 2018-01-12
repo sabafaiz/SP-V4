@@ -30,7 +30,7 @@ export class LoginComponent{
   }
   ngOnInit() {
     if (localStorage.getItem('user_roleInfo')) {
-      // this.router.navigateByUrl("/"+this.commonService.getData('user_roleInfo')[0].role);
+      this.router.navigateByUrl("/"+this.commonService.getData('user_roleInfo')[0].role);
     }
   }
   ngAfterViewChecked() {

@@ -397,7 +397,7 @@
               <caption style="text-align: left;color: #b10909;">{{dept.department}}
                 <span class="input-group pull-right">
                   <div class="input-group-addon base-color">BaseLine</div>
-                  <input type="text" class="form-control form-border" autofocus formControlName="baseline" style="width:25%" id="exampleInputAmount">
+                  <input type="number" class="form-control form-border" autofocus formControlName="baseline" style="width:25%" id="exampleInputAmount">
                 </span>
               </caption>
               <ng-container formArrayName="opiAnnualTargets">
@@ -407,14 +407,14 @@
                     <td *ngFor="let level of array.controls.levels.controls;let l = index;" [formGroupName]="l">
                       <div class="input-group">
                         <div class="input-group-addon base-color2">Q{{dept.opiAnnualTargets[op].levels[l].quarterId}}</div>
-                        <input type="text" class="form-control" id="exampleInputAmount" style="width: 50%;" formControlName="estimatedTargetLevel">
+                        <input type="number" class="form-control" id="exampleInputAmount" style="width: 50%;" formControlName="estimatedTargetLevel">
                       </div>
                     </td>
                   </ng-container>
                   <td>
                     <div class="input-group">
                       <div class="input-group-addon base-color3">Estimated Cost</div>
-                      <input type="text" class="form-control" formControlName="estimatedCost" style="width:50%" id="exampleInputAmount">
+                      <input type="number" class="form-control" formControlName="estimatedCost" style="width:50%" id="exampleInputAmount">
                     </div>
                   </td>
                 </tr>

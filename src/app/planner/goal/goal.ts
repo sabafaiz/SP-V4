@@ -4,6 +4,9 @@ import { FormBuilder, Validators, FormGroup, FormArray } from "@angular/forms";
 import { StorageService } from "../../shared/storage.service";
 import { Filters } from "../../shared/filters";
 
+import * as alertify from 'alertifyjs';
+import { LoaderService } from '../../shared/loader.service';
+
 declare let $: any;
 
 @Component({
@@ -22,17 +25,20 @@ export class GoalComponent extends Filters implements AfterViewInit {
 
   constructor(public orgService: UniversityService,
     public formBuilder: FormBuilder,
-    public commonService: StorageService) {
+    public commonService: StorageService,
+    private loaderService:LoaderService) {
     super();
     this.getCycles();
     this.goalForm = this.initObjectiveForm();
   }
+  
 
   ngAfterViewInit() {
 
   }
 
   getCycles() {
+    this.loaderService.display(true);
     this.orgService.getCycles().subscribe((response: any) => {
       if (response.status == 204) {
         this.cycles = [];
@@ -44,7 +50,7 @@ export class GoalComponent extends Filters implements AfterViewInit {
         });
         this.getGoals();
       }
-    })
+    });
   }
 
   defaultCycle: any;
@@ -57,6 +63,7 @@ export class GoalComponent extends Filters implements AfterViewInit {
         this.goals = response;
         this.goalsCopy = response;
       }
+      this.loaderService.display(false);      
     })
   }
 
@@ -68,70 +75,44 @@ export class GoalComponent extends Filters implements AfterViewInit {
       // "spis": this.formBuilder.array([this.inItSpi()]),
     });
   }
-  // inItSpi() {
-  //   return this.formBuilder.group({
-  //     "spi": ['', [Validators.required]],
-  //     "measureUnit": ['', [Validators.required]],
-  //     "currentLevel": ['', [Validators.required]],
-  //     "frequencyId":[1],
-  //     "targetDigital": this.formBuilder.array(this.inItTarget())
-  //   });
-  // }  
-  // inItTarget() {
-  //   const fa:any[] = [];
-  //   this.commonService.getData('org_info').cycle.forEach((element:any) => {
-  //     fa.push(this.inItTargetDigital(element));
-  //   });
-  //   return fa;
-  // }
-
-  // inItTargetDigital(year:any) {
-  //   return this.formBuilder.group({
-  //     "year": [year, [Validators.required]],
-  //     "expectedLevel": ['', [Validators.required]],
-  //   });
-  // }
-
-  // addSpi(form:any) {
-  //   const control = <FormArray>form.controls['spis'];
-  //   control.push(this.inItSpi());
-  // }
-
-  // removeSpi(form:any, index:any) {
-  //   const control = <FormArray>form.controls['spis'];
-  //   control.removeAt(index);
-  // }
 
   onSubmit() {
     if (!this.isUpdating) {
       this.orgService.addObjective(this.goalForm.value).subscribe((response: any) => {
-        $('#objectModal').modal('show');
+        // $('#objectModal').modal('show');
+        alertify.notify('You have successfully added a new Goal.', 'success', 5, function(){  console.log('dismissed'); });
         $("#add-plan").hide();
         this.goalForm.controls["goal"].reset();
         this.getGoals();
       }, (error: any) => {
-        console.log(error);
+        alertify.alert("Something went wrong..");
       });
     }
 
     if (this.isUpdating) {
-      if (confirm("Are you sure you want to Update this Goal?"))
+      alertify.confirm("Are you sure you want to Update this Goal?",()=>{
         this.orgService.updateObjective(this.selectedObjective.goalId, this.goalForm.value).subscribe((res: any) => {
-          console.log(res);
-          $('#objectModal').modal('show');
+          // $('#objectModal').modal('show');
+          alertify.notify('You have successfully added a new Goal.', 'success', 5, function(){  console.log('dismissed'); });
           this.goalForm =  this.initObjectiveForm()
           this.getGoals();
           this.isUpdating = false;
-        })
+        },(error:any)=>{      
+          alertify.alert("Something went wrong..");
+        });
+      });        
     }
 
   }
   deleteGoal(goalId: any, goals: any[], index: any) {
-    if (confirm("Are you sure you want to delete this Goal?"))
+    alertify.confirm("Are you sure you want to delete this Goal?",()=>{
       this.orgService.deleteObjective(goalId).subscribe((res: any) => {
-        console.log(res);
         goals.splice(index, 1);
-      })
+      },(error:any)=>{      
+        alertify.alert("Something went wrong..");
+      });
+    })
+      
   }
   selectedObjective: any;
   updateGoal(goal: any) {

@@ -23,6 +23,17 @@ export class HodService{
     .catch(this.handleError);
  }
 
+ approve(levelId,data){
+  return this.http.put(this.baseUrl + "/quarter/"+levelId+"/approve",data)
+  .map(this.extractData)
+  .catch(this.handleError);
+ }
+
+ reject(levelId,data){
+  return this.http.put(this.baseUrl + "/quarter/"+levelId+"/reject",data)
+  .map(this.extractData)
+  .catch(this.handleError);
+ }
 
 
  private extractData(res: Response) {

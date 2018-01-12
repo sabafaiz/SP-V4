@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { StorageService } from "./shared/storage.service";
 import { AuthGuard } from "./shared/auth.gaurd";
+import { LoaderService } from './shared/loader.service';
 
 
 export const routes: Routes = [
@@ -14,7 +15,7 @@ export const routes: Routes = [
 	},
 	{
 		path: 'login',
-		loadChildren: 'app/login/login.module#LoginModule'
+		loadChildren: 'app/login/login.module#LoginModule',
 	},
 	{
 		path: 'planner',
@@ -41,7 +42,7 @@ export const routes: Routes = [
 @NgModule({
 	imports: [BrowserModule, RouterModule.forRoot(routes, { useHash: true,})],
 	declarations: [AppComponent],
-	providers: [StorageService, AuthGuard],
+	providers: [StorageService, AuthGuard, LoaderService],
 	bootstrap: [AppComponent],
 	exports: []
 })
