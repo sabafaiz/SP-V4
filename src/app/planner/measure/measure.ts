@@ -409,7 +409,10 @@ export class MeasureComponent extends Filters implements AfterViewInit {
 
   selectedMeasure: any;
 
+  
+
   updateMeasure(objective: any, initiative: any, activity: any, measure: any) {
+
     this.measureForm.controls["cycleId"].disable();
     this.measureForm.controls["objectiveId"].disable();
     this.measureForm.controls["initiativeId"].disable();
@@ -432,7 +435,7 @@ export class MeasureComponent extends Filters implements AfterViewInit {
       approvalRequired: measure.approvalRequired
     });
     $('#add-opi').show();    
-    $('#collapse1').collapse('show');
+    $("#collapse1").collapse('show');
     // this.measureForm.controls["annualTarget"].patchValue(measure.annualTarget);
   }
 

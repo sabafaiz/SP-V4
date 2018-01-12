@@ -130,6 +130,7 @@ export class InitiativeComponent extends Filters {
       initiative: initiative.initiative
     });
     $("#add-initiative").show();
+    $("#collapse1").collapse('show');    
   }
 
   enableFields() {

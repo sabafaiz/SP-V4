@@ -5,7 +5,7 @@
         <a data-toggle="collapse" href="#collapse1" class="accordion-toggle">Add KPI</a>
       </h4>
     </div>
-    <div id="collapse1" class="panel-collapse collapse">
+    <div id="collapse1" class="panel-collapse collapse in">
       <form [formGroup]="measureForm" (submit)="submitMeasure()">
         <div class="panel-body">
           <div class="row">
@@ -266,7 +266,7 @@
                                   </ul>                                  
                                 </td>
                                 <td [style.border-top]="l?'1px solid #ddd':'none'">
-                                  <a (click)="updateMeasure(goal,initiate,activit,msr)" href="#collapse1">
+                                  <a (click)="updateMeasure(goal,initiate,activit,msr)" scrollTo href="#add-opi">
                                     <i class="glyphicon glyphicon-edit"></i>
                                   </a>
                                 </td>

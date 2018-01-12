@@ -69,6 +69,7 @@
                 <th>Current Cost</th>
                 <th>Current Target Level</th>
                 <th>End Date</th>
+                <th>Status</th>
                 <th></th>
               </tr>
             </thead>
@@ -84,8 +85,9 @@
                   <td>{{lev.currentCost}}</td>
                   <td>{{lev.currentTargetLevel}}</td>
                   <td>{{lev.endDate + tdl.year}}</td>
+                  <td style="text-transform: capitalize;">{{lev.status}}</td>
                   <td>
-                    <a data-toggle="modal" href="#feedbackModal" (click)="selectedLevel = lev;"> Approve/Reject</a>
+                    <button class="btn-link" data-toggle="modal" data-target="#feedbackModal" (click)="selectedLevel = lev;"> Approve/Reject</button>
                   </td>
                 </tr>
                 <tr *ngIf="lev.evidance&&lev.evidance.length">
@@ -104,12 +106,12 @@
                   <td colspan="5">
                     <table class="table table-bordered">
                       <caption>
-                        <b>Inernship Detail</b>
+                        <b>Internship Details</b>
                       </caption>
                       <thead>
                         <tr>
                           <th>Organization</th>
-                          <th>Supervisior</th>
+                          <th>Supervisor</th>
                           <th>Total</th>
                         </tr>
                       </thead>
@@ -174,7 +176,8 @@
           <col style="width:20%">
           <col style="width:20%">
           <col style="width:10%">
-          <col style="width:10%">
+          <col style="width:6.5%">
+          <col style="width:3.5%">
         </colgroup>
         <thead class="header-background" *ngIf="goals.length">
           <tr>
@@ -199,13 +202,14 @@
               </span>
             </th>
             <th>Frequency</th>
+            <th>Status</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let goal of goals;let i = index;">
             <td>{{goal.goal}}</td>
-            <td colspan="5" style="padding:0px;border:none;" #element [style.height]="get(element)">
+            <td colspan="6" style="padding:0px;border:none;" #element [style.height]="get(element)">
               <table class="table table-bordered" style="height: inherit;">
                 <colgroup>
                   <col style="width:25%">
@@ -221,16 +225,18 @@
                       </colgroup>
                       <tr *ngFor="let activit of initiate.activities;let k=index;">
                         <td [style.border-top]="k?'1px solid #ddd':'none'">{{activit.activity}}</td>
-                        <td colspan="3" style="padding:0px;" #element2 [style.height]="get(element2) + ' !important'">
+                        <td colspan="4" style="padding:0px;" #element2 [style.height]="get(element2) + ' !important'">
                           <table class="table table-bordered" style="height: inherit;">
                             <colgroup>
-                              <col style="width:50%">
+                              <col style="width:50.5%">
                               <col style="width:25%">
-                              <col style="width:25%">
+                              <col >
+                              <col >
                             </colgroup>
                             <tr *ngFor="let msr of activit.opis;let l=index">
                               <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.opi}}</td>
                               <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.frequency}}</td>
+                              <td style="text-transform: capitalize;">{{msr.departmentInfo["0"].opiAnnualTargets["0"].levels["0"].status}}</td>
                               <td [style.border-top]="l?'1px solid #ddd':'none'">
                                 <a style="cursor:pointer;" data-target="#edit-section" (click)="selectedOpi=goal;selectedInitiative=initiate;selectedActivity=activit;selectedMeasure=msr;showOpi(goal,msr)">view</a>
                               </td>
