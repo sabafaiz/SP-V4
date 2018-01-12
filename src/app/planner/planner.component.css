@@ -19,6 +19,7 @@ margin: 0 10px;
 .navbar-brand:hover,.navbar-brand:focus,.navbar-brand:active{
   color: #fff;
   background: transparent;
+ 
 }
 
 nav a{
@@ -42,6 +43,7 @@ nav a{
 .nav>li>a:focus, .nav>li>a:hover{
  color: #fff;
  background: transparent;
+ font-weight: 600;
 }
 
 .nav>li:active>a{
@@ -67,10 +69,9 @@ nav a{
 }
 
 .dropdown-menu{
-  /* top: 125%; */
   border: none;
   box-shadow: 0 6px 12px #26273485;
-  /* background-color: rgba(38, 39, 52, 0.78); */
+
 }
 .dropdown-menu>li>a{
   color: black;
@@ -154,15 +155,6 @@ nav a{
   margin-top: 50px;
   /* border-bottom: 3px solid #de32bd; */
 }
-
-
-/* .table-data{
-  background: #cbbde2;
-} */
-/* panel-css */
-
-
-/* serach css */
 
 .search-form .form-group {
   float: right !important;
@@ -276,8 +268,8 @@ nav a{
   line-height: 1.1em;
 }
 .plus:hover {
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
+  /* -webkit-transform: rotate(45deg); */
+          /* transform: rotate(45deg); */
   -webkit-box-shadow: 0 0 1px 15px rgba(138, 59, 88, 0.4), 0 0 1px 30px rgba(138, 59, 88, 0.1), 0 0 1px 45px rgba(138, 59, 88, 0.1);
           box-shadow: 0 0 1px 15px rgba(138, 59, 88, 0.4), 0 0 1px 30px rgba(138, 59, 88, 0.1), 0 0 1px 45px rgba(138, 59, 88, 0.1);
 }

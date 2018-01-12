@@ -264,7 +264,6 @@ outline-offset: 0px;
     border: 1px solid #563d7c;
     margin-bottom:30px;
     cursor: pointer;
-
 }
 
 
@@ -292,12 +291,47 @@ outline-offset: 0px;
 .value-card .card-body{
     padding-top: 30px;
     padding-left: 15px;
+    padding-bottom: 5px;
 }
 
 .value-card h5{
     font-weight: 700;
 }
 
+.card-body .icon-btn{
+    margin-left: 10px;
+    color: #563d7c;
+    margin-top: -33px;
+}
+
+.card-body .icon-btn:hover{
+    background: #563d7c;
+    color: white;
+    
+}
+
+.icon-add{
+    /* margin-left: 10px; */
+    color: #563d7c;
+    margin-top: -33px;
+    right: 5px;
+}
+.icon-add:hover{
+    background: #563d7c;
+    color: white;
+}
 
 
+div.value-card:hover button{
+    display: block;
+}
+div.value-card button{
+    position: absolute;
+    display: none;
+}
+
+div.value-card button.icon-btn{
+    float: right;
+    right: 48px;
+}
 /* icon */
