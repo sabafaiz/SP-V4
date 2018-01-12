@@ -43,6 +43,7 @@ export class PlanComponent{
       }else{
         this.cycles = response;
       }
+      this.loaderService.display(false);      
     },(error:any)=>{
       this.loaderService.display(false);
     });

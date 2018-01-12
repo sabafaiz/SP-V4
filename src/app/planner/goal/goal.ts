@@ -64,6 +64,8 @@ export class GoalComponent extends Filters implements AfterViewInit {
         this.goalsCopy = response;
       }
       this.loaderService.display(false);      
+    },(error:any)=>{
+      this.loaderService.display(false);            
     })
   }
 
