@@ -36,9 +36,7 @@ export const routes: Routes = [
 		path: 'hod',
 		loadChildren: 'app/hod/hod.module#HodModule',
 		canActivate: [AuthGuard]
-	}
-		
-];
+	}];
 @NgModule({
 	imports: [BrowserModule, RouterModule.forRoot(routes, { useHash: true,})],
 	declarations: [AppComponent],

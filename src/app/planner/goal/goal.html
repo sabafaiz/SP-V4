@@ -75,10 +75,14 @@
           <tr *ngFor="let goal of goals;let i = index;">
             <td style="vertical-align: middle;">{{goal.goal}}</td>
             <td style="vertical-align: middle;">
-              <i class="glyphicon glyphicon-edit btn-del" style="cursor:pointer;" (click)="updateGoal(goal)"></i>
+              <a scrollTo href="#add-initiative" (click)="updateGoal(goal)">
+              <i class="glyphicon glyphicon-edit btn-del"></i>
+              </a>
             </td>
             <td style="vertical-align: middle;">
-              <i class="glyphicon glyphicon-trash btn-del" style="cursor:pointer;" (click)="deleteGoal(goal.goalId,goals,i)"></i>
+              <a style="cursor:pointer;" (click)="deleteGoal(goal.goalId,goals,i)">
+                <i class="glyphicon glyphicon-trash btn-del"></i>
+              </a>
             </td>
           </tr>
         </tbody>
