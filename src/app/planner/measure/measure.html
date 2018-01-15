@@ -1,5 +1,16 @@
 <div class="container-fluid">
-  <div class="panel add-plan" id="add-opi" style="display:none;">
+  <div class="bg-nav">
+      <div class="form-inline" style="margin-bottom:unset;">
+          <button type="button" class="btn btn-default pull-right margin"  (click)="addNewMeasure()"><i class="glyphicon glyphicon-plus"></i></button>
+          <div class="form-group dropdown-st swing">
+            <label class="control-label">Strategic Plan</label>
+            <select id="year" name="year" class="form-control" [(ngModel)]="defaultCycle" (ngModelChange)="getMeasure()" style="width:auto;height: auto;padding: 0px;">
+              <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}} : [{{c.startYear}} To {{c.endYear}}]</option>
+            </select>
+          </div>
+        </div>
+  </div>
+  <div class="panel add-form" id="add-opi" style="display:none;margin-top: 70px;">
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" href="#collapse1" class="accordion-toggle">Add KPI</a>
@@ -123,25 +134,7 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" href="#collapse2"></a>
-        <div class="form-inline" style="margin-bottom:unset;">
-          <!-- new code -->
-          <div class="button__holder">
-              <button class="plus"  (click)="addNewMeasure()"></button>
-          </div>
-          <!-- end -->
-          <div class="form-group dropdown-st swing">
-            <label class="control-label">Strategic Plan</label>
-            <select id="year" name="year" class="form-control" [(ngModel)]="defaultCycle" (ngModelChange)="getMeasure()" style="width:auto;height: auto;padding: 0px;">
-              <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}} : [{{c.startYear}} To {{c.endYear}}]</option>
-            </select>
-          </div>
-          <!-- <button type="button" class=" btn btn-default btn-add pull-right" style="display: inline-block;
-          vertical-align: top;" (click)="addNewMeasure()">
-            <span class="glyphicon glyphicon-plus"></span>
-          </button> -->
-        </div>
-
-      </h4>
+         </h4>
     </div>
     <div id="collapse2" class="panel-collapse collapse in">
       <div class="panel-body">
@@ -162,7 +155,7 @@
                   <form action="" class="search-form">
                       <div class="form-group has-feedback" style="margin-bottom: 10px;">
                       <label for="search" class="sr-only">Search</label>
-                      <input type="text" class="form-control" name="search" id="search"(keyup)="searchGoal($event)" placeholder="Goal">
+                      <input type="text" class="form-control" name="search" id="search"(keyup)="searchGoal($event)" placeholder="GOAL">
                         <span class="glyphicon glyphicon-search form-control-feedback"></span>
                     </div>
                   </form>
@@ -174,7 +167,7 @@
                   <form action="" class="search-form">
                       <div class="form-group has-feedback" style="margin-bottom: 10px;">
                       <label for="search" class="sr-only">Search</label>
-                      <input type="text" class="form-control" name="search" id="search"(keyup)="searchInitiative($event)" placeholder="Initiative">
+                      <input type="text" class="form-control" name="search" id="search"(keyup)="searchInitiative($event)" placeholder="INITIATIVE">
                         <span class="glyphicon glyphicon-search form-control-feedback"></span>
                     </div>
                   </form>
@@ -186,7 +179,7 @@
                   <form action="" class="search-form">
                       <div class="form-group has-feedback"  style="margin-bottom: 10px;">
                       <label for="search" class="sr-only">Search</label>
-                      <input type="text" class="form-control" name="search" id="search" (keyup)="searchActivity($event)" placeholder="Activity">
+                      <input type="text" class="form-control" name="search" id="search" (keyup)="searchActivity($event)" placeholder="ACTIVITY">
                         <span class="glyphicon glyphicon-search form-control-feedback"></span>
                     </div>
                   </form>
@@ -296,10 +289,10 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
+<div class="modal fade modal-add" id="myModal" role="dialog">
   <div class="modal-dialog modal-xl">
     <div class="modal-content" *ngIf="selectedMeasure">
-      <div class="modal-header color4">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title"><b>KPI </b>: {{selectedMeasure.opi}}</h4>
       </div>
@@ -368,17 +361,17 @@
   </div>
 </div>
 
-<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modal-add" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content" *ngIf="selectedMeasure">
-      <div class="modal-header color4">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">
         <b>KPI </b>: {{selectedMeasure.opi}}</h4>
       </div>
       <div class="modal-body">
         <h3>Assigned Departments
-          <button class="btn btn-primary pull-right" data-toggle="modal" data-dismiss="modal" data-target="#myModal" (click)="next=false;prev=true;checkAssignDept(selectedMeasure.assignedDepartments);">Add
+          <button class="btn btn-primary pull-right margin" data-toggle="modal" data-dismiss="modal" data-target="#myModal" (click)="next=false;prev=true;checkAssignDept(selectedMeasure.assignedDepartments);">
             <span class="glyphicon glyphicon-plus"></span>
           </button>
         </h3>
@@ -401,7 +394,7 @@
               </button>
             </div>
             <table class="table border-color" *ngIf="!dept.edit">
-              <caption style="text-align: left;color: #b10909;">{{dept.department}}
+              <caption style="text-align: left;color: #563d7c;">{{dept.department}}
                 <span class="input-group pull-right">
                   <div class="input-group-addon base-color">BaseLine</div>
                   <div class="form-control form-border" style="width:25%">{{dept.baseline}}</div>
@@ -468,10 +461,10 @@
 
 
 <!--popup model-->
-<div class="modal fade" id="measureModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modal-add" id="measureModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header color4">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Confirm</h4>
       </div>

@@ -1,5 +1,17 @@
 <div class="container-fluid">
-  <div class="panel add-plan" id="add-initiative" style="display:none">
+  <div class="bg-nav">
+    <div class="form-inline " style="margin-bottom: unset">
+        <!-- new code -->
+        <button type="button" class="btn btn-default pull-right margin" (click)="addNewInitiative()"><i class="glyphicon glyphicon-plus"></i></button>
+        <div class="form-group dropdown-st">
+            <label class="control-label">Strategic Plan</label>
+            <select id="year" name="year" class="form-control" [(ngModel)]="defaultCycle" (ngModelChange)="getInitiative()" style="width:auto;height: auto;padding: 0px;">
+              <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}]</option>
+            </select>
+          </div>
+      </div>
+    </div>
+  <div class="panel add-form" id="add-initiative" style="display:none;margin-top: 70px;">
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" href="#collapse1" class="accordion-toggle">Add Initiative</a>
@@ -49,25 +61,6 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" href="#collapse2"></a>
-        <div class="form-inline " style="margin-bottom: unset">
-          <!-- new code -->
-          <div class="button__holder">
-              <button class="plus" (click)="addNewInitiative()"></button>
-          </div>
-          <div class="form-group dropdown-st swing">
-              <label class="control-label">Strategic Plan</label>
-              <select id="year" name="year" class="form-control" [(ngModel)]="defaultCycle" (ngModelChange)="getInitiative()" style="width:auto;height: auto;padding: 0px;">
-                <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}]</option>
-              </select>
-            </div>
-
-          <!-- end -->
-          
-          <!-- <button type="button" class=" btn btn-default btn-add pull-right" style="display: inline-block;
-          vertical-align: top;" (click)="addNewInitiative()">
-            <span class="glyphicon glyphicon-plus"></span>
-          </button> -->
-        </div>
       </h4>
     </div>
     <div id="collapse2" class="panel-collapse collapse in">
@@ -83,7 +76,7 @@
                   <form action="" class="search-form">
                       <div class="form-group has-feedback" style="margin-bottom: 10px;">
                       <label for="search" class="sr-only">Search</label>
-                      <input type="text" class="form-control" name="search" id="search"  (keyup)="searchGoal($event)" placeholder="Goal">
+                      <input type="text" class="form-control" name="search" id="search"  (keyup)="searchGoal($event)" placeholder="GOAL">
                         <span class="glyphicon glyphicon-search form-control-feedback"></span>
                     </div>
                   </form>
@@ -97,7 +90,7 @@
                   <form action="" class="search-form">
                       <div class="form-group has-feedback" style="margin-bottom: 10px;">
                       <label for="search" class="sr-only">Search</label>
-                      <input type="text" class="form-control" name="search" id="search"  (keyup)="searchInitiative($event)" placeholder="Initiative">
+                      <input type="text" class="form-control" name="search" id="search"  (keyup)="searchInitiative($event)" placeholder="INITIATIVE">
                         <span class="glyphicon glyphicon-search form-control-feedback"></span>
                     </div>
                   </form> 
@@ -147,7 +140,7 @@
 </div>
 
 <!--popup model-->
-<div class="modal fade" id="initiativeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modal-add" id="initiativeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header color4">

@@ -1,8 +1,9 @@
 <div class="container-fluid">
-  <div class="panel add-plan" id="add-plan" style="display:none;">
-    <div class="panel-heading">
+    <button type="button" class="btn btn-default pull-right margin"  (click)="addNewPlan()" style="margin-top:24px;"><i class="glyphicon glyphicon-plus"></i></button>
+  <div class="panel add-form" id="add-plan" style="display:none;margin-top:75px;">
+        <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" href="#collapse1" class="accordion-toggle">Add Strategic Plan</a>
+        <a data-toggle="collapse" href="#collapse1" class="accordion-toggle">ADD STRATEGIC  PLAN</a>
       </h4>
     </div>
     <div id="collapse1" class="panel-collapse collapse">
@@ -63,7 +64,7 @@
           <button type="submit" class="btn btn-default btn-empty" [disabled]="cycleForm.invalid">
             <i class="glyphicon glyphicon-ok"></i>
           </button>
-          <button type="button" class="btn btn-danger btn-close" data-toggle="tooltip" data-placement="auto" title="Reset Form" (click)="reset()">
+          <button type="button" class="btn btn-default btn-close" data-toggle="tooltip" data-placement="auto" title="Reset Form" (click)="reset()">
             <i class="glyphicon glyphicon-remove"></i>
           </button>
           <div class="pull-right" *ngIf="isUpdating">
@@ -79,9 +80,7 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <!-- new code -->
-        <div class="button__holder">
-            <button class="plus"  (click)="addNewPlan()"></button>
-        </div>
+      
       </h4>
     </div>
     <div class="panel-body">
