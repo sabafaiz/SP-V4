@@ -148,6 +148,35 @@ export class InitiativeComponent extends Filters {
 
   }
 
+  disable(event:any,initiativeId:any){
+    if(event.srcElement.checked)
+      alertify.confirm("Do you Really want to disable this Initiative??",()=>{
+        this.orgService.disableInitiative(initiativeId).subscribe((response:any)=>{
+          alertify.success("You disabled the Initiative..");
+          this.getInitiative();
+        },()=>{
+          event.srcElement.checked = !event.srcElement.checked;
+          alertify.error("Something went wrong..")
+        })
+      },()=>{
+        event.srcElement.checked = !event.srcElement.checked;
+        alertify.error("Action was not performed")
+      });
+    else
+      alertify.confirm("Do you Really want to enable this Initiative??",()=>{
+        this.orgService.enableInitiative(initiativeId).subscribe((response:any)=>{
+          alertify.success("You enabled the Initiative..");
+          this.getInitiative();
+        },()=>{
+          event.srcElement.checked = !event.srcElement.checked;
+          alertify.error("Something went wrong..")
+        })
+      },()=>{
+        event.srcElement.checked = !event.srcElement.checked;
+        alertify.error("Action was not performed")
+      });      
+  }
+
   get(e) {
     var promise = new Promise((resolve: any, reject: any) => { $(e)["0"].height = $(e)["0"].clientHeight; resolve(); });
     return promise;

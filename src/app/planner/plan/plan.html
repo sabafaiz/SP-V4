@@ -66,11 +66,6 @@
           <button type="button" class="btn btn-danger btn-close" data-toggle="tooltip" data-placement="auto" title="Reset Form" (click)="reset()">
             <i class="glyphicon glyphicon-remove"></i>
           </button>
-          <div class="pull-right" *ngIf="isUpdating">
-          <button type="button" class="btn btn-default btn-ghost">Make it Default</button>
-          <button type="button" class="btn btn-default btn-fault">Make it Disable</button>
-          <button type="button" class="btn btn-default btn-del" (click)="deleteCycle(selectedCycle.cycleId)">Delete</button>   
-          </div>
         </div>
       </form>
     </div>
@@ -93,6 +88,7 @@
             <th>End Year</th>
             <th>Description</th>
             <th>Disabled</th>
+            <th>Default</th>
             <th>Delete</th>
             <th>Edit</th>
           </tr>
@@ -102,21 +98,21 @@
             <td>{{c.planYear}}</td>
             <td>{{c.startYear}}</td>
             <td>{{c.endYear}}</td>
-            <td>{{c.description}}
-              <span class="pull-right" style="color:green" *ngIf="c.defaultCycle">*default</span>
+            <td>{{c.description}}</td>
+            <td>
+              <input type="checkbox" [checked]="c.disable" (change)="changeStatus($event,c)"><span style="color:red" *ngIf="c.disable">*disabled</span>
             </td>
             <td>
-              <input type="checkbox" [checked]="c.disable" (change)="changeStatus($event,c)">
+              <input type="checkbox" [checked]="c.defaultCycle" [disabled]="c.defaultCycle" (change)="defaultCycle($event,c.cycleId)">
+              <span style="color:green" *ngIf="c.defaultCycle">*default</span>
             </td>
             <td>
-              <a (click)="deleteCycle(c.cycleId)">
-                <i class="glyphicon glyphicon-trash"></i>
-              </a>
+              <button class="btn-link" (click)="deleteCycle(c.cycleId)" type="button" [disabled]="c.disable"><i class="glyphicon glyphicon-trash"></i></button>
             </td>
             <td>
-              <a (click)="editCycle(c)">
-                <i class="glyphicon glyphicon-edit"></i>
-              </a>
+              <button class="btn-link" type="button" (click)="editCycle(c)" [disabled]="c.disable">
+              <i class="glyphicon glyphicon-edit"></i>                  
+              </button>
             </td>
           </tr>
         </tbody>

@@ -16,8 +16,11 @@ export class HodComponent extends Filters {
   constructor(private utServ: HodService,
     private storage: StorageService) {
     super();
+    this.userDetails = storage.getData('userDetails');
     this.getOpi();
   }
+
+  userDetails: any = {};
 
   getOpi(): any {
     this.utServ.getOpiByDeptId(this.storage.getData('user_roleInfo')[0].departmentId).subscribe((response: any) => {
@@ -37,18 +40,24 @@ export class HodComponent extends Filters {
     console.log(data.feedback);
     if(data.feedback == 'true')
       alertify.confirm("Do you realy want to Approve this??",()=>{
-        this.utServ.approve(data.quarterId,{comment:data.comment}).subscribe((reponse)=>{
+        this.utServ.approve(data.id,{comment:data.comment}).subscribe((reponse)=>{
           console.log(reponse);
+          alertify.notify("Audit has been Approved");
+          $("#feedbackModal").modal('hide');
         },(error:any)=>{
-          console.log(error);        
+          console.log(error); 
+          alertify.notify("Something went wrong");          
+          $("#feedbackModal").modal('hide');                 
         });
       });
     else
       alertify.confirm("Do you realy want to Reject this??", ()=>{
-        this.utServ.reject(data.quarterId,{comment:data.comment}).subscribe((reponse)=>{
+        this.utServ.reject(data.id,{comment:data.comment}).subscribe((reponse)=>{
           console.log(reponse);
+          alertify.notify("Audit has been Rejected");
         },(error:any)=>{
           console.log(error);        
+          alertify.notify("Something went wrong");
         });
       })
       
@@ -57,8 +66,13 @@ export class HodComponent extends Filters {
 
 
   public showOpi(goal: any, measure: any) {
+    $('#edit-block').show();
     $('#edit-section').collapse('show');
     console.log(goal);
+  }
+
+  hideEditBlock(){
+    $('#edit-block').hide();
   }
 
   get(e) {

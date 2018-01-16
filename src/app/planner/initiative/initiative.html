@@ -94,13 +94,13 @@
                 </span> -->
               </th>
               <th>
-                  <form action="" class="search-form">
-                      <div class="form-group has-feedback" style="margin-bottom: 10px;">
-                      <label for="search" class="sr-only">Search</label>
-                      <input type="text" class="form-control" name="search" id="search"  (keyup)="searchInitiative($event)" placeholder="Initiative">
-                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                    </div>
-                  </form> 
+                <form action="" class="search-form">
+                    <div class="form-group has-feedback" style="margin-bottom: 10px;">
+                    <label for="search" class="sr-only">Search</label>
+                    <input type="text" class="form-control" name="search" id="search"  (keyup)="searchInitiative($event)" placeholder="Initiative">
+                      <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                  </div>
+                </form> 
 
                 <!-- <span class="search">
                   <input type="text" name="search" (keyup)="searchInitiative($event)" placeholder="Initiative">
@@ -114,21 +114,26 @@
               <td style="padding:0px;border:none;" #element [style.height]="get(element)">
                 <table class="table table-bordered" style="height: inherit;">
                   <colgroup>
-                    <col style="width:80%">
+                    <col style="width:70%">
+                    <col style="width:10%">
                     <col style="width:10%">
                     <col style="width:10%">
                   </colgroup>
                   <tr *ngFor="let initiate of goal.initiatives;let j=index;">
                     <td>{{initiate.initiative}}</td>
                     <td>
-                      <a scrollTo href="#add-initiative" data-toggle="tooltip" data-placement="auto" title="Edit" class="icon" (click)="updateInitiative(goal.goalId,initiate)">
-                        <i class="glyphicon glyphicon-edit btn-edit" ></i>
-                      </a>
+                      <input type="checkbox" [checked]="initiate.disable" (change)="disable($event,initiate.initiativeId)">
+                      <span style="color:red" *ngIf="initiate.disable"> *disabled</span>
                     </td>
                     <td>
-                      <span data-toggle="tooltip" data-placement="auto" title="Delete" class="icon">
-                        <i class="glyphicon glyphicon-trash btn-del" (click)="deleteInitiative(initiate.initiativeId,goal.initiatives,j)"></i>
-                      </span>
+                      <button class="btn-link" scrollTo href="#add-initiative" data-toggle="tooltip" data-placement="auto" title="Edit" (click)="updateInitiative(goal.goalId,initiate)">
+                        <i class="glyphicon glyphicon-edit btn-edit"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <button class="btn-link" data-toggle="tooltip" data-placement="auto" title="Delete" (click)="deleteInitiative(initiate.initiativeId,goal.initiatives,j)">
+                      <i class="glyphicon glyphicon-trash btn-del"></i>
+                      </button>
                     </td>
                   </tr>
                 </table>

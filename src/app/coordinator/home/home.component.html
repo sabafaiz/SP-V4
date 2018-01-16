@@ -8,7 +8,7 @@
   <div class="panel" *ngIf="selectedOpi">
     <div class="panel-heading background-4">
       <h4 class="panel-title ">
-        <a data-toggle="collapse" href="#edit-section">Edit Section</a>
+        <a data-toggle="collapse" href="#edit-section" class="accordion-toggle">Edit Section</a>
       </h4>
     </div>
     <div id="edit-section" class="panel-collapse collapse in">
@@ -393,8 +393,9 @@
           <col style="width:20%">
           <col style="width:20%">
           <col style="width:20%">
-          <col style="width:10%">
-          <col style="width:10%">
+          <col style="width:8%">
+          <col style="width:8%">
+          <col style="width:4%">
         </colgroup>
         <thead class="header-background" *ngIf="goalsCopy.length">
           <tr>
@@ -419,13 +420,14 @@
               </span>
             </th>
             <th>Frequency</th>
+            <th>Status</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let goal of goals;let i = index;">
             <td>{{goal.goal}}</td>
-            <td colspan="5" style="padding:0px;border:none;" #element [style.height]="get(element)">
+            <td colspan="6" style="padding:0px;border:none;" #element [style.height]="get(element)">
               <table class="table table-bordered" style="height: inherit;border:none;">
                 <colgroup>
                   <col style="width:25%">
@@ -433,7 +435,7 @@
                 </colgroup>
                 <tr *ngFor="let initiate of goal.initiatives;let j=index;">
                   <td>{{initiate.initiative}}</td>
-                  <td colspan="4" style="padding:0px;" #element1 [style.height]="get(element1)">
+                  <td colspan="5" style="padding:0px;" #element1 [style.height]="get(element1)">
                     <table class="table table-bordered" style="height: inherit;border:none;">
                       <colgroup>
                         <col style="width:33.33%">
@@ -441,16 +443,18 @@
                       </colgroup>
                       <tr *ngFor="let activit of initiate.activities;let k=index;">
                         <td [style.border-top]="k?'1px solid #ddd':'none'">{{activit.activity}}</td>
-                        <td colspan="3" style="padding:0px;" #element2 [style.height]="get(element2)">
+                        <td colspan="4" style="padding:0px;" #element2 [style.height]="get(element2)">
                           <table class="table table-bordered" style="height: inherit;border:none;">
                             <colgroup>
                               <col style="width:50%">
-                              <col style="width:25%">
-                              <col style="width:25%">
+                              <col style="width:20%">
+                              <col style="width:20%">
+                              <col style="width:10%">
                             </colgroup>
                             <tr *ngFor="let msr of activit.opis;let l=index">
                               <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.opi}}</td>
                               <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.frequency}}</td>
+                              <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.quarterStatus.status}}</td>
                               <td [style.border-top]="l?'1px solid #ddd':'none'">
                                 <a style="cursor:pointer;" data-target="#edit-section" (click)="selectedOpi=goal;selectedInitiative=initiate;selectedActivity=activit;selectedMeasure=msr;showOpi(goal,msr)">view</a>
                               </td>

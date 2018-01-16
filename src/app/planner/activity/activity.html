@@ -44,10 +44,12 @@
 
         </div>
         <div class="panel-footer">
-          <button type="submit" class="btn btn-success btn-outline-success btn-empty" [disabled]="activityForm.invalid" data-toggle="tooltip" data-placement="auto" title="Submit Form">
+          <button type="submit" class="btn btn-success btn-outline-success btn-empty" [disabled]="activityForm.invalid" data-toggle="tooltip"
+            data-placement="auto" title="Submit Form">
             <i class="glyphicon glyphicon-ok"></i>
           </button>
-          <button type="button" class="btn btn-danger btn-outline-danger btn-close" data-dismiss="modal" (click)="enableFields(); isUpdating = false" data-toggle="tooltip" data-placement="auto" title="Reset Form">
+          <button type="button" class="btn btn-danger btn-outline-danger btn-close" data-dismiss="modal" (click)="enableFields(); isUpdating = false"
+            data-toggle="tooltip" data-placement="auto" title="Reset Form">
             <i class="glyphicon glyphicon-remove"></i>
           </button>
         </div>
@@ -62,11 +64,11 @@
       <h4 class="panel-title">
         <a data-toggle="collapse" href="#collapse2"></a>
         <div class="form-inline" style="margin-bottom:unset;">
-              <!-- new code -->
-              <div class="button__holder">
-                  <button class="plus" (click)="addNewActivity()"></button>
-              </div>
-              <!-- end -->
+          <!-- new code -->
+          <div class="button__holder">
+            <button class="plus" (click)="addNewActivity()"></button>
+          </div>
+          <!-- end -->
           <div class="form-group dropdown-st swing">
             <label class="control-label">Strategic Plan</label>
             <select id="year" name="year" class="form-control" [(ngModel)]="defaultCycle" (ngModelChange)="getActivities()" style="width:auto;height: auto;padding: 0px;">
@@ -91,39 +93,39 @@
           <thead class="header-background" *ngIf="goals.length">
             <tr>
               <th>
-                  <form action="" class="search-form">
-                      <div class="form-group has-feedback" style="margin-bottom: 10px;">
-                      <label for="search" class="sr-only">Search</label>
-                      <input type="text" class="form-control" name="search" id="search"(keyup)="searchGoal($event)" placeholder="Goal">
-                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                    </div>
-                  </form>
+                <form action="" class="search-form">
+                  <div class="form-group has-feedback" style="margin-bottom: 10px;">
+                    <label for="search" class="sr-only">Search</label>
+                    <input type="text" class="form-control" name="search" id="search" (keyup)="searchGoal($event)" placeholder="Goal">
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                  </div>
+                </form>
 
                 <!-- <span class="search">
                   <input type="text" name="search" (keyup)="searchGoal($event)" placeholder="Goal">
                 </span> -->
               </th>
               <th>
-                  <form action="" class="search-form">
-                      <div class="form-group has-feedback" style="margin-bottom: 10px;">
-                      <label for="search" class="sr-only">Search</label>
-                      <input type="text" class="form-control" name="search" id="search"  (keyup)="searchInitiative($event)" placeholder="Initiative">
-                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                    </div>
-                  </form>
+                <form action="" class="search-form">
+                  <div class="form-group has-feedback" style="margin-bottom: 10px;">
+                    <label for="search" class="sr-only">Search</label>
+                    <input type="text" class="form-control" name="search" id="search" (keyup)="searchInitiative($event)" placeholder="Initiative">
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                  </div>
+                </form>
 
                 <!-- <span class="search">
                   <input type="text" name="search" (keyup)="searchInitiative($event)" placeholder="Initiative">
                 </span> -->
               </th>
               <th>
-                  <form action="" class="search-form">
-                      <div class="form-group has-feedback" style="margin-bottom: 10px;">
-                      <label for="search" class="sr-only">Search</label>
-                      <input type="text" class="form-control" name="search" id="search" (keyup)="searchActivity($event)" placeholder="Activity">
-                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                    </div>
-                  </form>
+                <form action="" class="search-form">
+                  <div class="form-group has-feedback" style="margin-bottom: 10px;">
+                    <label for="search" class="sr-only">Search</label>
+                    <input type="text" class="form-control" name="search" id="search" (keyup)="searchActivity($event)" placeholder="Activity">
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                  </div>
+                </form>
 
                 <!-- <span class="search">
                   <input type="text" name="search" (keyup)="searchActivity($event)" placeholder="Activity">
@@ -143,23 +145,30 @@
                   <tr *ngFor="let initiate of goal.initiatives;let j=index;">
                     <td>{{initiate.initiative}}</td>
                     <td style="padding:0px;" #element1 [style.height]="get(element1)">
-                      <table class="table" style="height: inherit;">
+                      <table class="table table-bordered" style="height: inherit;">
                         <colgroup>
-                          <col style="width:80%">
-                          <col style="width:10%">
-                          <col style="width:10%">
+                          <col style="width:70%">
+                          <col style="width:20%">
+                          <col style="width:5%">
+                          <col style="width:5%">
                         </colgroup>
                         <tr *ngFor="let activit of initiate.activities;let k=index;">
                           <td [style.border-top]="k?'1px solid #ddd':'none'">{{activit.activity}}</td>
-                          <td [style.border-top]="k?'1px solid #ddd':'none'">
-                            <a scrollTo href="#add-activity" data-toggle="tooltip" data-placement="auto" title="Edit" class="icon" (click)="updateActivity(goal,initiate,activit)">
-                              <i class="glyphicon glyphicon-edit btn-edit" ></i>
-                            </a>
+                          <td>
+                            <input type="checkbox" [checked]="activit.disable" (change)="disable($event,activit.activityId)">
+                            <span style="color:red" *ngIf="activit.disable"> *disabled</span>
                           </td>
                           <td [style.border-top]="k?'1px solid #ddd':'none'">
-                            <span data-toggle="tooltip" data-placement="auto" title="Delete" class="icon">
-                              <i class="glyphicon glyphicon-trash btn-del" (click)="deleteActivity(activit.activityId,initiate.activities,k)"></i>
-                            </span>
+                            <button class="btn-link" scrollTo href="#add-activity" data-toggle="tooltip" data-placement="auto" title="Edit" (click)="updateActivity(goal,initiate,activit)"
+                              [disabled]="activit.disable">
+                              <i class="glyphicon glyphicon-edit btn-edit"></i>
+                            </button>
+                          </td>
+                          <td [style.border-top]="k?'1px solid #ddd':'none'">
+                            <button class="btn-link" data-toggle="tooltip" data-placement="auto" title="Delete" (click)="deleteActivity(activit.activityId,initiate.activities,k)"
+                              [disabled]="activit.disable">
+                              <i class="glyphicon glyphicon-trash btn-del"></i>
+                            </button>
                           </td>
                         </tr>
                       </table>

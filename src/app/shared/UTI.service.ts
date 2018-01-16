@@ -61,6 +61,12 @@ export class UniversityService {
     .catch(this.handleError);
   }
 
+  public defaultCycle(cycleId:any){
+    return this.http.put(this.baseUrl + "/cycle/"+cycleId+"/default",{})
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
   public addValue(val: any[]) {
     
     return this.http.post(this.baseUrl + "/values", val)
@@ -194,6 +200,18 @@ export class UniversityService {
     .catch(this.handleError);
   }
 
+  public disableGoal(goalId:any){
+    return this.http.put(this.baseUrl + "/goal/"+goalId+"/disable",{})
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  public enableGoal(goalId:any){
+    return this.http.put(this.baseUrl + "/goal/"+goalId+"/enable",{})
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
   public addInitiative(initiative: any) {
     
     return this.http.post(this.baseUrl + "/initiative", initiative)
@@ -219,6 +237,19 @@ export class UniversityService {
       .catch(this.handleError);
   }
 
+  public disableInitiative(initiativeId:any){
+    return this.http.put(this.baseUrl + "/initiative/"+initiativeId+"/disable",{})
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  public enableInitiative(initiativeId:any){
+    return this.http.put(this.baseUrl + "/initiative/"+initiativeId+"/enable",{})
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+
   public fetchActivities(initId:any){
     return this.http.get(this.baseUrl + "/initiative/"+initId+"/activity")
     .map(this.extractData)
@@ -243,6 +274,18 @@ export class UniversityService {
       .catch(this.handleError);
   }
 
+  public disableActivity(activityId:any){
+    return this.http.put(this.baseUrl + "/activity/"+activityId+"/disable",{})
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  public enableActivity(activityId:any){
+    return this.http.put(this.baseUrl + "/activity/"+activityId+"/enable",{})
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
   public saveQuarteResult(data: any, quarterId: any) {
     return this.http.post(this.baseUrl + "/result", data)
       .map(this.extractData)
@@ -253,6 +296,18 @@ export class UniversityService {
     return this.http.put(this.baseUrl + "/result/" + resultId, data)
       .map(this.extractData)
       .catch(this.handleError);
+  }
+
+  public disableKPI(opiId:any){
+    return this.http.put(this.baseUrl + "/opi/"+opiId+"/disable",{})
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  public enableKPI(opiId:any){
+    return this.http.put(this.baseUrl + "/opi/"+opiId+"/enable",{})
+    .map(this.extractData)
+    .catch(this.handleError);
   }
 
   public lockResult(resultId: any){
