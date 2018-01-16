@@ -28,8 +28,8 @@ export class UniversityService {
   constructor(public http: CustomHttpService,
     public htttp: Http,
     public con: StorageService) {
-    this.baseUrl = con.baseUrl + con.getData('user_roleInfo')[0].role;
-  }
+      this.baseUrl = con.baseUrl + con.getData('user_roleInfo')[0].role;
+    }
 
   public saveInitialSetup(data:any){
     return this.http.post(this.baseUrl + "/initialSetup", data)

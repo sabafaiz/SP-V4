@@ -36,3 +36,7 @@
   border-spacing: 0;
     border-collapse: collapse;
 }
+
+.highlight{
+  background-color: gray;
+}

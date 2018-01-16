@@ -59,15 +59,6 @@ export class MeasureComponent extends Filters implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    $(document).ready(function () {
-      $('[data-toggle="tooltip"]').tooltip();
-    });
-    // $("#myModal").on('hidden.bs.modal', function (e: any) {
-    //   $(this).find("input[type=checkbox], input[type=radio]")
-    //     .prop("checked", "")
-    //     .end();
-
-    // });
 
   }
 
@@ -411,8 +402,9 @@ export class MeasureComponent extends Filters implements AfterViewInit {
 
   
 
-  updateMeasure(objective: any, initiative: any, activity: any, measure: any) {
-
+  updateMeasure(objective: any, initiative: any, activity: any, measure: any, highlight:any) {
+    $(".to-be-highlighted").removeClass("highlight");
+    $(highlight).addClass("highlight");
     this.measureForm.controls["cycleId"].disable();
     this.measureForm.controls["objectiveId"].disable();
     this.measureForm.controls["initiativeId"].disable();
