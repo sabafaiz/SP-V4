@@ -627,24 +627,24 @@ opacity: 0;
   border-color: #259be5;
 }
 .btn-empty{
-    border-radius: 50%;
-    width: 62px;
-    height: 62px;
-    color: #ffffff;
-    background-color: #259be5;
-    border-color: #1ea5e9;
-    box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.2), 0 13px 24px -11px rgba(233, 30, 99, 0.6);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  color: #ffffff;
+  background-color: #563d7c;
+  border-color: #563d7c;
+    box-shadow:0 5px 20px 0px rgba(0, 0, 0, 0.2), 0 13px 24px -11px rgb(86, 61, 124);
 }
 .btn-empty[disabled]:hover{
   border-color: #ffffff;
   color: white;
-  background: #259be5;
+  background: #563d7c;
 }
 
 .btn-empty:hover{
   border-color: #ffffff;
   color: white;
-  background: forestgreen;
+  background: #563d7c;
 }
 
 .btn:active:focus, .btn:focus {
@@ -663,15 +663,15 @@ outline-offset: 0px;
   width: 62px;
   height: 62px;
   color: white;
-  background-color: #4cae4c;
-  border-color: #4cae4c;
+  background-color: #563d7c;
+  border-color: #563d7c;
   box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.2), 0 13px 24px -11px rgba(233, 30, 99, 0.6)
 }
 
 .btn-green:hover{
   color: white;
-  background-color: #4cae4c;
-  border-color: #4cae4c;
+  background-color: #563d7c;
+  border-color: #563d7c;
 }
 
 
@@ -694,17 +694,17 @@ outline-offset: 0px;
 
 .btn-close{
   border-radius: 50%;
-  width: 62px;
-  height: 62px;
+  width: 50px;
+  height: 50px;
   color: #ffffff;
-  background-color: #cf3238;
-  border-color: #cf3238;
-  box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.2), 0 13px 24px -11px rgba(233, 30, 99, 0.6)
+  background-color: #563d7c;
+  border-color: #563d7c;
+  box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.2), 0 13px 24px -11px rgb(86, 61, 124);
 }
 
 .btn-close:hover{
 color:white;
-background-color: #00C9FF;
+background-color: #563d7c;
 }
 
 .color4{
@@ -727,26 +727,27 @@ text-decoration: underline;
 color: brown;
 }
 
-.base-color{
-  background: #fa5252;
-  color: white;
-  border: #fa5252;
+
+  .base-color {
+    background: #cbbde2;
+    color: #563d7c;
+    border: #cbbde2;
 }
 
 .form-border{
-  border: 1px solid #fa5252;
+  border: 1px solid #cbbde2;
 }
 
 .base-color2{
-  background: #7f92a0;
+  background: #563d7c;
   color: white;
-  border: #7f92a0;
+  border: #563d7c;
 }
 
 .base-color3{
-  background: #7f92a0;
-  color: white;
-  border: #7f92a0;
+  background: #cbbde2;
+  color: #563d7c;
+  border: #cbbde2;
 }
 
 .border-color>tbody>tr>td{

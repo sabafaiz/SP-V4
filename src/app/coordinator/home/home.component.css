@@ -4,3 +4,9 @@
 .table .table {
  background-color: inherit;
 }
+
+
+.panel-opi panel-title{
+    font-size: 25px;
+    color: #563d7c;  
+}

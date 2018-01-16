@@ -4,7 +4,8 @@ import { StorageService } from "../../../shared/storage.service";
 import { UniversityService } from "../../../shared/UTI.service";
 @Component({
   selector: 'initial-setup',
-  templateUrl: './setup.component.html'
+  templateUrl: './setup.component.html',
+  styleUrls:['./setup.component.css']
 })
 export class InitialSetup {
   setupForm: FormGroup;
