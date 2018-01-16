@@ -103,13 +103,28 @@ export class PlanComponent{
 
   deleteCycle(cycleId:any){
     alertify.confirm("Do you Really want to Delete this Cycle??",()=>{
-      this.orgService.deleteCycle(cycleId).subscribe((response:any)=>{
+      this.orgService.defaultCycle(cycleId).subscribe((response:any)=>{
         this.getCycles();
       },(error:any)=>{      
         alertify.alert("You Can not Delete this Cycle??");
       })
     })
     
+  }
+
+  defaultCycle(event:any,cycleId:any){
+    alertify.confirm("Do you Really want to make it Default Cycle??",()=>{
+      this.orgService.defaultCycle(cycleId).subscribe((response:any)=>{
+        this.getCycles();
+        alertify.success("Cycle has been made default..")
+      },(error:any)=>{
+        event.srcElement.checked = !event.srcElement.checked;
+        alertify.error("Something went wrong..")
+      })
+    },()=>{
+      event.srcElement.checked = !event.srcElement.checked;
+      alertify.error("Action was not performed")
+    })
   }
 
   reset(){

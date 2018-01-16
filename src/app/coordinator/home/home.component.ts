@@ -10,7 +10,7 @@ declare let $: any;
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  styleUrls: ['./home.component.css','./../coordinator.component.css'],
   providers: [CoordinatorService]
 })
 export class HomeComponent extends Filters implements AfterViewInit {

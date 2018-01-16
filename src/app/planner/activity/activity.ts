@@ -170,6 +170,35 @@ export class ActivityComponent extends Filters implements OnInit, AfterViewInit 
 
   }
 
+  disable(event:any,activityId:any){
+    if(event.srcElement.checked)
+      alertify.confirm("Do you Really want to disable this Activity??",()=>{
+        this.orgService.disableActivity(activityId).subscribe((response:any)=>{
+          alertify.success("You disabled the Activity..");
+          this.getActivities();
+        },()=>{
+          event.srcElement.checked = !event.srcElement.checked;
+          alertify.error("Something went wrong..")
+        })
+      },()=>{
+        event.srcElement.checked = !event.srcElement.checked;
+        alertify.error("Action was not performed")
+      });
+    else
+      alertify.confirm("Do you Really want to enable this Activity??",()=>{
+        this.orgService.enableActivity(activityId).subscribe((response:any)=>{
+          alertify.success("You enabled the Activity..");
+          this.getActivities();
+        },()=>{
+          event.srcElement.checked = !event.srcElement.checked;
+          alertify.error("Something went wrong..")
+        })
+      },()=>{
+        event.srcElement.checked = !event.srcElement.checked;
+        alertify.error("Action was not performed")
+      });      
+  }
+
   get(e){
     var promise = new Promise((resolve:any,reject:any)=>{     $(e)["0"].height = $(e)["0"].clientHeight;     resolve();    }) ;   
     return promise;

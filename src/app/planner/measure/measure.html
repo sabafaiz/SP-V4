@@ -38,6 +38,14 @@
             </div>
             <div class="col-lg-6 col-xs-12 col-sm-12">
               <div class="form-group">
+                <label>Select Goal:</label>
+                <select class="form-control" id="sel1" formControlName="objectiveId" [ngModel]="defaultCycle" (ngModelChange)="getInitiative($event)">
+                  <option *ngFor="let objective of objectives;let i=index;" [value]="objective.goalId">{{i+1}}.{{objective.goal}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-6 col-xs-12 col-sm-12">
+              <div class="form-group">
                 <label>Select Initiative:</label>
                 <select class="form-control" id="sel1" formControlName="initiativeId" (ngModelChange)="getActivities($event)">
                   <option *ngFor="let initiative of initiatives;let j=index;" [value]="initiative.initiativeId">{{j+1}}.{{initiative.initiative}}</option>
@@ -134,7 +142,7 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" href="#collapse2"></a>
-         </h4>
+      </h4>
     </div>
     <div id="collapse2" class="panel-collapse collapse in">
       <div class="panel-body">
@@ -146,71 +154,71 @@
             <col style="width:16%">
             <col style="width:16%">
             <col style="width:16%">
-            <col style="width:2%">
-            <col >
+            <col style="width:4%">
+            <!-- <col> -->
           </colgroup>
           <thead class="header-background" *ngIf="goalsCopy.length">
             <tr>
               <th>
-                  <form action="" class="search-form">
-                      <div class="form-group has-feedback" style="margin-bottom: 10px;">
-                      <label for="search" class="sr-only">Search</label>
-                      <input type="text" class="form-control" name="search" id="search"(keyup)="searchGoal($event)" placeholder="GOAL">
-                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                    </div>
-                  </form>
+                <form action="" class="search-form">
+                  <div class="form-group has-feedback" style="margin-bottom: 10px;">
+                    <label for="search" class="sr-only">Search</label>
+                    <input type="text" class="form-control" name="search" id="search" (keyup)="searchGoal($event)" placeholder="Goal">
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                  </div>
+                </form>
                 <!-- <span class="search">
-                  <input type="text" name="search" (keyup)="searchGoal($event)" placeholder="Goal">
-                </span> -->
+                    <input type="text" name="search" (keyup)="searchGoal($event)" placeholder="Goal">
+                  </span> -->
               </th>
               <th>
-                  <form action="" class="search-form">
-                      <div class="form-group has-feedback" style="margin-bottom: 10px;">
-                      <label for="search" class="sr-only">Search</label>
-                      <input type="text" class="form-control" name="search" id="search"(keyup)="searchInitiative($event)" placeholder="INITIATIVE">
-                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                    </div>
-                  </form>
+                <form action="" class="search-form">
+                  <div class="form-group has-feedback" style="margin-bottom: 10px;">
+                    <label for="search" class="sr-only">Search</label>
+                    <input type="text" class="form-control" name="search" id="search" (keyup)="searchInitiative($event)" placeholder="Initiative">
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                  </div>
+                </form>
                 <!-- <span class="search">
-                  <input type="text" name="search" (keyup)="searchInitiative($event)" placeholder="Initiative">
-                </span> -->
+                    <input type="text" name="search" (keyup)="searchInitiative($event)" placeholder="Initiative">
+                  </span> -->
               </th>
               <th>
-                  <form action="" class="search-form">
-                      <div class="form-group has-feedback"  style="margin-bottom: 10px;">
-                      <label for="search" class="sr-only">Search</label>
-                      <input type="text" class="form-control" name="search" id="search" (keyup)="searchActivity($event)" placeholder="ACTIVITY">
-                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                    </div>
-                  </form>
-<!-- 
-                <span class="search">
-                  <input type="text" name="search" (keyup)="searchActivity($event)" placeholder="Activity">
-                </span> -->
+                <form action="" class="search-form">
+                  <div class="form-group has-feedback" style="margin-bottom: 10px;">
+                    <label for="search" class="sr-only">Search</label>
+                    <input type="text" class="form-control" name="search" id="search" (keyup)="searchActivity($event)" placeholder="Activity">
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                  </div>
+                </form>
+                <!-- 
+                  <span class="search">
+                    <input type="text" name="search" (keyup)="searchActivity($event)" placeholder="Activity">
+                  </span> -->
               </th>
               <th>
-                  <form action="" class="search-form">
-                      <div class="form-group has-feedback"  style="margin-bottom: 10px;">
-                      <label for="search" class="sr-only">Search</label>
-                      <input type="text" class="form-control" name="search" id="search" (keyup)="searchOpi($event)" placeholder="KPI">
-                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                    </div>
-                  </form>
-                
+                <form action="" class="search-form">
+                  <div class="form-group has-feedback" style="margin-bottom: 10px;">
+                    <label for="search" class="sr-only">Search</label>
+                    <input type="text" class="form-control" name="search" id="search" (keyup)="searchOpi($event)" placeholder="KPI">
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                  </div>
+                </form>
+
                 <!-- <span class="search">
-                  <input type="text" name="search" (keyup)="searchOpi($event)" placeholder="KPI">
-                </span> -->
+                    <input type="text" name="search" (keyup)="searchOpi($event)" placeholder="KPI">
+                  </span> -->
               </th>
               <th style="vertical-align:middle">KPI Detail</th>
               <th style="vertical-align:middle">Assigned Departments</th>
-              <th></th>
-              <th></th>
+              <th>Action</th>
+              <!-- <th></th> -->
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let goal of goals;let i = index;">
               <td>{{goal.goal}}</td>
-              <td colspan="8" style="padding:0px;" #element [style.height]="get(element)">
+              <td colspan="6" style="padding:0px;" #element [style.height]="get(element)">
                 <table class="table table-bordered" style="height: inherit;">
                   <colgroup>
                     <col style="width:19%">
@@ -218,7 +226,7 @@
                   </colgroup>
                   <tr *ngFor="let initiate of goal.initiatives;let j=index;">
                     <td>{{initiate.initiative}}</td>
-                    <td colspan="7" style="padding:0px;" #element1 [style.height]="get(element1)">
+                    <td colspan="5" style="padding:0px;" #element1 [style.height]="get(element1)">
                       <table class="table table-bordered" style="height: inherit;">
                         <colgroup>
                           <col style="width:23.5%">
@@ -226,14 +234,13 @@
                         </colgroup>
                         <tr *ngFor="let activit of initiate.activities;let k=index;">
                           <td [style.border-top]="k?'1px solid #ddd':'none'">{{activit.activity}}</td>
-                          <td colspan="5" style="padding:0px;" #element2 [style.height]="get(element2)">
+                          <td colspan="4" style="padding:0px;" #element2 [style.height]="get(element2)">
                             <table class="table table-bordered" style="height: inherit;">
                               <colgroup>
                                 <col style="width: 30.9%;">
                                 <col style="width: 30.9%;">
                                 <col style="width: 30.9%;">
-                                <col >
-                                <col >
+                                <col style="width: 7.3%;">
                               </colgroup>
                               <tr *ngFor="let msr of activit.opis;let l=index">
                                 <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.opi}}</td>
@@ -256,16 +263,32 @@
                                     <li *ngIf="msr.assignedDepartments.length">
                                       <a data-toggle="modal" data-target="#detailModal" (click)="selectedMeasure=msr;"> Detail</a>
                                     </li>
-                                  </ul>                                  
+                                  </ul>
                                 </td>
                                 <td [style.border-top]="l?'1px solid #ddd':'none'">
-                                  <a (click)="updateMeasure(goal,initiate,activit,msr)" scrollTo href="#add-opi">
-                                    <i class="glyphicon glyphicon-edit"></i>
-                                  </a>
+                                  <ul style="list-style:none;padding:0;">
+                                    <li>
+                                      <button class="btn-link" (click)="updateMeasure(goal,initiate,activit,msr)" scrollTo href="#add-opi" [disabled]="msr.disable">
+                                        <i class="glyphicon glyphicon-edit"></i>
+                                      </button>
+                                    </li>
+                                    <li>
+                                      <button class="btn-link" (click)="deleteMeasure(msr.opiId,activit.opis,l)" [disabled]="msr.disable">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                      </button>
+                                    </li>
+                                    <li>
+                                      <button class="btn-link">
+                                        <input type="checkbox" [checked]="msr.disable" (change)="disable($event,msr.opiId)">
+                                      </button>
+                                      <span style="color:red" *ngIf="msr.disable"> *disabled</span>
+                                    </li>
+                                  </ul>
+
                                 </td>
-                                <td [style.border-top]="l?'1px solid #ddd':'none'" class="icon">
+                                <!-- <td [style.border-top]="l?'1px solid #ddd':'none'" class="icon">
                                   <i class="glyphicon glyphicon-trash" (click)="deleteMeasure(msr.opiId,activit.opis,l)"></i>
-                                </td>
+                                </td> -->
                               </tr>
                             </table>
                           </td>
@@ -286,7 +309,6 @@
       </div>
     </div>
   </div>
-</div>
 
 <!-- Modal -->
 <div class="modal fade modal-add" id="myModal" role="dialog">
@@ -294,7 +316,8 @@
     <div class="modal-content" *ngIf="selectedMeasure">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"><b>KPI </b>: {{selectedMeasure.opi}}</h4>
+        <h4 class="modal-title">
+          <b>KPI </b>: {{selectedMeasure.opi}}</h4>
       </div>
       <div class="modal-body">
         <div class="row" *ngIf="prev">
@@ -367,7 +390,7 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">
-        <b>KPI </b>: {{selectedMeasure.opi}}</h4>
+          <b>KPI </b>: {{selectedMeasure.opi}}</h4>
       </div>
       <div class="modal-body">
         <h3>Assigned Departments
@@ -458,7 +481,6 @@
     </div>
   </div>
 </div>
-
 
 <!--popup model-->
 <div class="modal fade modal-add" id="measureModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

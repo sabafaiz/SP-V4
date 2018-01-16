@@ -1,24 +1,65 @@
-<div class="container-fluid">
-
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <ul class="nav navbar-nav">
-        <li routerLinkActive="active"><a routerLink="/">Home</a></li>
-        <li><a routerLink="/login" (click)="logout()">Logout</a></li>      
-      </ul>
-    </div>
-  </nav>
-
-  <div class="text-center" style="color: red;">
-    <h1>
-      <b>Assigned Operational Performance Indicators</b>
-    </h1>
+<nav class="navbar navbar-fixed-top" id="top">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="#">UAEU</a>
   </div>
+  <ul class="nav navbar-nav navbar-right" style="margin-right:0px;">
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <span class="glyphicon glyphicon-user"></span>
+        <strong>{{userDetails.firstName}}</strong>
+        <span class="glyphicon glyphicon-chevron-down"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <div class="navbar-login">
+            <div class="row">
+              <div class="col-lg-4">
+                <p class="text-center">
+                  <span class="glyphicon glyphicon-user icon-size"></span>
+                </p>
+              </div>
+              <div class="col-lg-8">
+                <p class="text-left">
+                  <strong>{{userDetails.firstName}} {{userDetails.lastName}}</strong><br>
+                  <b>{{userDetails.roleInfo[0].role}}</b>
+                </p>
+                <p class="text-left small">{{userDetails.email}}</p>
+                <p class="text-left">
+                  <a href="#" class="btn btn-primary btn-block btn-sm">Profile</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="divider"></li>
+        <li>
+          <div class="navbar-login navbar-login-session">
+            <div class="row">
+              <div class="col-lg-12">
+                <p>
+                  <a routerLink="/login" class="btn btn-danger btn-block" (click)="logout()">Logout</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+<div class="text-center" style="color: red;">
+  <h1>
+    <b>Assigned Operational Performance Indicators</b>
+  </h1>
+</div>
+<div class="container-fluid">
   <!--edit section-->
-  <div class="panel" *ngIf="selectedOpi">
+  <div class="panel" *ngIf="selectedOpi" id="edit-block">
     <div class="panel-heading background-4">
       <h4 class="panel-title ">
         <a data-toggle="collapse" href="#edit-section">Edit Section</a>
+        <button type="button" class="close" (click)="hideEditBlock()">&times;</button>
       </h4>
     </div>
     <div id="edit-section" class="panel-collapse collapse in">
@@ -60,105 +101,107 @@
         </div>
 
         <table id="accordion" class="table table-bordered">
-            <thead>
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Estimated Cost</th>
+              <th>Quarter</th>
+              <th>Estimated Target Level</th>
+              <th>Current Cost</th>
+              <th>Current Target Level</th>
+              <th>End Date</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let tdl of selectedMeasure.departmentInfo[0].opiAnnualTargets;let at=index;">
+            <tr>
+              <td [attr.rowspan]="tdl.levels.length + 3" style="vertical-align: middle;">{{tdl.year}}</td>
+              <td [attr.rowspan]="tdl.levels.length + 3" style="vertical-align: middle;">{{tdl.estimatedCost}}</td>
+            </tr>
+            <ng-template let-lev ngFor [ngForOf]="tdl.levels" let-in="index">
               <tr>
-                <th>Year</th>
-                <th>Estimated Cost</th>
-                <th>Quarter</th>
-                <th>Estimated Target Level</th>
-                <th>Current Cost</th>
-                <th>Current Target Level</th>
-                <th>End Date</th>
-                <th>Status</th>
-                <th></th>
+                <td>{{lev.quarter}}</td>
+                <td>{{lev.estimatedTargetLevel}}</td>
+                <td>{{lev.currentCost}}</td>
+                <td>{{lev.currentTargetLevel}}</td>
+                <td>{{lev.endDate + tdl.year}}</td>
+                <td style="text-transform: capitalize;">{{lev.status}}</td>
+                <td>
+                  <button class="btn-link" data-toggle="modal" data-target="#feedbackModal" (click)="selectedLevel = lev;"> Approve/Reject</button>
+                </td>
               </tr>
-            </thead>
-            <tbody *ngFor="let tdl of selectedMeasure.departmentInfo[0].opiAnnualTargets;let at=index;">
-              <tr>
-                <td [attr.rowspan]="tdl.levels.length + 3" style="vertical-align: middle;">{{tdl.year}}</td>
-                <td [attr.rowspan]="tdl.levels.length + 3" style="vertical-align: middle;">{{tdl.estimatedCost}}</td>
-              </tr>
-              <ng-template let-lev ngFor [ngForOf]="tdl.levels" let-in="index">
-                <tr>
-                  <td>{{lev.quarter}}</td>
-                  <td>{{lev.estimatedTargetLevel}}</td>
-                  <td>{{lev.currentCost}}</td>
-                  <td>{{lev.currentTargetLevel}}</td>
-                  <td>{{lev.endDate + tdl.year}}</td>
-                  <td style="text-transform: capitalize;">{{lev.status}}</td>
-                  <td>
-                    <button class="btn-link" data-toggle="modal" data-target="#feedbackModal" (click)="selectedLevel = lev;"> Approve/Reject</button>
-                  </td>
-                </tr>
-                <tr *ngIf="lev.evidance&&lev.evidance.length">
-                  <td colspan="6">
-                    <b>Evidences</b>
-                    <br>
-                    <div class="row" *ngFor="let ev of lev.evidance;let e = index;">
-                      <div class="col-lg-6">
-                        <a [attr.href]="ev.url">{{e+1}}) evidance {{e+1}}</a>
-                      </div>
+              <tr *ngIf="lev.evidance&&lev.evidance.length">
+                <td colspan="6">
+                  <b>Evidences</b>
+                  <br>
+                  <div class="row" *ngFor="let ev of lev.evidance;let e = index;">
+                    <div class="col-lg-6">
+                      <a [attr.href]="ev.url">{{e+1}}) evidance {{e+1}}</a>
                     </div>
-                  </td>
-                </tr>
-                <tr *ngIf="lev.internshipGraph&&lev.internshipGraph.length" >
-                  <td></td>
-                  <td colspan="5">
-                    <table class="table table-bordered">
-                      <caption>
-                        <b>Internship Details</b>
-                      </caption>
-                      <thead>
-                        <tr>
-                          <th>Organization</th>
-                          <th>Supervisor</th>
-                          <th>Total</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let data of lev.internshipGraph;let z = index;">
-                          <td>{{data.organization}}</td>
-                          <td>{{data.internalSupervisior}}</td>
-                          <td>{{data.count}}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-                <tr *ngIf="lev.mouDetails&&lev.mouDetails.length">
-                  <td></td>
-                  <td colspan="5">
-                    <table class="table table-bordered">
-                      <caption><b>Mous Detail</b></caption>
-                      <thead>
-                        <tr>
-                          <th>Mou Type</th>
-                          <th>Organisation</th>
-                        </tr>
-                      </thead>
-                      <tbody *ngFor="let detail of lev.mouDetails;let d = index;">
-                        <tr>
-                          <td>{{detail.mouType}}</td>
-                          <td>{{detail.organization}}</td>
-                        </tr>
-                        <tr *ngIf="detail.evidance.length">
-                          <td colspan="2">
-                            <b>Evidences</b>
-                            <br>
-                            <div class="row" *ngFor="let ev of detail.evidance;let e = index;">
-                              <div class="col-lg-6">
-                                <a [attr.href]="ev.url">{{e+1}}) evidance {{e+1}}</a>
-                              </div>
+                  </div>
+                </td>
+              </tr>
+              <tr *ngIf="lev.internshipGraph&&lev.internshipGraph.length">
+                <td></td>
+                <td colspan="6">
+                  <table class="table table-bordered">
+                    <caption>
+                      <b>Internship Details</b>
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th>Organization</th>
+                        <th>Supervisor</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of lev.internshipGraph;let z = index;">
+                        <td>{{data.organization}}</td>
+                        <td>{{data.internalSupervisior}}</td>
+                        <td>{{data.count}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <tr *ngIf="lev.mouDetails&&lev.mouDetails.length">
+                <td></td>
+                <td colspan="6">
+                  <table class="table table-bordered">
+                    <caption>
+                      <b>Mous Detail</b>
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th>Mou Type</th>
+                        <th>Organisation</th>
+                      </tr>
+                    </thead>
+                    <tbody *ngFor="let detail of lev.mouDetails;let d = index;">
+                      <tr>
+                        <td>{{detail.mouType}}</td>
+                        <td>{{detail.organization}}</td>
+                      </tr>
+                      <tr *ngIf="detail.evidance.length">
+                        <td colspan="2">
+                          <b>Evidences</b>
+                          <br>
+                          <div class="row" *ngFor="let ev of detail.evidance;let e = index;">
+                            <div class="col-lg-6">
+                              <a [attr.href]="ev.url">{{e+1}}) evidance {{e+1}}</a>
                             </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-              </ng-template>
-            </tbody>
-          </table>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -230,15 +273,15 @@
                             <colgroup>
                               <col style="width:50.5%">
                               <col style="width:25%">
-                              <col >
-                              <col >
+                              <col>
+                              <col>
                             </colgroup>
                             <tr *ngFor="let msr of activit.opis;let l=index">
                               <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.opi}}</td>
                               <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.frequency}}</td>
-                              <td style="text-transform: capitalize;">{{msr.departmentInfo["0"].opiAnnualTargets["0"].levels["0"].status}}</td>
+                              <td style="text-transform: capitalize;">{{msr.quarterStatus.status}}</td>
                               <td [style.border-top]="l?'1px solid #ddd':'none'">
-                                <a style="cursor:pointer;" data-target="#edit-section" (click)="selectedOpi=goal;selectedInitiative=initiate;selectedActivity=activit;selectedMeasure=msr;showOpi(goal,msr)">view</a>
+                                <a scrollTo href="#top" (click)="selectedOpi=goal;selectedInitiative=initiate;selectedActivity=activit;selectedMeasure=msr;showOpi(goal,msr)">view</a>
                               </td>
                             </tr>
                           </table>
@@ -261,36 +304,36 @@
   </div>
 </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="feedbackModal" role="dialog">
-      <div class="modal-dialog">
-      
-        <!-- Modal content-->
-        <div class="modal-content" *ngIf="selectedLevel">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">{{selectedMeasure.opi}}</h4>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="optradio">Feedback :</label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" [(ngModel)]="selectedLevel.feedback" value="true">Approve
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio" [(ngModel)]="selectedLevel.feedback" value="false">Reject
-              </label>
-            </div>
-            <div class="form-group">
-              <label for="comment">Comment :</label>
-              <textarea class="form-control" id="comment" name="comment" [(ngModel)]="selectedLevel.comment"></textarea>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-btn-success" (click)="setQuarterFeedback(selectedLevel)">Submit</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
+<!-- Modal -->
+<div class="modal fade" id="feedbackModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content" *ngIf="selectedLevel">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{selectedMeasure.opi}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="optradio">Feedback :</label>
+          <label class="radio-inline">
+            <input type="radio" name="optradio" [(ngModel)]="selectedLevel.feedback" value="true">Approve
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="optradio" [(ngModel)]="selectedLevel.feedback" value="false">Reject
+          </label>
         </div>
-        
+        <div class="form-group">
+          <label for="comment">Comment :</label>
+          <textarea class="form-control" id="comment" name="comment" [(ngModel)]="selectedLevel.comment"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-btn-success" (click)="setQuarterFeedback(selectedLevel)">Submit</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
+
+  </div>
+</div>

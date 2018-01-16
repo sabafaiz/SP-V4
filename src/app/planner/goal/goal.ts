@@ -133,6 +133,35 @@ export class GoalComponent extends Filters implements AfterViewInit {
 
   }
 
+  disable(event:any,goalId:any){
+    if(event.srcElement.checked)
+      alertify.confirm("Do you Really want to disable this Goal??",()=>{
+        this.orgService.disableGoal(goalId).subscribe((response:any)=>{
+          alertify.success("You disabled the Goal..");
+          this.getGoals();
+        },()=>{
+          event.srcElement.checked = !event.srcElement.checked;
+          alertify.error("Something went wrong..")
+        })
+      },()=>{
+        event.srcElement.checked = !event.srcElement.checked;
+        alertify.error("Action was not performed")
+      });
+    else
+      alertify.confirm("Do you Really want to enable this Goal??",()=>{
+        this.orgService.enableGoal(goalId).subscribe((response:any)=>{
+          alertify.success("You enabled the Goal..");
+          this.getGoals();
+        },()=>{
+          event.srcElement.checked = !event.srcElement.checked;
+          alertify.error("Something went wrong..")
+        })
+      },()=>{
+        event.srcElement.checked = !event.srcElement.checked;
+        alertify.error("Action was not performed")
+      });      
+  }
+
   closeForm(){
     $("#add-plan").hide();
   }

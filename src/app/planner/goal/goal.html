@@ -67,20 +67,24 @@
             </th>
             <th></th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody class="body-background">
           <tr *ngFor="let goal of goals;let i = index;">
             <td style="vertical-align: middle;">{{goal.goal}}</td>
-            <td style="vertical-align: middle;">
-              <a scrollTo href="#add-initiative" (click)="updateGoal(goal)">
-              <i class="glyphicon glyphicon-edit btn-del"></i>
-              </a>
+            <td>
+              <input type="checkbox" [checked]="goal.disable" (change)="disable($event,goal.goalId)"><span style="color:red" *ngIf="goal.disable">*disabled</span>
             </td>
             <td style="vertical-align: middle;">
-              <a style="cursor:pointer;" (click)="deleteGoal(goal.goalId,goals,i)">
+              <button class="btn-link" scrollTo href="#add-initiative" (click)="updateGoal(goal)" [disabled]="goal.disable">
+              <i class="glyphicon glyphicon-edit btn-del"></i>
+              </button>
+            </td>
+            <td style="vertical-align: middle;">
+              <button class="btn-link" (click)="deleteGoal(goal.goalId,goals,i)" [disabled]="goal.disable">
                 <i class="glyphicon glyphicon-trash btn-del"></i>
-              </a>
+              </button>
             </td>
           </tr>
         </tbody>

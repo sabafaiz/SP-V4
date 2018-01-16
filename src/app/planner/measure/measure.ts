@@ -54,7 +54,7 @@ export class MeasureComponent extends Filters implements AfterViewInit {
   }
 
   ngOnInit() {
-    // this.getQuarter();
+    this.getQuarter();
     this.getDepartments();
   }
 
@@ -469,6 +469,35 @@ export class MeasureComponent extends Filters implements AfterViewInit {
     $('#add-opi').show();        
     $("#collapse1").collapse('show');
     this.measureForm = this.setMeasure();
+  }
+
+  disable(event:any,opiId:any){
+    if(event.srcElement.checked)
+      alertify.confirm("Do you Really want to disable this KPI??",()=>{
+        this.orgService.disableKPI(opiId).subscribe((response:any)=>{
+          alertify.success("You disabled the KPI..");
+          this.getMeasure();
+        },()=>{
+          event.srcElement.checked = !event.srcElement.checked;
+          alertify.error("Something went wrong..")
+        })
+      },()=>{
+        event.srcElement.checked = !event.srcElement.checked;
+        alertify.error("Action was not performed")
+      });
+    else
+      alertify.confirm("Do you Really want to enable this KPI??",()=>{
+        this.orgService.enableKPI(opiId).subscribe((response:any)=>{
+          alertify.success("You enabled the KPI..");
+          this.getMeasure();
+        },()=>{
+          event.srcElement.checked = !event.srcElement.checked;
+          alertify.error("Something went wrong..")
+        })
+      },()=>{
+        event.srcElement.checked = !event.srcElement.checked;
+        alertify.error("Action was not performed")
+      });      
   }
 
   get(e) {
