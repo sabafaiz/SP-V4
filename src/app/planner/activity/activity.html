@@ -147,16 +147,17 @@
                           <col style="width:5%">
                           <col style="width:5%">
                         </colgroup>
-                        <tr *ngFor="let activit of initiate.activities;let k=index;">
+                        <tr class="to-be-highlighted" *ngFor="let activit of initiate.activities;let k=index;" #highlight>
                           <td [style.border-top]="k?'1px solid #ddd':'none'">{{activit.activity}}</td>
                           <td>
                             <input type="checkbox" [checked]="activit.disable" (change)="disable($event,activit.activityId)">
                             <span style="color:red" *ngIf="activit.disable"> *disabled</span>
                           </td>
                           <td [style.border-top]="k?'1px solid #ddd':'none'">
-                            <button class="btn-link" scrollTo href="#add-activity" data-toggle="tooltip" data-placement="auto" title="Edit" (click)="updateActivity(goal,initiate,activit)"
-                              [disabled]="activit.disable">
-                              <i class="glyphicon glyphicon-edit btn-edit"></i>
+                            <button class="btn-link" data-toggle="tooltip" data-placement="auto" title="Edit" (click)="updateActivity(goal,initiate,activit,highlight)" [disabled]="activit.disable">
+                              <a scrollTo href="#add-activity">
+                                <i class="glyphicon glyphicon-edit btn-edit"></i>
+                              </a>
                             </button>
                           </td>
                           <td [style.border-top]="k?'1px solid #ddd':'none'">

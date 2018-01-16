@@ -119,7 +119,9 @@ export class InitiativeComponent extends Filters {
   }
 
   selectedInitiative: any;
-  updateInitiative(goalId: any, initiative: any) {
+  updateInitiative(goalId: any, initiative: any,highlight:any) {
+    $(".to-be-highlighted").removeClass("highlight");
+    $(highlight).addClass("highlight");
     this.isUpdating = true;
     this.initiativeForm.controls["cycleId"].disable();
     this.initiativeForm.controls["goalId"].disable();

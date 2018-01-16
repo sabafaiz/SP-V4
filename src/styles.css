@@ -794,3 +794,8 @@ color: brown;
 button:disabled{
   cursor: no-drop;
 }
+
+.highlight{
+  background-color: gray;
+  color: white;
+}

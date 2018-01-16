@@ -268,8 +268,10 @@
                                 <td [style.border-top]="l?'1px solid #ddd':'none'">
                                   <ul style="list-style:none;padding:0;">
                                     <li>
-                                      <button class="btn-link" (click)="updateMeasure(goal,initiate,activit,msr,highlight)" scrollTo href="#top" [disabled]="msr.disable">
+                                      <button class="btn-link" (click)="updateMeasure(goal,initiate,activit,msr,highlight)" [disabled]="msr.disable">
+                                        <a scrollTo href="#top">
                                         <i class="glyphicon glyphicon-edit"></i>
+                                        </a>
                                       </button>
                                     </li>
                                     <li>

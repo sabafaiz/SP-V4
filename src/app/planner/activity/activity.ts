@@ -137,7 +137,9 @@ export class ActivityComponent extends Filters implements OnInit, AfterViewInit 
     })
   }
   seletedActivity: any;
-  updateActivity(objective: any, initiative: any, activity: any) {
+  updateActivity(objective: any, initiative: any, activity: any,highlight:any) {
+    $(".to-be-highlighted").removeClass("highlight");
+    $(highlight).addClass("highlight");
     $("#add-activity").show();
     $("#collapse1").collapse('show');
     this.isUpdating = true;

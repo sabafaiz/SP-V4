@@ -117,7 +117,9 @@ export class GoalComponent extends Filters implements AfterViewInit {
       
   }
   selectedObjective: any;
-  updateGoal(goal: any) {
+  updateGoal(goal: any,highlight:any) {
+    $(".to-be-highlighted").removeClass("highlight");
+    $(highlight).addClass("highlight");
     this.selectedObjective = goal;
     this.isUpdating = true;
     this.goalForm.patchValue({ goal: goal.goal, cycleId: this.defaultCycle });
