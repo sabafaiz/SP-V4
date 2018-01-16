@@ -2,7 +2,7 @@
   <div class="bg-nav">
       <div class="form-inline" style="margin-bottom:unset;">
           <button type="button" class="btn btn-default pull-right margin"  (click)="addNewMeasure()"><i class="glyphicon glyphicon-plus"></i></button>
-          <div class="form-group dropdown-st swing">
+          <div class="form-group dropdown-st">
             <label class="control-label">Strategic Plan</label>
             <select id="year" name="year" class="form-control" [(ngModel)]="defaultCycle" (ngModelChange)="getMeasure()" style="width:auto;height: auto;padding: 0px;">
               <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}} : [{{c.startYear}} To {{c.endYear}}]</option>
