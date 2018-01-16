@@ -106,10 +106,10 @@
               <span style="color:green" *ngIf="c.defaultCycle">*default</span>
             </td>
             <td>
-              <button class="btn-link" (click)="deleteCycle(c.cycleId)" type="button" [disabled]="c.disable"><i class="glyphicon glyphicon-trash"></i></button>
+              <button class="btn-link btn-del" (click)="deleteCycle(c.cycleId)" type="button" [disabled]="c.disable"><i class="glyphicon glyphicon-trash"></i></button>
             </td>
             <td>
-              <button class="btn-link" type="button" (click)="editCycle(c)" [disabled]="c.disable">
+              <button class="btn-link btn-del" type="button" (click)="editCycle(c)" [disabled]="c.disable">
               <i class="glyphicon glyphicon-edit"></i>                  
               </button>
             </td>
