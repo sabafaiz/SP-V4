@@ -3,8 +3,6 @@ import { Observable } from 'rxjs/Observable';
 import { Response, Http, Headers, RequestOptions } from '@angular/http';
 import { StorageService } from './storage.service';
 import { CustomHttpService } from './default.header.service';
-
-
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
@@ -102,6 +100,12 @@ export class UniversityService {
       .catch(this.handleError);
   }
 
+  public getAllCycle(){
+    return this.http.get(this.baseUrl + "/cycles?hideDisable=false")
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   public getCycles(){
     return this.http.get(this.baseUrl + "/cycles")
       .map(this.extractData)
@@ -134,7 +138,7 @@ export class UniversityService {
   }
 
   public getObjectivesByCycleId(cycleId:any){
-    return this.http.get(this.baseUrl + "/goals?cycleId="+cycleId, this.child)
+    return this.http.get(this.baseUrl + "/goals?cycleId="+cycleId+"&hideDisable=false", this.child)
     .map(this.extractData)
     .catch(this.handleError);
   }

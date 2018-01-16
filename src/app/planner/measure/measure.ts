@@ -432,7 +432,8 @@ export class MeasureComponent extends Filters implements AfterViewInit {
   }
 
   enableFields() {
-    $('#add-opi').hide();        
+    $('#add-opi').hide();    
+    $(".to-be-highlighted").removeClass("highlight");    
     this.measureForm.controls["cycleId"].enable();
     this.measureForm.controls["objectiveId"].enable();
     this.measureForm.controls["initiativeId"].enable();

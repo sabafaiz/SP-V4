@@ -37,7 +37,7 @@ export class PlanComponent{
     $("#collapse1").collapse('show');    
   }
   getCycles(){
-    this.orgService.getCycles().subscribe((response:any)=>{
+    this.orgService.getAllCycle().subscribe((response:any)=>{
       if(response.status == 204){
         this.cycles = [];
       }else{
@@ -88,7 +88,6 @@ export class PlanComponent{
       } else { 
         event.srcElement.checked = !event.srcElement.checked;
       }
-      debugger
     }else{
       const forEnabled = confirm("Are you sure you want to enable it");
       if(forEnabled){

@@ -6,32 +6,24 @@
     <li routerLinkActive="active">
       <a routerLink="home">Home</a>
     </li>
-    <!-- <li routerLinkActive="active" class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown">{{selectedMenu}}
-          <span *ngIf="!selectedMenu">Strategic Plan</span>
-          <span class="caret"></span>
-        </a>
-      <ul class="dropdown-menu"> -->
-        <li routerLinkActive="active" (click)="selectedMenu = 'Strategic Plan'">
-          <a routerLink="./strategic-plan">Strategic Plan</a>
-        </li>
-        <li routerLinkActive="active" (click)="selectedMenu = 'Strategic goals'">
-          <a routerLink="./strategic-goal">Strategic Goals</a>
-        </li>
-        <li routerLinkActive="active" (click)="selectedMenu = 'Proposed Initiatives'">
-          <a routerLink="./initiatives">Proposed Initiatives</a>
-        </li>
-        <li routerLinkActive="active" (click)="selectedMenu = 'Proposed Activities'">
-          <a routerLink="./activities">Proposed Activities</a>
-        </li>
-        <li routerLinkActive="active" (click)="selectedMenu = 'KPI'">
-          <a routerLink="./kpis">KPI</a>
-        </li>
-        <li routerLinkActive="active" (click)="selectedMenu = 'SPI'">
-          <a routerLink="./spi">SPI</a>
-        </li>
-      <!-- </ul>
-    </li> -->
+    <li routerLinkActive="active">
+      <a routerLink="./strategic-plan">Strategic Plan</a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="./strategic-goal">Strategic Goals</a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="./initiatives">Proposed Initiatives</a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="./activities">Proposed Activities</a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="./kpis">KPI</a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="./spi">SPI</a>
+    </li>
   </ul>
   <ul class="nav navbar-nav navbar-right" style="margin-right:0px;">
     <li class="dropdown">

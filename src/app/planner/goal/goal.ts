@@ -165,6 +165,7 @@ export class GoalComponent extends Filters implements AfterViewInit {
   }
 
   closeForm(){
+    $(".to-be-highlighted").removeClass("highlight");
     $("#add-plan").hide();
   }
 }

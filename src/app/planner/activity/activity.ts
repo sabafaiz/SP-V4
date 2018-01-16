@@ -160,7 +160,8 @@ export class ActivityComponent extends Filters implements OnInit, AfterViewInit 
     this.activityForm.controls["objectiveId"].enable();
     this.activityForm.controls["initiativeId"].enable();
     this.activityForm = this.setActivity();
-    $("#add-activity").hide();    
+    $("#add-activity").hide(); 
+    $(".to-be-highlighted").removeClass("highlight");   
   }
 
   addNewActivity(){

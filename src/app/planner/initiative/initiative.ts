@@ -137,6 +137,7 @@ export class InitiativeComponent extends Filters {
 
   enableFields() {
     $("#add-initiative").hide();
+    $(".to-be-highlighted").removeClass("highlight");
     this.initiativeForm.controls["cycleId"].enable();
     this.initiativeForm.controls["goalId"].enable();
     this.initiativeForm = this.initForm();
