@@ -34,7 +34,8 @@ export class PlanComponent{
 
   addNewPlan(){
     $("#add-plan").show();
-    $("#collapse1").collapse('show');    
+    $("#collapse1").collapse('show');   
+    this.cycleForm.reset();
   }
   getCycles(){
     this.orgService.getCycles().subscribe((response:any)=>{

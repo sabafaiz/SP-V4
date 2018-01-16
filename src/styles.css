@@ -4,6 +4,7 @@
 :root{
   --color-primary : #563d7c;
   --color-text    : #cbbde2;
+  --color-body    : #f3efef;
   --color0        : white;
   --color1        : #d6c7e8;
   --color2        : rgb(248, 242, 255);
@@ -24,7 +25,7 @@
 
 /* end of variables  */
 body{
-  background: var(--color0);
+  background: var(--color-body);
   
 }
 
@@ -770,6 +771,9 @@ color: brown;
 }
 
 /* panel-css */
+.detail-plan{
+  background: var(--color-body);
+}
 
 
 .header-background>tr>th{
