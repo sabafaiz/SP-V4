@@ -280,11 +280,11 @@
           </colgroup>
           <thead class="header-background" *ngIf="goalsCopy.length">
             <tr>
-              <th>
+              <th><span class="hide-text">GOAL</span>
                 <form action="" class="search-form">
                   <div class="form-group has-feedback" style="margin-bottom: 10px;">
                     <label for="search" class="sr-only">Search</label>
-                    <input type="text" class="form-control" name="search" id="search" (keyup)="searchGoal($event)" placeholder="Goal">
+                    <input type="text" class="form-control" name="search" id="search" (keyup)="searchGoal($event)" placeholder="GOAL">
                     <span class="glyphicon glyphicon-search form-control-feedback"></span>
                   </div>
                 </form>
@@ -292,11 +292,11 @@
                     <input type="text" name="search" (keyup)="searchGoal($event)" placeholder="Goal">
                   </span> -->
               </th>
-              <th>
+              <th><span class="hide-text">INITIATIVE</span>
                 <form action="" class="search-form">
                   <div class="form-group has-feedback" style="margin-bottom: 10px;">
                     <label for="search" class="sr-only">Search</label>
-                    <input type="text" class="form-control" name="search" id="search" (keyup)="searchInitiative($event)" placeholder="Initiative">
+                    <input type="text" class="form-control" name="search" id="search" (keyup)="searchInitiative($event)" placeholder="INITIATIVE">
                     <span class="glyphicon glyphicon-search form-control-feedback"></span>
                   </div>
                 </form>
@@ -304,11 +304,11 @@
                     <input type="text" name="search" (keyup)="searchInitiative($event)" placeholder="Initiative">
                   </span> -->
               </th>
-              <th>
+              <th><span class="hide-text">ACTIVITY</span>
                 <form action="" class="search-form">
                   <div class="form-group has-feedback" style="margin-bottom: 10px;">
                     <label for="search" class="sr-only">Search</label>
-                    <input type="text" class="form-control" name="search" id="search" (keyup)="searchActivity($event)" placeholder="Activity">
+                    <input type="text" class="form-control" name="search" id="search" (keyup)="searchActivity($event)" placeholder="ACTIVITY">
                     <span class="glyphicon glyphicon-search form-control-feedback"></span>
                   </div>
                 </form>
@@ -317,7 +317,7 @@
                     <input type="text" name="search" (keyup)="searchActivity($event)" placeholder="Activity">
                   </span> -->
               </th>
-              <th>
+              <th><span class="hide-text">KPI</span>
                 <form action="" class="search-form">
                   <div class="form-group has-feedback" style="margin-bottom: 10px;">
                     <label for="search" class="sr-only">Search</label>
@@ -503,6 +503,7 @@
     </div>
   </div>
 
+  <!-- detail-modal -->
   <div class="modal fade modal-add" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content" *ngIf="selectedMeasure">
@@ -536,12 +537,12 @@
               </button>
               </div>
               <table class="table border-color" *ngIf="!dept.edit">
-                <caption style="text-align: left;color: var(--color-primary);">{{dept.department}}
+                <caption style="text-align: left;color: var(--color-primary);">{{dept.department}}</caption>
                   <span class="input-group pull-right">
                   <div class="input-group-addon base-color">BaseLine</div>
                   <div class="form-control form-border" style="width:25%">{{dept.baseline}}</div>
                 </span>
-                </caption>
+                
                 <ng-container>
                   <tr *ngFor="let array of dept.opiAnnualTargets;let op=index;">
                     <td>{{array.year}}</td>

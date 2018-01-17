@@ -147,7 +147,7 @@
         </colgroup>
         <thead class="header-background" *ngIf="goals.length">
           <tr>
-            <th>
+            <th><span class="hide-text">GOAL</span>
               <form action="" class="search-form">
                 <div class="form-group has-feedback" style="margin-bottom: 10px;">
                   <label for="search" class="sr-only">Search</label>
@@ -155,12 +155,8 @@
                   <span class="glyphicon glyphicon-search form-control-feedback"></span>
                 </div>
               </form>
-
-              <!-- <span class="search">
-                  <input type="text" name="search" (keyup)="searchGoal($event)" placeholder="Goal">
-                </span> -->
             </th>
-            <th>
+            <th><span class="hide-text">INITIATIVE</span>
               <form action="" class="search-form">
                 <div class="form-group has-feedback" style="margin-bottom: 10px;">
                   <label for="search" class="sr-only">Search</label>
@@ -173,7 +169,7 @@
                   <input type="text" name="search" (keyup)="searchInitiative($event)" placeholder="Initiative">
                 </span> -->
             </th>
-            <th>
+            <th><span class="hide-text">ACTIVITY</span>
               <form action="" class="search-form">
                 <div class="form-group has-feedback" style="margin-bottom: 10px;">
                   <label for="search" class="sr-only">Search</label>
