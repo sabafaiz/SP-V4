@@ -38,11 +38,11 @@ border-top: 1px solid #cf3238
 
 
 .table-bordered .glyphicon-edit{
-  color:#563d7c;
+  color:var(--color-primary)
   }
 
 .table-bordered .glyphicon-trash{
-    color:#563d7c;
+    color:var(--color-primary)
   }
 
 /* .btn-del:hover {

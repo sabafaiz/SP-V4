@@ -38,19 +38,11 @@ export class MeasureComponent extends Filters implements AfterViewInit {
   public measureForm: FormGroup;
   selectedQuarter: any = 0;
   constructor(public orgService: UniversityService,
-    public formBuilder: FormBuilder, public commonService: StorageService, private loaderService:LoaderService) {
+    public formBuilder: FormBuilder, public commonService: StorageService, private loaderService: LoaderService) {
     super();
     this.measureForm = this.setMeasure();
     this.loaderService.display(true);
-    this.orgService.getCycleWithChildren().subscribe((response: any) => {
-      this.cycles = response;
-      this.cycles.forEach(element => {
-        if (element.defaultCycle)
-          this.defaultCycle = element.cycleId;
-      });
-      this.getMeasure();
-      this.getEvidenceForms()
-    });
+    this.getCycleWithChildren(false);
   }
 
   ngOnInit() {
@@ -60,6 +52,20 @@ export class MeasureComponent extends Filters implements AfterViewInit {
 
   ngAfterViewInit() {
 
+  }
+
+  getCycleWithChildren(flag: any) {
+    this.orgService.getCycleWithChildren(flag).subscribe((response: any) => {
+      this.cycles = response;
+      this.cycles.forEach(element => {
+        if (element.defaultCycle)
+          this.defaultCycle = element.cycleId;
+      });
+      if (!flag) {
+        this.getMeasure();
+        this.getEvidenceForms();
+      }
+    });
   }
 
   getObjective(cycleId: any) {
@@ -112,8 +118,8 @@ export class MeasureComponent extends Filters implements AfterViewInit {
         this.filteredInitiatives = response;
         this.filteredOpis = response;
       }
-      this.loaderService.display(false);      
-    },(error:any)=>{
+      this.loaderService.display(false);
+    }, (error: any) => {
       this.loaderService.display(false);
     });
   }
@@ -134,53 +140,53 @@ export class MeasureComponent extends Filters implements AfterViewInit {
   public selectedMeasureId: any;
 
   /**for editing opi target levels */
-  editDepartmentForm:FormGroup;
-  viewDepartment(dept:any){
+  editDepartmentForm: FormGroup;
+  viewDepartment(dept: any) {
     dept.edit = true;
     this.editDepartmentForm = this.formBuilder.group({
-      "id":[dept.id],
-      "baseline":[dept.baseline],
-      "opiAnnualTargets":this.formBuilder.array(this.getOpiAnnualTargets(dept.opiAnnualTargets))
+      "id": [dept.id],
+      "baseline": [dept.baseline],
+      "opiAnnualTargets": this.formBuilder.array(this.getOpiAnnualTargets(dept.opiAnnualTargets))
     });
   }
 
-  getOpiAnnualTargets(opiAnnualTargets:any[]){
-    const annualTargets:any[] = [];
+  getOpiAnnualTargets(opiAnnualTargets: any[]) {
+    const annualTargets: any[] = [];
     opiAnnualTargets.forEach(element => {
       annualTargets.push(this.formBuilder.group({
-        "id":[element.id],
-        "estimatedCost":[element.estimatedCost],
-        "levels":this.formBuilder.array(this.getLevels(element.levels))
+        "id": [element.id],
+        "estimatedCost": [element.estimatedCost],
+        "levels": this.formBuilder.array(this.getLevels(element.levels))
       }))
     });
     return annualTargets;
   }
 
-  getLevels(levelsArray){
-    const levels:any[]=[];
+  getLevels(levelsArray) {
+    const levels: any[] = [];
     levelsArray.forEach(element => {
       levels.push(this.formBuilder.group({
-        "id":element.id,
-        "estimatedTargetLevel":element.estimatedTargetLevel
+        "id": element.id,
+        "estimatedTargetLevel": element.estimatedTargetLevel
       }))
     });
     return levels;
   }
 
-  removeAssignedDept(selectedMeasure:any,index:any){
-    const assignedDepartments:any[] = selectedMeasure.assignedDepartments;
-    if(confirm("Do you realy want to unassign department??"))
-    this.orgService.deleteAssignedDepartment(selectedMeasure.assignedDepartments[index].id).subscribe((response:any)=>{
-      assignedDepartments.splice(index,1);
-    })    
+  removeAssignedDept(selectedMeasure: any, index: any) {
+    const assignedDepartments: any[] = selectedMeasure.assignedDepartments;
+    if (confirm("Do you realy want to unassign department??"))
+      this.orgService.deleteAssignedDepartment(selectedMeasure.assignedDepartments[index].id).subscribe((response: any) => {
+        assignedDepartments.splice(index, 1);
+      })
   }
 
-  updateOpiTarget(selectedMeasure:any,index:any){
-    if(confirm("Do you realy want to update targets??"))
-    this.orgService.updateTarget(selectedMeasure.opiId,[this.editDepartmentForm.value]).subscribe((response:any)=>{
-      selectedMeasure.assignedDepartments[index] = response[0];
-    });
-  }  
+  updateOpiTarget(selectedMeasure: any, index: any) {
+    if (confirm("Do you realy want to update targets??"))
+      this.orgService.updateTarget(selectedMeasure.opiId, [this.editDepartmentForm.value]).subscribe((response: any) => {
+        selectedMeasure.assignedDepartments[index] = response[0];
+      });
+  }
 
   public selectedDepartments: any[] = [];
   public department(event: any) {
@@ -222,13 +228,13 @@ export class MeasureComponent extends Filters implements AfterViewInit {
       return;
     } else {
       if (checked) {
-        if(!department.disabled){
+        if (!department.disabled) {
           department.my = true;
-          if(this.selectedDepartments.indexOf(department)===-1)
-          this.selectedDepartments.push(department);
+          if (this.selectedDepartments.indexOf(department) === -1)
+            this.selectedDepartments.push(department);
         }
       } else {
-        if(!department.disabled){
+        if (!department.disabled) {
           department.my = false;
           this.selectedDepartments.splice(this.selectedDepartments.indexOf(department), 1);
         }
@@ -258,13 +264,13 @@ export class MeasureComponent extends Filters implements AfterViewInit {
     departmentsArray.forEach(element => {
       delete element["departmentName"];
     });
-    alertify.confirm("Do you really want to assign this OPI",()=>{
+    alertify.confirm("Do you really want to assign this OPI", () => {
       this.orgService.assignOpi(this.selectedMeasure.opiId, departmentsArray).subscribe((response: any) => {
         this.selectedMeasure.assignedDepartments = this.selectedMeasure.assignedDepartments.concat(response);
         alertify.notify("Successfully assigned");
-        $('#detailModal').modal('show');        
-        $('#myModal').modal('hide');        
-      },(error:any)=>{
+        $('#detailModal').modal('show');
+        $('#myModal').modal('hide');
+      }, (error: any) => {
         alertify.error("Something went wrong");
       })
     })
@@ -387,22 +393,22 @@ export class MeasureComponent extends Filters implements AfterViewInit {
           msg += "\n" + key + " = " + formChanges[key] + ",";
         }
       });
-      alertify.confirm("Are you sure you want to update this OPI as " + msg, ()=> {
+      alertify.confirm("Are you sure you want to update this OPI as " + msg, () => {
         delete this.measureForm.value["activityId"];
         this.orgService.updateMeasure(this.selectedMeasure.opiId, formChanges).subscribe((response: any) => {
           this.measureForm = this.setMeasure();
           this.getMeasure();
         });
       })
-      $('#add-opi').hide();            
+      $('#add-opi').hide();
     }
   }
 
   selectedMeasure: any;
 
-  
 
-  updateMeasure(objective: any, initiative: any, activity: any, measure: any, highlight:any) {
+
+  updateMeasure(objective: any, initiative: any, activity: any, measure: any, highlight: any) {
     $(".to-be-highlighted").removeClass("highlight");
     $(highlight).addClass("highlight");
     this.measureForm.controls["cycleId"].disable();
@@ -426,14 +432,14 @@ export class MeasureComponent extends Filters implements AfterViewInit {
       helpText: measure.helpText,
       approvalRequired: measure.approvalRequired
     });
-    $('#add-opi').show();    
+    $('#add-opi').show();
     $("#collapse1").collapse('show');
     // this.measureForm.controls["annualTarget"].patchValue(measure.annualTarget);
   }
 
   enableFields() {
-    $('#add-opi').hide();    
-    $(".to-be-highlighted").removeClass("highlight");    
+    $('#add-opi').hide();
+    $(".to-be-highlighted").removeClass("highlight");
     this.measureForm.controls["cycleId"].enable();
     this.measureForm.controls["objectiveId"].enable();
     this.measureForm.controls["initiativeId"].enable();
@@ -456,41 +462,52 @@ export class MeasureComponent extends Filters implements AfterViewInit {
     })
   }
 
+  closeForm() {
+    this.enableFields();
+    this.isUpdating = false;
+    this.getCycleWithChildren(false);
+  }
+
   addNewMeasure() {
     this.enableFields();
     this.isUpdating = false;
-    $('#add-opi').show();        
+    $('#add-opi').show();
     $("#collapse1").collapse('show');
+    
+    this.objectives = [];
+    this.initiatives = [];
+    this.activities = [];
+    this.getCycleWithChildren(true);
     this.measureForm = this.setMeasure();
   }
 
-  disable(event:any,opiId:any){
-    if(event.srcElement.checked)
-      alertify.confirm("Do you Really want to disable this KPI??",()=>{
-        this.orgService.disableKPI(opiId).subscribe((response:any)=>{
+  disable(event: any, opiId: any) {
+    if (event.srcElement.checked)
+      alertify.confirm("Do you Really want to disable this KPI??", () => {
+        this.orgService.disableKPI(opiId).subscribe((response: any) => {
           alertify.success("You disabled the KPI..");
           this.getMeasure();
-        },()=>{
+        }, () => {
           event.srcElement.checked = !event.srcElement.checked;
           alertify.error("Something went wrong..")
         })
-      },()=>{
+      }, () => {
         event.srcElement.checked = !event.srcElement.checked;
         alertify.error("Action was not performed")
       });
     else
-      alertify.confirm("Do you Really want to enable this KPI??",()=>{
-        this.orgService.enableKPI(opiId).subscribe((response:any)=>{
+      alertify.confirm("Do you Really want to enable this KPI??", () => {
+        this.orgService.enableKPI(opiId).subscribe((response: any) => {
           alertify.success("You enabled the KPI..");
           this.getMeasure();
-        },()=>{
+        }, () => {
           event.srcElement.checked = !event.srcElement.checked;
           alertify.error("Something went wrong..")
         })
-      },()=>{
+      }, () => {
         event.srcElement.checked = !event.srcElement.checked;
         alertify.error("Action was not performed")
-      });      
+      });
   }
 
   get(e) {

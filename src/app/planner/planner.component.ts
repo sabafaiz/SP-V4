@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { StorageService } from '../shared/storage.service';
 import { UniversityService } from "../shared/UTI.service";
 import { Router } from "@angular/router";
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { LoaderService } from '../shared/loader.service';
 
 declare let $:any;
 

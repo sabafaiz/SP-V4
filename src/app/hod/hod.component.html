@@ -6,7 +6,7 @@
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <span class="glyphicon glyphicon-user"></span>
-        <strong>{{userDetails.firstName}}</strong>
+        <strong style="text-transform: capitalize">{{userDetails.firstName}}({{userDetails.roleInfo[0].role}})</strong>
         <span class="glyphicon glyphicon-chevron-down"></span>
       </a>
       <ul class="dropdown-menu">
@@ -128,11 +128,11 @@
                 <td>{{lev.endDate + tdl.year}}</td>
                 <td style="text-transform: capitalize;">{{lev.status}}</td>
                 <td>
-                  <button class="btn-link" data-toggle="modal" data-target="#feedbackModal" (click)="selectedLevel = lev;"> Approve/Reject</button>
+                  <button class="btn-link" data-toggle="modal" data-target="#feedbackModal" (click)="selectedLevel = lev;" [disabled]="lev.status!='locked'"> Approve/Reject</button>
                 </td>
               </tr>
               <tr *ngIf="lev.evidance&&lev.evidance.length">
-                <td colspan="6">
+                <td colspan="7">
                   <b>Evidences</b>
                   <br>
                   <div class="row" *ngFor="let ev of lev.evidance;let e = index;">
@@ -175,16 +175,28 @@
                     </caption>
                     <thead>
                       <tr>
+                        <th>*</th>
                         <th>Mou Type</th>
                         <th>Organisation</th>
+                        <th>Evidence</th>
                       </tr>
                     </thead>
                     <tbody *ngFor="let detail of lev.mouDetails;let d = index;">
                       <tr>
+                        <th>{{d+1}}</th>
                         <td>{{detail.mouType}}</td>
                         <td>{{detail.organization}}</td>
+                        <td>
+                          <ul style="list-style:none;padding:0;">
+                            <li *ngIf="!detail.evidance.length">None</li>
+                            <li style="float:left;" *ngFor="let ev of detail.evidance;let e = index;">
+                                <!-- {{e+1}}) -->
+                                <a [attr.href]="ev.url"> evidance {{e+1}}</a> ,
+                            </li>
+                          </ul>
+                        </td>
                       </tr>
-                      <tr *ngIf="detail.evidance.length">
+                      <!-- <tr *ngIf="detail.evidance.length">
                         <td colspan="2">
                           <b>Evidences</b>
                           <br>
@@ -194,7 +206,7 @@
                             </div>
                           </div>
                         </td>
-                      </tr>
+                      </tr> -->
                     </tbody>
                   </table>
                 </td>
@@ -279,7 +291,7 @@
                             <tr *ngFor="let msr of activit.opis;let l=index">
                               <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.opi}}</td>
                               <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.frequency}}</td>
-                              <td style="text-transform: capitalize;">{{msr.quarterStatus.status}}</td>
+                              <td style="text-transform: capitalize;"><p *ngIf="msr.quarterStatus">{{msr.quarterStatus.status}}</p></td>
                               <td [style.border-top]="l?'1px solid #ddd':'none'">
                                 <a scrollTo href="#top" (click)="selectedOpi=goal;selectedInitiative=initiate;selectedActivity=activit;selectedMeasure=msr;showOpi(goal,msr)">view</a>
                               </td>

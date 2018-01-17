@@ -449,7 +449,7 @@
                             <tr *ngFor="let msr of activit.opis;let l=index">
                               <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.opi}}</td>
                               <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.frequency}}</td>
-                              <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.quarterStatus.status}}</td>
+                              <td [style.border-top]="l?'1px solid #ddd':'none'"><p *ngIf="msr.quarterStatus">{{msr.quarterStatus.status}}</p></td>
                               <td [style.border-top]="l?'1px solid #ddd':'none'">
                                 <a style="cursor:pointer;" data-target="#edit-section" (click)="selectedOpi=goal;selectedInitiative=initiate;selectedActivity=activit;selectedMeasure=msr;showOpi(goal,msr)">view</a>
                               </td>

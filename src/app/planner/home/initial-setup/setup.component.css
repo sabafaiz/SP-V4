@@ -25,12 +25,12 @@
 }
 #cssmenu {
   width: auto;
-  border-bottom: 3px solid  #563d7c;
+  border-bottom: 3px solid  var(--color-primary);
   font-family: Raleway, sans-serif;
   line-height: 1;
 }
 #cssmenu ul {
-  background: #ffffff;
+  background: var(--color-body);
 }
 #cssmenu > ul > li {
   float: left;
@@ -93,7 +93,7 @@
 #cssmenu > ul > li.active > a:after,
 #cssmenu > ul > li:hover > a:after,
 #cssmenu > ul > li > a:hover:after {
-  background:  #563d7c;
+  background:  var(--color-primary);
 }
 
 
@@ -121,105 +121,46 @@
 }
 
 .form-fill textarea:focus{
-    border-color: #563d7c;
+    border-color: var(--color-primary);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgb(86, 61, 124);
 }
 
 .margin{
     margin-right:15px;
-    color: #563d7c;
+    color: var(--color-primary);
     margin-top: 10px;
 }
 
 .margin:hover{
-    background:#563d7c;
+    background:var(--color-primary);
     color:white; 
 }
 
 .add-value{
-  border: 2px solid #563d7c;
+  border: 2px solid var(--color-primary);
     margin-right: 15px;
 }
 
 .add-value .panel-body .control-label{
 text-align:left;
-color:#563d7c;
+color:var(--color-primary);
 }
 
 .add-value .close{
-    color:#563d7c;
+    color:var(--color-primary);
     opacity: 1;
 }
 
 
 
 .add-value .form-control:focus{
-    border-color: #563d7c;
+    border-color: var(--color-primary);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgb(86, 61, 124);  
 }
 
 .submit-btn{
-    color: #cbbde2;
-    background-color: #563d7c;
-    border-color: #563d7c;
+    color: var(--color-text);
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
 }
 
-
-/* option2 */
-
-.the-legend {
-    border-style: none;
-    border-width: 0;
-    font-size: 16px;
-    line-height: 20px;
-    margin-bottom: 0;
-    width: auto;
-    padding: 14px 28px;
-    border: 1px solid #e0e0e0;
-    background: #cbbde2;
-    color: #563d7c;
-}
-.the-fieldset {
-    border: 1px solid #e0e0e0;
-    padding: 10px;
-}
-
-
-/* option2 */
-.add-value2{
-  background: #563d7c;
-  color: #cbbde2;
-  margin-left: 15px; 
-  margin-top: 65px;
-}
-
-.add-value2 .close{
-  color:#cbbde2;
-  opacity: 1;
-}
-
-
-
-.add-value2 .submit-btn{
-    color: #563d7c;
-    background-color: #cbbde2;
-    border-color: #cbbde2;
-  }
-
-.margin1{
-    margin-right:15px;
-    color: #563d7c;
-    margin-top: -35px;
-    margin-left:-7px;
-}
-
-.margin1:hover{
-    background:#563d7c;
-    color:white; 
-}
-
-
-.add-value2 .form-control:focus{
-  border-color: #563d7c;
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgb(86, 61, 124);  
-}

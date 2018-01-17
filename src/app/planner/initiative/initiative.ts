@@ -27,13 +27,13 @@ export class InitiativeComponent extends Filters {
     public commonService: StorageService,
     private loaderService:LoaderService) {
     super();
-    this.getCycleWithChildren();
+    this.getCycleWithChildren(false);
     this.initiativeForm = this.initForm();
   }
 
-  getCycleWithChildren() {
+  getCycleWithChildren(flag:any) {
     this.loaderService.display(true);
-    this.orgService.getCycleWithChildren().subscribe((response: any) => {
+    this.orgService.getCycleWithChildren(flag).subscribe((response: any) => {
       if (response.status == 204) {
         this.cycles = [];
       } else {
@@ -42,7 +42,8 @@ export class InitiativeComponent extends Filters {
           if (element.defaultCycle)
             this.defaultCycle = element.cycleId;
         });
-        this.getInitiative();
+        if(!flag)
+          this.getInitiative();
       }
     })
   }
@@ -143,10 +144,17 @@ export class InitiativeComponent extends Filters {
     this.initiativeForm = this.initForm();
   }
 
+  closeForm(){
+    this.enableFields();
+    this.isUpdating = false;
+    this.getCycleWithChildren(false);
+  }
+
   addNewInitiative() {
     $("#add-initiative").show();
     this.isUpdating = false;
     $("#collapse1").collapse('show');
+    this.getCycleWithChildren(true);
     this.initiativeForm = this.initForm();
 
   }

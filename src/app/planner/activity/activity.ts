@@ -29,7 +29,22 @@ export class ActivityComponent extends Filters implements OnInit, AfterViewInit 
     private loaderService:LoaderService) {
     super();
     this.loaderService.display(true);
-    this.orgService.getCycleWithChildren().subscribe((response: any) => {
+    this.getCycleWithChildren(false);
+    this.activityForm = this.setActivity();
+  }
+
+  ngOnInit() {
+    
+  }
+
+  ngAfterViewInit() {
+    $(document).ready(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  }
+  
+  getCycleWithChildren(flag:any){
+    this.orgService.getCycleWithChildren(flag).subscribe((response: any) => {
       if (response.status == 204) {
         this.cycles = [];
         this.objectives = [];
@@ -40,19 +55,9 @@ export class ActivityComponent extends Filters implements OnInit, AfterViewInit 
             this.defaultCycle = element.cycleId;
           }
         });
+        if(!flag)
         this.getActivities();
       }
-    });
-    this.activityForm = this.setActivity();
-  }
-
-  ngOnInit() {
-    // this.getActivities();
-  }
-
-  ngAfterViewInit() {
-    $(document).ready(function () {
-      $('[data-toggle="tooltip"]').tooltip();
     });
   }
 
@@ -155,6 +160,12 @@ export class ActivityComponent extends Filters implements OnInit, AfterViewInit 
     });
   }
 
+  closeForm(){
+    this.enableFields();
+    this.isUpdating = false;
+    this.getCycleWithChildren(false);
+  }
+
   enableFields() {
     this.activityForm.controls["cycleId"].enable();
     this.activityForm.controls["objectiveId"].enable();
@@ -169,8 +180,8 @@ export class ActivityComponent extends Filters implements OnInit, AfterViewInit 
     this.isUpdating = false;
     $("#add-activity").show();
     $("#collapse1").collapse('show');
+    this.getCycleWithChildren(true);
     this.activityForm = this.setActivity();
-
   }
 
   disable(event:any,activityId:any){

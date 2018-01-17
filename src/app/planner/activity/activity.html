@@ -20,7 +20,6 @@
     </div>
     <div id="collapse1" class="panel-collapse collapse">
       <form [formGroup]="activityForm" (submit)="submitActivity()">
-
         <div class="panel-body">
           <div class="row">
             <div class="col-lg-6 col-sm-12">
@@ -60,7 +59,7 @@
             data-placement="auto" title="Submit Form">
             <i class="glyphicon glyphicon-ok"></i>
           </button>
-          <button type="button" class="btn btn-danger btn-outline-danger btn-close" data-dismiss="modal" (click)="enableFields(); isUpdating = false"
+          <button type="button" class="btn btn-danger btn-outline-danger btn-close" data-dismiss="modal" (click)="closeForm();"
             data-toggle="tooltip" data-placement="auto" title="Reset Form">
             <i class="glyphicon glyphicon-remove"></i>
           </button>

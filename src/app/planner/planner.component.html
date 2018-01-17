@@ -1,73 +1,79 @@
-<nav class="navbar navbar-fixed-top">
-  <div class="navbar-header">
-    <a class="navbar-brand" href="">UAEU</a>
-  </div>
-  <ul class="nav navbar-nav" style="margin-right:0px;">
-    <li routerLinkActive="active">
-      <a routerLink="home">Home</a>
-    </li>
-    <li routerLinkActive="active">
-      <a routerLink="./strategic-plan">Strategic Plan</a>
-    </li>
-    <li routerLinkActive="active">
-      <a routerLink="./strategic-goal">Strategic Goals</a>
-    </li>
-    <li routerLinkActive="active">
-      <a routerLink="./initiatives">Proposed Initiatives</a>
-    </li>
-    <li routerLinkActive="active">
-      <a routerLink="./activities">Proposed Activities</a>
-    </li>
-    <li routerLinkActive="active">
-      <a routerLink="./kpis">KPI</a>
-    </li>
-    <li routerLinkActive="active">
-      <a routerLink="./spi">SPI</a>
-    </li>
-  </ul>
-  <ul class="nav navbar-nav navbar-right" style="margin-right:0px;">
-    <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <span class="glyphicon glyphicon-user"></span>
-        <strong>{{userDetails.firstName}}</strong>
-        <span class="glyphicon glyphicon-chevron-down"></span>
-      </a>
-      <ul class="dropdown-menu">
-        <li>
-          <div class="navbar-login">
-            <div class="row">
-              <div class="col-lg-4">
-                <p class="text-center">
-                  <span class="glyphicon glyphicon-user icon-size"></span>
-                </p>
-              </div>
-              <div class="col-lg-8">
-                <p class="text-left">
-                  <strong>{{userDetails.firstName}} {{userDetails.lastName}}</strong><br>
-                  <b>{{userDetails.roleInfo[0].role}}</b>
-                </p>
-                <p class="text-left small">{{userDetails.email}}</p>
-                <p class="text-left">
-                  <a href="#" class="btn btn-primary btn-block btn-sm">Profile</a>
-                </p>
-              </div>
-            </div>
-          </div>
+<div class="row">
+  <div class="col-sm-12 col-lg-12 col-md-12">
+
+    <nav class="navbar navbar-fixed-top">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="">UAEU</a>
+      </div>
+      <ul class="nav navbar-nav" style="margin-right:0px;">
+        <li routerLinkActive="active">
+          <a routerLink="home">Home</a>
         </li>
-        <li class="divider"></li>
-        <li>
-          <div class="navbar-login navbar-login-session">
-            <div class="row">
-              <div class="col-lg-12">
-                <p>
-                  <a routerLink="/login" class="btn btn-danger btn-block" (click)="logout()">Logout</a>
-                </p>
-              </div>
-            </div>
-          </div>
+        <li routerLinkActive="active">
+          <a routerLink="./strategic-plan">Strategic Plan</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="./strategic-goal">Strategic Goals</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="./initiatives">Proposed Initiatives</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="./activities">Proposed Activities</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="./kpis">KPI</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="./spi">SPI</a>
         </li>
       </ul>
-    </li>
-  </ul>
-</nav>
+      <ul class="nav navbar-nav navbar-right" style="margin-right:0px;">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-user"></span>
+            <strong>{{userDetails.firstName}}</strong>
+            <span class="glyphicon glyphicon-chevron-down"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <div class="navbar-login">
+                <div class="row">
+                  <div class="col-lg-4">
+                    <p class="text-center">
+                      <span class="glyphicon glyphicon-user icon-size"></span>
+                    </p>
+                  </div>
+                  <div class="col-lg-8">
+                    <p class="text-left">
+                      <strong>{{userDetails.firstName}} {{userDetails.lastName}}</strong>
+                      <br>
+                      <b>{{userDetails.roleInfo[0].role}}</b>
+                    </p>
+                    <p class="text-left small">{{userDetails.email}}</p>
+                    <p class="text-left">
+                      <a href="#" class="btn btn-primary btn-block btn-sm">Profile</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <div class="navbar-login navbar-login-session">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <p>
+                      <a routerLink="/login" class="btn btn-danger btn-block" (click)="logout()">Logout</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
 <router-outlet></router-outlet>

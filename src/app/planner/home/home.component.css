@@ -42,7 +42,7 @@
 }
 
 .color4{
-    background: #563d7c;
+    background: var(--color-primary);;
     color:white;
 }
 
@@ -117,36 +117,36 @@ outline-offset: 0px;
 }
 
 .nav-values li a{
-    background: #cbbde2;
+    background: var(--color-text);
     border-radius: 15px;
     text-align: center;
     margin:10px;
-    color:#563d7c;
+    color:var(--color-primary);;
     font-weight: 600;
 }
 
 .nav-values li a:hover{
-    background: #563d7c!important;
+    background: var(--color-primary)!important;
     color: white!important;
 }
 
 .nav-values li :active{
-    background: #563d7c!important;
+    background: var(--color-primary)!important;
     color: white!important;
 }
 
 .nav-values li a:open{
-    background: #563d7c!important;
+    background: var(--color-primary)!important;
     color: white!important;   
 }
 
 .margin{
     margin-left:10px;
-    color: #563d7c;
+    color: var(--color-primary);
 }
 
 .margin:hover{
-    background:#563d7c;
+    background:var(--color-primary);
     color:white; 
 }
 
@@ -177,12 +177,12 @@ outline-offset: 0px;
 }
 #cssmenu {
   width: auto;
-  border-bottom: 3px solid  #563d7c;
+  border-bottom: 3px solid  var(--color-primary);
   font-family: Raleway, sans-serif;
   line-height: 1;
 }
 #cssmenu ul {
-  background: #ffffff;
+  background: #f3efef;
 }
 #cssmenu > ul > li {
   float: left;
@@ -245,7 +245,7 @@ outline-offset: 0px;
 #cssmenu > ul > li.active > a:after,
 #cssmenu > ul > li:hover > a:after,
 #cssmenu > ul > li > a:hover:after {
-  background:  #563d7c;
+  background:  var(--color-primary);
 }
 
 
@@ -257,18 +257,18 @@ outline-offset: 0px;
 /* cssmenu end */
 
 .value-card{
-    /* background: #cbbde2; */
+    /* background: var(--color-text); */
     border-radius: 6px;
     position: relative;
     z-index: 1;
-    border: 1px solid #563d7c;
+    border: 1px solid var(--color-primary);
     margin-bottom:30px;
     cursor: pointer;
 }
 
 
 .value-card .card-header{
-    background: #cbbde2;
+    background: var(--color-text);
     width:auto;
     border-radius: 4px;
     position: absolute;
@@ -279,13 +279,13 @@ outline-offset: 0px;
     padding-right: 10px;
     margin-left: 10px;
     cursor: pointer;
-    color:#563d7c;
+    color:var(--color-primary);
     
 }
 
 .value-card .card-header:hover{
-    background:#563d7c;
-    color: #cbbde2;
+    background:var(--color-primary);
+    color: var(--color-text);
 }
 
 .value-card .card-body{
@@ -300,24 +300,24 @@ outline-offset: 0px;
 
 .card-body .icon-btn{
     margin-left: 10px;
-    color: #563d7c;
+    color: var(--color-primary);
     margin-top: -33px;
 }
 
 .card-body .icon-btn:hover{
-    background: #563d7c;
+    background: var(--color-primary);
     color: white;
     
 }
 
 .icon-add{
     /* margin-left: 10px; */
-    color: #563d7c;
+    color: var(--color-primary);
     margin-top: -33px;
     right: 5px;
 }
 .icon-add:hover{
-    background: #563d7c;
+    background: var(--color-primary);
     color: white;
 }
 

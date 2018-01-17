@@ -1,15 +1,17 @@
 <div class="container-fluid">
   <div class="bg-nav">
     <div class="form-inline" style="margin-bottom: unset">
-        <button type="button" class="btn btn-default pull-right margin" (click)="addNewGoal()"><i class="glyphicon glyphicon-plus"></i></button>
+      <button type="button" class="btn btn-default pull-right margin" (click)="addNewGoal()">
+        <i class="glyphicon glyphicon-plus"></i>
+      </button>
       <div class="form-group dropdown-st">
         <label class="control-label">Strategic Plan</label>
         <select id="year" name="year" class="form-control" [(ngModel)]="defaultCycle" (ngModelChange)="getGoals()" style="width:auto;height: auto;padding: 0px;">
           <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}]</option>
         </select>
       </div>
-      </div> 
     </div>
+  </div>
   <div class="panel  add-form" id="add-plan" style="display:none;margin-top: 70px;">
     <div class="panel-heading">
       <h4 class="panel-title">
@@ -17,8 +19,8 @@
       </h4>
     </div>
     <div id="collapse1" class="panel-collapse collapse">
-      <form [formGroup]="goalForm" (submit)="onSubmit()">      
-      <div class="panel-body">
+      <form [formGroup]="goalForm" (submit)="onSubmit()">
+        <div class="panel-body">
           <div class="row">
             <div class="col-lg-6 col-xs-12 col-sm-6">
               <div class="form-group">
@@ -35,35 +37,38 @@
               </div>
             </div>
           </div>
-      </div>
-      <div class="panel-footer">
-        <button type="submit" class="btn btn-success btn-empty" [disabled]="goalForm.invalid"><i class="glyphicon glyphicon-ok"></i></button>
-        <button type="button" class="btn btn-danger btn-close" (click)="closeForm();isUpdating=false;" data-toggle="tooltip" data-placement="auto" title="Close">
-          <i class="glyphicon glyphicon-remove"></i>
-        </button>
-      </div>
-    </form>      
+        </div>
+        <div class="panel-footer">
+          <button type="submit" class="btn btn-success btn-empty" [disabled]="goalForm.invalid">
+            <i class="glyphicon glyphicon-ok"></i>
+          </button>
+          <button type="button" class="btn btn-danger btn-close" (click)="closeForm();isUpdating=false;" data-toggle="tooltip" data-placement="auto"
+            title="Close">
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
+        </div>
+      </form>
     </div>
   </div>
   <div class="panel detail-plan">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" href="#collapse2"></a>  
-       
+        <a data-toggle="collapse" href="#collapse2"></a>
+
       </h4>
     </div>
     <div id="collapse2" class="panel-collapse collapse in">
-      <table class="table table-hover table-bordered" >        
+      <table class="table table-hover table-bordered">
         <thead class="header-background" *ngIf="goals.length">
           <tr>
             <th>
-                <form action="" class="search-form">
-                      <div class="form-group has-feedback" style="margin-bottom:10px;">
-                    <label for="search" class="sr-only">Search</label>
-                  <input type="text" class="form-control" name="search" id="search"  (keyup)="searchGoal($event,goals)" placeholder="GOAL">
-                      <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                  </div>
-                </form>
+              <form action="" class="search-form">
+                <div class="form-group has-feedback" style="margin-bottom:10px;">
+                  <label for="search" class="sr-only">Search</label>
+                  <input type="text" class="form-control" name="search" id="search" (keyup)="searchGoal($event,goals)" placeholder="GOAL">
+                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                </div>
+              </form>
             </th>
             <th></th>
             <th></th>
@@ -71,14 +76,15 @@
           </tr>
         </thead>
         <tbody class="body-background">
-          <tr  class="to-be-highlighted" *ngFor="let goal of goals;let i = index;" #highlight>
+          <tr class="to-be-highlighted" *ngFor="let goal of goals;let i = index;" #highlight>
             <td style="vertical-align: middle;">{{goal.goal}}</td>
             <td>
-              <input type="checkbox" [checked]="goal.disable" (change)="disable($event,goal.goalId)"><span style="color:red" *ngIf="goal.disable">*disabled</span>
+              <input type="checkbox" [checked]="goal.disable" (change)="disable($event,goal.goalId)">
+              <span style="color:red" *ngIf="goal.disable">*disabled</span>
             </td>
             <td style="vertical-align: middle;">
               <button class="btn-link" (click)="updateGoal(goal,highlight)" [disabled]="goal.disable">
-                <a scrollTo href="#add-initiative" >
+                <a scrollTo href="#add-initiative">
                   <i class="glyphicon glyphicon-edit btn-del"></i>
                 </a>
               </button>
@@ -91,7 +97,9 @@
           </tr>
         </tbody>
         <tfoot *ngIf="!goals.length">
-          <tr><td colspan="4" class="text-center">No Data to Display .,.</td></tr>
+          <tr>
+            <td colspan="4" class="text-center">No Data to Display .,.</td>
+          </tr>
         </tfoot>
       </table>
     </div>

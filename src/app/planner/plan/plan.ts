@@ -26,15 +26,15 @@ export class PlanComponent{
       "description":new FormControl('',[Validators.required]),
       "planYear":new FormControl('',[Validators.required]),
       "startYear":new FormControl('',[Validators.required]),
-      "endYear":new FormControl('',[Validators.required]),
-      "active":new FormControl(false,[Validators.required])
+      "endYear":new FormControl('',[Validators.required])
     });  
     this.getCycles();
   }
 
   addNewPlan(){
     $("#add-plan").show();
-    $("#collapse1").collapse('show');    
+    $("#collapse1").collapse('show');   
+    this.cycleForm.reset();
   }
   getCycles(){
     this.orgService.getAllCycle().subscribe((response:any)=>{

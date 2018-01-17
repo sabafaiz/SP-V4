@@ -8,5 +8,5 @@
 
 .panel-opi panel-title{
     font-size: 25px;
-    color: #563d7c;  
+    color: var(--color-primary);
 }
