@@ -6,11 +6,11 @@ import { InitialSetup } from "./initial-setup/setup.component";
 
 @NgModule({
 	imports: [SharedModule, RouterModule.forChild([
-		{
-			path:'',
-			redirectTo:'initial-setup',
-			pathMatch:'full'
-		},
+		// {
+		// 	path:'',
+		// 	redirectTo:'initial-setup',
+		// 	pathMatch:'full'
+		// },
 		{
 			path: '',
 			component: HomeComponent

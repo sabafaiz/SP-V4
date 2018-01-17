@@ -1,14 +1,14 @@
 <div class="container-fluid">
-  <div class="bg-nav">
+  <div class="bg-nav" id="top">
     <div class="form-inline" style="margin-bottom:unset;">
-      <button type="button" class="btn btn-default pull-right margin" (click)="addNewMeasure()"><i class="glyphicon glyphicon-plus"></i></button>
-      <div class="form-group dropdown-st">
-        <label class="control-label">Strategic Plan</label>
-        <select id="year" name="year" class="form-control" [(ngModel)]="defaultCycle" (ngModelChange)="getMeasure()" style="width:auto;height: auto;padding: 0px;">
-              <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}} : [{{c.startYear}} To {{c.endYear}}]</option>
-            </select>
+        <button type="button" class="btn btn-default pull-right margin" (click)="addNewMeasure()"><i class="glyphicon glyphicon-plus"></i></button>
+        <div class="form-group dropdown-st">
+          <label class="control-label">Strategic Plan</label>
+          <select id="year" name="year" class="form-control" [(ngModel)]="defaultCycle" (ngModelChange)="getMeasure()" style="width:auto;height: auto;padding: 0px;">
+            <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}} : [{{c.startYear}} To {{c.endYear}}]</option>
+          </select>
+        </div>
       </div>
-    </div>
   </div>
   <!-- new code for form -->
   <div class="card card-form" id="add-opi">
@@ -258,7 +258,7 @@
           <button type="submit" class="btn btn-success btn-outline-success btn-empty" [disabled]="measureForm.invalid">
             <i class="glyphicon glyphicon-ok"></i>
           </button>
-          <button type="button" class="btn btn-danger btn-outine-danger btn-close" (click)="enableFields(); isUpdating = false;">
+          <button type="button" class="btn btn-danger btn-outine-danger btn-close" (click)="closeForm();">
             <i class="glyphicon glyphicon-remove"></i>
           </button>
         </div>
@@ -363,7 +363,7 @@
                                 <col style="width: 30.9%;">
                                 <col style="width: 7.3%;">
                               </colgroup>
-                              <tr *ngFor="let msr of activit.opis;let l=index">
+                              <tr class="to-be-highlighted" *ngFor="let msr of activit.opis;let l=index" #highlight>
                                 <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.opi}}</td>
                                 <td [style.border-top]="l?'1px solid #ddd':'none'">
                                   <label>Frequency :</label>{{msr.frequency}}
@@ -389,8 +389,10 @@
                                 <td [style.border-top]="l?'1px solid #ddd':'none'">
                                   <ul style="list-style:none;padding:0;">
                                     <li>
-                                      <button class="btn-link btn-edit" (click)="updateMeasure(goal,initiate,activit,msr)" scrollTo href="#add-opi" [disabled]="msr.disable">
+                                      <button class="btn-link btn-edit" (click)="updateMeasure(goal,initiate,activit,msr,highlight)" [disabled]="msr.disable">
+                                        <a scrollTo href="#top">
                                         <i class="glyphicon glyphicon-edit"></i>
+                                        </a>
                                       </button>
                                     </li>
                                     <li>
@@ -405,11 +407,7 @@
                                       <span style="color:red" *ngIf="msr.disable"> *disabled</span>
                                     </li>
                                   </ul>
-
                                 </td>
-                                <!-- <td [style.border-top]="l?'1px solid #ddd':'none'" class="icon">
-                                  <i class="glyphicon glyphicon-trash" (click)="deleteMeasure(msr.opiId,activit.opis,l)"></i>
-                                </td> -->
                               </tr>
                             </table>
                           </td>

@@ -21,7 +21,7 @@ export class SPIComponent implements AfterViewInit{
     // this.orgService.getObjectives().subscribe((response: any) => {
     //   this.objectives = response;
     // });
-    this.getCycles();
+    this.getCycles(false);
     this.getSpis();
     this.spiForm = this.inItSpi();
   }
@@ -30,8 +30,8 @@ export class SPIComponent implements AfterViewInit{
     
   }
 
-  getCycles(){
-    this.orgService.getCycleWithChildren().subscribe((response:any)=>{
+  getCycles(flag:any){
+    this.orgService.getCycleWithChildren(flag).subscribe((response:any)=>{
       if(response.status == 204){
         this.cycles = [];
       }else{

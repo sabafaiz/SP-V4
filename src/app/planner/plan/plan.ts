@@ -26,8 +26,7 @@ export class PlanComponent{
       "description":new FormControl('',[Validators.required]),
       "planYear":new FormControl('',[Validators.required]),
       "startYear":new FormControl('',[Validators.required]),
-      "endYear":new FormControl('',[Validators.required]),
-      "active":new FormControl(false,[Validators.required])
+      "endYear":new FormControl('',[Validators.required])
     });  
     this.getCycles();
   }
@@ -38,7 +37,7 @@ export class PlanComponent{
     this.cycleForm.reset();
   }
   getCycles(){
-    this.orgService.getCycles().subscribe((response:any)=>{
+    this.orgService.getAllCycle().subscribe((response:any)=>{
       if(response.status == 204){
         this.cycles = [];
       }else{
@@ -89,7 +88,6 @@ export class PlanComponent{
       } else { 
         event.srcElement.checked = !event.srcElement.checked;
       }
-      debugger
     }else{
       const forEnabled = confirm("Are you sure you want to enable it");
       if(forEnabled){

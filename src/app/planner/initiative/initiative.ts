@@ -25,15 +25,14 @@ export class InitiativeComponent extends Filters {
   constructor(public orgService: UniversityService,
     public formBuilder: FormBuilder,
     public commonService: StorageService,
-    private loaderService:LoaderService) {
+    private loaderService: LoaderService) {
     super();
-    this.getCycleWithChildren();
+    this.getCycleWithChildren(false);
     this.initiativeForm = this.initForm();
   }
 
-  getCycleWithChildren() {
-    this.loaderService.display(true);
-    this.orgService.getCycleWithChildren().subscribe((response: any) => {
+  getCycleWithChildren(flag: any) {
+    this.orgService.getCycleWithChildren(flag).subscribe((response: any) => {
       if (response.status == 204) {
         this.cycles = [];
       } else {
@@ -42,7 +41,8 @@ export class InitiativeComponent extends Filters {
           if (element.defaultCycle)
             this.defaultCycle = element.cycleId;
         });
-        this.getInitiative();
+        if (!flag)
+          this.getInitiative();
       }
     })
   }
@@ -58,6 +58,7 @@ export class InitiativeComponent extends Filters {
 
   defaultCycle: any;
   getInitiative() {
+    this.loaderService.display(true);
     this.orgService.getInitiativesByCycleId(this.defaultCycle).subscribe((response: any) => {
       if (response.status == 204) {
         this.goals = [];
@@ -68,7 +69,7 @@ export class InitiativeComponent extends Filters {
         this.initFilters(response);
       }
       this.loaderService.display(false);
-    },(error:any)=>{
+    }, (error: any) => {
       this.loaderService.display(false);
     });
   }
@@ -87,39 +88,41 @@ export class InitiativeComponent extends Filters {
       this.orgService.addInitiative(this.initiativeForm.value).subscribe((res: any) => {
         this.getInitiative();
         $("#add-initiative").hide();
-        alertify.notify("You have successfully added a new Initiative.");                
+        alertify.notify("You have successfully added a new Initiative.");
         // $('#initiativeModal').modal('show');
         this.initiativeForm.controls["initiative"].reset();
       }, err => {
         console.log(err);
       });
     else
-      alertify.confirm("Are you sure you want to update this Initiative?",()=>{
+      alertify.confirm("Are you sure you want to update this Initiative?", () => {
         this.orgService.updateInitiative(this.selectedInitiative.initiativeId, this.initiativeForm.value).subscribe((res: any) => {
           $("#add-initiative").hide();
           this.getInitiative();
-        alertify.notify("You have successfully updated Initiative.");          
+          alertify.notify("You have successfully updated Initiative.");
           // $('#initiativeModal').modal('show');
           this.isUpdating = false;
         })
       })
-        
+
   }
 
   deleteInitiative(initiativeId: any, initiatives: any[], index: any) {
-    alertify.confirm("Are you sure you want to delete this Initiative?",()=>{
+    alertify.confirm("Are you sure you want to delete this Initiative?", () => {
       this.orgService.deleteInitiative(initiativeId).subscribe((res: any) => {
         console.log(res);
         initiatives.splice(index, 1);
         this.getInitiative();
-      },(error:any)=>{
+      }, (error: any) => {
         alertify.alert("Something went wrong..");
       });
-    });      
+    });
   }
 
   selectedInitiative: any;
-  updateInitiative(goalId: any, initiative: any) {
+  updateInitiative(goalId: any, initiative: any, highlight: any) {
+    $(".to-be-highlighted").removeClass("highlight");
+    $(highlight).addClass("highlight");
     this.isUpdating = true;
     this.initiativeForm.controls["cycleId"].disable();
     this.initiativeForm.controls["goalId"].disable();
@@ -130,51 +133,59 @@ export class InitiativeComponent extends Filters {
       initiative: initiative.initiative
     });
     $("#add-initiative").show();
-    $("#collapse1").collapse('show');    
+    $("#collapse1").collapse('show');
   }
 
   enableFields() {
-    $("#add-initiative").hide();
+    $(".to-be-highlighted").removeClass("highlight");
     this.initiativeForm.controls["cycleId"].enable();
     this.initiativeForm.controls["goalId"].enable();
     this.initiativeForm = this.initForm();
+  }
+
+  closeForm() {
+    $("#add-initiative").hide();
+    this.enableFields();
+    this.isUpdating = false;
+    this.getCycleWithChildren(false);
   }
 
   addNewInitiative() {
     $("#add-initiative").show();
     this.isUpdating = false;
     $("#collapse1").collapse('show');
+    this.getCycleWithChildren(true);
     this.initiativeForm = this.initForm();
 
   }
 
-  disable(event:any,initiativeId:any){
-    if(event.srcElement.checked)
-      alertify.confirm("Do you Really want to disable this Initiative??",()=>{
-        this.orgService.disableInitiative(initiativeId).subscribe((response:any)=>{
+  disable(event: any, initiativeId: any) {
+    if (event.srcElement.checked)
+      alertify.confirm("Do you Really want to disable this Initiative??", () => {
+        this.orgService.disableInitiative(initiativeId).subscribe((response: any) => {
           alertify.success("You disabled the Initiative..");
           this.getInitiative();
-        },()=>{
+        }, () => {
           event.srcElement.checked = !event.srcElement.checked;
           alertify.error("Something went wrong..")
         })
-      },()=>{
+      }, () => {
         event.srcElement.checked = !event.srcElement.checked;
         alertify.error("Action was not performed")
       });
     else
-      alertify.confirm("Do you Really want to enable this Initiative??",()=>{
-        this.orgService.enableInitiative(initiativeId).subscribe((response:any)=>{
+      alertify.confirm("Do you Really want to enable this Initiative??", () => {
+        this.orgService.enableInitiative(initiativeId).subscribe((response: any) => {
           alertify.success("You enabled the Initiative..");
           this.getInitiative();
-        },()=>{
+        }, () => {
           event.srcElement.checked = !event.srcElement.checked;
           alertify.error("Something went wrong..")
         })
-      },()=>{
+      }, () => {
         event.srcElement.checked = !event.srcElement.checked;
         alertify.error("Action was not performed")
-      });      
+      });
   }
 
   get(e) {

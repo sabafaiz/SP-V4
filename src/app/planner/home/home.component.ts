@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { StorageService } from "../../shared/storage.service";
 import { UniversityService } from "../../shared/UTI.service";
+import { LoaderService } from '../../shared/loader.service';
 
 declare let $:any;
 
@@ -10,7 +11,7 @@ declare let $:any;
   templateUrl:'./home.component.html',
   styleUrls:['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent{
   public valueForm:FormGroup;
   public missionVisionForm:FormGroup;
   public missionVision:string;
@@ -25,11 +26,11 @@ export class HomeComponent implements OnInit {
     this.missionVisionForm = new FormGroup({
       description:new FormControl('',Validators.required)
     });
+    this.fetchOrganizationInfo(); 
    }
 
-  ngOnInit() {
-    // this.organizationInfo = this.commonService.getData('org_info');  
-    this.fetchOrganizationInfo();  
+  ngOnInit() { 
+     
   }
 
   public fetchOrganizationInfo() {
@@ -62,7 +63,6 @@ export class HomeComponent implements OnInit {
   }
 
   deleteValue(val:any,index:any){
-    console.log("asddfadsfdsfds adsf ");
     this.orgSer.deleteValue(val.valueId).subscribe((res:any)=>{
       this.organizationInfo.values.splice(index,1);
     })

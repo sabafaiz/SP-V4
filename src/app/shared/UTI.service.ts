@@ -3,8 +3,6 @@ import { Observable } from 'rxjs/Observable';
 import { Response, Http, Headers, RequestOptions } from '@angular/http';
 import { StorageService } from './storage.service';
 import { CustomHttpService } from './default.header.service';
-
-
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
@@ -28,8 +26,8 @@ export class UniversityService {
   constructor(public http: CustomHttpService,
     public htttp: Http,
     public con: StorageService) {
-    this.baseUrl = con.baseUrl + con.getData('user_roleInfo')[0].role;
-  }
+      this.baseUrl = con.baseUrl + con.getData('user_roleInfo')[0].role;
+    }
 
   public saveInitialSetup(data:any){
     return this.http.post(this.baseUrl + "/initialSetup", data)
@@ -102,14 +100,20 @@ export class UniversityService {
       .catch(this.handleError);
   }
 
+  public getAllCycle(){
+    return this.http.get(this.baseUrl + "/cycles?hideDisable=false")
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   public getCycles(){
     return this.http.get(this.baseUrl + "/cycles")
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  public getCycleWithChildren(){
-    return this.http.get(this.baseUrl + "/cycles", this.child)
+  public getCycleWithChildren(disable:any){
+    return this.http.get(this.baseUrl + "/cycles?hideDisable="+disable, this.child)
     .map(this.extractData)
     .catch(this.handleError);
   }
@@ -134,7 +138,7 @@ export class UniversityService {
   }
 
   public getObjectivesByCycleId(cycleId:any){
-    return this.http.get(this.baseUrl + "/goals?cycleId="+cycleId, this.child)
+    return this.http.get(this.baseUrl + "/goals?cycleId="+cycleId+"&hideDisable=false", this.child)
     .map(this.extractData)
     .catch(this.handleError);
   }
@@ -152,7 +156,7 @@ export class UniversityService {
   }
 
   public getInitiativesByCycleId(cycleId:any){
-    return this.http.get(this.baseUrl + "/initiatives?cycleId="+cycleId,this.parent)
+    return this.http.get(this.baseUrl + "/initiatives?cycleId="+cycleId+"&hideDisable=false",this.parent)
     .map(this.extractData)
     .catch(this.handleError);
   }
@@ -164,7 +168,7 @@ export class UniversityService {
   }
 
   public getActivitiesByCycleId(cycleId:any){
-    return this.http.get(this.baseUrl + "/activities?cycleId="+cycleId,this.parent)
+    return this.http.get(this.baseUrl + "/activities?cycleId="+cycleId+"&hideDisable=false",this.parent)
     .map(this.extractData)
     .catch(this.handleError);
   }
@@ -176,7 +180,7 @@ export class UniversityService {
   }
 
   public getMeasuresByCycleId(cycleId:any){
-    return this.http.get(this.baseUrl + "/opis?cycleId="+cycleId, this.parent)
+    return this.http.get(this.baseUrl + "/opis?cycleId="+cycleId+"&hideDisable=false", this.parent)
     .map(this.extractData)
     .catch(this.handleError);
   }

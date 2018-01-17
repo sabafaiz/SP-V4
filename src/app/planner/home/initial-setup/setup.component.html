@@ -34,7 +34,7 @@
         </div>
         <div class="form-group">
 
-          <button type="button" class="btn btn-default pull-right margin" (click)="addValue()"><i class="glyphicon glyphicon-plus"></i></button>
+          <button type="button" class="btn btn-default pull-right margin" (click)="addValue()" [disabled]="setupForm.controls.values.invalid"><i class="glyphicon glyphicon-plus"></i></button>
         </div>
         <!-- <label class="control-label col-sm-2">Values :</label> -->
         <!-- </div> -->
@@ -42,7 +42,7 @@
           <div class="col-sm-4" *ngFor="let stu of setupForm.controls.values.controls;let j=index;" [formGroupName]="j" style="padding: 0px;">
             <div class="panel add-value">
               <div class="panel-heading">
-                <button type="button" class="close" (click)="removeValue(j)">&times;</button>
+                <button type="button" class="close" (click)="removeValue(j)" [disabled]="!j">&times;</button>
               </div>
               <div class="panel-body">
                 <div class="form-group">
@@ -57,10 +57,13 @@
                     <textarea class="form-control" id="desc" formControlName="description"></textarea>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-default center-block submit-btn">Submit</button>
+                
               </div>
             </div>
           </div>
+        </div>
+        <div class="col-sm-12">
+          <button type="submit" class="btn btn-default submit-btn" [disabled]="setupForm.invalid">Submit</button>
         </div>
       </div>
    </div>

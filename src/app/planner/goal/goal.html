@@ -1,60 +1,63 @@
 <div class="container-fluid">
   <div class="bg-nav">
     <div class="form-inline" style="margin-bottom: unset">
-        <button type="button" class="btn btn-default pull-right margin" (click)="addNewGoal()"><i class="glyphicon glyphicon-plus"></i></button>
+      <button type="button" class="btn btn-default pull-right margin" (click)="addNewGoal()">
+        <i class="glyphicon glyphicon-plus"></i>
+      </button>
       <div class="form-group dropdown-st">
         <label class="control-label">Strategic Plan</label>
         <select id="year" name="year" class="form-control" [(ngModel)]="defaultCycle" (ngModelChange)="getGoals()" style="width:auto;height: auto;padding: 0px;">
           <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId" [attr.selected]="c.defaultCycle">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}]</option>
         </select>
       </div>
-      </div> 
     </div>
+  </div>
 
-    <!-- new code for form -->
-<div class="card card-form" id="add-plan">
-  <form [formGroup]="goalForm" (submit)="onSubmit()">
-    <div class="card-header">
-      <button type="button" class="close" aria-label="Close" (click)="closeForm();isUpdating=false;" data-toggle="tooltip" data-placement="auto" title="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <h4>ADD GOAL</h4>
-    </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="form-group">
-            <label class="control-label" for="year">Strategic Plan:</label>
-            <select id="year" name="year" class="form-control" formControlName="cycleId" [ngModel]="defaultCycle">
-              <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}] : {{c.description}}</option>
-            </select>
+  <!-- new code for form -->
+  <div class="card card-form" id="add-plan">
+    <form [formGroup]="goalForm" (submit)="onSubmit()">
+      <div class="card-header">
+        <button type="button" class="close" aria-label="Close" (click)="closeForm();isUpdating=false;" data-toggle="tooltip" data-placement="auto"
+          title="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4>ADD GOAL</h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label class="control-label" for="year">Strategic Plan:</label>
+              <select id="year" name="year" class="form-control" formControlName="cycleId" [ngModel]="defaultCycle">
+                <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}] : {{c.description}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label class="control-label">Goal</label>
+              <textarea class="form-control" rows="3" formControlName="goal"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6"></div>
+          <div class="col-sm-6">
+            <button type="submit" class="btn btn-default pull-right btn-sub" [disabled]="goalForm.invalid">
+              SUBMIT
+            </button>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="form-group">
-            <label class="control-label">Goal</label>
-            <textarea class="form-control" rows="3" formControlName="goal"></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6"></div>
-        <div class="col-sm-6">
-          <button type="submit" class="btn btn-default pull-right btn-sub" [disabled]="goalForm.invalid">
-            SUBMIT
-           </button>
-        </div>
-      </div>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
 
 
 
 
-    <!-- new code for form end -->
+  <!-- new code for form end -->
   <!-- <div class="panel  add-form" id="add-plan" style="display:none;margin-top: 70px;">
     <div class="panel-heading">
       <h4 class="panel-title">
@@ -62,8 +65,8 @@
       </h4>
     </div>
     <div id="collapse1" class="panel-collapse collapse">
-      <form [formGroup]="goalForm" (submit)="onSubmit()">      
-      <div class="panel-body">
+      <form [formGroup]="goalForm" (submit)="onSubmit()">
+        <div class="panel-body">
           <div class="row">
             <div class="col-lg-6 col-xs-12 col-sm-6">
               <div class="form-group">
@@ -80,14 +83,17 @@
               </div>
             </div>
           </div>
-      </div>
-      <div class="panel-footer">
-        <button type="submit" class="btn btn-success btn-empty" [disabled]="goalForm.invalid"><i class="glyphicon glyphicon-ok"></i></button>
-        <button type="button" class="btn btn-danger btn-close" (click)="closeForm();isUpdating=false;" data-toggle="tooltip" data-placement="auto" title="Close">
-          <i class="glyphicon glyphicon-remove"></i>
-        </button>
-      </div>
-    </form>      
+        </div>
+        <div class="panel-footer">
+          <button type="submit" class="btn btn-success btn-empty" [disabled]="goalForm.invalid">
+            <i class="glyphicon glyphicon-ok"></i>
+          </button>
+          <button type="button" class="btn btn-danger btn-close" (click)="closeForm();isUpdating=false;" data-toggle="tooltip" data-placement="auto"
+            title="Close">
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
+        </div>
+      </form>
     </div>
   </div> -->
   <!-- code for table -->
@@ -133,21 +139,21 @@
       </table>
     </div>
 
+</div>
 
-  <!--popup model-->
-  <div class="modal fade modal-add" id="objectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Confirm</h4>
-        </div>
-        <div class="modal-body">
-          <p>You have successfully added a new Goal.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="collapse" href="#collapse1">Close</button>
-        </div>
+<!--popup model-->
+<div class="modal fade modal-add" id="objectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Confirm</h4>
+      </div>
+      <div class="modal-body">
+        <p>You have successfully added a new Goal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="collapse" href="#collapse1">Close</button>
       </div>
     </div>
   </div>

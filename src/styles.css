@@ -795,6 +795,10 @@ button:disabled{
   cursor: no-drop;
 }
 
+.highlight{
+  background-color: gray;
+  color: white;
+}
 .btn-del{
   color: var(--color-primary);
 }
