@@ -26,10 +26,11 @@ export class HomeComponent{
     this.missionVisionForm = new FormGroup({
       description:new FormControl('',Validators.required)
     });
+    this.fetchOrganizationInfo(); 
    }
 
   ngOnInit() { 
-    this.fetchOrganizationInfo();  
+     
   }
 
   public fetchOrganizationInfo() {

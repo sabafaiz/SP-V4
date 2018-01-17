@@ -217,6 +217,7 @@
 
 .bg-nav{
   margin-top: 44px;
+  margin-bottom: 30px;
   border-bottom: 3px solid var(--color-primary);
   width: auto;
   font-family: Raleway ,sans-serif;

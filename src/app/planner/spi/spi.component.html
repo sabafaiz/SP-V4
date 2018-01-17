@@ -70,22 +70,6 @@
             </div>
           </div>
         </div>
-
-
-        <!-- <div class="panel panel-default" formArrayName="targetDigital">
-          <div class="panel-heading background-transparent background-5">
-            <b>Annual Target</b>
-          </div>
-          <div class="panel-body">
-            <div class="form-group row">
-              <div class="col-lg-3 col-sm-3 col-xs-12 col-md-3" *ngFor="let td of spiForm.controls.targetDigital.controls;let m = index;"
-                [formGroupName]="m">
-                <label for="example-text-input">{{td.value.year}}</label>
-                <input type="number" min="0" step="1" class="form-control" formControlName="expectedLevel">
-              </div>
-            </div>
-          </div>
-        </div> -->
       </form>
     </div>
     <div class="panel-footer">
@@ -93,16 +77,8 @@
         <button type="button" class="btn btn-default btn-close" (click)="spiForm.reset()" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>
     </div>
   </div>
-
-  <div class="panel detail-plan">
-    <div class="panel-heading">Strategic Planning - Strategic Performance Indicators
-      <span class="pull-right" style="cursor:pointer">
-      <div class="ctooltip">
-        <i class="glyphicon glyphicon-plus"></i>
-        <span class="ctooltiptext">Add Activity</span>
-    </div>
-    </span>
-  </div>
+<!-- table -->
+  <div class="card table-card">
   <table class="table table-bordered header-background" id="thable" *ngIf="spis.length">
     <colgroup>
       <col width="50%">
