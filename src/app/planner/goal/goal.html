@@ -10,7 +10,52 @@
       </div>
       </div> 
     </div>
-  <div class="panel  add-form" id="add-plan" style="display:none;margin-top: 70px;">
+
+    <!-- new code for form -->
+<div class="card card-form" id="add-plan">
+  <form [formGroup]="goalForm" (submit)="onSubmit()">
+    <div class="card-header">
+      <button type="button" class="close" aria-label="Close" (click)="closeForm();isUpdating=false;" data-toggle="tooltip" data-placement="auto" title="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4>ADD GOAL</h4>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label class="control-label" for="year">Strategic Plan:</label>
+            <select id="year" name="year" class="form-control" formControlName="cycleId" [ngModel]="defaultCycle">
+              <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}] : {{c.description}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label class="control-label">Goal</label>
+            <textarea class="form-control" rows="3" formControlName="goal"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6">
+          <button type="submit" class="btn btn-default pull-right btn-sub" [disabled]="goalForm.invalid">
+            SUBMIT
+           </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+
+    <!-- new code for form end -->
+  <!-- <div class="panel  add-form" id="add-plan" style="display:none;margin-top: 70px;">
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" href="#collapse1" class="accordion-toggle">Add Goal</a>
@@ -44,16 +89,10 @@
       </div>
     </form>      
     </div>
-  </div>
-  <div class="panel detail-plan">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" href="#collapse2"></a>  
-       
-      </h4>
-    </div>
-    <div id="collapse2" class="panel-collapse collapse in">
-      <table class="table table-hover table-bordered" >        
+  </div> -->
+  <!-- code for table -->
+    <div class="card table-card">
+      <table class="table  table-bordered table-data" >        
         <thead class="header-background" *ngIf="goals.length">
           <tr>
             <th>
@@ -93,7 +132,7 @@
         </tfoot>
       </table>
     </div>
-  </div>
+
 
   <!--popup model-->
   <div class="modal fade modal-add" id="objectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
