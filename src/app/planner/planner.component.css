@@ -405,4 +405,38 @@
   color:var(--color0);
 }
 
+.hide-text{
+  float: left;
+  position: absolute;
+  margin-top: 10px;
+}
+
+
 /* card-table */
+
+
+/* lengad */
+.the-legend {
+  background: #563d7c;
+  color: #cbbde2;
+  border-style: none;
+  border-width: 0;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 0;
+  width: auto;
+  padding: 14px 13px;
+  border: 1px solid #e0e0e0;
+}
+.the-fieldset {
+  border: 1px solid #e0e0e0;
+  padding: 30px;
+}
+
+.the-fieldset .pull-right{
+  margin-bottom: 20px;
+}
+
+.the-fieldset .input-group{
+  margin-right: 25px;
+}
