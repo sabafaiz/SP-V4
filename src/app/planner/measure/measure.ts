@@ -47,6 +47,7 @@ export class MeasureComponent extends Filters implements AfterViewInit {
 
   ngOnInit() {
     this.getQuarter();
+    this.getFrequencies();
     this.getDepartments();
   }
 
@@ -127,6 +128,13 @@ export class MeasureComponent extends Filters implements AfterViewInit {
   getQuarter() {
     this.orgService.getQuarter().subscribe((res: any) => {
       this.quarters = res;
+    })
+  }
+  frequencies:any[];
+  getFrequencies(){
+    this.orgService.getFrequencies().subscribe((response:any)=>{
+      console.log("frequencies :",response);
+      this.frequencies = response;
     })
   }
 
@@ -261,9 +269,9 @@ export class MeasureComponent extends Filters implements AfterViewInit {
 
   assign() {
     const departmentsArray: any[] = this.departmentForm.controls["departmentsArray"].value;
-    departmentsArray.forEach(element => {
-      delete element["departmentName"];
-    });
+    // departmentsArray.forEach(element => {
+    //   delete element["departmentName"];
+    // });
     alertify.confirm("Do you really want to assign this OPI", () => {
       this.orgService.assignOpi(this.selectedMeasure.opiId, departmentsArray).subscribe((response: any) => {
         this.selectedMeasure.assignedDepartments = this.selectedMeasure.assignedDepartments.concat(response);
@@ -322,6 +330,7 @@ export class MeasureComponent extends Filters implements AfterViewInit {
     const quarterLevel: any[] = [];
     levels.forEach(element => {
       quarterLevel.push(this.formBuilder.group({
+        quarterName: element.quarter,
         quarterId: element.quarterId,
         estimatedTargetLevel: element.estimatedTargetLevel
       }))
@@ -330,14 +339,10 @@ export class MeasureComponent extends Filters implements AfterViewInit {
   }
 
   setLevels(count: any) {
+    this.quarters = this.frequencies[count-1].quarters;
     const levels: any[] = [];
-    if (count == 3) count++;
-    for (var i = 0; i < count; i++) {
-      if (count == 2)
-        levels.push(this.getLevel(2 * i + 1));
-      else if (count == 1)
-        levels.push(this.getLevel(3));
-      else
+    //if (count == 3) count++;
+    for (var i = 0; i < this.quarters.length; i++) {
         levels.push(this.getLevel(i));
     }
     return levels;
@@ -345,6 +350,7 @@ export class MeasureComponent extends Filters implements AfterViewInit {
 
   getLevel(q: any) {
     return this.formBuilder.group({
+      quarterName: this.quarters[q].quarter,
       quarterId: this.quarters[q].id,
       estimatedTargetLevel: [0]
     });
@@ -474,7 +480,6 @@ export class MeasureComponent extends Filters implements AfterViewInit {
     $('#add-opi').show();
     $("#collapse1").collapse('show');
     
-    this.objectives = [];
     this.initiatives = [];
     this.activities = [];
     this.getCycleWithChildren(true);

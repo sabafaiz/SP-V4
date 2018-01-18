@@ -402,6 +402,12 @@ export class UniversityService {
     .catch(this.handleError);
   }
 
+  public getFrequencies(){
+    return this.http.get("https://spdemo.ind-cloud.everdata.com/spv4/frequencies")
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
   public getDepartments(){
     return this.http.get(this.baseUrl + "/department")
     .map(this.extractData)

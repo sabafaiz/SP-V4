@@ -21,20 +21,24 @@ export class PlanComponent{
   status:any[]=[];
   constructor(public ss:StorageService,public orgService:UniversityService, private loaderService:LoaderService){
     this.loaderService.display(true);    
-    this.cycleForm = new FormGroup({
+    this.cycleForm = this.initForm();
+    this.getCycles();
+  }
+
+  initForm(){
+    return new FormGroup({
       "universityId":new FormControl(this.ss.getData('org_info').universityId),
       "description":new FormControl('',[Validators.required]),
       "planYear":new FormControl('',[Validators.required]),
       "startYear":new FormControl('',[Validators.required]),
       "endYear":new FormControl('',[Validators.required])
     });  
-    this.getCycles();
   }
 
   addNewPlan(){
+    this.cycleForm = this.initForm();
     $("#add-plan").show();
     $("#collapse1").collapse('show');   
-    this.cycleForm.reset();
   }
   getCycles(){
     this.orgService.getAllCycle().subscribe((response:any)=>{
@@ -60,20 +64,24 @@ export class PlanComponent{
   onSubmit(){
     if(!this.isUpdating)
       this.orgService.saveCycle(this.cycleForm.value).subscribe((response:any)=>{
-        alertify.success('You added New Strategic plan.');
+        alertify.success('You added New Strategic plan.',()=>{
+          $("#add-plan").hide();
+        });        
         this.isUpdating = false;        
         this.getCycles();
-        this.cycleForm.reset();
+        this.cycleForm = this.initForm();
       });
     else{
       var data={};
       data['description'] = this.cycleForm.value["description"];
       data['endYear'] = this.cycleForm.value["endYear"];
       this.orgService.updateCycle(this.selectedCycle.cycleId,data).subscribe((response:any)=>{
-        alertify.success('You updated Strategic plan.');        
+        alertify.success('You updated Strategic plan.',()=>{
+          $("#add-plan").hide();
+        });        
         this.isUpdating = false;
         this.getCycles();
-        this.cycleForm.reset();
+        this.cycleForm = this.initForm();
       })
     }
   }

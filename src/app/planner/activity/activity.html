@@ -12,8 +12,7 @@
       </div>
     </div>
   </div>
-  <!-- new code for form -->
-  <div class="card card-form" id="add-activity">
+  <div class="card card-form" id="add-activity" style="display:none">
     <form [formGroup]="activityForm" (submit)="submitActivity()">
       <div class="card-header">
         <button type="button" class="close" aria-label="Close" data-dismiss="modal" (click)="enableFields(); isUpdating = false"
@@ -65,8 +64,7 @@
           <div class="col-sm-6">
           </div>
           <div class="col-sm-6">
-            <button type="submit" class="btn btn-default pull-right btn-sub" data-dismiss="modal" (click)="enableFields(); isUpdating = false"
-              data-toggle="tooltip" data-placement="auto" title="Reset Form">
+            <button type="submit" class="btn btn-default pull-right btn-sub">
               SUBMIT
             </button>
           </div>
@@ -99,10 +97,6 @@
                     <span class="glyphicon glyphicon-search form-control-feedback"></span>
                   </div>
                 </form>
-
-                <!-- <span class="search">
-                      <input type="text" name="search" (keyup)="searchGoal($event)" placeholder="Goal">
-                    </span> -->
               </th>
               <th><span class="hide-text">INITIATIVE</span>
                 <form action="" class="search-form">
@@ -112,10 +106,6 @@
                     <span class="glyphicon glyphicon-search form-control-feedback"></span>
                   </div>
                 </form>
-
-                <!-- <span class="search">
-                      <input type="text" name="search" (keyup)="searchInitiative($event)" placeholder="Initiative">
-                    </span> -->
               </th>
               <th><span class="hide-text">ACTIVITY</span>
                 <form action="" class="search-form">
@@ -125,10 +115,6 @@
                     <span class="glyphicon glyphicon-search form-control-feedback"></span>
                   </div>
                 </form>
-
-                <!-- <span class="search">
-                      <input type="text" name="search" (keyup)="searchActivity($event)" placeholder="Activity">
-                    </span> -->
               </th>
             </tr>
           </thead>
@@ -185,83 +171,6 @@
             </tr>
           </tfoot>
         </table>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- new code for form end -->
-<!-- <div class="panel add-form" id="add-activity" style="display:none;margin-top: 70px;">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" href="#collapse1" class="accordion-toggle">Add Activity</a>
-      </h4>
-    </div>
-    <div id="collapse1" class="panel-collapse collapse">
-      <form [formGroup]="activityForm" (submit)="submitActivity()">
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-lg-6 col-sm-12">
-              <div class="form-group">
-                <label for="year">Plan Year:</label>
-                <select id="year" name="year" class="form-control" formControlName="cycleId" [ngModel]="defaultCycle" (ngModelChange)="getObjective($event)">
-                  <option *ngFor="let c of cycles;let y = index;" [value]="c.cycleId">{{c.planYear}}: [{{c.startYear}} To {{c.endYear}}] : {{c.description}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-lg-6 col-sm-12">
-              <div class="form-group">
-                <label for="sel1">Select Goal:</label>
-                <select class="form-control" id="sel1" formControlName="objectiveId" (ngModelChange)="getInitiative($event)">
-                  <option *ngFor="let objective of objectives;let i=index;" [value]="objective.goalId">{{i+1}}.{{objective.goal}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-lg-6 col-sm-12">
-              <div class="form-group">
-                <label for="sel1">Select Initiative:</label>
-                <select class="form-control" id="sel1" formControlName="initiativeId">
-                  <option *ngFor="let initiative of initiatives;let j=index;" [value]="initiative.initiativeId">{{j+1}}.{{initiative.initiative}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-lg-6 col-sm-12">
-              <div class="form-group">
-                <label>Activity</label>
-                <textarea class="form-control" rows="3" formControlName="activity"></textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="panel-footer">
-          <button type="submit" class="btn btn-success btn-outline-success btn-empty" [disabled]="activityForm.invalid" data-toggle="tooltip"
-            data-placement="auto" title="Submit Form">
-            <i class="glyphicon glyphicon-ok"></i>
-          </button>
-          <button type="button" class="btn btn-danger btn-outline-danger btn-close" data-dismiss="modal" (click)="closeForm();"
-            data-toggle="tooltip" data-placement="auto" title="Reset Form">
-            <i class="glyphicon glyphicon-remove"></i>
-          </button>
-        </div>
-      </form>
-    </div>
-  </div> -->
-
-
-
-<!--popup model-->
-<div class="modal fade modal-add" id="activityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <!-- <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Confirm</h4>
-      </div> -->
-      <div class="modal-body">
-        <p>Saved successfully .,.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default btn-empty" data-dismiss="modal" data-toggle="collapse" href="#collapse1">Close</button>
       </div>
     </div>
   </div>
