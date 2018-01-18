@@ -18,6 +18,7 @@ export class HomeComponent extends Filters implements AfterViewInit {
   // goals: any[]=[];
   evidencForm: FormGroup;
   evidences: any[] = [];
+  roles:any[]=["coordinator","hod","chanceller","dvc","vc"]
   constructor(private utServ: CoordinatorService,
     private storage: StorageService, private loaderService:LoaderService) {
     super();
