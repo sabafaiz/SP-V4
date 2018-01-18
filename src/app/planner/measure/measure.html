@@ -517,26 +517,26 @@
           </button>
           </h3>
           <hr>
-          <ul style="list-style:none;padding-left:0;height: 55vh;overflow-y: auto;">
+          <ul class="dept-list">
             <li class="sibling-list-element" *ngIf="!selectedDepartments">None Selected</li>
             <li class="sibling-list-element" *ngFor="let dept of selectedMeasure.assignedDepartments;let arr=index;">
               <div class="edit-btn">
-                <button type="button" class="btn btn-link" (click)="viewDepartment(dept)" *ngIf="!dept.edit">
+                <button type="button" class="btn btn-link btn-edit" (click)="viewDepartment(dept)" *ngIf="!dept.edit">
                 <i class="glyphicon glyphicon-pencil"></i>
               </button>
-                <button type="button" class="btn btn-link" (click)="updateOpiTarget(selectedMeasure,arr);dept.edit = false;" *ngIf="dept.edit">
+                <button type="button" class="btn btn-link btn-edit" (click)="updateOpiTarget(selectedMeasure,arr);dept.edit = false;" *ngIf="dept.edit">
                 <i class="glyphicon glyphicon-floppy-saved"></i>
               </button>
-                <button type="button" class="btn btn-link" (click)="removeAssignedDept(selectedMeasure,arr)" *ngIf="dept.edit">
+                <button type="button" class="btn btn-link btn-edit" (click)="removeAssignedDept(selectedMeasure,arr)" *ngIf="dept.edit">
                 <i class="glyphicon glyphicon-trash"></i>
               </button>
-                <button type="button" class="btn btn-link" (click)="dept.edit = false;" *ngIf="dept.edit">
+                <button type="button" class="btn btn-link btn-edit" (click)="dept.edit = false;" *ngIf="dept.edit">
                 <i class="glyphicon glyphicon-remove"></i>
               </button>
               </div>
               <table class="table border-color" *ngIf="!dept.edit">
-                <caption style="text-align: left;color: var(--color-primary);">{{dept.department}}</caption>
-                  <span class="input-group pull-right">
+                <div class="border-all">{{dept.department}}</div>
+                  <span class="input-group pull-right margin-bottom">
                   <div class="input-group-addon base-color">BaseLine</div>
                   <div class="form-control form-border" style="width:25%">{{dept.baseline}}</div>
                 </span>
@@ -562,12 +562,12 @@
                 </ng-container>
               </table>
               <table class="table border-color" [formGroup]="editDepartmentForm" *ngIf="dept.edit">
-                <caption style="text-align: left;color: #b10909;">{{dept.department}}
-                  <span class="input-group pull-right">
+                <div class="border-all">{{dept.department}}  </div>
+                  <span class="input-group pull-right margin-bottom">
                   <div class="input-group-addon base-color">BaseLine</div>
                   <input type="number" class="form-control form-border" autofocus formControlName="baseline" style="width:25%" id="exampleInputAmount">
                 </span>
-                </caption>
+              
                 <ng-container formArrayName="opiAnnualTargets">
                   <tr *ngFor="let array of editDepartmentForm.controls.opiAnnualTargets.controls;let op=index;" [formGroupName]="op">
                     <td>{{dept.opiAnnualTargets[op].year}}</td>
