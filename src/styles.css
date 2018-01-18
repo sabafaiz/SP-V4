@@ -755,8 +755,8 @@ color: brown;
 }
 
 .base-color2{
-  background: var(--color-primary);
-  color: white;
+  background: var(--color-text);
+  color: var(--color-primary);
   border: var(--color-primary);
 }
 

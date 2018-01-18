@@ -9,7 +9,9 @@ import {StorageService} from '../shared/storage.service';
 @Injectable()
 export class CredentialService {
   // public baseUrl: string = "https://strategic-plannning.cloud.cms500.com/apiv2";
-  public baseUrl: string = "https://testing.ind-cloud.everdata.com/spv4";  
+  // public baseUrl: string = "https://testing.ind-cloud.everdata.com/spv4";  
+  public baseUrl: string = "https://spdemo.ind-cloud.everdata.com/spv4";  
+  
   login: any = false;
   headers: any;
   access_token: string;

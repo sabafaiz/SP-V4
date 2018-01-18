@@ -64,9 +64,8 @@ export class PlanComponent{
   onSubmit(){
     if(!this.isUpdating)
       this.orgService.saveCycle(this.cycleForm.value).subscribe((response:any)=>{
-        alertify.success('You added New Strategic plan.',()=>{
-          $("#add-plan").hide();
-        });        
+        alertify.success('You added New Strategic plan.');  
+        $("#add-plan").hide();      
         this.isUpdating = false;        
         this.getCycles();
         this.cycleForm = this.initForm();
@@ -76,9 +75,8 @@ export class PlanComponent{
       data['description'] = this.cycleForm.value["description"];
       data['endYear'] = this.cycleForm.value["endYear"];
       this.orgService.updateCycle(this.selectedCycle.cycleId,data).subscribe((response:any)=>{
-        alertify.success('You updated Strategic plan.',()=>{
-          $("#add-plan").hide();
-        });        
+        alertify.success('You updated Strategic plan.');    
+        $("#add-plan").hide();    
         this.isUpdating = false;
         this.getCycles();
         this.cycleForm = this.initForm();

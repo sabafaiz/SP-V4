@@ -387,20 +387,20 @@
             </button>
           </h3>
           <hr>
-          <ul style="list-style:none;padding-left:0;height: 55vh;overflow-y: auto;">
+          <ul class="dept-list">
             <li class="sibling-list-element" *ngIf="!selectedDepartments">None Selected</li>
             <li class="sibling-list-element" *ngFor="let dept of selectedMeasure.assignedDepartments;let arr=index;">
               <div class="edit-btn">
-                <button type="button" class="btn btn-link" (click)="viewDepartment(dept)" *ngIf="!dept.edit">
+                <button type="button" class="btn btn-link btn-edit" (click)="viewDepartment(dept)" *ngIf="!dept.edit">
                   <i class="glyphicon glyphicon-pencil"></i>
                 </button>
-                <button type="button" class="btn btn-link" (click)="updateOpiTarget(selectedMeasure,arr);dept.edit = false;" *ngIf="dept.edit">
+                <button type="button" class="btn btn-link btn-edit" (click)="updateOpiTarget(selectedMeasure,arr);dept.edit = false;" *ngIf="dept.edit">
                   <i class="glyphicon glyphicon-floppy-saved"></i>
                 </button>
-                <button type="button" class="btn btn-link" (click)="removeAssignedDept(selectedMeasure,arr)" *ngIf="dept.edit">
+                <button type="button" class="btn btn-link btn-edit" (click)="removeAssignedDept(selectedMeasure,arr)" *ngIf="dept.edit">
                   <i class="glyphicon glyphicon-trash"></i>
                 </button>
-                <button type="button" class="btn btn-link" (click)="dept.edit = false;" *ngIf="dept.edit">
+                <button type="button" class="btn btn-link btn-edit" (click)="dept.edit = false;" *ngIf="dept.edit">
                   <i class="glyphicon glyphicon-remove"></i>
                 </button>
               </div>
