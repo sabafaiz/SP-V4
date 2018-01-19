@@ -394,6 +394,20 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.center tr th{
+  text-align: center;
+}
+
+.icon-mark{
+  font-size: 22px;
+  color: var(--color-text);
+}
+
+.icon-mark2{
+  font-size:22px;
+  color:var(--color-primary);
+}
+
 /* card-css end */
 
 /* card-table */

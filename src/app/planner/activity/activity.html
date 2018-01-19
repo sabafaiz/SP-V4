@@ -140,8 +140,12 @@
                         <tr class="to-be-highlighted" *ngFor="let activit of initiate.activities;let k=index;" #highlight>
                           <td [style.border-top]="k?'1px solid #ddd':'none'">{{activit.activity}}</td>
                           <td>
-                            <input type="checkbox" [checked]="activit.disable" (change)="disable($event,activit.activityId)">
-                            <span style="color:red" *ngIf="activit.disable"> *disabled</span>
+                              <button type="button" class="btn btn-lg btn-toggle center-block" data-toggle="button" aria-pressed="false" autocomplete="off">
+                                  <div class="handle"></div>
+                                </button>
+
+                            <!-- <input type="checkbox" [checked]="activit.disable" (change)="disable($event,activit.activityId)">
+                            <span style="color:red" *ngIf="activit.disable"> *disabled</span> -->
                           </td>
                           <td [style.border-top]="k?'1px solid #ddd':'none'">
                             <button class="btn-link" data-toggle="tooltip" data-placement="auto" title="Edit" (click)="updateActivity(goal,initiate,activit,highlight)"

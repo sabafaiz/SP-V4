@@ -242,7 +242,7 @@
                               <br>
                               <label>MeasureUnit :</label>{{msr.measureUnit}}
                               <br>
-                              <label>Direction :</label>{{direction[msr.direction]}}
+                              <label>Direction :</label><span [ngClass]="msr.direction ? 'glyphicon glyphicon-sort-by-attributes' : 'glyphicon glyphicon-sort-by-attributes-alt'" class="icon-mark2"></span>
                               <br>
                             </td>
                             <td [style.border-top]="l?'1px solid #ddd':'none'">
@@ -271,10 +271,14 @@
                                   </button>
                                 </li>
                                 <li>
-                                  <button class="btn-link btn-edit">
+                                    <button type="button" class="btn btn-sm btn-toggle center-block" data-toggle="button" aria-pressed="false" autocomplete="off">
+                                        <div class="handle"></div>
+                                      </button>
+
+                                  <!-- <button class="btn-link btn-edit">
                                     <input type="checkbox" [checked]="msr.disable" (change)="disable($event,msr.opiId)">
                                   </button>
-                                  <span style="color:red" *ngIf="msr.disable"> *disabled</span>
+                                  <span style="color:red" *ngIf="msr.disable"> *disabled</span> -->
                                 </li>
                               </ul>
                             </td>

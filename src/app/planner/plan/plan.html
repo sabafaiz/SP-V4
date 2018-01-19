@@ -83,13 +83,13 @@
         <col width="10%">
         <col width="10%">
       </colgroup>
-      <thead>
+      <thead class="center">
         <tr>
           <th>Plan Year</th>
           <th>From Year</th>
           <th>End Year</th>
           <th>Description</th>
-          <th>Disabled</th>
+          <th>Enable</th>
           <th>Default</th>
           <th>Delete</th>
           <th>Edit</th>
@@ -102,12 +102,17 @@
           <td>{{c.endYear}}</td>
           <td>{{c.description}}</td>
           <td>
-            <input type="checkbox" [checked]="c.disable" (change)="changeStatus($event,c)">
-            <span style="color:red" *ngIf="c.disable">*disabled</span>
+              <button type="button" class="btn btn-lg btn-toggle center-block" data-toggle="button" aria-pressed="false" autocomplete="off">
+                  <div class="handle"></div>
+                </button>
+            <!-- <input type="checkbox" [checked]="c.disable" (change)="changeStatus($event,c)">
+            <span style="color:red" *ngIf="c.disable">*disabled</span> -->
           </td>
           <td>
-            <input type="checkbox" [checked]="c.defaultCycle" [disabled]="c.defaultCycle" [disabled]="c.disable" (change)="defaultCycle($event,c.cycleId)">
-            <span style="color:green" *ngIf="c.defaultCycle">*default</span>
+             <span class="icon-mark"><i class="glyphicon glyphicon-exclamation-sign"></i></span>
+             <span class="icon-mark2"><i class="glyphicon glyphicon-ok-sign"></i></span>
+            <!-- <input type="checkbox" [checked]="c.defaultCycle" [disabled]="c.defaultCycle" [disabled]="c.disable" (change)="defaultCycle($event,c.cycleId)">
+            <span style="color:green" *ngIf="c.defaultCycle">*default</span> -->
           </td>
           <td>
             <button class="btn-link btn-del" (click)="deleteCycle(c.cycleId)" type="button" [disabled]="c.disable">
