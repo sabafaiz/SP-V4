@@ -101,10 +101,11 @@
           <td>{{c.startYear}}</td>
           <td>{{c.endYear}}</td>
           <td>{{c.description}}</td>
-          <td>
-              <button type="button" class="btn btn-lg btn-toggle center-block" data-toggle="button" aria-pressed="false" autocomplete="off">
-                  <div class="handle"></div>
-                </button>
+          <td class="text-center">
+            <label class="switch">
+              <input type="checkbox" [checked]="c.disable" (change)="changeStatus($event,c)">
+              <span class="slider round"></span>
+            </label>
             <!-- <input type="checkbox" [checked]="c.disable" (change)="changeStatus($event,c)">
             <span style="color:red" *ngIf="c.disable">*disabled</span> -->
           </td>
