@@ -1,4 +1,78 @@
 <div class="container-fluid">
+<!-- new code -->
+<div class="panel" *ngIf="selectedOpi" style="margin-top:50px;">
+    <div class="panel-heading">
+        <h4 class="panel-title ">
+          <a data-toggle="collapse" href="#edit-section" class="accordion-toggle"></a>
+        </h4>
+      </div>
+      <div id="edit-section" class="panel-collapse collapse in">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-2">
+              <h5><strong>STRATEGIC GOAL</strong></h5>
+              </div>
+              <div class="col-sm-10">
+                <h5>{{selectedOpi.goal}}</h5>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+              <h5><strong>INITIATIVE</strong></h5>
+            </div>
+            <div class="col-sm-10">
+              <h5>{{selectedInitiative.initiative}}</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+              <h5><strong>ACTIVITY</strong></h5>
+            </div>
+            <div class="col-sm-10">
+              <h5>{{selectedActivity.activity}}</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+              <h5><strong>OPI</strong></h5>
+            </div>
+            <div class="col-sm-10">
+               <h5> {{selectedMeasure.opi}}</h5>
+            </div>
+          </div>
+          <div class="row mini">
+            <div class="col-sm-3 ">
+              <h5><strong>FREQUENCY</strong></h5>
+              <h5>{{selectedMeasure.frequency}}</h5>
+            </div>
+            <div class="col-sm-3">
+              <h5><strong>MEASURE UNIT</strong></h5>
+              <h5>{{selectedMeasure.measureUnit}}</h5>
+            </div>
+            <div class="col-sm-3">
+              <h5><strong>BASE LINE</strong></h5>
+              <h5>{{selectedMeasure.departmentInfo[0].baseline}}</h5>
+            </div>
+            <div class="col-sm-3">
+              <h5><strong>EVIDENCE FORM TYPE</strong></h5>
+              <h5> {{selectedMeasure.evidanceForm}}
+                  <p *ngIf="!selectedMeasure.evidanceForm">None</p></h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+                <fieldset class="the-fieldset">
+                    <legend class="the-legend">EDIT SECTION</legend>
+                    
+                </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+<!-- new code -->
   <!--edit section-->
   <div class="panel" *ngIf="selectedOpi">
     <div class="panel-heading background-4">
@@ -45,7 +119,7 @@
         </div>
         <!-- without evidenceformId -->
         <div class="row" *ngIf="!selectedMeasure.evidanceFormId">
-          <table id="accordion" class="table table-hover">
+          <table id="accordion" class="table table-hover table-bordered">
             <thead>
               <tr>
                 <th>Year</th>
@@ -114,7 +188,7 @@
         </div>
         <!--with student internship form-->
         <div class="row" *ngIf="selectedMeasure.evidanceFormId==1">
-          <table id="accordion" class="table table-hover">
+          <table id="accordion" class="table table-hover table-bordered">
             <colgroup>
               <col width="10%">
               <col width="10%">
@@ -210,7 +284,7 @@
         </div>
         <!--with mous forms-->
         <div class="row" *ngIf="selectedMeasure.evidanceFormId==2">
-          <table id="accordion" class="table table-hover">
+          <table id="accordion" class="table table-hover table-bordered">
             <colgroup>
               <col width="10%">
               <col width="10%">
@@ -371,19 +445,18 @@
           </table>
         </div>
       </div>
-      
     </div>
   </div>
 
   <!--opi List-->
-  <div class="panel panel-default panel-opi">
-    <div class="panel-heading">
+  <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" href="#collapse2">Proposed Operational Performance Indicators</a>
+        <a data-toggle="collapse" href="#collapse2"></a>
       </h4>
     </div>
-    <div class="panel-body">
-      <table class="table table-bordered">
+  
+  <div class="card table-card">
+      <table class="table table-bordered table1">
         <colgroup>
           <col style="width:20%">
           <col style="width:20%">
@@ -395,25 +468,48 @@
         </colgroup>
         <thead class="header-background" *ngIf="goalsCopy.length">
           <tr>
-            <th>Goal
-              <span class="search">
-                <input type="text" name="search" (keyup)="searchGoal($event)" placeholder="Search..">
-              </span>
+            <th>
+                <span class="hide-text">GOAL</span>
+                <form action="" class="search-form">
+                  <div class="form-group has-feedback" style="margin-bottom:10px;">
+                    <label for="search" class="sr-only">Search</label>
+                    <input type="text" class="form-control" name="search" id="search" (keyup)="searchGoal($event)" placeholder="GOAL">
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                  </div>
+                </form>
             </th>
-            <th>Initiative
-              <span class="search">
+            <th>
+                <span class="hide-text">INITIATIVE</span>
+                <form action="" class="search-form">
+                  <div class="form-group has-feedback" style="margin-bottom:10px;">
+                    <label for="search" class="sr-only">Search</label>
+                    <input type="text" class="form-control" name="search" id="search" (keyup)="searchInitiative($event)" placeholder="INITIATIVE">
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                  </div>
+                </form>
+              <!-- <span class="search">
                 <input type="text" name="search" (keyup)="searchInitiative($event)" placeholder="Search..">
-              </span>
+              </span> -->
             </th>
-            <th>Activity
-              <span class="search">
-                <input type="text" name="search" (keyup)="searchActivity($event)" placeholder="Search..">
-              </span>
+            <th>
+                <span class="hide-text">ACTIVITY</span>
+                <form action="" class="search-form">
+                  <div class="form-group has-feedback" style="margin-bottom:10px;">
+                    <label for="search" class="sr-only">Search</label>
+                    <input type="text" class="form-control" name="search" id="search"  (keyup)="searchActivity($event)" placeholder="ACTIVITY">
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                  </div>
+                </form>
             </th>
-            <th>KPI
-              <span class="search">
-                <input type="text" name="search" (keyup)="searchOpi($event)" placeholder="Search..">
-              </span>
+            <th>
+                <span class="hide-text">KPI</span>
+                <form action="" class="search-form">
+                  <div class="form-group has-feedback" style="margin-bottom:10px;">
+                    <label for="search" class="sr-only">Search</label>
+                    <input type="text" class="form-control" name="search" id="search"  (keyup)="searchOpi($event)" placeholder="KPI">
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                  </div>
+                </form>
             </th>
             <th>Frequency</th>
             <th>Status</th>
@@ -424,7 +520,7 @@
           <tr *ngFor="let goal of goals;let i = index;">
             <td>{{goal.goal}}</td>
             <td colspan="6" style="padding:0px;border:none;" #element [style.height]="get(element)">
-              <table class="table table-bordered" style="height: inherit;border:none;">
+              <table class="table table-bordered">
                 <colgroup>
                   <col style="width:25%">
                   <col style="width:75%">
@@ -471,7 +567,6 @@
           </tr>
         </tfoot>
       </table>
-    </div>
   </div>
 
 </div>
@@ -517,7 +612,7 @@
 </div>
 
 <div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-lg bar">
     <!-- Modal content-->
     <div class="modal-content" *ngIf="selectedMeasure">
       <div class="modal-header">
