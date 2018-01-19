@@ -9,7 +9,6 @@
           <li class="active"><a data-toggle="tab" href="#mission">MISSION</a></li>
         </ul>
       </div>
-      <!-- <label class="control-label col-sm-2" for="mission">Mission:</label> -->
       <div class="col-sm-8">
         <textarea class="form-control" id="mission" formControlName="mission" placeholder="Write Your Mission..."></textarea>
       </div>
@@ -20,7 +19,6 @@
           <li class="active"><a data-toggle="tab" href="#mission">VISSION</a></li>
         </ul>
       </div>
-      <!-- <label class="control-label col-sm-2" for="vision">Vision:</label> -->
       <div class="col-sm-8">
         <textarea class="form-control" id="vision" formControlName="vision" placeholder="Write Your Vission..."></textarea>
       </div>
@@ -34,12 +32,12 @@
         </div>
         <div class="form-group">
 
-          <button type="button" class="btn btn-default pull-right margin" (click)="addValue()" [disabled]="setupForm.controls.values.invalid"><i class="glyphicon glyphicon-plus"></i></button>
+          <button type="button" class="btn btn-default pull-right margin" (click)="addValue()" [disabled]="setupForm.controls.values['controls'].invalid"><i class="glyphicon glyphicon-plus"></i></button>
         </div>
         <!-- <label class="control-label col-sm-2">Values :</label> -->
         <!-- </div> -->
         <div class="col-sm-12">
-          <div class="col-sm-4" *ngFor="let stu of setupForm.controls.values.controls;let j=index;" [formGroupName]="j" style="padding: 0px;">
+          <div class="col-sm-4" *ngFor="let stu of setupForm.controls.values['controls'];let j=index;" [formGroupName]="j" style="padding: 0px;">
             <div class="panel add-value">
               <div class="panel-heading">
                 <button type="button" class="close" (click)="removeValue(j)" [disabled]="!j">&times;</button>

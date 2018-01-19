@@ -9,7 +9,7 @@ import { LoaderService } from '../../../shared/loader.service';
   styleUrls:['./setup.component.css']
 })
 export class InitialSetup implements OnInit{
-  setupForm: FormGroup;
+  public setupForm: FormGroup;
   constructor(public fb: FormBuilder,
               public st: StorageService,
               public utiService:UniversityService) {

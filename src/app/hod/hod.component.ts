@@ -21,6 +21,8 @@ export class HodComponent extends Filters {
   }
 
   userDetails: any = {};
+  selectedLevel:any;
+  selectedOpi:any;
 
   getOpi(): any {
     this.utServ.getOpiByDeptId(this.storage.getData('user_roleInfo')[0].departmentId).subscribe((response: any) => {

@@ -40,7 +40,7 @@ export class LoginComponent{
       $('.wrapper').addClass('form-success');
     });
   }
-  private onSubmit() {
+  public onSubmit() {
     this.loginStart = true;
     this.credentialService.verifyUser(this.loginForm.value).subscribe((res) => {
       this.commonService.storeData("access_token", res.access_token);
