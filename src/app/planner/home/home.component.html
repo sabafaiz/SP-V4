@@ -2,71 +2,56 @@
   <div class="container text-center" style="padding: 20px;">
     <img src="assets/uaeu_signature.png" style="height: 100px;">
   </div>
-  <!-- <div class="panel panel-info panel-color">
-      <div class="panel-heading">
-        <div class="dropdown pull-right">
-          <span class="glyphicon glyphicon-option-vertical dropdown-toggle" data-toggle="dropdown" (click)="editMisionVision('mission', organizationInfo.mission);"></span>
-          <ul class="dropdown-menu">
-            <li><a data-toggle="modal" data-target="#missionVisionForm" >Edit</a></li>
-          </ul>
-        </div>
-        <b class="panel-title">Mission</b>
+
+  <div class="card nav-card">
+      <div id='cssmenu'>
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#mission">MISSION</a></li>
+          <button type="button" class="btn btn-default pull-right margin" data-toggle="modal" data-target="#missionVisionForm" (click)="editMisionVision('mission', organizationInfo.mission);"><i class="glyphicon glyphicon-edit"></i></button>
+          <!-- <span class="pull-right edit-icon" (click)="editMisionVision('mission', organizationInfo.mission);"><i class="glyphicon glyphicon-edit" data-toggle="modal" data-target="#missionVisionForm"></i></span> -->
+        </ul>
       </div>
-      <div class="panel-body panel-no-border">
-        {{organizationInfo.mission}}
-      </div>
-    </div>
-    <div class="panel panel-info panel-color2">
-      <div class="panel-heading">
-        <div class="dropdown pull-right">
-          <span class="glyphicon glyphicon-option-vertical dropdown-toggle" data-toggle="dropdown" 
-          (click)="editMisionVision('vision', organizationInfo.vision);"></span>
-          <ul class="dropdown-menu">
-            <li><a data-toggle="modal" data-target="#missionVisionForm" >Edit</a></li>
-          </ul>
-        </div>
-        <b class="panel-tiatle">Vision</b>
-      </div>
-      <div class="panel-body panel-no-border">
-        {{organizationInfo.vision}}
-      </div>
-    </div>
   
-    <div class="panel panel-info add-goal">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          <b>Values</b>
-          <span class="pull-right ctooltip">
-            <button class="btn btn-circle btn-right green-background" data-toggle="modal" data-target="#valueForm" (click)="onValueSelected('',null)">
-              <i class="glyphicon glyphicon-plus"></i>
-            </button>
-            <span class="ctooltiptext">Add Values</span>
-          </span>
-        </h3>            
-      </div>
-      <div class="panel-collapse collapse in">
-        <div class="panel-body">
-          <div class="panel panel-info" *ngFor="let val of organizationInfo.values;let i = index;">
-            <div class="panel-heading color3"><b>{{i+1}}. {{val.title}}</b>
-              <div class="dropdown pull-right">
-                <span class="glyphicon glyphicon-option-vertical dropdown-toggle" data-toggle="dropdown"></span>
-                <ul class="dropdown-menu">
-                  <li><a data-toggle="modal" data-target="#valueForm" (click)="onValueSelected(val,i)">Edit</a></li>
-                  <li><a (click)="deleteValue(val,i)">Delete</a></li>
-                </ul>
+      <div class="tab-content" style="margin-top:15px;margin-left: 10px;" *ngIf="organizationInfo">
+        <div id="mission" class="tab-pane fade in active">
+          <p>{{organizationInfo.mission}}</p>
+        </div>
+        <div id="cssmenu" style="margin-top:40px;">
+          <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#vision">VISSION</a></li>
+            <button type="button" class="btn btn-default pull-right margin" data-toggle="modal" data-target="#missionVisionForm" (click)="editMisionVision('vision', organizationInfo.vision);"><i class="glyphicon glyphicon-edit"></i></button>
+            <!-- <span class="pull-right edit-icon" (click)="editMisionVision('vision', organizationInfo.vision);"><i class="glyphicon glyphicon-edit" data-toggle="modal" data-target="#missionVisionForm"></i></span> -->
+          </ul>
+        </div>
+        <div id="vision" class="tab-pane fade in active" style="margin-top:15px;margin-left: 10px;">
+          <p>{{organizationInfo.vision}}</p>
+        </div>
+        <div id="cssmenu" style="margin-top:40px;">
+          <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#values">VALUES</a></li>
+            <button type="button" class="btn btn-default pull-right margin" (click)="onValueSelected('',null)" data-toggle="modal" data-target="#valueForm"><i class="glyphicon glyphicon-plus"></i></button>
+           
+          
+          </ul>
+        </div>
+        <div id="values" class="tab-pane fade in active">
+          <div class="col-sm-12" style="margin-top: 40px;">
+            <div class="card value-card" *ngFor="let val of organizationInfo.values;let i = index;">
+              <div class="card-header">
+                <h5>{{i+1}}.{{val.title}}</h5>
               </div>
+              <div class="card-body">
+                <p>{{val.description}} </p><br>
+                <button type="button" class="btn btn-default pull-right icon-add" data-toggle="modal" data-target="#valueForm" (click)="onValueSelected(val,i)"><i class="glyphicon glyphicon-edit"></i></button>
+                  <button type="button" class="btn btn-default pull-right icon-btn " (click)="deleteValue(val,i)"><i class="glyphicon glyphicon-trash"></i></button>
+                </div>
             </div>
-            <div class="panel-body">{{val.description}}</div>
           </div>
         </div>
       </div>
     </div>
-  </div> -->
-
-  <!-- end -->
-
-
-  <div class="modal fade" id="valueForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  
+ <div class="modal fade" id="valueForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <!-- Modal Header -->
@@ -133,50 +118,3 @@
   <!-- ===============================================================================
   ======================== /End of Initial setup Interface ==============================================
   ===================================================================================== -->
-  <div class="card nav-card">
-    <div id='cssmenu'>
-      <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#mission">MISSION</a></li>
-        <button type="button" class="btn btn-default pull-right margin" data-toggle="modal" data-target="#missionVisionForm" (click)="editMisionVision('mission', organizationInfo.mission);"><i class="glyphicon glyphicon-edit"></i></button>
-        <!-- <span class="pull-right edit-icon" (click)="editMisionVision('mission', organizationInfo.mission);"><i class="glyphicon glyphicon-edit" data-toggle="modal" data-target="#missionVisionForm"></i></span> -->
-      </ul>
-    </div>
-
-    <div class="tab-content" style="margin-top:15px;margin-left: 10px;" *ngIf="organizationInfo">
-      <div id="mission" class="tab-pane fade in active">
-        <p>{{organizationInfo.mission}}</p>
-      </div>
-      <div id="cssmenu" style="margin-top:40px;">
-        <ul class="nav nav-tabs">
-          <li class="active"><a data-toggle="tab" href="#vision">VISSION</a></li>
-          <button type="button" class="btn btn-default pull-right margin" data-toggle="modal" data-target="#missionVisionForm" (click)="editMisionVision('vision', organizationInfo.vision);"><i class="glyphicon glyphicon-edit"></i></button>
-          <!-- <span class="pull-right edit-icon" (click)="editMisionVision('vision', organizationInfo.vision);"><i class="glyphicon glyphicon-edit" data-toggle="modal" data-target="#missionVisionForm"></i></span> -->
-        </ul>
-      </div>
-      <div id="vision" class="tab-pane fade in active" style="margin-top:15px;margin-left: 10px;">
-        <p>{{organizationInfo.vision}}</p>
-      </div>
-      <div id="cssmenu" style="margin-top:40px;">
-        <ul class="nav nav-tabs">
-          <li class="active"><a data-toggle="tab" href="#values">VALUES</a></li>
-          <button type="button" class="btn btn-default pull-right margin" (click)="onValueSelected('',null)" data-toggle="modal" data-target="#valueForm"><i class="glyphicon glyphicon-plus"></i></button>
-         
-        
-        </ul>
-      </div>
-      <div id="values" class="tab-pane fade in active">
-        <div class="col-sm-12" style="margin-top: 40px;">
-          <div class="card value-card" *ngFor="let val of organizationInfo.values;let i = index;">
-            <div class="card-header">
-              <h5>{{i+1}}.{{val.title}}</h5>
-            </div>
-            <div class="card-body">
-              <p>{{val.description}} </p><br>
-              <button type="button" class="btn btn-default pull-right icon-add" data-toggle="modal" data-target="#valueForm" (click)="onValueSelected(val,i)"><i class="glyphicon glyphicon-edit"></i></button>
-                <button type="button" class="btn btn-default pull-right icon-btn " (click)="deleteValue(val,i)"><i class="glyphicon glyphicon-trash"></i></button>
-              </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>

@@ -48,3 +48,8 @@ border-top: 1px solid #cf3238
 /* .btn-del:hover {
     color:
   } */
+
+
+  .header-background th{
+    vertical-align: middle;
+  }

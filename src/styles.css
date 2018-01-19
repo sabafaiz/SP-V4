@@ -66,9 +66,17 @@ nav a{
   margin-top: 4px;
 }
 .nav .open>a{
-  background-color: #de3572;
-  border-color: white;
+  background-color: transparent;
+
 }
+
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover{
+  background: transparent;
+  border-color: transparent;
+
+}
+
+
 
 .nav>li>a:focus, .nav>li>a:hover{
  color: #fff;
