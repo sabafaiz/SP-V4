@@ -800,7 +800,6 @@ color: brown;
   cursor: pointer;
 }
 
-
 button:disabled{
   cursor: no-drop;
 }

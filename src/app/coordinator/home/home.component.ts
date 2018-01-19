@@ -54,6 +54,8 @@ export class HomeComponent extends Filters implements AfterViewInit {
   }
 
   public showOpi(goal: any, measure: any) {
+    $("#first-section").show();
+    $("#second-section").hide();
     $('#edit-section').collapse('show');
     console.log(goal);
   }
@@ -194,6 +196,11 @@ export class HomeComponent extends Filters implements AfterViewInit {
       this.utServ.deleteInternshipFile(file.id).subscribe((response: any) => {
         files.splice(index, 1);
       })
+  }
+
+  closeForm(){
+    $("#first-section").hide();
+    $("#second-section").show();
   }
 
   get(e) {
