@@ -10,7 +10,7 @@ declare let $: any;
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css','./../coordinator.component.css'],
+  styleUrls: ['./home.component.css', './../coordinator.component.css'],
   providers: [CoordinatorService]
 })
 export class HomeComponent extends Filters implements AfterViewInit {
@@ -18,9 +18,11 @@ export class HomeComponent extends Filters implements AfterViewInit {
   // goals: any[]=[];
   evidencForm: FormGroup;
   evidences: any[] = [];
-  roles:any[]=["coordinator","hod","chanceller","dvc","vc"]
+  selectedOpi:any;
+  selectedMeasure:any;
+  roles: any[] = ["coordinator", "hod", "dvc", "vc", "chanceller"]
   constructor(private utServ: CoordinatorService,
-    private storage: StorageService, private loaderService:LoaderService) {
+    private storage: StorageService, private loaderService: LoaderService) {
     super();
     this.getOpi();
     this.evidencForm = new FormGroup({
@@ -46,8 +48,8 @@ export class HomeComponent extends Filters implements AfterViewInit {
         this.initFilters(this.goalsCopy);
       }
       this.loaderService.display(false);
-    },(error:any)=>{
-      this.loaderService.display(false);      
+    }, (error: any) => {
+      this.loaderService.display(false);
     })
   }
 
@@ -89,7 +91,7 @@ export class HomeComponent extends Filters implements AfterViewInit {
     });
   }
 
-  updateCurrentCost(lev: any){
+  updateCurrentCost(lev: any) {
     var object = {
       "currentCost": lev.currentCost
     }

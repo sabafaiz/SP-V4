@@ -247,8 +247,8 @@
                             </td>
                             <td [style.border-top]="l?'1px solid #ddd':'none'">
                               <ul style="list-style:none;padding:0px;" class="table-list">
-                                <li *ngIf="!msr.assignedDepartments.length">None
-                                  <a class="pull-right" data-toggle="modal" data-target="#myModal" (click)="selectedMeasure=msr;next=false;prev=true;checkAssignDept(msr.assignedDepartments);">Add</a>
+                                <li *ngIf="!msr.assignedDepartments.length">
+                                  <a class="" data-toggle="modal" data-target="#myModal" (click)="selectedMeasure=msr;next=false;prev=true;checkAssignDept(msr.assignedDepartments);">Add</a>
                                 </li>
                                 <li *ngFor="let dept of msr.assignedDepartments;let d = index">{{dept.department}}, </li>
                                 <li *ngIf="msr.assignedDepartments.length">
@@ -381,7 +381,7 @@
             <b>KPI </b>: {{selectedMeasure.opi}}</h4>
         </div>
         <div class="modal-body">
-          <h3>Assigned Departments
+          <h3>ASSIGNED DEPARTMENTS
             <button class="btn btn-primary pull-right margin" data-toggle="modal" data-dismiss="modal" data-target="#myModal" (click)="next=false;prev=true;checkAssignDept(selectedMeasure.assignedDepartments);">
               <span class="glyphicon glyphicon-plus"></span>
             </button>
@@ -391,80 +391,80 @@
             <li class="sibling-list-element" *ngIf="!selectedDepartments">None Selected</li>
             <li class="sibling-list-element" *ngFor="let dept of selectedMeasure.assignedDepartments;let arr=index;">
               <div class="edit-btn">
-                <button type="button" class="btn btn-link btn-edit" (click)="viewDepartment(dept)" *ngIf="!dept.edit">
+                <button type="button" class="btn btn-link margin" (click)="viewDepartment(dept)" *ngIf="!dept.edit">
                   <i class="glyphicon glyphicon-pencil"></i>
                 </button>
-                <button type="button" class="btn btn-link btn-edit" (click)="updateOpiTarget(selectedMeasure,arr);dept.edit = false;" *ngIf="dept.edit">
+                <button type="button" class="btn btn-link margin" (click)="updateOpiTarget(selectedMeasure,arr);dept.edit = false;" *ngIf="dept.edit">
                   <i class="glyphicon glyphicon-floppy-saved"></i>
                 </button>
-                <button type="button" class="btn btn-link btn-edit" (click)="removeAssignedDept(selectedMeasure,arr)" *ngIf="dept.edit">
+                <button type="button" class="btn btn-link margin" (click)="removeAssignedDept(selectedMeasure,arr)" *ngIf="dept.edit">
                   <i class="glyphicon glyphicon-trash"></i>
                 </button>
-                <button type="button" class="btn btn-link btn-edit" (click)="dept.edit = false;" *ngIf="dept.edit">
+                <button type="button" class="btn btn-link margin" (click)="dept.edit = false;" *ngIf="dept.edit">
                   <i class="glyphicon glyphicon-remove"></i>
                 </button>
               </div>
-              <table class="table border-color" *ngIf="!dept.edit">
-                <caption style="text-align: left;color: var(--color-primary);">{{dept.department}}</caption>
-                <span class="input-group pull-right">
-                  <div class="input-group-addon base-color">BaseLine</div>
-                  <div class="form-control form-border" style="width:25%">{{dept.baseline}}</div>
-                </span>
-
-                <ng-container>
-                  <tr *ngFor="let array of dept.opiAnnualTargets;let op=index;">
-                    <td>{{array.year}}</td>
-                    <ng-container>
-                      <td *ngFor="let level of array.levels;let l = index;">
-                        <div class="input-group">
-                          <div class="input-group-addon base-color2">Q{{level.quarterId}}</div>
-                          <div class="form-control" style="width: 50%;">{{level.estimatedTargetLevel}}</div>
-                        </div>
-                      </td>
-                    </ng-container>
-                    <td>
-                      <div class="input-group">
-                        <div class="input-group-addon base-color3">Estimated Cost</div>
-                        <div class="form-control" style="width:50%">{{array.estimatedCost}}</div>
-                      </div>
-                    </td>
-                  </tr>
-                </ng-container>
-              </table>
-              <table class="table border-color" [formGroup]="editDepartmentForm" *ngIf="dept.edit">
-                <caption style="text-align: left;color: #b10909;">{{dept.department}}
+              <table class="table border-color">
+                <fieldset class="the-fieldset" *ngIf="!dept.edit">
+                  <legend class="the-legend">{{dept.department}}</legend>
                   <span class="input-group pull-right">
-                    <div class="input-group-addon base-color">BaseLine</div>
-                    <input type="number" class="form-control form-border" autofocus formControlName="baseline" style="width:25%" id="exampleInputAmount">
-                  </span>
-                </caption>
-                <ng-container formArrayName="opiAnnualTargets">
-                  <tr *ngFor="let array of editDepartmentForm.controls.opiAnnualTargets.controls;let op=index;" [formGroupName]="op">
-                    <td>{{dept.opiAnnualTargets[op].year}}</td>
-                    <ng-container formArrayName="levels">
-                      <td *ngFor="let level of array.controls.levels.controls;let l = index;" [formGroupName]="l">
+                          <div class="input-group-addon base-color">BaseLine</div>
+                          <div class="form-control form-border" style="width:12%">{{dept.baseline}}</div>
+                        </span>
+                  <ng-container>
+                    <tr *ngFor="let array of dept.opiAnnualTargets;let op=index;">
+                      <td width="30%" style="padding-bottom:10px">{{array.year}}</td>
+                      <ng-container>
+                        <td width="40%" *ngFor="let level of array.levels;let l = index;" style="padding-bottom:10px">
+                          <div class="input-group">
+                            <div class="input-group-addon base-color2">Q{{level.quarterId}}</div>
+                            <div class="form-control">{{level.estimatedTargetLevel}}</div>
+                          </div>
+                        </td>
+                      </ng-container>
+                      <td width="60%" style="padding-bottom:10px">
                         <div class="input-group">
-                          <div class="input-group-addon base-color2">Q{{dept.opiAnnualTargets[op].levels[l].quarterId}}</div>
-                          <input type="number" class="form-control" id="exampleInputAmount" style="width: 50%;" formControlName="estimatedTargetLevel">
+                          <div class="input-group-addon base-color3" >Estimated Cost</div>
+                          <div class="form-control" style="width:100%" >{{array.estimatedCost}}</div>
                         </div>
                       </td>
-                    </ng-container>
-                    <td>
-                      <div class="input-group">
-                        <div class="input-group-addon base-color3">Estimated Cost</div>
-                        <input type="number" class="form-control" formControlName="estimatedCost" style="width:50%" id="exampleInputAmount">
-                      </div>
-                    </td>
-                  </tr>
-                </ng-container>
+                    </tr>
+                  </ng-container>
+                </fieldset>
+              </table>
+              <table class="table border-color">
+                <fieldset class="the-fieldset" [formGroup]="editDepartmentForm" *ngIf="dept.edit">
+                  <legend class="the-legend">{{dept.department}}</legend>
+                  <span class="input-group pull-right">
+                      <div class="input-group-addon base-color">BaseLine</div>
+                      <input type="number" class="form-control form-border" autofocus formControlName="baseline" style="width:25%" id="exampleInputAmount">
+                    </span>
+                  <ng-container formArrayName="opiAnnualTargets">
+                    <tr *ngFor="let array of editDepartmentForm.controls.opiAnnualTargets.controls;let op=index;" [formGroupName]="op">
+                      <td width="30%" style="padding-bottom:20px">{{dept.opiAnnualTargets[op].year}}</td>
+                      <ng-container formArrayName="levels">
+                        <td *ngFor="let level of array.controls.levels.controls;let l = index;" [formGroupName]="l" width="40%" style="padding-bottom:20px">
+                          <div class="input-group">
+                            <div class="input-group-addon base-color2">Q{{dept.opiAnnualTargets[op].levels[l].quarterId}}</div>
+                            <input type="number" class="form-control" id="exampleInputAmount" style="width: 50%;" formControlName="estimatedTargetLevel">
+                          </div>
+                        </td>
+                      </ng-container>
+                      <td width="60%" style="padding-bottom:20px">
+                        <div class="input-group">
+                          <div class="input-group-addon base-color3">Estimated Cost</div>
+                          <input type="number" class="form-control" formControlName="estimatedCost" style="width:100%" id="exampleInputAmount">
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+
+                </fieldset>
               </table>
             </li>
           </ul>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default btn-close" data-dismiss="modal">
-            <i class="glyphicon glyphicon-remove"></i>
-          </button>
+          <div class="modal-footer">
+          </div>
         </div>
       </div>
     </div>

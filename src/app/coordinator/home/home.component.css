@@ -5,10 +5,17 @@
  background-color: inherit;
 }
 
+.panel-opi{
+    margin-top: 50px;
+}
 
-.panel-opi panel-title{
+.panel-opi .panel-title{
     font-size: 25px;
-    color: var(--color-primary);
+    color: hsl(264, 6%, 69%);;
+}
+
+.panel-opi .panel-heading{
+    background: #563d7c;
 }
 
 div[customBox]{
@@ -110,3 +117,20 @@ li:before{
 .white:before{
     background:white;
 }
+.table-card .table{
+    background:var(--color0);
+    margin-bottom: 0px;
+    box-shadow: 0 1px 8px 0 rgba(0,0,0,.2), 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.12); 
+  }
+  
+  
+  .table-card thead{
+    background: var(--color-primary);
+    color:var(--color0);
+  }
+  
+  .hide-text{
+    float: left;
+    position: absolute;
+    margin-top: 10px;
+  }

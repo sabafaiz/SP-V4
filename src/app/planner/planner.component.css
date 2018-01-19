@@ -291,6 +291,11 @@
 .modal-add .modal-header{
   background: var(--color-primary);
   color:var(--color-text);
+
+}
+
+.modal-add hr{
+  border-top: 1px solid #fff;
 }
 
 .modal-add .modal-header .close{
@@ -300,6 +305,7 @@
 
 .modal-add .modal-body h3{
   color: var(--color-primary);
+  text-decoration: underline;
 }
 
 .modal-add .modal-body .margin{
@@ -417,24 +423,34 @@
 
 /* lengad */
 .the-legend {
-  background: #563d7c;
-  color: #cbbde2;
+  background: var(--color-text);
+  color: var(--color-primary);
   border-style: none;
   border-width: 0;
   font-size: 14px;
   line-height: 20px;
   margin-bottom: 0;
   width: auto;
-  padding: 14px 13px;
+  padding: 7px 13px;
   border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-weight: 600;
 }
+
+.the-legend:hover{
+  background: var(--color-primary);
+  color:  var(--color-text);
+}
+
 .the-fieldset {
-  border: 1px solid #e0e0e0;
-  padding: 30px;
+  border: 1px solid var(--color-primary);
+  padding: 15px;
+  border-radius: 7px;
+  
 }
 
 .the-fieldset .pull-right{
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .the-fieldset .input-group{
@@ -462,10 +478,15 @@
   list-style:none;
   padding-left:0;
   height:55vh;
-  verflow-y: auto;
+  overflow-y: auto;
 }
 
-.dept-list li{
+/* .dept-list li{
   border: 1px solid var(--color-primary);
   margin-bottom: 30px;
+} */
+
+.modal-header .close:focus {
+  outline: -webkit-focus-ring-color auto 0px;
+
 }
