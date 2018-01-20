@@ -121,7 +121,7 @@ export class HomeComponent extends Filters implements AfterViewInit {
   lockQuarterResult(quarter: any) {
     this.utServ.updateQuarterResult(quarter.id, { 'status': 'locked' }).subscribe((response: any) => {
       console.log(response);
-      quarter.disabled = true;
+      quarter.disable = true;
       quarter.status = "locked";
     });
   }

@@ -6,4 +6,6 @@
 export const environment = {
   production: false,
   api:"https://spdemo.ind-cloud.everdata.com/spv4/"
+  // api:"https://testing.ind-cloud.everdata.com/spv4/" 
+  
 };
