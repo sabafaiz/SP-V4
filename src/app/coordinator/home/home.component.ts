@@ -142,6 +142,11 @@ export class HomeComponent extends Filters implements AfterViewInit {
       })
   }
 
+  getInternshipFile(lev:any,event){
+    console.log(event);
+    lev.internshipFile = event.target.files["0"];
+  }
+
   file: any;
   getFile(event: any) {
     this.file = event.srcElement.files[0];

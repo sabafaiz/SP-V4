@@ -117,7 +117,7 @@ li:before{
 .white:before{
     background:white;
 }
-.table-card .table{
+.table-card .table1{
     background:var(--color0);
     margin-bottom: 0px;
     box-shadow: 0 1px 8px 0 rgba(0,0,0,.2), 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.12); 
@@ -134,3 +134,107 @@ li:before{
     position: absolute;
     margin-top: 10px;
   }
+
+
+  /* serach-css  start*/
+  .search-form .form-group {
+    float: right !important;
+    transition: all 0.35s, border-radius 0s;
+    width: 32px;
+    height: 32px;
+    background-color: var(--color-text);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+  }
+  .search-form .form-group input.form-control {
+    padding-right: 20px;
+    border: 0 none;
+    background: transparent;
+    box-shadow: none;
+    display:block;
+  }
+  .search-form .form-group input.form-control::-webkit-input-placeholder {
+    display: none;
+    color:var(--color-primary);
+  }
+  .search-form .form-group input.form-control:-moz-placeholder {
+    /* Firefox 18- */
+    display: none;
+  }
+  .search-form .form-group input.form-control::-moz-placeholder {
+    /* Firefox 19+ */
+    display: none;
+  }
+  .search-form .form-group input.form-control:-ms-input-placeholder {
+    display: none;
+  }
+  .search-form .form-group:hover,
+  .search-form .form-group.hover {
+    width: 100%;
+    border-radius: 4px 25px 25px 4px;
+  }
+  .search-form .form-group span.form-control-feedback {
+    position: absolute;
+    top: -1px;
+    right: -2px;
+    z-index: 2;
+    display: block;
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    color: var(--color-primary);
+    left: initial;
+    font-size: 14px;
+  }
+  
+  
+
+
+/* serach css end */
+
+.mini {
+  text-align: center;
+}
+
+.mini strong{
+  text-decoration: underline;
+  color: var(--color-primary);
+}
+
+/* legand */
+.the-legend {
+  background: var(--color-text);
+  color:var(--color-primary);
+  border-style: none;
+  border-width: 0;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 0;
+  width: auto;
+  padding: 8px 16px;
+  border: 1px solid var(--color-text);
+  border-radius: 6px;
+}
+.the-fieldset {
+  border: 1px solid var(--color-primary);
+  padding: 10px;
+}
+/* legand */
+
+
+.panel-heading{
+  background: var(--color-primary);
+  color:var(--color-text);
+}
+
+.bar .modal-header{
+  background: var(--color-primary);
+  color:var(--color-text);
+}
+
+.bar .close{
+  color:var(--coolor0);
+  opacity: 1;
+}

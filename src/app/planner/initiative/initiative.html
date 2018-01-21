@@ -108,7 +108,7 @@
                 </colgroup>
                 <tr class="to-be-highlighted" *ngFor="let initiate of goal.initiatives;let j=index;" #highlight>
                   <td>{{initiate.initiative}}</td>
-                  <td>
+                  <td class="text-center">
                     <label class="switch">
                       <input type="checkbox" [checked]="initiate.disable" (change)="disable($event,initiate.initiativeId)">
                       <span class="slider round"></span>

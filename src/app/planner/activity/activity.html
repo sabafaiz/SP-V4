@@ -142,7 +142,7 @@
                         </colgroup>
                         <tr class="to-be-highlighted" *ngFor="let activit of initiate.activities;let k=index;" #highlight>
                           <td [style.border-top]="k?'1px solid #ddd':'none'">{{activit.activity}}</td>
-                          <td>
+                          <td class="text-center">
                             <label class="switch">
                               <input type="checkbox" [checked]="activit.disable" (change)="disable($event,activit.activityId)">
                               <span class="slider round"></span>

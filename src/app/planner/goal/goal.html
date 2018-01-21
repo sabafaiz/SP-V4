@@ -76,7 +76,7 @@
       <tbody class="body-background">
         <tr *ngFor="let goal of goals;let i = index;">
           <td style="vertical-align: middle;">{{goal.goal}}</td>
-          <td>
+          <td class="text-center">
             <label class="switch">
               <input type="checkbox" [checked]="goal.disable" (change)="disable($event,goal.goalId)">
               <span class="slider round"></span>
