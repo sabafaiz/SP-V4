@@ -27,6 +27,8 @@ export class InitiativeComponent extends Filters {
     public commonService: StorageService,
     private loaderService: LoaderService) {
     super();
+    
+    this.loaderService.display(true);
     this.getCycleWithChildren(false);
     this.initiativeForm = this.initForm();
   }
@@ -58,7 +60,6 @@ export class InitiativeComponent extends Filters {
 
   defaultCycle: any;
   getInitiative() {
-    this.loaderService.display(true);
     this.orgService.getInitiativesByCycleId(this.defaultCycle).subscribe((response: any) => {
       if (response.status == 204) {
         this.goals = [];

@@ -76,15 +76,11 @@
       <tbody class="body-background">
         <tr *ngFor="let goal of goals;let i = index;">
           <td style="vertical-align: middle;">{{goal.goal}}</td>
-          <td>
-            
-    
-        <button type="button" class="btn btn-lg btn-toggle center-block" data-toggle="button" aria-pressed="false" autocomplete="off">
-          <div class="handle"></div>
-        </button>
-     
-            <!-- <input type="checkbox" [checked]="goal.disable" (change)="disable($event,goal.goalId)">
-            <span style="color:red" *ngIf="goal.disable">*disabled</span> -->
+          <td class="text-center">
+            <label class="switch">
+              <input type="checkbox" [checked]="goal.disable" (change)="disable($event,goal.goalId)">
+              <span class="slider round"></span>
+            </label>
           </td>
           <td style="vertical-align: middle;">
             <button class="btn-link" scrollTo href="#add-initiative" (click)="updateGoal(goal)" [disabled]="goal.disable">

@@ -242,7 +242,9 @@
                               <br>
                               <label>MeasureUnit :</label>{{msr.measureUnit}}
                               <br>
-                              <label>Direction :</label><span [ngClass]="msr.direction ? 'glyphicon glyphicon-sort-by-attributes' : 'glyphicon glyphicon-sort-by-attributes-alt'" class="icon-mark2"></span>
+                              <label>Direction :</label>
+                              <span [ngClass]="msr.direction ? 'glyphicon glyphicon-sort-by-attributes' : 'glyphicon glyphicon-sort-by-attributes-alt'"
+                                class="icon-mark2"></span>
                               <br>
                             </td>
                             <td [style.border-top]="l?'1px solid #ddd':'none'">
@@ -271,14 +273,10 @@
                                   </button>
                                 </li>
                                 <li>
-                                    <button type="button" class="btn btn-sm btn-toggle center-block" data-toggle="button" aria-pressed="false" autocomplete="off">
-                                        <div class="handle"></div>
-                                      </button>
-
-                                  <!-- <button class="btn-link btn-edit">
+                                  <label class="switch">
                                     <input type="checkbox" [checked]="msr.disable" (change)="disable($event,msr.opiId)">
-                                  </button>
-                                  <span style="color:red" *ngIf="msr.disable"> *disabled</span> -->
+                                    <span class="slider round"></span>
+                                  </label>
                                 </li>
                               </ul>
                             </td>
@@ -412,9 +410,9 @@
                 <fieldset class="the-fieldset" *ngIf="!dept.edit">
                   <legend class="the-legend">{{dept.department}}</legend>
                   <span class="input-group pull-right">
-                          <div class="input-group-addon base-color">BaseLine</div>
-                          <div class="form-control form-border" style="width:12%">{{dept.baseline}}</div>
-                        </span>
+                    <div class="input-group-addon base-color">BaseLine</div>
+                    <div class="form-control form-border" style="width:12%">{{dept.baseline}}</div>
+                  </span>
                   <ng-container>
                     <tr *ngFor="let array of dept.opiAnnualTargets;let op=index;">
                       <td width="30%" style="padding-bottom:10px">{{array.year}}</td>
@@ -428,8 +426,8 @@
                       </ng-container>
                       <td width="60%" style="padding-bottom:10px">
                         <div class="input-group">
-                          <div class="input-group-addon base-color3" >Estimated Cost</div>
-                          <div class="form-control" style="width:100%" >{{array.estimatedCost}}</div>
+                          <div class="input-group-addon base-color3">Estimated Cost</div>
+                          <div class="form-control" style="width:100%">{{array.estimatedCost}}</div>
                         </div>
                       </td>
                     </tr>
@@ -440,9 +438,9 @@
                 <fieldset class="the-fieldset" [formGroup]="editDepartmentForm" *ngIf="dept.edit">
                   <legend class="the-legend">{{dept.department}}</legend>
                   <span class="input-group pull-right">
-                      <div class="input-group-addon base-color">BaseLine</div>
-                      <input type="number" class="form-control form-border" autofocus formControlName="baseline" style="width:25%" id="exampleInputAmount">
-                    </span>
+                    <div class="input-group-addon base-color">BaseLine</div>
+                    <input type="number" class="form-control form-border" autofocus formControlName="baseline" style="width:25%" id="exampleInputAmount">
+                  </span>
                   <ng-container formArrayName="opiAnnualTargets">
                     <tr *ngFor="let array of editDepartmentForm.controls.opiAnnualTargets.controls;let op=index;" [formGroupName]="op">
                       <td width="30%" style="padding-bottom:20px">{{dept.opiAnnualTargets[op].year}}</td>

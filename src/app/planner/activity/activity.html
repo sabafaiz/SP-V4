@@ -89,7 +89,8 @@
           </colgroup>
           <thead class="header-background" *ngIf="goals.length">
             <tr>
-              <th><span class="hide-text">GOAL</span>
+              <th>
+                <span class="hide-text">GOAL</span>
                 <form action="" class="search-form">
                   <div class="form-group has-feedback" style="margin-bottom: 10px;">
                     <label for="search" class="sr-only">Search</label>
@@ -98,7 +99,8 @@
                   </div>
                 </form>
               </th>
-              <th><span class="hide-text">INITIATIVE</span>
+              <th>
+                <span class="hide-text">INITIATIVE</span>
                 <form action="" class="search-form">
                   <div class="form-group has-feedback" style="margin-bottom: 10px;">
                     <label for="search" class="sr-only">Search</label>
@@ -107,7 +109,8 @@
                   </div>
                 </form>
               </th>
-              <th><span class="hide-text">ACTIVITY</span>
+              <th>
+                <span class="hide-text">ACTIVITY</span>
                 <form action="" class="search-form">
                   <div class="form-group has-feedback" style="margin-bottom: 10px;">
                     <label for="search" class="sr-only">Search</label>
@@ -139,13 +142,11 @@
                         </colgroup>
                         <tr class="to-be-highlighted" *ngFor="let activit of initiate.activities;let k=index;" #highlight>
                           <td [style.border-top]="k?'1px solid #ddd':'none'">{{activit.activity}}</td>
-                          <td>
-                              <button type="button" class="btn btn-lg btn-toggle center-block" data-toggle="button" aria-pressed="false" autocomplete="off">
-                                  <div class="handle"></div>
-                                </button>
-
-                            <!-- <input type="checkbox" [checked]="activit.disable" (change)="disable($event,activit.activityId)">
-                            <span style="color:red" *ngIf="activit.disable"> *disabled</span> -->
+                          <td class="text-center">
+                            <label class="switch">
+                              <input type="checkbox" [checked]="activit.disable" (change)="disable($event,activit.activityId)">
+                              <span class="slider round"></span>
+                            </label>
                           </td>
                           <td [style.border-top]="k?'1px solid #ddd':'none'">
                             <button class="btn-link" data-toggle="tooltip" data-placement="auto" title="Edit" (click)="updateActivity(goal,initiate,activit,highlight)"
