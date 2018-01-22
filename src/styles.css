@@ -102,6 +102,12 @@ nav a{
   padding-top: 0px;
 }
 
+.btn-login{
+  color:var(--color-text);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
 .icon-size{
   font-size: 87px;
 }
