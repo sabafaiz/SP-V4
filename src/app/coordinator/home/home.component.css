@@ -197,6 +197,9 @@ li:before{
 
 
 /* serach css end */
+.edit-panel .panel-title{
+  padding: 10px;
+}
 
 .mini {
   text-align: center;

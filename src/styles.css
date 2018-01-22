@@ -101,11 +101,20 @@ nav a{
   padding-bottom: 0px;
   padding-top: 0px;
 }
+.login-card{
+  border: 2px solid #563d7c;
+}
 
 .btn-login{
   color:var(--color-text);
   background: var(--color-primary);
   border-color: var(--color-primary);
+}
+
+.btn-login:hover ,.btn-login:focus,.btn-login:active{
+  color:var(--color-text);
+  background: var(--color-primary);
+  border-color: var(--color-primary); 
 }
 
 .icon-size{
