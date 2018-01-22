@@ -44,7 +44,10 @@ div[customBox]{
   }
 
   div[line] h4{
-    text-transform: uppercase;margin: auto;padding: 20px;
+    text-transform: uppercase;
+    margin: auto;
+    padding: 20px;
+    color:var(--color-primary);
   }
   .active{
     border-color:yellow !important;
