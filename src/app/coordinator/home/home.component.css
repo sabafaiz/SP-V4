@@ -303,6 +303,7 @@ text-align: center;
   color: #563d7c;
   font-weight: 700;
   text-align: center;
+  text-decoration: underline;
   
 }
 
@@ -318,5 +319,9 @@ text-align: center;
   color:var(--color-text);
 }
 
+.panel-title .close{
+  color:var(--color-text);
+  opacity: 1;
+}
 
 /* edit-table */
