@@ -258,6 +258,9 @@
                                     aria-describedby="fileHelp" (change)="getInternshipFile(lev,$event)" [disabled]="lev.disable">
                                   <small id="fileHelp" class="form-text text-muted">Accept only .xls, .csv or excel sheets</small>
                                 </div>
+                                <div class="form-group">
+                                  <button type="button" (click)="saveInternshipForm(lev)" [disabled]="lev.disable">Save</button>
+                                </div>
                               </td>
                             </tr>
                           </tfoot>
