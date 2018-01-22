@@ -97,7 +97,7 @@ text-align: center;
     padding: 0 30px;; }
 
 
-li:before{
+#statu-legend li:before{
     content: '';
     width: 10px;
     height: 10px;

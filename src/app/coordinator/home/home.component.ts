@@ -88,8 +88,9 @@ export class HomeComponent extends Filters implements AfterViewInit {
       "organization": lev.organization
     }
     this.utServ.saveQuarterResultWithMou(lev.id, object).subscribe((response: any) => {
-      lev = response;
-      this.getOpi();
+      console.log(response);
+      lev.currentCost = response.currentCost;
+      lev['mouDetails'] = response.mouDetails;
     });
   }
 
