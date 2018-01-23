@@ -69,9 +69,12 @@
       <table class="table table-bordered table-data">
         <colgroup>
           <col style="width:30%">
-          <col style="width:70%">
+          <col style="width:40%">
+          <col style="width:10%">
+          <col style="width:10%">
+          <col style="width:10%">
         </colgroup>
-        <thead class="header-background" *ngIf="goals.length">
+        <thead class="header-background" *ngIf="goalsCopy.length">
           <tr>
             <th>
               <span class="hide-text">GOAL</span>
@@ -93,15 +96,18 @@
                 </div>
               </form>
             </th>
+            <th>Disable</th>
+            <th>Edit</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let goal of goals;let i = index;">
             <td>{{goal.goal}}</td>
-            <td style="padding:0px;border:none;" #element [style.height]="get(element)">
+            <td colspan="4" style="padding:0px;border:none;" #element [style.height]="get(element)">
               <table class="table table-bordered" style="height: inherit;">
                 <colgroup>
-                  <col style="width:70%">
+                  <col style="width:40%">
                   <col style="width:10%">
                   <col style="width:10%">
                   <col style="width:10%">

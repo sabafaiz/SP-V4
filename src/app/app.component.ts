@@ -15,6 +15,14 @@ import { LoaderService } from './shared/loader.service';
   selector: 'my-app',
   template: `
   <router-outlet>
+  <div class="loading-outer-overlay" *ngIf="transactionLoader">
+    <div class="loading-overlay-sm">
+      <div loader-box>
+        <div class="loader-small"></div>
+        <h1>{{loadingStatus}}</h1>
+      </div>
+    </div>
+  </div>
   <div class="loading-outer-overlay" *ngIf="showLoader">
     <div class="loading-overlay">
       <div class="loader"></div>
@@ -28,6 +36,8 @@ export class AppComponent {
   // Sets initial value to true to show loading spinner on first load
   // loading;
   showLoader:boolean;
+  transactionLoader:boolean;
+  loadingStatus:string;
 
   constructor(private router: Router,private loaderService:LoaderService) {
     // router.events.subscribe((event: RouterEvent) => {
@@ -39,9 +49,16 @@ export class AppComponent {
 
   ngOnInit() {
     this.loaderService.status.asObservable().subscribe((val: boolean) => {
-    this.showLoader = val;
+      this.showLoader = val;
     });
-    }
+    this.loaderService.transactionLoader.asObservable().subscribe((val: boolean) => {
+      this.transactionLoader = val;
+    });
+    this.loaderService.loadingStatus.asObservable().subscribe((val: string) => {
+      this.loadingStatus = val;
+    });
+
+  }
 
   // Shows and hides the loading spinner during RouterEvent changes
   // navigationInterceptor(event: RouterEvent): void {

@@ -3,12 +3,11 @@
   <div class="panel" *ngIf="selectedOpi" style="margin-top:50px;" id="first-section">
     <div class="panel-heading">
       <h4 class="panel-title ">
-          <button type="button" class="close" (click)="closeForm();">
-              <span aria-hidden="true">&times;</span>
-            </button>
+        <button type="button" class="close" (click)="closeForm();">
+          <span aria-hidden="true">&times;</span>
+        </button>
         <a data-toggle="collapse" href="#edit-section">EDIT SECTION</a>
-      </h4>
-     
+      </h4>     
     </div>
     <div id="edit-section" class="panel-collapse collapse in">
       <div class="panel-body">
@@ -125,14 +124,14 @@
                         <button *ngIf="lev.isUpdating" (click)="lev.status='inprogress';lev.isUpdating=false;"> Cancel</button>
                         <button *ngIf="lev.evidance.length&&!isUpdating" (click)="lockQuarterResult(lev)" [disabled]="lev.disable">Lock</button>
                       </div>
-                      <button type="button" class="close" data-toggle="collapse" [attr.href]="'#row-collapse'+at" *ngIf="lev.evidance.length" (click)="evidences=lev.evidance;">
+                      <button type="button" class="close" data-toggle="collapse" [attr.href]="'#row-collapse'+at" *ngIf="lev.evidance.length" (click)="evidences=lev.evidance;collapseOff('#row-collapse'+at)" style="cursor:pointer;">
                         <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
                       </button>
                     </td>
                   </tr>
                 </ng-template>
                 <ng-container *ngIf="evidences.length">
-                  <tr [attr.id]="'row-collapse'+at" class="collapse">
+                  <tr [attr.id]="'row-collapse'+at" class="collapse collapse-off">
                     <td colspan="6">
                       <div class="heading-details">Evidences</div>
                       <br>
@@ -181,14 +180,14 @@
                   <td [attr.rowspan]="tdl.levels.length + 5" style="vertical-align: middle;">{{tdl.estimatedCost}}</td>
                 </tr>
                 <ng-template let-lev ngFor [ngForOf]="tdl.levels" let-in="index">
-                  <tr [style.background]="lev.disable?'lightgray':null" data-toggle="collapse" [attr.href]="'#row-collapse'+at+'q'+in" (click)="selectedQuarter=lev;evForm=1;">
+                  <tr [style.background]="lev.disable?'lightgray':null" data-toggle="collapse" [attr.href]="'#row-collapse'+at+'q'+in" (click)="selectedQuarter=lev;evForm=1;collapseOff('#row-collapse'+at+'q'+in)" style="cursor:pointer;">
                     <td>{{lev.quarter}}</td>
                     <td>{{lev.estimatedTargetLevel}}</td>
                     <td>{{lev.endDate + tdl.year}}</td>
                     <td style="text-align:center;">View</td>
                   </tr>
                   <ng-container>
-                    <tr [attr.id]="'row-collapse'+at+'q'+in" class="collapse">
+                    <tr [attr.id]="'row-collapse'+at+'q'+in" class="collapse collapse-off">
                       <td colspan="6">
                         <table class="table table-bordered">
                           <caption align="top" *ngIf="lev.internshipDetails.length">
@@ -236,7 +235,7 @@
                                 <ul style="list-style: none;padding: 0;">
                                   <li *ngFor="let ev of file.evidance;let e=index;">
                                     <a [attr.href]="ev.url">evidence {{e+1}}</a>
-                                    <button type="button" class="close" (click)="deleteInternshipEvidence(file.evidance,ev,e)" [disabled]="lev.disable">
+                                    <button type="button" class="close" (click)="deleteInternshipEvidence(file.evidance,ev,e)" [disabled]="lev.disable || lev.status=='locked'">
                                       <span aria-hidden="true">&times;</span>
                                     </button>
                                   </li>
@@ -259,7 +258,7 @@
                                   <small id="fileHelp" class="form-text text-muted">Accept only .xls, .csv or excel sheets</small>
                                 </div>
                                 <div class="form-group">
-                                  <button type="button" (click)="saveInternshipForm(lev)" [disabled]="lev.disable">Save</button>
+                                  <button type="button" (click)="saveInternshipForm(lev)" [disabled]="lev.disable" [disabled]="!(lev.currentCost&&lev.internshipFile)">Save</button>
                                 </div>
                               </td>
                             </tr>
@@ -299,14 +298,14 @@
                   <td [attr.rowspan]="tdl.levels.length+4" style="vertical-align: middle;">{{tdl.estimatedCost}}</td>
                 </tr>
                 <ng-template let-lev ngFor [ngForOf]="tdl.levels" let-in="index">
-                  <tr data-toggle="collapse" [attr.href]="'#row-collapse'+at+'lev'+in" (click)="selectedQuarter=lev;" [style.background]="lev.disable?'lightgray':null">
+                  <tr data-toggle="collapse" [attr.href]="'#row-collapse'+at+'lev'+in" (click)="selectedQuarter=lev;collapseOff('#row-collapse'+at+'lev'+in)" [style.background]="lev.disable?'lightgray':null" style="cursor:pointer;">
                     <td>{{lev.quarter}}</td>
                     <td>{{lev.estimatedTargetLevel}}</td>
                     <td>{{lev.endDate + tdl.year}}</td>
                     <td style="text-align:center;">View</td>
                   </tr>
                   <ng-container>
-                    <tr [attr.id]="'row-collapse'+at+'lev'+in" class="collapse">
+                    <tr [attr.id]="'row-collapse'+at+'lev'+in" class="collapse collapse-off">
                       <td colspan="6">
                         <table class="table table-bordered" *ngIf="lev.mouDetails.length">
                           <caption align="top">

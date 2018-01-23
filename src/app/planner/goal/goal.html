@@ -56,7 +56,13 @@
   <!-- code for table -->
   <div class="card table-card">
     <table class="table  table-bordered table-data">
-      <thead class="header-background" *ngIf="goals.length">
+      <colgroup>
+        <col style="width:70%">
+        <col style="width:10%">
+        <col style="width:10%">
+        <col style="width:10%">
+      </colgroup>
+      <thead class="header-background" *ngIf="goalsCopy.length">
         <tr>
           <th>
             <span class="hide-text">GOAL</span>
@@ -68,9 +74,9 @@
               </div>
             </form>
           </th>
-          <th style="text-align:center">Enable</th>
-          <th>Delete</th>
+          <th style="text-align:center">Disable</th>
           <th>Edit</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody class="body-background">

@@ -595,46 +595,6 @@ opacity: 0;
 }
 /* end of loader ========================================================================== */
 
-
-/* navigation loader*/
-
-.loading-outer-overlay{
-  height: 100vh;
-  width: 100vw;
-  background: #08080887;
-  display: list-item;
-  position: fixed;
-  z-index: 1;
-}
-.loading-overlay{
-  position: absolute;
-  top: 50% !important;
-  left: 50% !important;
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-}
-.loader {
-  border: 16px solid #8e8576;
-  border-radius: 50%;
-  border-top: 16px solid blue;
-  border-right: 16px solid green;
-  border-bottom: 16px solid red;
-  width: 120px;
-  height: 120px;
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
-}
-
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
 /* panel-css */
 
 .add-plan{

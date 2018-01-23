@@ -289,7 +289,7 @@ export class MeasureComponent extends Filters implements AfterViewInit {
     const departmentsArrayForEdit: any[] = [];
     this.selectedDepartments.forEach(element => {
       departmentsFormArray.push(this.formBuilder.group({
-        baseline: [element.baseline],
+        baseline: [0],
         departmentId: [element.departmentId],
         departmentName: [element.department],
         opiAnnualTargets: this.formBuilder.array(this.setAnnualTarget(element.opiAnnualTargets))
@@ -314,7 +314,7 @@ export class MeasureComponent extends Filters implements AfterViewInit {
     return this.formBuilder.group({
       "year": [year, [Validators.required]],
       "levels": this.formBuilder.array(this.setLevels(this.selectedMeasure.frequencyId)),
-      "estimatedCost": ['', [Validators.required]]
+      "estimatedCost": [0, [Validators.required]]
     });
   }
 

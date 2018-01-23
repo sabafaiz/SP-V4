@@ -4,7 +4,7 @@ import { StorageService } from "../../shared/storage.service";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Filters } from "../../shared/filters";
 import { LoaderService } from '../../shared/loader.service';
-
+import * as alertify from 'alertifyjs';
 declare let $: any;
 
 @Component({
@@ -67,16 +67,23 @@ export class HomeComponent extends Filters implements AfterViewInit {
         'currentCost': quarter.currentCost,
         'currentTargetLevel': quarter.currentTargetLevel,
       }
+      this.loaderService.setLoadingStatus("Saving");
+      this.loaderService.setTransactionLoader(true);
       this.utServ.saveQuarterResult(object).subscribe((response: any) => {
-        quarter.status = 'inprogress';
+      this.loaderService.setTransactionLoader(false);
+      quarter.status = 'inprogress';
       })
     } else {
       let object = {
         'currentCost': quarter.currentCost,
         'currentTargetLevel': quarter.currentTargetLevel,
       }
+      this.loaderService.setLoadingStatus("Updating");
+      this.loaderService.setTransactionLoader(true);
       this.utServ.updateQuarterResult(quarter.id, object).subscribe((response: any) => {
-        console.log(response);
+      this.loaderService.setTransactionLoader(false);
+      alertify.success("Updated");
+      console.log(response);
       });
     }
   }
@@ -87,10 +94,14 @@ export class HomeComponent extends Filters implements AfterViewInit {
       "mouType": lev.mouType,
       "organization": lev.organization
     }
+    this.loaderService.setLoadingStatus("Saving");
+    this.loaderService.setTransactionLoader(true);
     this.utServ.saveQuarterResultWithMou(lev.id, object).subscribe((response: any) => {
       console.log(response);
       lev.currentCost = response.currentCost;
       lev['mouDetails'] = response.mouDetails;
+    this.loaderService.setTransactionLoader(false);
+    alertify.success("Saved");      
     });
   }
 
@@ -98,8 +109,14 @@ export class HomeComponent extends Filters implements AfterViewInit {
     var object = {
       "currentCost": lev.currentCost
     }
+    this.loaderService.setLoadingStatus("Updating");
+    this.loaderService.setTransactionLoader(true);    
     this.utServ.updateQuarterResultCurrentCost(lev.id, object).subscribe((response: any) => {
       lev.edit = false;
+      setTimeout(() => {
+        this.loaderService.setTransactionLoader(false);
+        alertify.success("Updated");
+      }, 1000);
       console.log(response);
     });
   }
@@ -109,24 +126,43 @@ export class HomeComponent extends Filters implements AfterViewInit {
       "mouType": mou.mouType,
       "organization": mou.organization
     }
+    this.loaderService.setLoadingStatus("Updating");
+    this.loaderService.setTransactionLoader(true);
     this.utServ.updateMou(mou.id, object).subscribe((response: any) => {
+      this.loaderService.setTransactionLoader(false);
+      alertify.success("Updated");
       mou.edit = false;
     })
   }
 
   deleteMou(mous: any[], mou: any, index: any) {
-    if (confirm("Are you sure you want to delete this mou"))
+    alertify.confirm("Are you sure you want to delete this mou",()=>{
+      this.loaderService.setLoadingStatus("Updating");
+      this.loaderService.setTransactionLoader(true);
       this.utServ.deleteMou(mou.id).subscribe((response: any) => {
         mous.splice(index, 1);
-      })
+        this.loaderService.setTransactionLoader(false); 
+        alertify.success("Sucessfully removed");       
+      },(error:any)=>{
+        alertify.error("Something went wrong");
+      });      
+    }).setHeader("Confirmation");
   }
 
   lockQuarterResult(quarter: any) {
-    this.utServ.updateQuarterResult(quarter.id, { 'status': 'locked' }).subscribe((response: any) => {
-      console.log(response);
-      quarter.disable = true;
-      quarter.status = "locked";
-    });
+    alertify.confirm("Are you sure you want to Lock you results",()=>{
+      this.loaderService.setLoadingStatus("Locking");
+      this.loaderService.setTransactionLoader(true);
+      this.utServ.updateQuarterResult(quarter.id, { 'status': 'locked' }).subscribe((response: any) => {
+        this.loaderService.setTransactionLoader(false);      
+        console.log(response);
+        quarter.disable = true;
+        quarter.status = "locked";
+      },(error:any)=>{
+        alertify.error("Something went wrong");
+      });
+    }).setHeader("Confirmation");
+    
   }
 
   deleteEvidence(evidences: any[], evidence: any, index: any) {
@@ -212,6 +248,11 @@ export class HomeComponent extends Filters implements AfterViewInit {
   get(e) {
     var promise = new Promise((resolve: any, reject: any) => { $(e)["0"].height = $(e)["0"].clientHeight; resolve(); });
     return promise;
+  }
+
+  collapseOff(element:any){
+    $(element).addClass('in');
+    $(".collapse-off").removeClass('in');
   }
 
 }
