@@ -247,7 +247,7 @@ text-align: center;
 }
 
 /* edit-table */
- .table-edit thead th{
+ .table-edit thead {
    background: var(--color-primary);
    color:var(--color-text);
 
@@ -325,3 +325,17 @@ text-align: center;
 }
 
 /* edit-table */
+
+/* form-control */
+.bg-color{
+  background: white;
+}
+
+.form-control{
+  background: white;
+}
+
+.form-group label{
+  font-weight: 600;
+  color:var(--color-primary);
+}
