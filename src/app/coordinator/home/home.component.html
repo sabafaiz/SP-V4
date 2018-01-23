@@ -3,11 +3,12 @@
   <div class="panel" *ngIf="selectedOpi" style="margin-top:50px;" id="first-section">
     <div class="panel-heading">
       <h4 class="panel-title ">
-        <button type="button" class="close" (click)="closeForm();">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <a data-toggle="collapse" href="#edit-section">EDIT SECTION</a>
-      </h4>     
+          <button type="button" class="close" (click)="closeForm();">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        <a data-toggle="collapse" href="#edit-section">KPI DETAILS</a>
+      </h4>
+     
     </div>
     <div id="edit-section" class="panel-collapse collapse in">
       <div class="panel-body">
@@ -155,7 +156,7 @@
           </div>
           <!--with student internship form-->
           <div class="row" *ngIf="selectedMeasure.evidanceFormId==1" style="padding:15px;">
-            <table id="accordion" class="table table-hover table-bordered table-edit">
+            <table id="accordion" class="table  table-bordered table-edit">
               <colgroup>
                 <col width="10%">
                 <col width="10%">
@@ -192,7 +193,7 @@
                         <table class="table table-bordered">
                           <caption align="top" *ngIf="lev.internshipDetails.length">
                             <div class="input-group">
-                              <div class="input-group-addon">Current Cost</div>
+                              <div class="input-group-addon bg-color">Current Cost</div>
                               <input class="form-control" [(ngModel)]="lev.currentCost" style="width:25%" [disabled]="!lev.edit" autofocus>
                               <div class="pull-left" *ngIf="!lev.edit;else savebtn" [hidden]="lev.disable">
                                 <button type="button" class="btn btn-link" (click)="lev.edit=true;lev.currentCostCopy=lev.currentCost;">
@@ -210,7 +211,7 @@
                               </ng-template>
 
                               <div class="pull-right">
-                                <button (click)="lockQuarterResult(lev)" *ngIf="lev.internshipDetails.length" [disabled]="lev.status=='locked'" [disabled]="lev.disable">Lock </button>
+                                <button type="button" class="btn btn-primary btn-save" (click)="lockQuarterResult(lev)" *ngIf="lev.internshipDetails.length" [disabled]="lev.status=='locked'" [disabled]="lev.disable">Lock</button>
                               </div>
                             </div>
                           </caption>
@@ -218,7 +219,7 @@
                             <tr>
                               <th>Internship Detail</th>
                               <th *ngIf="lev.internshipDetails.length">Evidennce
-                                <button class="pull-right" data-toggle="modal" data-target="#evidenceForm" (click)="selectedInternshipFile = file;" *ngIf="lev.status!='locked'"
+                                <button class="pull-right btn-save" data-toggle="modal" data-target="#evidenceForm" (click)="selectedInternshipFile = file;" *ngIf="lev.status!='locked'"
                                   [disabled]="lev.disable">Add</button>
                               </th>
                             </tr>
@@ -247,15 +248,21 @@
                           <tfoot *ngIf="!lev.internshipDetails.length">
                             <tr>
                               <td colspan="2">
+                                <div class="row">
+                                  <div class="col-sm-6">
                                 <div class="form-group">
-                                  <label>Current Cost</label>
+                                  <label>Current Cost :</label>
                                   <input class="form-control" type="number" [(ngModel)]="lev.currentCost" [disabled]="lev.disable" style="width:25%">
                                 </div>
+                              </div>
+                              <div class="col-sm-6">
                                 <div class="form-group">
-                                  <label for="exampleInputFile">Student Internship File</label>
-                                  <input type="file" class="form-control-file" id="exampleInputFile" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                                    aria-describedby="fileHelp" (change)="getInternshipFile(lev,$event)" [disabled]="lev.disable">
-                                  <small id="fileHelp" class="form-text text-muted">Accept only .xls, .csv or excel sheets</small>
+                                    <label for="exampleInputFile">Student Internship File :</label>
+                                    <input type="file" class="form-control-file" id="exampleInputFile" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                      aria-describedby="fileHelp" (change)="getInternshipFile(lev,$event)" [disabled]="lev.disable">
+                                    <small id="fileHelp" class="form-text text-muted">Accept only .xls, .csv or excel sheets</small>
+                                  </div>
+                                </div>
                                 </div>
                                 <div class="form-group">
                                   <button type="button" (click)="saveInternshipForm(lev)" [disabled]="lev.disable" [disabled]="!(lev.currentCost&&lev.internshipFile)">Save</button>
@@ -404,25 +411,25 @@
                         <div class="row" *ngIf="!lev.mouDetails.length">
                           <div class="col-sm-3">
                             <div class="input-group">
-                              <div class="input-group-addon">Current Cost</div>
+                              <div class="input-group-addon bg-color">Current Cost</div>
                               <input type="text" class="form-control" [(ngModel)]="lev.currentCost" [disabled]="lev.disable">
                             </div>
                           </div>
                           <div class="col-sm-3">
                             <div class="input-group">
-                              <div class="input-group-addon">Mou type</div>
+                              <div class="input-group-addon bg-color">Mou type</div>
                               <input type="text" class="form-control" [(ngModel)]="lev.mouType" [disabled]="lev.disable">
                             </div>
                           </div>
                           <div class="col-sm-3">
                             <div class="input-group">
-                              <div class="input-group-addon">Organization</div>
+                              <div class="input-group-addon bg-color">Organization</div>
                               <input type="text" class="form-control" [(ngModel)]="lev.organization" [disabled]="lev.disable">
                             </div>
                           </div>
                           <div class="col-sm-3">
                             <div class="form-group">
-                              <button class="btn" type="button" (click)="saveQuarterResultWithMou(lev)" [disabled]="lev.disable"> Save</button>
+                              <button class="btn pull-right btn-save" type="button" (click)="saveQuarterResultWithMou(lev)" [disabled]="lev.disable"> Save</button>
                             </div>
                           </div>
                         </div>
