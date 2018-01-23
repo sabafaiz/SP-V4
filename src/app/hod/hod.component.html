@@ -2,6 +2,9 @@
   <div class="navbar-header">
     <a class="navbar-brand" href="#">UAEU</a>
   </div>
+  <ul class="nav navbar-nav navbar-left">
+    <li><a>Assigned Operational Performance Indicators</a></li>
+  </ul>
   <ul class="nav navbar-nav navbar-right" style="margin-right:0px;">
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -24,9 +27,9 @@
                   <b>{{userDetails.roleInfo[0].role}}</b>
                 </p>
                 <p class="text-left small">{{userDetails.email}}</p>
-                <p class="text-left">
+                <!-- <p class="text-left">
                   <a href="#" class="btn btn-primary btn-block btn-sm">Profile</a>
-                </p>
+                </p> -->
               </div>
             </div>
           </div>
@@ -35,9 +38,10 @@
         <li>
           <div class="navbar-login navbar-login-session">
             <div class="row">
-              <div class="col-lg-12">
+              <div class="col-lg-6"></div>
+              <div class="col-sm-6">
                 <p>
-                  <a routerLink="/login" class="btn btn-danger btn-block" (click)="logout()">Logout</a>
+                  <a routerLink="/login" class="btn btn-danger btn-block btn-save" (click)="logout()">Logout</a>
                 </p>
               </div>
             </div>
@@ -47,17 +51,196 @@
     </li>
   </ul>
 </nav>
-
-<div class="text-center" style="color: red;">
-  <h1>
-    <b>Assigned Operational Performance Indicators</b>
-  </h1>
+<!--NEW EDIT SECTION  CODESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS-->
+<div class="container-fulid">
+  <div class="panel" *ngIf="selectedOpi" id="edit-block" style="margin-top:50px;">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#edit-section">Edit Section</a>
+        <button type="button" class="close" (click)="hideEditBlock()">&times;</button>
+      </h4>
+    </div>
+    <div id="edit-section" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-2">
+            <label>Strategic Goal</label>
+          </div>
+          <div class="col-sm-10">
+            {{selectedOpi.goal}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2">
+            <label>Initiative</label>
+          </div>
+          <div class="col-sm-10">
+            {{selectedInitiative.initiative}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2">
+            <label>Activity </label>
+          </div>
+          <div class="col-sm-10">
+            {{selectedActivity.activity}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2">
+            <label>OPI </label>
+          </div>
+          <div class="col-sm-10">
+            {{selectedMeasure.opi}}
+          </div>
+        </div>
+        <div class="row mini">
+          <div class="col-sm-3">
+            <h5>
+              <strong>FREQUENCY</strong>
+            </h5>
+            <h5>{{selectedMeasure.frequency}}</h5>
+          </div>
+          <div class="col-sm-3">
+            <h5>
+              <strong>MEASURE UNIT</strong>
+            </h5>
+            <h5>{{selectedMeasure.measureUnit}}</h5>
+          </div>
+          <div class="col-sm-3">
+            <h5>
+              <strong>BASE LINE</strong>
+            </h5>
+            <h5>{{selectedMeasure.departmentInfo[0].baseline}}</h5>
+          </div>
+          <div class="col-sm-3">
+            <h5>
+              <strong>EVIDENCE FORM TYPE</strong>
+            </h5>
+            <h5> {{selectedMeasure.evidanceForm}}
+              <p *ngIf="!selectedMeasure.evidanceForm">None</p>
+            </h5>
+          </div>
+        </div>
+        <fieldset class="the-fieldset">
+            <legend class="the-legend">Edit-Section</legend>
+            <table id="accordion" class="table table-bordered table-edit">
+                <thead>
+                  <tr>
+                    <th>Year</th>
+                    <th>Estimated Cost</th>
+                    <th>Quarter</th>
+                    <th>Estimated Target Level</th>
+                    <th>Current Cost</th>
+                    <th>Current Target Level</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let tdl of selectedMeasure.departmentInfo[0].opiAnnualTargets;let at=index;">
+                  <tr>
+                    <td [attr.rowspan]="tdl.levels.length + 3" style="vertical-align: middle;">{{tdl.year}}</td>
+                    <td [attr.rowspan]="tdl.levels.length + 3" style="vertical-align: middle;">{{tdl.estimatedCost}}</td>
+                  </tr>
+                  <ng-template let-lev ngFor [ngForOf]="tdl.levels" let-in="index">
+                    <tr>
+                      <td>{{lev.quarter}}</td>
+                      <td>{{lev.estimatedTargetLevel}}</td>
+                      <td>{{lev.currentCost}}</td>
+                      <td>{{lev.currentTargetLevel}}</td>
+                      <td>{{lev.endDate + tdl.year}}</td>
+                      <td style="text-transform: capitalize;">{{lev.status}}</td>
+                      <td>
+                        <button class="btn-link" data-toggle="modal" data-target="#feedbackModal" (click)="selectedLevel = lev;" [disabled]="lev.status!='locked'"> Approve/Reject</button>
+                      </td>
+                    </tr>
+                    <tr *ngIf="lev.evidance&&lev.evidance.length">
+                      <td colspan="7">
+                          <div class="heading-details">Evidences</div>
+                        <br>
+                        <div class="row" >
+                          <div class="col-lg-4" *ngFor="let ev of lev.evidance;let e = index;">
+                            <div class="box">
+                           <span><i class="glyphicon glyphicon-file file"></i></span>
+                            <a [attr.href]="ev.url">evidance {{e+1}}</a>
+                          </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr *ngIf="lev.internshipGraph&&lev.internshipGraph.length">
+                      <td></td>
+                      <td colspan="6">
+                        <table class="table table-bordered">
+                          <caption>
+                            <b>Internship Details</b>
+                          </caption>
+                          <thead>
+                            <tr>
+                              <th>Organization</th>
+                              <th>Supervisor</th>
+                              <th>Total</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let data of lev.internshipGraph;let z = index;">
+                              <td>{{data.organization}}</td>
+                              <td>{{data.internalSupervisior}}</td>
+                              <td>{{data.count}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr *ngIf="lev.mouDetails&&lev.mouDetails.length">
+                      <td></td>
+                      <td colspan="6">
+                        <table class="table table-bordered">
+                          <caption>
+                            <b>Mous Detail</b>
+                          </caption>
+                          <thead>
+                            <tr>
+                              <th>*</th>
+                              <th>Mou Type</th>
+                              <th>Organisation</th>
+                              <th>Evidence</th>
+                            </tr>
+                          </thead>
+                          <tbody *ngFor="let detail of lev.mouDetails;let d = index;">
+                            <tr>
+                              <th>{{d+1}}</th>
+                              <td>{{detail.mouType}}</td>
+                              <td>{{detail.organization}}</td>
+                              <td>
+                                <ul style="list-style:none;padding:0;">
+                                  <li *ngIf="!detail.evidance.length">None</li>
+                                  <li style="float:left;" *ngFor="let ev of detail.evidance;let e = index;">
+                                    <!-- {{e+1}}) -->
+                                    <a [attr.href]="ev.url"> evidance {{e+1}}</a> ,
+                                  </li>
+                                </ul>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </tbody>
+              </table>
+        </fieldset>
+      </div>
+    </div>
+  </div>
 </div>
+
+<!-- NEW EDIT SECTION CODESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS enddddddddddddddddddddddddddddd -->
 <div class="container-fluid">
-  <!--edit section-->
-  <div class="panel" *ngIf="selectedOpi" id="edit-block">
-    <div class="panel-heading background-4">
-      <h4 class="panel-title ">
+  <div class="panel" *ngIf="selectedOpi" id="edit-block" style="margin-top:50px;">
+    <div class="panel-heading">
+      <h4 class="panel-title">
         <a data-toggle="collapse" href="#edit-section">Edit Section</a>
         <button type="button" class="close" (click)="hideEditBlock()">&times;</button>
       </h4>
@@ -66,36 +249,28 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-lg-6">
-            <label>Strategic Goal :</label>
-            {{selectedOpi.goal}}
+            <label>Strategic Goal :</label> {{selectedOpi.goal}}
           </div>
           <div class="col-lg-6">
-            <label>Initiative :</label>
-            {{selectedInitiative.initiative}}
+            <label>Initiative :</label> {{selectedInitiative.initiative}}
           </div>
           <div class="col-lg-6">
-            <label>Activity :</label>
-            {{selectedActivity.activity}}
+            <label>Activity :</label> {{selectedActivity.activity}}
           </div>
           <div class="col-lg-6">
-            <label>OPI :</label>
-            {{selectedMeasure.opi}}
+            <label>OPI :</label> {{selectedMeasure.opi}}
           </div>
           <div class="col-lg-6">
-            <label>Frequency :</label>
-            {{selectedMeasure.frequency}}
+            <label>Frequency :</label> {{selectedMeasure.frequency}}
           </div>
           <div class="col-lg-6">
-            <label>Measure Unit :</label>
-            {{selectedMeasure.measureUnit}}
+            <label>Measure Unit :</label> {{selectedMeasure.measureUnit}}
           </div>
           <div class="col-lg-6">
-            <label>Base Line :</label>
-            {{selectedMeasure.departmentInfo[0].baseline}}
+            <label>Base Line :</label> {{selectedMeasure.departmentInfo[0].baseline}}
           </div>
           <div class="col-lg-6">
-            <label>Evidence Form Type :</label>
-            {{selectedMeasure.evidanceForm}}
+            <label>Evidence Form Type :</label> {{selectedMeasure.evidanceForm}}
             <p *ngIf="!selectedMeasure.evidanceForm">None</p>
           </div>
         </div>
@@ -190,23 +365,12 @@
                           <ul style="list-style:none;padding:0;">
                             <li *ngIf="!detail.evidance.length">None</li>
                             <li style="float:left;" *ngFor="let ev of detail.evidance;let e = index;">
-                                <!-- {{e+1}}) -->
-                                <a [attr.href]="ev.url"> evidance {{e+1}}</a> ,
+                              <!-- {{e+1}}) -->
+                              <a [attr.href]="ev.url"> evidance {{e+1}}</a> ,
                             </li>
                           </ul>
                         </td>
                       </tr>
-                      <!-- <tr *ngIf="detail.evidance.length">
-                        <td colspan="2">
-                          <b>Evidences</b>
-                          <br>
-                          <div class="row" *ngFor="let ev of detail.evidance;let e = index;">
-                            <div class="col-lg-6">
-                              <a [attr.href]="ev.url">{{e+1}}) evidance {{e+1}}</a>
-                            </div>
-                          </div>
-                        </td>
-                      </tr> -->
                     </tbody>
                   </table>
                 </td>
@@ -217,102 +381,115 @@
       </div>
     </div>
   </div>
-  <div class="panel">
-    <div class="panel-heading  background-4">
-      <h4 class="panel-title">
-        <a>Assigned Operational Indicator</a>
-      </h4>
-    </div>
-    <div class="panel-body">
-      <table class="table table-bordered">
-        <colgroup>
-          <col style="width:20%">
-          <col style="width:20%">
-          <col style="width:20%">
-          <col style="width:20%">
-          <col style="width:10%">
-          <col style="width:6.5%">
-          <col style="width:3.5%">
-        </colgroup>
-        <thead class="header-background" *ngIf="goals.length">
-          <tr>
-            <th>Goal
-              <span class="search">
-                <input type="text" name="search" (keyup)="searchGoal($event)" placeholder="Search..">
-              </span>
-            </th>
-            <th>Initiative
-              <span class="search">
-                <input type="text" name="search" (keyup)="searchInitiative($event)" placeholder="Search..">
-              </span>
-            </th>
-            <th>Activity
-              <span class="search">
-                <input type="text" name="search" (keyup)="searchActivity($event)" placeholder="Search..">
-              </span>
-            </th>
-            <th>KPI
-              <span class="search">
-                <input type="text" name="search" (keyup)="searchOpi($event)" placeholder="Search..">
-              </span>
-            </th>
-            <th>Frequency</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let goal of goals;let i = index;">
-            <td>{{goal.goal}}</td>
-            <td colspan="6" style="padding:0px;border:none;" #element [style.height]="get(element)">
-              <table class="table table-bordered" style="height: inherit;">
-                <colgroup>
-                  <col style="width:25%">
-                  <col style="width:75%">
-                </colgroup>
-                <tr *ngFor="let initiate of goal.initiatives;let j=index;">
-                  <td>{{initiate.initiative}}</td>
-                  <td colspan="4" style="padding:0px;" #element1 [style.height]="get(element1)">
-                    <table class="table table-bordered" style="height: inherit;">
-                      <colgroup>
-                        <col style="width:33.33%">
-                        <col style="width:66.67">
-                      </colgroup>
-                      <tr *ngFor="let activit of initiate.activities;let k=index;">
-                        <td [style.border-top]="k?'1px solid #ddd':'none'">{{activit.activity}}</td>
-                        <td colspan="4" style="padding:0px;" #element2 [style.height]="get(element2) + ' !important'">
-                          <table class="table table-bordered" style="height: inherit;">
-                            <colgroup>
-                              <col style="width:50.5%">
-                              <col style="width:25%">
-                              <col>
-                              <col>
-                            </colgroup>
-                            <tr *ngFor="let msr of activit.opis;let l=index">
-                              <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.opi}}</td>
-                              <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.frequency}}</td>
-                              <td style="text-transform: capitalize;"><p *ngIf="msr.quarterStatus">{{msr.quarterStatus.status}}</p></td>
-                              <td [style.border-top]="l?'1px solid #ddd':'none'">
-                                <a scrollTo href="#top" (click)="selectedOpi=goal;selectedInitiative=initiate;selectedActivity=activit;selectedMeasure=msr;showOpi(goal,msr)">view</a>
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </tbody>
-        <tfoot *ngIf="!goals.length">
-          <tr>
-            <td colspan="4" class="text-center">No Data to Display .,.</td>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
+
+  <div class="card table-card" style="margin-top:50px;">
+    <table class="table table-bordered table1">
+      <colgroup>
+        <col style="width:20%">
+        <col style="width:20%">
+        <col style="width:20%">
+        <col style="width:20%">
+        <col style="width:10%">
+        <col style="width:6.5%">
+        <col style="width:3.5%">
+      </colgroup>
+      <thead class="header-background" *ngIf="goals.length">
+        <tr>
+          <th>
+            <span class="hide-text">GOAL</span>
+            <form action="" class="search-form">
+              <div class="form-group has-feedback" style="margin-bottom:10px;">
+                <label for="search" class="sr-only">Search</label>
+                <input type="text" class="form-control" name="search" id="search" (keyup)="searchGoal($event)" placeholder="GOAL">
+                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+              </div>
+            </form>
+          </th>
+          <th> <span class="hide-text">INITIATIVE</span>
+            <form action="" class="search-form">
+              <div class="form-group has-feedback" style="margin-bottom:10px;">
+                <label for="search" class="sr-only">Search</label>
+                <input type="text" class="form-control" name="search" id="search" (keyup)="searchInitiative($event)" placeholder="INITIATIVE">
+                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+              </div>
+            </form>
+          </th>
+          <th><span class="hide-text">ACTIVITY</span>
+            <form action="" class="search-form">
+              <div class="form-group has-feedback" style="margin-bottom:10px;">
+                <label for="search" class="sr-only">Search</label>
+                <input type="text" class="form-control" name="search" id="search" (keyup)="searchActivity($event)" placeholder="ACTIVITY">
+                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+              </div>
+            </form>
+          </th>
+          <th><span class="hide-text">KPI</span>
+            <form action="" class="search-form">
+              <div class="form-group has-feedback" style="margin-bottom:10px;">
+                <label for="search" class="sr-only">Search</label>
+                <input type="text" class="form-control" name="search" id="search" (keyup)="searchOpi($event)" placeholder="KPI">
+                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+              </div>
+            </form>
+          </th>
+          <th>Frequency</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let goal of goals;let i = index;">
+          <td>{{goal.goal}}</td>
+          <td colspan="6" style="padding:0px;border:none;" #element [style.height]="get(element)">
+            <table class="table table-bordered" style="height: inherit;">
+              <colgroup>
+                <col style="width:25%">
+                <col style="width:75%">
+              </colgroup>
+              <tr *ngFor="let initiate of goal.initiatives;let j=index;">
+                <td>{{initiate.initiative}}</td>
+                <td colspan="4" style="padding:0px;" #element1 [style.height]="get(element1)">
+                  <table class="table table-bordered" style="height: inherit;">
+                    <colgroup>
+                      <col style="width:33.33%">
+                      <col style="width:66.67">
+                    </colgroup>
+                    <tr *ngFor="let activit of initiate.activities;let k=index;">
+                      <td [style.border-top]="k?'1px solid #ddd':'none'">{{activit.activity}}</td>
+                      <td colspan="4" style="padding:0px;" #element2 [style.height]="get(element2) + ' !important'">
+                        <table class="table table-bordered" style="height: inherit;">
+                          <colgroup>
+                            <col style="width:50.5%">
+                            <col style="width:25%">
+                            <col>
+                            <col>
+                          </colgroup>
+                          <tr *ngFor="let msr of activit.opis;let l=index">
+                            <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.opi}}</td>
+                            <td [style.border-top]="l?'1px solid #ddd':'none'">{{msr.frequency}}</td>
+                            <td style="text-transform: capitalize;">
+                              <p *ngIf="msr.quarterStatus">{{msr.quarterStatus.status}}</p>
+                            </td>
+                            <td [style.border-top]="l?'1px solid #ddd':'none'">
+                              <a scrollTo href="#top" (click)="selectedOpi=goal;selectedInitiative=initiate;selectedActivity=activit;selectedMeasure=msr;showOpi(goal,msr)">view</a>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot *ngIf="!goals.length">
+        <tr>
+          <td colspan="4" class="text-center">No Data to Display .,.</td>
+        </tr>
+      </tfoot>
+    </table>
   </div>
 </div>
 
