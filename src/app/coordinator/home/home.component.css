@@ -71,10 +71,10 @@ div[customBox]{
     z-index: 1;
   }
   .locked{
-    border-color: #C51162 !important;
+    border-color: yellow !important;
   }
   .locked::before{
-    background: #C51162!important;
+    background: yellow!important;
     z-index: 1;
   }
   .null{
@@ -113,7 +113,7 @@ text-align: center;
     
 }
 .cyan:before{
-    background:#C51162;
+    background:yellow;
 }
 .green:before{
     background:#1B5E20;
@@ -337,5 +337,13 @@ text-align: center;
 
 .form-group label{
   font-weight: 600;
+  color:var(--color-primary);
+}
+
+.btn-more{
+  color:var(--color-primary);
+}
+
+.btn-more:hover,.btn-more:focus,.btn-more:active{
   color:var(--color-primary);
 }
