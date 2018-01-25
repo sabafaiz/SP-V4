@@ -4,3 +4,8 @@
 .table .table {
  background-color: inherit;
 }
+
+.table-data .align{
+    text-align: center;
+    vertical-align: middle;
+}

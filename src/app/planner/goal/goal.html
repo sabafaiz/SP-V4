@@ -74,9 +74,9 @@
               </div>
             </form>
           </th>
-          <th style="text-align:center">Disable</th>
-          <th>Edit</th>
-          <th>Delete</th>
+          <th style="text-align:center">Enable</th>
+          <th style="text-align:center">Edit</th>
+          <th style="text-align:center">Delete</th>
         </tr>
       </thead>
       <tbody class="body-background">
@@ -88,12 +88,12 @@
               <span class="slider round"></span>
             </label>
           </td>
-          <td style="vertical-align: middle;">
+          <td style="vertical-align: middle;text-align:center">
             <button class="btn-link" scrollTo href="#add-initiative" (click)="updateGoal(goal)" [disabled]="goal.disable">
               <i class="glyphicon glyphicon-edit btn-del"></i>
             </button>
           </td>
-          <td style="vertical-align: middle;">
+          <td style="vertical-align: middle;text-align:center">
             <button class="btn-link" (click)="deleteGoal(goal.goalId,goals,i)" [disabled]="goal.disable">
               <i class="glyphicon glyphicon-trash btn-del"></i>
             </button>

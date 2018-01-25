@@ -117,13 +117,13 @@
                     <td>{{lev.endDate + tdl.year}}</td>
                     <td>
                       <div *ngIf="!lev.disable">
-                        <button *ngIf="lev.status=='unsubmitted'" [disabled]="!(lev.currentTargetLevel&&lev.currentCost)" (click)="lev.isUpdating=false;saveQuarterResult(lev)"
+                        <button class="btn-save" *ngIf="lev.status=='unsubmitted'" [disabled]="!(lev.currentTargetLevel&&lev.currentCost)" (click)="lev.isUpdating=false;saveQuarterResult(lev)"
                           [disabled]="lev.disable"> Save</button>
-                        <button *ngIf="lev.status=='inprogress'" data-toggle="modal" data-target="#evidenceForm" (click)="selectedQuarter=lev;evForm=0"
+                        <button class="btn-save" *ngIf="lev.status=='inprogress'" data-toggle="modal" data-target="#evidenceForm" (click)="selectedQuarter=lev;evForm=0"
                           [disabled]="lev.disable">Upload Evidence</button>
-                        <button *ngIf="lev.status=='inprogress'" (click)="lev.status='unsubmitted';lev.isUpdating=true;" [disabled]="lev.disable">Edit</button>
-                        <button *ngIf="lev.isUpdating" (click)="lev.status='inprogress';lev.isUpdating=false;"> Cancel</button>
-                        <button *ngIf="lev.evidance.length&&!isUpdating" (click)="lockQuarterResult(lev)" [disabled]="lev.disable">Lock</button>
+                        <button class="btn-save" *ngIf="lev.status=='inprogress'" (click)="lev.status='unsubmitted';lev.isUpdating=true;" [disabled]="lev.disable">Edit</button>
+                        <button class="btn-save" *ngIf="lev.isUpdating" (click)="lev.status='inprogress';lev.isUpdating=false;"> Cancel</button>
+                        <button class="btn-save" *ngIf="lev.evidance.length&&!isUpdating" (click)="lockQuarterResult(lev)" [disabled]="lev.disable">Lock</button>
                       </div>
                       <button type="button" class="close" data-toggle="collapse" [attr.href]="'#row-collapse'+at" *ngIf="lev.evidance.length" (click)="evidences=lev.evidance;collapseOff('#row-collapse'+at)" style="cursor:pointer;">
                         <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
