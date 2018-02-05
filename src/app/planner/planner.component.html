@@ -1,11 +1,10 @@
-<div class="row">
+<!-- <div class="row">
   <div class="col-sm-12 col-lg-12 col-md-12">
-
-    <nav class="navbar navbar-fixed-top">
+   <nav class="navbar navbar-fixed-top">
       <div class="navbar-header">
         <a class="navbar-brand" href="">UAEU</a>
       </div>
-      <ul class="nav navbar-nav" style="margin-right:0px;">
+      <ul class="nav navbar-nav margin-right">
         <li routerLinkActive="active">
           <a routerLink="home">Home</a>
         </li>
@@ -28,7 +27,7 @@
           <a routerLink="./spi">SPI</a>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right" style="margin-right:0px;">
+      <ul class="nav navbar-nav navbar-right margin-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <span class="glyphicon glyphicon-user"></span>
@@ -51,9 +50,6 @@
                       <b>{{userDetails.roleInfo[0].role}}</b>
                     </p>
                     <p class="text-left small">{{userDetails.email}}</p>
-                    <!-- <p class="text-left">
-                      <a href="#" class="btn btn-primary btn-block btn-sm">Profile</a>
-                    </p> -->
                   </div>
                 </div>
               </div>
@@ -78,4 +74,92 @@
     </nav>
   </div>
 </div>
+<router-outlet></router-outlet> -->
+
+
+
+
+<!-- new code -->
+<nav class="navbar navbar-fixed-top nav-bg">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">UAEU</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li routerLinkActive="active">
+          <a routerLink="home">Home</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="./strategic-plan">Strategic Plan</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="./strategic-goal">Strategic Goals</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="./initiatives">Proposed Initiatives</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="./activities">Proposed Activities</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="./kpis">KPI</a>
+        </li>
+        <li routerLinkActive="active">
+          <a routerLink="./spi">SPI</a>
+        </li>
+      </ul>
+     <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-user"></span>
+            <strong style="text-transform: capitalize">{{userDetails.firstName}}({{userDetails.roleInfo[0].role}})</strong>
+            <span class="glyphicon glyphicon-chevron-down"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <div class="navbar-login">
+                <div class="row">
+                  <div class="col-lg-4">
+                    <p class="text-center">
+                      <span class="glyphicon glyphicon-user icon-size"></span>
+                    </p>
+                  </div>
+                  <div class="col-lg-8">
+                    <p class="text-left">
+                      <strong>{{userDetails.firstName}} {{userDetails.lastName}}</strong>
+                      <br>
+                      <b>{{userDetails.roleInfo[0].role}}</b>
+                    </p>
+                    <p class="text-left small">{{userDetails.email}}</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <div class="navbar-login navbar-login-session">
+                <div class="row">
+                  <div class="col-sm-6">
+                    </div>
+                    <div class="col-sm-6">
+                    <p>
+                      <a routerLink="/login" class="btn btn-danger btn-block btn-login" (click)="logout()">Logout</a>
+                    </p>
+                 </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 <router-outlet></router-outlet>

@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="bg-nav">
-    <div class="form-inline " style="margin-bottom: unset">
-      <button type="button" class="btn btn-default pull-right margin" (click)="addNewInitiative()">
+    <div class="form-inline" >
+      <button type="button" class="btn btn-default pull-right btn-plus" (click)="addNewInitiative()">
         <i class="glyphicon glyphicon-plus"></i>
       </button>
       <div class="form-group dropdown-st">
@@ -13,7 +13,7 @@
     </div>
   </div>
   <!-- new code for form-->
-  <div class="card card-form" id="add-initiative" style="display:none">
+  <div class="card card-form" id="add-initiative">
     <form [formGroup]="initiativeForm" (submit)="submitInitiative()">
       <div class="card-header">
         <button type="button" class="close" aria-label="Close" (click)="closeForm();" data-toggle="tooltip" data-placement="auto"
@@ -79,7 +79,7 @@
             <th>
               <span class="hide-text">GOAL</span>
               <form action="" class="search-form">
-                <div class="form-group has-feedback" style="margin-bottom: 10px;">
+                <div class="form-group has-feedback">
                   <label for="search" class="sr-only">Search</label>
                   <input type="text" class="form-control" name="search" id="search" (keyup)="searchGoal($event)" placeholder="GOAL">
                   <span class="glyphicon glyphicon-search form-control-feedback"></span>
@@ -89,7 +89,7 @@
             <th>
               <span class="hide-text">INITIATIVE</span>
               <form action="" class="search-form">
-                <div class="form-group has-feedback" style="margin-bottom: 10px;">
+                <div class="form-group has-feedback">
                   <label for="search" class="sr-only">Search</label>
                   <input type="text" class="form-control" name="search" id="search" (keyup)="searchInitiative($event)" placeholder="INITIATIVE">
                   <span class="glyphicon glyphicon-search form-control-feedback"></span>

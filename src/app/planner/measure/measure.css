@@ -4,12 +4,8 @@
 .modal-xl{
   width: 80%;
 }
-.p-3 {
-  flex: 6 !important;
-}
-.p-3o{
-  flex:2;
-}
+
+
 
 .table{
   margin-bottom: 0px;
@@ -40,6 +36,10 @@
   padding-bottom: 20px;
   padding-left: -1px;
 }
+.table-list{
+  list-style:none;
+  padding: 0px;
+}
 
 .table-list li{
   text-align: center;
@@ -48,8 +48,18 @@
 
 
 .table-list li a{
-  background: #563d7c;
+  background: var(--color-primary);
   border-radius: 17px;
   padding: 6px;
-  color:white!important;
+  color:var(--color0)!important;
+}
+
+.margin{
+  margin:15px 15px;
+}
+
+.btn-plus{
+  background: var(--color0);
+  color:var(--color-primary);
+  border-color:var(--color-primary);
 }

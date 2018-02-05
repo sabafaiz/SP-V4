@@ -1,68 +1,142 @@
-.add-goal .panel-heading
-{
-    background: #1a4292;  /* fallback for old browsers */
-    color: white;
+
+/* css for #cssmenu */
+.margin-side{
+ margin-top:15px;
+margin-left: 10px;
+}
+
+.top{
+margin-top:40px;
+}
+
+div .pic1{
+    height: 100px;
+    margin:auto;
+    padding-top: 19px;
+}
+/* css for #cssmenu */
+
+
+/* cssmenu start */
+#cssmenu,
+#cssmenu ul,
+#cssmenu ul li,
+#cssmenu ul li a {
+  margin: 0;
+  border: 0;
+  line-height: 1;
+  display: block;
+  position: relative;
+}
+#cssmenu:after,
+#cssmenu > ul:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+#cssmenu {
+  width: auto;
+  border-bottom: 3px solid  var(--color-primary);
+}
+#cssmenu ul {
+  background: #f3efef;
+}
+#cssmenu > ul > li {
+  float: left;
+}
+#cssmenu.align-center > ul {
+  font-size: 0;
+  text-align: center;
+}
+#cssmenu.align-center > ul > li {
+  display: inline-block;
+  float: none;
+}
+#cssmenu.align-right > ul > li {
+  float: right;
+}
+#cssmenu.align-right > ul > li > a {
+  margin-right: 0;
+  margin-left: -4px;
+}
+#cssmenu > ul > li > a {
+  z-index: 2;
+  padding: 18px 25px 12px 25px;
+  font-size: 15px;
+  font-weight: 400;
+  text-decoration: none;
+  /* -webkit-transition: all .2s ease;
+  -moz-transition: all .2s ease;
+  -ms-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease; */
+  margin-right: -4px;
+}
+#cssmenu > ul > li.active > a,
+#cssmenu > ul > li:hover > a,
+#cssmenu > ul > li > a:hover {
+  color: var(--color0);
+}
+#cssmenu > ul > li > a:after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  width: 100%;
+  height: 120%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  content: "";
+  -webkit-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease;
+  -webkit-transform: perspective(5px) rotateX(2deg);
+  -webkit-transform-origin: bottom;
+  -moz-transform: perspective(5px) rotateX(2deg);
+  -moz-transform-origin: bottom;
+  transform: perspective(5px) rotateX(2deg);
+  transform-origin: bottom;
+}
+#cssmenu > ul > li.active > a:after,
+#cssmenu > ul > li:hover > a:after,
+#cssmenu > ul > li > a:hover:after {
+  background:  var(--color-primary);
+}
+.nav>li>a:hover{
+    background: transparent;
+}
+
+
+/* cssmenu end */
+.btn-plus{
+    margin-left:10px;
+    color: var(--color-primary);
+    border-radius: 3px;
     cursor: pointer;
-
 }
 
-.green-background{
-    margin-top: -8px;
-    background:   #20a3e8;
-}
-
-.btn:hover {
-    color: #cf3238;
-}
-
-.panel-color .panel-heading{
-    color: white;
-    background: #1a4292;
-}
-
-
-
-
-.panel-color2 .panel-heading{
-    color:white;
-    background: #1a4292;
-}
-
-.color3{
-    background: #614385;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #516395, #614385);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #516395, #614385); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    color:white;    
-}
-
-.dropdown-menu>li>a:hover {
-    color: #ffffff;
-    text-decoration: none;
-    background-color: #bc4c36;
-}
-
-.color4{
-    background: var(--color-primary);;
-    color:white;
-}
-
-.color4 .close{
-    color:white;
+.btn-plus:hover{
+    background:var(--color-primary);
+    color:var(--color0);
 }
 
 .btn-submit{
     border-radius: 50%;
     width: 62px;
     height: 62px;
-    color: #ffffff;
-    background-color: #259be5;
-    border-color: #1ea5e9;
-  box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.2), 0 13px 24px -11px rgba(233, 30, 99, 0.6)
+    color: var(--color-text);
+    background-color: var(--color-primary);
+    border-color:  var(--color-primary);
+    box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.2), 0 13px 24px -11px rgba(77, 2, 77, 0.6)
 }
 
 .btn-submit:hover{
-  color:white;
-  background-color: #92FE9D;
+  color:var(--color0);
+  background-color: var(--color-primary);
 }
 
 .btn:active:focus, .btn:focus {
@@ -75,41 +149,25 @@ outline: 0px auto -webkit-focus-ring-color;
 outline-offset: 0px;
 }
 
-
-
 .btn-close{
     border-radius: 50%;
     width: 62px;
     height: 62px;
-    color: #ffffff;
-    background-color: #cf3238;
-    border-color: #cf3238;
-    box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.2), 0 13px 24px -11px rgba(233, 30, 99, 0.6)
+    color: var(--color-primary);
+    background-color: var(--color-text);
+    border-color: var(--color-text);
+    box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.2), 0 13px 24px -11px rgba(203, 189, 226, 0.8)
 }
 
 .btn-close:hover{
-  color:white;
-  background-color: #00C9FF;
+  color:var(--color0);
+  background-color:  var(--color-text);
 }
 
-.nav-card{
-    background: #f3efef;
-    margin: 15px;
-    padding: 20px;
-  }
-
-.tab1{
-    margin-top: 35px;
-}
-
-.edit-icon{
-    cursor: pointer;
-    transition: 0.6s;
-}
-
-.edit-icon:hover{
-    color:red;
-    font-size: 26px;
+#cssmenu  .btn-default:focus{
+    background-color: var(--color-primary);
+    border-color:  var(--color-primary);
+    color:var(--color0);
 }
 
 .margin-top{
@@ -140,124 +198,15 @@ outline-offset: 0px;
     color: white!important;   
 }
 
-.margin{
-    margin-left:10px;
-    color: var(--color-primary);
-}
+/* cards */
+.nav-card{
+    background: #f3efef;
+    margin: 15px;
+    padding: 20px;
+  }
 
-.margin:hover{
-    background:var(--color-primary);
-    color:white; 
-}
-
-/* cssmenu start */
-#cssmenu,
-#cssmenu ul,
-#cssmenu ul li,
-#cssmenu ul li a {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  list-style: none;
-  line-height: 1;
-  display: block;
-  position: relative;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-#cssmenu:after,
-#cssmenu > ul:after {
-  content: ".";
-  display: block;
-  clear: both;
-  visibility: hidden;
-  line-height: 0;
-  height: 0;
-}
-#cssmenu {
-  width: auto;
-  border-bottom: 3px solid  var(--color-primary);
-  font-family: Raleway, sans-serif;
-  line-height: 1;
-}
-#cssmenu ul {
-  background: #f3efef;
-}
-#cssmenu > ul > li {
-  float: left;
-}
-#cssmenu.align-center > ul {
-  font-size: 0;
-  text-align: center;
-}
-#cssmenu.align-center > ul > li {
-  display: inline-block;
-  float: none;
-}
-#cssmenu.align-right > ul > li {
-  float: right;
-}
-#cssmenu.align-right > ul > li > a {
-  margin-right: 0;
-  margin-left: -4px;
-}
-#cssmenu > ul > li > a {
-  z-index: 2;
-  padding: 18px 25px 12px 25px;
-  font-size: 15px;
-  font-weight: 400;
-  text-decoration: none;
-  color: #444444;
-  -webkit-transition: all .2s ease;
-  -moz-transition: all .2s ease;
-  -ms-transition: all .2s ease;
-  -o-transition: all .2s ease;
-  transition: all .2s ease;
-  margin-right: -4px;
-}
-#cssmenu > ul > li.active > a,
-#cssmenu > ul > li:hover > a,
-#cssmenu > ul > li > a:hover {
-  color: #ffffff;
-}
-#cssmenu > ul > li > a:after {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: -1;
-  width: 100%;
-  height: 120%;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  content: "";
-  -webkit-transition: all .2s ease;
-  -o-transition: all .2s ease;
-  transition: all .2s ease;
-  -webkit-transform: perspective(5px) rotateX(2deg);
-  -webkit-transform-origin: bottom;
-  -moz-transform: perspective(5px) rotateX(2deg);
-  -moz-transform-origin: bottom;
-  transform: perspective(5px) rotateX(2deg);
-  transform-origin: bottom;
-}
-#cssmenu > ul > li.active > a:after,
-#cssmenu > ul > li:hover > a:after,
-#cssmenu > ul > li > a:hover:after {
-  background:  var(--color-primary);
-}
-
-
-.nav>li>a:hover{
-    background: transparent;
-}
-
-
-/* cssmenu end */
 
 .value-card{
-    /* background: var(--color-text); */
     border-radius: 6px;
     position: relative;
     z-index: 1;
@@ -265,7 +214,6 @@ outline-offset: 0px;
     margin-bottom:30px;
     cursor: pointer;
 }
-
 
 .value-card .card-header{
     background: var(--color-text);
@@ -310,8 +258,8 @@ outline-offset: 0px;
     
 }
 
+/* btn-show on hover of card-body */
 .icon-add{
-    /* margin-left: 10px; */
     color: var(--color-primary);
     margin-top: -33px;
     right: 5px;
@@ -320,7 +268,6 @@ outline-offset: 0px;
     background: var(--color-primary);
     color: white;
 }
-
 
 div.value-card:hover button{
     display: block;
@@ -334,4 +281,17 @@ div.value-card button.icon-btn{
     float: right;
     right: 48px;
 }
+/* btn-show on hover of card-body */
 /* icon */
+/* cards */
+
+/* modal-header css */
+.modal-bg .modal-header{
+    background: var(--color-primary);;
+    color:var(--color0);
+}
+
+.modal-bg .modal-header .close{
+    color:var(--color0);
+}
+/* modal-header css */

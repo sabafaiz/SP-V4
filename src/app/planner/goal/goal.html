@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="bg-nav">
-    <div class="form-inline" style="margin-bottom: unset">
-      <button type="button" class="btn btn-default pull-right margin" (click)="addNewGoal()">
+    <div class="form-inline">
+      <button type="button" class="btn btn-default pull-right btn-plus" (click)="addNewGoal()">
         <i class="glyphicon glyphicon-plus"></i>
       </button>
       <div class="form-group dropdown-st">
@@ -14,7 +14,7 @@
   </div>
 
   <!-- new code for form -->
-  <div class="card card-form" id="add-plan" style="display:none">
+  <div class="card card-form" id="add-plan">
     <form [formGroup]="goalForm" (submit)="onSubmit()">
       <div class="card-header">
         <button type="button" class="close" aria-label="Close" (click)="closeForm();isUpdating=false;" data-toggle="tooltip" data-placement="auto"
@@ -67,7 +67,7 @@
           <th>
             <span class="hide-text">GOAL</span>
             <form action="" class="search-form">
-              <div class="form-group has-feedback" style="margin-bottom:10px;">
+              <div class="form-group has-feedback">
                 <label for="search" class="sr-only">Search</label>
                 <input type="text" class="form-control" name="search" id="search" (keyup)="searchGoal($event,goals)" placeholder="GOAL">
                 <span class="glyphicon glyphicon-search form-control-feedback"></span>

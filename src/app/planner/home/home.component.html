@@ -1,41 +1,36 @@
 <div class="container-fluid" *ngIf="organizationInfo">
-  <div class="container text-center" style="padding: 20px;">
-    <img src="assets/uaeu_signature.png" style="height: 100px;">
+  <div class="container text-center">
+    <img src="assets/uaeu_signature.png" class="img-responsive pic1">
   </div>
-
-  <div class="card nav-card">
+ <div class="card nav-card">
       <div id='cssmenu'>
         <ul class="nav nav-tabs">
           <li class="active"><a data-toggle="tab" href="#mission">MISSION</a></li>
-          <button type="button" class="btn btn-default pull-right margin" data-toggle="modal" data-target="#missionVisionForm" (click)="editMisionVision('mission', organizationInfo.mission);"><i class="glyphicon glyphicon-edit"></i></button>
-          <!-- <span class="pull-right edit-icon" (click)="editMisionVision('mission', organizationInfo.mission);"><i class="glyphicon glyphicon-edit" data-toggle="modal" data-target="#missionVisionForm"></i></span> -->
+          <button type="button" class="btn btn-default pull-right btn-plus" data-toggle="modal" data-target="#missionVisionForm" (click)="editMisionVision('mission', organizationInfo.mission);"><i class="glyphicon glyphicon-edit"></i></button>
         </ul>
       </div>
   
-      <div class="tab-content" style="margin-top:15px;margin-left: 10px;" *ngIf="organizationInfo">
+      <div class="tab-content margin-side"  *ngIf="organizationInfo">
         <div id="mission" class="tab-pane fade in active">
           <p>{{organizationInfo.mission}}</p>
         </div>
-        <div id="cssmenu" style="margin-top:40px;">
+        <div id="cssmenu" class="top">
           <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#vision">VISSION</a></li>
-            <button type="button" class="btn btn-default pull-right margin" data-toggle="modal" data-target="#missionVisionForm" (click)="editMisionVision('vision', organizationInfo.vision);"><i class="glyphicon glyphicon-edit"></i></button>
-            <!-- <span class="pull-right edit-icon" (click)="editMisionVision('vision', organizationInfo.vision);"><i class="glyphicon glyphicon-edit" data-toggle="modal" data-target="#missionVisionForm"></i></span> -->
+            <button type="button" class="btn btn-default pull-right btn-plus" data-toggle="modal" data-target="#missionVisionForm" (click)="editMisionVision('vision', organizationInfo.vision);"><i class="glyphicon glyphicon-edit"></i></button>
           </ul>
         </div>
-        <div id="vision" class="tab-pane fade in active" style="margin-top:15px;margin-left: 10px;">
+        <div id="vision" class="tab-pane fade in active margin-side">
           <p>{{organizationInfo.vision}}</p>
         </div>
-        <div id="cssmenu" style="margin-top:40px;">
+        <div id="cssmenu" class="top">
           <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#values">VALUES</a></li>
-            <button type="button" class="btn btn-default pull-right margin" (click)="onValueSelected('',null)" data-toggle="modal" data-target="#valueForm"><i class="glyphicon glyphicon-plus"></i></button>
-           
-          
+            <button type="button" class="btn btn-default pull-right btn-plus" (click)="onValueSelected('',null)" data-toggle="modal" data-target="#valueForm"><i class="glyphicon glyphicon-plus"></i></button>
           </ul>
         </div>
         <div id="values" class="tab-pane fade in active">
-          <div class="col-sm-12" style="margin-top: 40px;">
+          <div class="col-sm-12 top">
             <div class="card value-card" *ngFor="let val of organizationInfo.values;let i = index;">
               <div class="card-header">
                 <h5>{{i+1}}.{{val.title}}</h5>
@@ -51,7 +46,8 @@
       </div>
     </div>
   
- <div class="modal fade" id="valueForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- modal code -->
+ <div class="modal fade modal-bg" id="valueForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <!-- Modal Header -->
@@ -86,7 +82,7 @@
   </div>
 
 
-  <div class="modal fade" id="missionVisionForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal fade modal-bg" id="missionVisionForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <!-- Modal Header -->
@@ -115,6 +111,8 @@
       </div>
     </div>
   </div>
+
+  <!-- modal end -->
   <!-- ===============================================================================
   ======================== /End of Initial setup Interface ==============================================
   ===================================================================================== -->
